@@ -110,6 +110,9 @@ Use only the files in `assets/`. They're final; never redraw or re-type the
 logo. `firn-lockup.svg` is the header logo (about 34px tall). Favicons are in
 `assets/favicon/`.
 
+Tab favicon = bare flake (glacier-deep, lighter on dark). Home-screen icons
+(180/192/512) = glacier tile.
+
 ---
 
 ## Privacy rules (non-negotiable)
