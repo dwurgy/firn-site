@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firn: a calm browser for everyone</title>
+<meta name="description" content="Vertical tabs, spaces, split view and link previews, without the learning curve. Built on Chromium. Your data stays on your device.">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Firn">
+<meta property="og:url" content="https://firnbrowser.com/">
+<meta property="og:title" content="Firn: a calm browser for everyone">
+<meta property="og:description" content="Vertical tabs, spaces, split view and link previews, without the learning curve. Built on Chromium. Your data stays on your device.">
+<meta property="og:image" content="https://firnbrowser.com/assets/firn-share-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Firn logo above the words: A calm browser for everyone. firnbrowser.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Firn: a calm browser for everyone">
+<meta name="twitter:description" content="Vertical tabs, spaces, split view and link previews, without the learning curve. Built on Chromium. Your data stays on your device.">
+<meta name="twitter:image" content="https://firnbrowser.com/assets/firn-share-preview.png">
+
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon/firn-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/favicon/firn-favicon-180.png">
+<meta name="theme-color" content="#E9E3DA">
+
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="frame">
+<div class="sheet">
+
+<header class="site-header">
+  <a href="#top" class="logo-link" aria-label="Firn home"><img src="/assets/firn-lockup.svg" alt="firn" width="74" height="34"></a>
+  <nav aria-label="Elsewhere" class="header-nav">
+    <a href="https://www.reddit.com/r/FirnBrowser">r/FirnBrowser</a>
+    <a href="https://github.com/dwurgy/firn">Source code</a>
+  </nav>
+</header>
+
+<main>
+
+<section id="top" class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Coming soon to Windows, then macOS and Linux</p>
+    <h1 class="serif">A calm browser for everyone.</h1>
+    <p class="lede">Vertical tabs, spaces, split view and link previews, without the learning curve. Built on Chromium. Your data stays on your device.</p>
+
+    <!-- Sign-up is not connected yet. It will post to a Cloudflare Worker in a later step. -->
+    <form class="signup">
+      <label for="email">Want to try Firn when it's ready?</label>
+      <div class="signup-row">
+        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        <button type="submit">Notify me</button>
+      </div>
+      <p class="signup-note">Just one email. No newsletter, no tracking, never shared.</p>
+    </form>
+
+    <!-- shown after submitting, instead of the form -->
+    <template id="thanks">
+      <div role="status" class="thanks">Thank you. You'll hear from Firn once, when it's ready.</div>
+    </template>
+  </div>
+</section>
+
+<section class="showcase" aria-label="What Firn looks like">
+  <div class="window">
+    <div class="window-body">
+      <div class="sidebar">
+        <div class="address">Search or type an address</div>
+        <div class="basecamp">
+          <div class="active"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="space-label">Personal</div>
+        <div class="tabs">
+          <div class="tab active"><span style="background: #8FAE8B"></span>Recipes</div>
+          <div class="tab"><span style="background: #C9A27E"></span>Weekend trip</div>
+          <div class="tab"><span style="background: #6FA3A0"></span>Reading list</div>
+        </div>
+        <div class="space-dots">
+          <span style="background: #7F9CB0"></span>
+          <span style="background: #8FAE8B"></span>
+          <span style="background: #C9A27E"></span>
+        </div>
+      </div>
+      <div class="window-page">
+        <p>[Screenshot of Firn goes here]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <h2 class="serif">All the good ideas. None of the homework.</h2>
+  <div class="feature-grid">
+    <div class="card">
+      <h3>Spaces</h3>
+      <p>Keep Work and Personal apart, each with its own tabs, color and icon. Switching feels like opening a different browser.</p>
+    </div>
+    <div class="card">
+      <h3>Basecamp</h3>
+      <p>Your everyday sites, like mail and calendar, always one click away at the top of the sidebar, in every space.</p>
+    </div>
+    <div class="card">
+      <h3>Lookout</h3>
+      <p>Peek at a link in a floating panel without leaving your page. Keep it as a tab if you want it.</p>
+    </div>
+    <div class="card">
+      <h3>Split view</h3>
+      <p>Two tabs side by side, each with its own address. Drag the gap to make room.</p>
+    </div>
+  </div>
+</section>
+
+<section class="principles">
+  <h2 class="serif">Less, on purpose.</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <h3 class="serif">Nothing to learn.</h3>
+      <p>Short menus in plain words. Anything important can be found by looking or right-clicking.</p>
+    </div>
+    <div class="principle">
+      <h3 class="serif">Nothing in the way.</h3>
+      <p>The page you're reading is the star. Firn steps back until you need it.</p>
+    </div>
+    <div class="principle">
+      <h3 class="serif">Nothing loud.</h3>
+      <p>Generous space, warm colors and quiet motion. Nothing competes for your attention.</p>
+    </div>
+    <div class="principle">
+      <h3 class="serif">Nothing collected.</h3>
+      <p>No tracking, no telemetry, no account required. Your tabs, history and passwords stay on your computer unless you choose otherwise.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Firn is free and open source under the Mozilla Public License 2.0.</p>
+    <nav aria-label="Footer" class="footer-nav">
+      <a href="https://github.com/dwurgy/firn">GitHub</a>
+      <a href="https://www.reddit.com/r/FirnBrowser">Reddit</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
