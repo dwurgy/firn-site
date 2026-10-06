@@ -22,7 +22,7 @@ The design was made in Claude Design and is final unless David changes it.
   look identical.
 - `design/coming-soon-desktop.png` and `design/coming-soon-phone.png`: how it
   should look at 1440px and at phone width.
-- `design/share-preview-reference.html` and `assets/firn-share-preview-v2.png`:
+- `design/share-preview-reference.html` and `assets/firn-share-preview-v3.png`:
   the 1200×630 image shown when someone shares the link (Open Graph / Twitter
   card).
 
@@ -113,7 +113,7 @@ Firn's promise is privacy, so the website keeps it too:
 - Accessible: real `<label>` for the email field, visible focus ring (frost),
   good contrast, alt text on the logo.
 - Page title, description, Open Graph and Twitter tags using
-  `assets/firn-share-preview-v2.png`.
+  `assets/firn-share-preview-v3.png`.
 - Fast: no build step needed to view it; images and fonts sized sensibly.
 
 ## Placeholders to fill later
