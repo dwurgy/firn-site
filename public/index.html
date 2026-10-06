@@ -27,6 +27,7 @@
 
 <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<script src="signup.js" defer></script>
 </head>
 <body>
 
@@ -49,13 +50,20 @@
     <h1 class="serif">A calm browser for everyone.</h1>
     <p class="lede">Vertical tabs, spaces, split view and link previews, without the learning curve. Built on Chromium. Your data stays on your device.</p>
 
-    <!-- Sign-up is not connected yet. It will post to a Cloudflare Worker in a later step. -->
-    <form class="signup">
+    <!-- Posts to functions/api/signup.js. signup.js sends it in the background;
+         without JavaScript the browser posts it and lands on the thanks page. -->
+    <form class="signup" action="/api/signup" method="post">
       <label for="email">Want to try Firn when it's ready?</label>
       <div class="signup-row">
-        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        <input id="email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com">
         <button type="submit">Notify me</button>
       </div>
+      <!-- Spam trap: hidden from people, but bots fill it in. -->
+      <div class="trap" aria-hidden="true">
+        <label for="website">Leave this empty</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <p class="signup-error" role="alert" hidden></p>
       <p class="signup-note">Just one email. No newsletter, no tracking, never shared.</p>
     </form>
 

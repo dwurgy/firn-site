@@ -203,6 +203,23 @@ input:focus {
   color: var(--ink-muted);
 }
 
+.signup-error {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.signup button:disabled { cursor: progress; }
+
+/* Spam trap: off-screen for people, still filled in by most bots. */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .thanks {
   margin-top: 8px;
   padding: 16px 22px;

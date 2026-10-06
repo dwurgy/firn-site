@@ -122,6 +122,13 @@ Firn's promise is privacy, so the website keeps it too:
   real screenshot.
 - The "Coming soon to Windows, then macOS and Linux" line may change.
 
+## Project layout
+
+The published site lives in `public/` (so the assets above are at
+`public/assets/`). Sign-up code is in `functions/` (Cloudflare Pages
+Functions, D1 database bound as `DB`), the database setup in `migrations/`.
+See README.md.
+
 ## How to work
 
 - Small steps, one at a time. After each, say in plain words what changed and
