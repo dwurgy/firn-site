@@ -94,12 +94,16 @@ input:focus {
 /* ---------- Hero ---------- */
 
 .hero {
-  /* Bottom padding grows with the width of the snow art (1920×384, about
-     17.3% of its width from the top crystal to the bottom), so the faint
-     crystals always sit below the text instead of on it. */
-  padding: 72px 32px max(220px, calc((100vw - 24px) * 0.173 + 28px));
+  /* The snow art spans the full width at its natural proportions. On narrow
+     screens it stays at least 800px wide (trimmed at the sides) so it
+     doesn't shrink into a thin strip.
+     Bottom padding grows with the art's width (1920×384, about 17.3% of its
+     width from the top crystal to the bottom), so the faint crystals always
+     sit below the text instead of on it. */
+  --snow-width: max(100vw - 24px, 800px);
+  padding: 72px 32px max(220px, calc(var(--snow-width) * 0.173 + 28px));
   background-image: url('assets/firn-snow-layers.svg');
-  background-size: 100% auto;
+  background-size: var(--snow-width) auto;
   background-repeat: no-repeat;
   background-position: center bottom;
 }
@@ -215,7 +219,8 @@ input:focus {
 
 .showcase {
   padding: 0 32px;
-  margin-top: -150px;
+  /* Overlaps the snow by 150px on desktop, less as the mockup shrinks. */
+  margin-top: max(-150px, (100vw - 88px) * -0.1415);
   container-type: inline-size;
 }
 
