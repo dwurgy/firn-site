@@ -112,6 +112,10 @@ logo. `firn-lockup.svg` is the header logo (about 34px tall). Favicons are in
 
 Tab favicon = bare flake (glacier-deep, lighter on dark). Home-screen icons
 (180/192/512) = glacier tile.
+The 180 icon is the iPhone home-screen icon (`apple-touch-icon`); 192 and 512
+are listed in `public/site.webmanifest` for Android. They're marked
+`purpose: any` (not maskable), because the flake reaches too close to the
+edges to survive Android's circle crop.
 
 ---
 

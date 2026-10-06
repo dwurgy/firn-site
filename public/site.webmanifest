@@ -1,0 +1,24 @@
+{
+  "name": "Firn",
+  "short_name": "Firn",
+  "description": "A calm browser for everyone.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#FBFAF8",
+  "theme_color": "#E9E3DA",
+  "icons": [
+    {
+      "src": "/assets/favicon/firn-favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicon/firn-favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
