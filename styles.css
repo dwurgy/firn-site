@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Fraunces';
-  src: url('/assets/fonts/fraunces.woff2') format('woff2');
+  src: url('assets/fonts/fraunces.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -98,7 +98,7 @@ input:focus {
      17.3% of its width from the top crystal to the bottom), so the faint
      crystals always sit below the text instead of on it. */
   padding: 72px 32px max(220px, calc((100vw - 24px) * 0.173 + 28px));
-  background-image: url('/assets/firn-snow-layers.svg');
+  background-image: url('assets/firn-snow-layers.svg');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center bottom;
