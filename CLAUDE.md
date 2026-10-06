@@ -112,6 +112,10 @@ logo. `firn-lockup.svg` is the header logo (about 34px tall). Favicons are in
 
 Tab favicon = bare flake (glacier-deep, lighter on dark). Home-screen icons
 (180/192/512) = glacier tile.
+The 180 icon is the iPhone home-screen icon (`apple-touch-icon`); 192 and 512
+are listed in `public/site.webmanifest` for Android. They're marked
+`purpose: any` (not maskable), because the flake reaches too close to the
+edges to survive Android's circle crop.
 
 ---
 
@@ -139,6 +143,42 @@ Firn's promise is privacy, so the website keeps it too:
   step by step, in plain words.
 - Keep it a simple static site: plain HTML and CSS, plus the one Worker for
   sign-ups. No framework unless there's a strong reason; ask first.
+
+## Cloudflare setup
+
+These settings live in David's Cloudflare dashboard, not in this repo. They're
+written down here so the setup can be understood or rebuilt. Never put the
+export password (or any other secret) in this repo.
+
+- **Pages project** `firn-site`, connected to GitHub `dwurgy/firn-site` (the
+  Cloudflare GitHub app only has access to this repo). Production branch
+  `main`, framework preset None, no build command, build output directory
+  `public`. Every merge to `main` publishes; other branches get preview
+  addresses.
+- **Domains:** firnbrowser.com and www.firnbrowser.com, added under the
+  project's Custom domains. The project's own address,
+  `firn-site-e8s.pages.dev`, redirects to firnbrowser.com (see below).
+- **Database:** D1 database `firn-signups`, created by running
+  `migrations/0001_create_signups.sql` in its Console. Bound to the project
+  as `DB` (Settings → Bindings, Production only).
+- **Export password:** secret `EXPORT_PASSWORD` (Settings → Variables and
+  Secrets, Production only). It protects `/admin/export`; without it that page
+  doesn't exist. To change it, edit the secret, then redeploy.
+- Changes to bindings or secrets only take effect after a new deployment
+  (Deployments → ⋯ → Retry deployment).
+- Preview deployments have no database, so sign-ups there show an error.
+  That's expected.
+- **Spam limit:** a rate limiting rule on the firnbrowser.com zone
+  (Security → WAF), named "Sign-up limit". When URI Path equals
+  `/api/signup`, per IP, more than 5 requests in 10 seconds: block for 10
+  seconds. The free plan allows one such rule.
+- **pages.dev redirect:** account-level Bulk Redirects. The list
+  `pages_dev_redirect` sends `firn-site-e8s.pages.dev` to
+  `https://firnbrowser.com` (301), with preserve query string, subpath
+  matching and preserve path suffix on, and "include subdomains" off so
+  preview addresses keep working. An enabled Bulk Redirect rule uses that
+  list. This is done in the dashboard rather than in code so that static
+  files don't count against the Functions request allowance.
 
 ## Must-haves
 
