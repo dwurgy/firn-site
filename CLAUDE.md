@@ -65,6 +65,38 @@ Shadows  page: 0 1px 3px rgba(60,40,20,.14), 0 6px 20px rgba(60,40,20,.2)
          window: 0 2px 8px rgba(40,28,16,.14), 0 18px 48px rgba(40,28,16,.22)
 ```
 
+### Dark mode
+
+The page follows the visitor's system setting (`prefers-color-scheme: dark`),
+the same way Firn follows the OS. No toggle. Layout, spacing and copy are the
+same in both modes; only colours, shadows and two images change. All colours
+are CSS variables in `public/styles.css`, with one dark block that redefines
+them. Reference: `design/coming-soon-dark-reference.html` and the
+`coming-soon-dark-*.png` screenshots.
+
+```
+Colors   frame #3A3734 · page #2B2826 · ink #F5F1EC · ink-muted #D4CDC5
+         ink-faint #958D85 (placeholders) · links #F5F1EC, hover #D4CDC5
+         main button: background #F5F1EC, text #2B2826
+         email field: background rgba(255,250,245,.08),
+         border 1px rgba(255,250,245,.12)
+         focus ring rgba(160,196,214,.45)
+         mockup tiles rgba(255,250,245,.08) · highlighted tab
+         rgba(255,250,245,.14) · footer border rgba(255,250,245,.08)
+         "thanks" background rgba(43,40,38,.85)
+         space colours in the mockup are the same in both modes
+Shadows  page: 0 1px 3px rgba(0,0,0,.3), 0 6px 22px rgba(0,0,0,.35)
+         window: 0 2px 8px rgba(0,0,0,.3), 0 18px 48px rgba(0,0,0,.4)
+         small (highlighted tab): 0 1px 2px rgba(0,0,0,.15)
+Images   header logo: assets/firn-lockup-on-dark.svg (via <picture>)
+         hero: assets/firn-snow-layers-dark.svg, same sizing rules as light
+Meta     color-scheme "light dark"; theme-color #E9E3DA light, #3A3734 dark
+```
+
+Feature cards use the frame colour (#3A3734), as in the dark reference file.
+The link preview image stays light in both modes, because it shows up in
+other people's apps.
+
 ### Fonts
 
 Self-host Fraunces from `assets/fonts/fraunces.woff2` (a variable font; keep

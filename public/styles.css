@@ -15,13 +15,57 @@
   --ink-muted: #5E564E;
   --ink-faint: #9D9389;
   --frost: rgba(130, 168, 190, 0.45);
-  --hairline: rgba(60, 40, 20, 0.14);
+  --rule: rgba(60, 40, 20, 0.08);
+
+  --field-bg: #FFFFFF;
+  --field-border: rgba(60, 40, 20, 0.14);
+  --button-hover: #3A332D;
+  --thanks-bg: rgba(251, 250, 248, 0.85);
+
+  /* Window mockup: address bar, Basecamp tiles, highlighted tab */
+  --address-bg: rgba(255, 255, 255, 0.55);
+  --tile-bg: rgba(255, 255, 255, 0.5);
+  --tile-active-bg: rgba(255, 255, 255, 0.78);
 
   --shadow-page: 0 1px 3px rgba(60, 40, 20, 0.14), 0 6px 20px rgba(60, 40, 20, 0.2);
   --shadow-window: 0 2px 8px rgba(40, 28, 16, 0.14), 0 18px 48px rgba(40, 28, 16, 0.22);
+  --shadow-small: 0 1px 2px rgba(60, 40, 20, 0.08);
+
+  --snow-art: url('assets/firn-snow-layers.svg');
 
   --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ease: 200ms ease-out;
+
+  color-scheme: light dark;
+}
+
+/* Dark mode follows the visitor's system setting, like Firn follows the OS.
+   Only colors, shadows and the snow art change; layout stays the same. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --frame: #3A3734;
+    --page: #2B2826;
+    --ink: #F5F1EC;
+    --ink-muted: #D4CDC5;
+    --ink-faint: #958D85;
+    --frost: rgba(160, 196, 214, 0.45);
+    --rule: rgba(255, 250, 245, 0.08);
+
+    --field-bg: rgba(255, 250, 245, 0.08);
+    --field-border: rgba(255, 250, 245, 0.12);
+    --button-hover: #E3DDD6;
+    --thanks-bg: rgba(43, 40, 38, 0.85);
+
+    --address-bg: rgba(255, 250, 245, 0.08);
+    --tile-bg: rgba(255, 250, 245, 0.08);
+    --tile-active-bg: rgba(255, 250, 245, 0.14);
+
+    --shadow-page: 0 1px 3px rgba(0, 0, 0, 0.3), 0 6px 22px rgba(0, 0, 0, 0.35);
+    --shadow-window: 0 2px 8px rgba(0, 0, 0, 0.3), 0 18px 48px rgba(0, 0, 0, 0.4);
+    --shadow-small: 0 1px 2px rgba(0, 0, 0, 0.15);
+
+    --snow-art: url('assets/firn-snow-layers-dark.svg');
+  }
 }
 
 /* ---------- Base ---------- */
@@ -102,7 +146,7 @@ input:focus {
      sit below the text instead of on it. */
   --snow-width: max(100vw - 24px, 800px);
   padding: 72px 32px max(220px, calc(var(--snow-width) * 0.173 + 28px));
-  background-image: url('assets/firn-snow-layers.svg');
+  background-image: var(--snow-art);
   background-size: var(--snow-width) auto;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -171,9 +215,9 @@ input:focus {
   height: 48px;
   box-sizing: border-box;
   padding: 0 16px;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--field-border);
   border-radius: 10px;
-  background: #FFFFFF;
+  background: var(--field-bg);
   font: inherit;
   font-size: 16px;
   color: var(--ink);
@@ -195,7 +239,7 @@ input:focus {
   cursor: pointer;
   transition: background-color var(--ease);
 }
-.signup button:hover { background: #3A332D; }
+.signup button:hover { background: var(--button-hover); }
 
 .signup-note {
   margin: 0;
@@ -224,7 +268,7 @@ input:focus {
   margin-top: 8px;
   padding: 16px 22px;
   border-radius: 14px;
-  background: rgba(251, 250, 248, 0.85);
+  background: var(--thanks-bg);
   font-size: 16px;
   color: var(--ink);
 }
@@ -269,7 +313,7 @@ input:focus {
 .address {
   height: calc(36 * var(--u));
   border-radius: calc(10 * var(--u));
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--address-bg);
   display: flex;
   align-items: center;
   padding: 0 calc(12 * var(--u));
@@ -286,9 +330,9 @@ input:focus {
 .basecamp div {
   height: calc(40 * var(--u));
   border-radius: calc(10 * var(--u));
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--tile-bg);
 }
-.basecamp .active { background: rgba(255, 255, 255, 0.78); }
+.basecamp .active { background: var(--tile-active-bg); }
 
 .space-label {
   font-size: calc(12 * var(--u));
@@ -314,8 +358,8 @@ input:focus {
   white-space: nowrap;
 }
 .tab.active {
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 1px 2px rgba(60, 40, 20, 0.08);
+  background: var(--tile-active-bg);
+  box-shadow: var(--shadow-small);
   color: var(--ink);
 }
 .tab span {
@@ -421,7 +465,7 @@ input:focus {
 
 /* ---------- Footer ---------- */
 
-.site-footer { border-top: 1px solid rgba(60, 40, 20, 0.08); }
+.site-footer { border-top: 1px solid var(--rule); }
 
 .footer-inner {
   max-width: 1040px;
