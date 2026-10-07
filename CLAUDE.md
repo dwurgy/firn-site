@@ -28,9 +28,14 @@ unless David changes it.
   use the design's markup with the real head (favicons, Open Graph), clean
   links and the working sign-up form. At 1440px and 393px they render
   pixel for pixel like the design files.
-- `design/share-preview-reference.html` and `assets/firn-share-preview-v3.png`:
-  the 1200×630 image shown when someone shares the link (Open Graph / Twitter
-  card). It keeps the earlier snow art (`design/assets/firn-snow-layers.svg`).
+- `public/assets/firn-share-preview-v4.png`: the link preview, the 1200×630
+  image shown when someone shares a firnbrowser.com link (Open Graph /
+  Twitter card), in the First light style: logo, "A calm browser for
+  everyone.", firnbrowser.com, snow at sunrise. Made in Claude Design as a
+  finished image. It stays light in both modes, because it shows up in
+  other people's apps. Every page's `og:image` and `twitter:image` use the
+  full URL `https://firnbrowser.com/assets/firn-share-preview-v4.png`. When
+  it changes, use a new file name (v5, …) so apps fetch the new picture.
 
 **Copy is final**, as written in the design files (including the line break
 in the home subhead). Don't rewrite headlines or reword claims. Every privacy
@@ -233,7 +238,7 @@ stacked.
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  `assets/firn-share-preview-v3.png`.
+  `assets/firn-share-preview-v4.png`.
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Placeholders to fill later
