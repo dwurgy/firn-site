@@ -179,3 +179,14 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 /* The hero's floating flakes sit on the text below about 970px wide; the
    design hides them on phones, this extends that to tablets. */
 @media (max-width:999px){.hero .fl{display:none}}
+/* Smooth scrolling. The window's live backdrop blur, combined with the
+   full-page grain blending on top of it, made the browser redo a large
+   blur and blend on every scroll frame (about 20 fps over the haze).
+   - The window keeps its semi-clear glass colour but drops the live blur:
+     behind it are only already-blurred colour glows, so blurring them
+     again changed nothing visible.
+   - The grain sits under the content (sky, glows, snow) instead of on top
+     of everything. Visually within 8/255 of the design at every pixel.
+   The footer pills and support cards keep their real frosted blur. */
+.win{backdrop-filter:none;-webkit-backdrop-filter:none}
+.sheet::after{z-index:0}

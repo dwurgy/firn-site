@@ -27,7 +27,8 @@ unless David changes it.
   design tool) plus a few live-site additions at the end. The live pages
   use the design's markup with the real head (favicons, Open Graph), clean
   links and the working sign-up form. At 1440px and 393px they render
-  pixel for pixel like the design files.
+  the same as the design files, apart from the scroll-performance changes
+  below (no pixel differs by more than 9/255, which is invisible).
 - `public/assets/firn-share-preview-v4.png`: the link preview, the 1200×630
   image shown when someone shares a firnbrowser.com link (Open Graph /
   Twitter card), in the First light style: logo, "A calm browser for
@@ -54,12 +55,16 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Sky glow.** Each page starts with a soft morning sky (`.sky`): cool
   glacier blue at the top, warm peach and rose glows lower down, fading out
   as you scroll. Inner pages use a shorter sky (`.sky.short`).
-- **Paper grain.** A faint warm noise texture over the whole page
-  (`.sheet::after`, an inline SVG filter, no image file).
+- **Paper grain.** A faint warm noise texture (`.sheet::after`, an inline
+  SVG filter, no image file). On the live site it sits on the scenery (sky,
+  glows, snow) under the content, not on top of everything; see "Keep
+  scrolling smooth" below.
 - **Frosted glass.** The window mockup, the footer pills, the support cards
-  and the release-note badges are semi-clear panels with a soft edge and a
-  `backdrop-filter` blur. Where a browser can't blur, the semi-opaque
-  background alone still reads fine.
+  and the release-note badges are semi-clear panels with a soft edge. The
+  pills and cards use a real `backdrop-filter` blur; the big window mockup
+  doesn't (see below), it only looks frosted because of its semi-clear
+  colour over the already-soft glows. Where a browser can't blur, the
+  semi-opaque background alone still reads fine.
 - **Colour light behind the window.** On the home page, blurred patches of
   glacier, sunrise, sage and lilac light (`.light`) sit behind the frosted
   window mockup.
@@ -77,6 +82,18 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Calm.** Generous space; motion is only small 200ms hover/focus
   transitions, switched off for `prefers-reduced-motion`. No carousels,
   pop-ups, cookie banners, chat widgets or stock photos.
+
+### Keep scrolling smooth
+
+A live `backdrop-filter` blur on a big element, combined with a full-page
+layer that blends (`mix-blend-mode`) on top of it, makes the browser redo a
+large blur and blend on every scroll frame. On the home page that dropped
+scrolling over the haze to about 20 frames per second. So, at the end of
+`public/site.css`: the window mockup has no backdrop blur, and the grain
+sits under the content (`z-index: 0`) instead of over it. After that every
+page scrolls at about 60 fps. When adding new parts: no large
+`backdrop-filter` panels, and no full-page blended layer above blurred
+ones. Small glass pieces (pills, cards) are fine.
 
 ### Colours and type
 
