@@ -16,20 +16,20 @@ input::placeholder{color:#9D9389}
 input:focus{outline:3px solid rgba(130,168,190,0.45);outline-offset:1px}
 </style>
 
-<style id="phone">
+<style id="capsule">.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.capsule:focus-within{box-shadow:0 0 0 3px rgba(130,168,190,0.45) !important}</style><style id="phone">
 @media (max-width: 600px){
   .frame{padding:8px !important}
-  .site-header{padding:22px 24px 6px !important;justify-content:center !important}
+  .site-header{padding:22px 24px 6px !important}
   .site-header img{height:30px !important}
   .site-nav{display:none !important}
   .hero-art{padding:36px 24px 214px !important;background-size:auto 210px !important}
   .hero-inner{gap:18px !important}
-  .eyebrow{font-size:12px !important;letter-spacing:.1em !important}
+  .eyebrow{font-size:14px !important}
   .eyebrow .long{display:none}
   .eyebrow .short{display:inline !important}
   .hero-inner h1{font-size:46px !important;line-height:1.02 !important}
   .lede{font-size:17px !important;line-height:1.5 !important}
-  .signup{margin-top:6px !important;gap:8px !important}
+  .signup{margin-top:8px !important}
   .signup-row{flex-wrap:nowrap !important}
   .signup-row input{flex:1 1 auto !important}
   .shot{margin-top:-36px !important;padding:0 16px !important}
@@ -43,31 +43,26 @@ input:focus{outline:3px solid rgba(130,168,190,0.45);outline-offset:1px}
 
 <header class="site-header" style="max-width: 1120px; margin: 0 auto; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
 <a href="#top" aria-label="Firn home" style="display: flex;"><img src="../public/assets/firn-lockup.svg" alt="firn" style="height: 34px; width: auto; display: block;"></a>
-<nav class="site-nav" aria-label="Elsewhere" style="display: flex; gap: 24px; font-size: 15px; flex-wrap: wrap;">
-<a href="https://www.reddit.com/r/FirnBrowser" style="text-decoration: none;">r/FirnBrowser</a>
-<a href="https://github.com/dwurgy/firn" style="text-decoration: none;">Source code</a>
-</nav>
 </header>
 
-<section id="top" class="hero-art" style="padding: 72px 32px 220px;">
+<section id="top" class="hero-art" style="padding: 72px 32px 300px;">
 <div class="hero-inner" style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px;">
-<p class="eyebrow" style="margin: 0; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E564E;"><span class="long">Coming soon to Windows, then macOS and Linux</span><span class="short" style="display:none">Coming soon · Windows first</span></p>
+<p class="eyebrow" style="margin: 0; font-size: 15px; letter-spacing: 0; color: #5E564E;"><span class="long">Coming soon to macOS, Windows and Linux</span><span class="short" style="display:none">Coming soon</span></p>
 <h1 class="serif" style="margin: 0; font-size: clamp(44px, 7vw, 76px); line-height: 1.04; font-weight: 360; letter-spacing: -0.015em;">A calm browser for everyone.</h1>
 <p class="lede" style="margin: 0; max-width: 600px; font-size: 19px; line-height: 1.55; color: #5E564E;">Vertical tabs, spaces and split view, without the learning curve. Your data stays on your device.</p>
 
 
-<form class="signup" style="margin-top: 8px; width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 10px; text-align: left;">
-<label for="email" style="font-size: 14px; color: #5E564E;">Want to try Firn when it's ready?</label>
-<div class="signup-row" style="display: flex; flex-wrap: wrap; gap: 8px;">
-<input id="email" type="email" required placeholder="you@example.com" style="flex: 1 1 240px; min-width: 0; height: 48px; box-sizing: border-box; padding: 0 16px; border: 1px solid rgba(60, 40, 20, 0.14); border-radius: 10px; background: #FFFFFF; font: inherit; font-size: 16px; color: #241F1B;">
-<button type="submit" style="flex: 0 0 auto; height: 48px; padding: 0 22px; border: 0; border-radius: 10px; background: #241F1B; color: #FBFAF8; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer;">Notify me</button>
+<form class="signup" style="margin-top: 12px; width: 100%; max-width: 420px;">
+<label for="email" class="sr-only">Email address, to hear once when Firn is ready</label>
+<div class="capsule" style="display: flex; align-items: center; gap: 6px; height: 56px; box-sizing: border-box; padding: 5px 5px 5px 20px; border: 1px solid rgba(60, 40, 20, 0.12); border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 6px 18px rgba(60, 40, 20, 0.07);">
+<input id="email" type="email" required placeholder="Your email" autocomplete="email" style="flex: 1 1 auto; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; color: #241F1B;">
+<button type="submit" style="flex: 0 0 auto; height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: #241F1B; color: #FBFAF8; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer;">Notify me</button>
 </div>
-<p style="margin: 0; font-size: 13px; color: #5E564E;">Just one email. No tracking, never shared.</p>
 </form>
 
 <!-- shown after submitting, instead of the form -->
 <template id="thanks">
-<div role="status" style="margin-top: 8px; padding: 16px 22px; border-radius: 14px; background: rgba(251, 250, 248, 0.85); font-size: 16px; color: #241F1B;">Thank you. You'll hear from Firn once, when it's ready.</div>
+<div role="status" style="margin-top: 8px; padding: 16px 22px; border-radius: 14px; background: rgba(251, 250, 248, 0.85); font-size: 16px; color: #241F1B;">Thank you. One email when Firn is ready, nothing else.</div>
 </template>
 </div>
 </section>

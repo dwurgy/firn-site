@@ -180,26 +180,64 @@ export password (or any other secret) in this repo.
   list. This is done in the dashboard rather than in code so that static
   files don't count against the Functions request allowance.
 
-## Phone layout
+## Hero, header and sign-up (current)
 
-At 600px wide and below, the hero is tighter (design: `design/phone-proposal-light.html`
-and `-dark.html`, view at 393px; before/after in `design/phone-before-after-*.png`).
-It's one `@media (max-width: 600px)` block at the end of `public/styles.css`:
-frame padding 8px; header shows only the logo, centered, 30px tall (the
-links stay in the footer); eyebrow reads just "Coming soon"; smaller hero
-type; email field and button on one row; snow art at a fixed 210px height
-(`background-size: auto 210px`, cropped at the sides); window mockup
-overlaps the snow by 36px. Ignore the proposal files' eyebrow text ("Windows
-first") and their squashed mockup: the eyebrow is as above, and the mockup
-still shrinks as one picture.
+The latest full-page design is `design/phone-proposal-light.html` and
+`-dark.html` (view at 1440px and 393px), with screenshots in
+`design/hero-*.png`. For the header, hero and sign-up it supersedes
+`coming-soon-reference.html`; everything below the hero is unchanged. One
+exception: on phones the window mockup still shrinks as one picture (the
+proposal files show it squashed).
+
+**Header (all sizes):** logo only, left-aligned. The r/FirnBrowser and
+Source code links live in the footer only. The right side is kept free for a
+small menu later (release notes, donate); nothing there yet.
+
+**Copy (final, all sizes):**
+- Eyebrow, sentence case, ink-muted: "Coming soon to macOS, Windows and
+  Linux" (15px); on phones just "Coming soon" (14px).
+- Subhead: "Vertical tabs, spaces and split view, without the learning
+  curve. Your data stays on your device."
+- Sign-up: no visible label or note. Placeholder "Your email". A visually
+  hidden label for screen readers: "Email address, to hear once when Firn is
+  ready".
+- Thank-you (replaces the box after signing up, and on `/thanks`): "Thank
+  you. One email when Firn is ready, nothing else."
+- Error for a mistyped address: "That doesn't look like an email address."
+
+**Sign-up capsule:** one centered box, max-width 420px, 56px tall, radius
+14px, padding 5px 5px 5px 20px, 1px border, soft shadow. Inside: the email
+field (no border, transparent) and the Notify me button (44px tall, radius
+10px, 15px, weight 500). When the field is focused the whole box gets the
+frost ring (box-shadow 0 0 0 3px frost); the field has no ring of its own.
+The button keeps its own ring when tabbed to.
+
+```
+Light   box #FFFFFF · border rgba(60,40,20,.12)
+        shadow 0 1px 2px rgba(60,40,20,.06), 0 6px 18px rgba(60,40,20,.07)
+        button #241F1B, text #FBFAF8
+Dark    box rgba(255,250,245,.08) · border rgba(255,250,245,.12)
+        shadow 0 1px 2px rgba(0,0,0,.15), 0 6px 18px rgba(0,0,0,.18)
+        button #F5F1EC, text #2B2826
+```
+
+Desktop hero bottom padding is 300px (more on very wide screens) so the snow
+crystals stay clear of the capsule.
+
+**Phone (max-width: 600px)**, one block at the end of `public/styles.css`:
+frame padding 8px; header padding 22px 24px 6px, logo 30px, still
+left-aligned; hero padding 36px 24px 214px, gap 18px; h1 46px / 1.02;
+subhead 17px / 1.5; snow art at a fixed 210px height
+(`background-size: auto 210px`, cropped at the sides, pinned to the bottom);
+window mockup margin-top -36px, side padding 16px.
 
 ## Must-haves
 
 - Works and looks right at phone width (see the phone screenshot). On phones,
   the window mockup should shrink as one picture rather than squash its
   sidebar. It will become a real screenshot image later.
-- Accessible: real `<label>` for the email field, visible focus ring (frost),
-  good contrast, alt text on the logo.
+- Accessible: real `<label>` for the email field (visually hidden), visible
+  focus ring (frost), good contrast, alt text on the logo.
 - Page title, description, Open Graph and Twitter tags using
   `assets/firn-share-preview-v3.png`.
 - Fast: no build step needed to view it; images and fonts sized sensibly.
@@ -208,8 +246,8 @@ still shrinks as one picture.
 
 - `[Screenshot of Firn goes here]` in the window mockup: David will provide a
   real screenshot.
-- The "Coming soon to macOS, Windows and Linux" line (phone: "Coming soon")
-  may change.
+- The "Coming soon to macOS, Windows and Linux" eyebrow (phone: "Coming
+  soon") may change.
 
 ## Project layout
 
