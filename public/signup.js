@@ -7,7 +7,7 @@ const button = form.querySelector('button');
 const error = form.querySelector('.signup-error');
 
 const messages = {
-  invalid: "That doesn't look like an email address. Please check it and try again.",
+  invalid: "That doesn't look like an email address.",
   busy: 'Too many sign-ups right now. Please try again later.',
   error: 'Something went wrong. Please try again in a minute.',
 };

@@ -17,8 +17,9 @@
   --frost: rgba(130, 168, 190, 0.45);
   --rule: rgba(60, 40, 20, 0.08);
 
-  --field-bg: #FFFFFF;
-  --field-border: rgba(60, 40, 20, 0.14);
+  --capsule-bg: #FFFFFF;
+  --capsule-border: rgba(60, 40, 20, 0.12);
+  --shadow-capsule: 0 1px 2px rgba(60, 40, 20, 0.06), 0 6px 18px rgba(60, 40, 20, 0.07);
   --button-hover: #3A332D;
   --thanks-bg: rgba(251, 250, 248, 0.85);
 
@@ -51,8 +52,9 @@
     --frost: rgba(160, 196, 214, 0.45);
     --rule: rgba(255, 250, 245, 0.08);
 
-    --field-bg: rgba(255, 250, 245, 0.08);
-    --field-border: rgba(255, 250, 245, 0.12);
+    --capsule-bg: rgba(255, 250, 245, 0.08);
+    --capsule-border: rgba(255, 250, 245, 0.12);
+    --shadow-capsule: 0 1px 2px rgba(0, 0, 0, 0.15), 0 6px 18px rgba(0, 0, 0, 0.18);
     --button-hover: #E3DDD6;
     --thanks-bg: rgba(43, 40, 38, 0.85);
 
@@ -127,25 +129,17 @@ input:focus {
 .logo-link { display: flex; }
 .logo-link img { height: 34px; width: auto; display: block; }
 
-.header-nav {
-  display: flex;
-  gap: 24px;
-  font-size: 15px;
-  flex-wrap: wrap;
-}
-.header-nav a { text-decoration: none; }
-
 /* ---------- Hero ---------- */
 
 .hero {
   /* The snow art spans the full width at its natural proportions. On narrow
      screens it stays at least 800px wide (trimmed at the sides) so it
      doesn't shrink into a thin strip.
-     Bottom padding grows with the art's width (1920×384, about 17.3% of its
-     width from the top crystal to the bottom), so the faint crystals always
-     sit below the text instead of on it. */
+     Bottom padding is at least 300px, and grows with the art's width on very
+     wide screens (1920×384, about 17.3% of its width from the top crystal to
+     the bottom), so the faint crystals always sit below the sign-up box. */
   --snow-width: max(100vw - 24px, 800px);
-  padding: 72px 32px max(220px, calc(var(--snow-width) * 0.173 + 28px));
+  padding: 72px 32px max(300px, calc(var(--snow-width) * 0.173 + 28px));
   background-image: var(--snow-art);
   background-size: var(--snow-width) auto;
   background-repeat: no-repeat;
@@ -164,9 +158,7 @@ input:focus {
 
 .eyebrow {
   margin: 0;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 15px;
   color: var(--ink-muted);
 }
 
@@ -186,69 +178,72 @@ input:focus {
   color: var(--ink-muted);
 }
 
-/* ---------- Sign-up form ---------- */
+/* ---------- Sign-up capsule ----------
+   One box holding the email field and the button. The field has no border
+   of its own; the whole box gets the frost ring while the field is focused. */
 
 .signup {
-  margin-top: 8px;
+  margin-top: 12px;
   width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
+  max-width: 420px;
 }
 
-.signup label {
-  font-size: 14px;
-  color: var(--ink-muted);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-.signup-row {
+.capsule {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 6px;
+  height: 56px;
+  box-sizing: border-box;
+  padding: 5px 5px 5px 20px;
+  border: 1px solid var(--capsule-border);
+  border-radius: 14px;
+  background: var(--capsule-bg);
+  box-shadow: var(--shadow-capsule);
+  transition: box-shadow var(--ease);
 }
+.capsule:has(input:focus) { box-shadow: 0 0 0 3px var(--frost); }
 
 .signup input {
-  flex: 1 1 240px;
+  flex: 1 1 auto;
   min-width: 0;
-  height: 48px;
-  box-sizing: border-box;
-  padding: 0 16px;
-  border: 1px solid var(--field-border);
-  border-radius: 10px;
-  background: var(--field-bg);
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
   font: inherit;
   font-size: 16px;
   color: var(--ink);
-  transition: outline-color var(--ease);
 }
+.signup input:focus { outline: none; }
 .signup input::placeholder { color: var(--ink-faint); }
 
 .signup button {
   flex: 0 0 auto;
-  height: 48px;
-  padding: 0 22px;
+  height: 44px;
+  padding: 0 20px;
   border: 0;
   border-radius: 10px;
   background: var(--ink);
   color: var(--page);
   font: inherit;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color var(--ease);
 }
 .signup button:hover { background: var(--button-hover); }
 
-.signup-note {
-  margin: 0;
-  font-size: 13px;
-  color: var(--ink-muted);
-}
-
 .signup-error {
-  margin: 0;
+  margin: 12px 0 0;
   font-size: 14px;
   color: var(--ink);
 }
@@ -487,3 +482,43 @@ input:focus {
   flex-wrap: wrap;
 }
 .footer-nav a { color: var(--ink-muted); }
+
+/* ---------- Phone (design/phone-proposal-*.html) ---------- */
+
+.eyebrow-short { display: none; }
+
+@media (max-width: 600px) {
+  .frame { padding: 8px; }
+
+  .site-header { padding: 22px 24px 6px; }
+  .logo-link img { height: 30px; }
+
+  /* Snow art at a fixed 210px height, cropped at the sides, pinned to the
+     bottom. The 214px bottom padding keeps its crystals below the text. */
+  .hero {
+    padding: 36px 24px 214px;
+    background-size: auto 210px;
+  }
+  .hero-inner { gap: 18px; }
+
+  .eyebrow { font-size: 14px; }
+  .eyebrow-long { display: none; }
+  .eyebrow-short { display: inline; }
+
+  .hero h1 {
+    font-size: 46px;
+    line-height: 1.02;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .signup { margin-top: 8px; }
+
+  /* The mockup overlaps only the deepest band of snow. */
+  .showcase {
+    margin-top: -36px;
+    padding: 0 16px;
+  }
+}
