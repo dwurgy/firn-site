@@ -190,3 +190,24 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
    The footer pills and support cards keep their real frosted blur. */
 .win{backdrop-filter:none;-webkit-backdrop-filter:none}
 .sheet::after{z-index:0}
+/* iPhone: the page runs under the status bar (viewport-fit=cover). Safari
+   tints the status-bar strip from the page background, so it's the sky's
+   top colour; the header and footer pills keep clear of the status bar,
+   home indicator and (in landscape) the notch. iOS text autosizing is off
+   so the scaled mockup's small text isn't enlarged. */
+html,body{background:var(--sky-top)}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
+.pills{bottom:calc(36px + env(safe-area-inset-bottom));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
+/* Phones: the window mockup is drawn at its full 1040×542px and scaled down
+   as one picture with transform (Safari's zoom let the sidebar text
+   reflow). .win-fit takes the scaled size so the page flows around it.
+   --s keeps it inside the 16px side padding on narrower phones. */
+@media (max-width:600px){
+ header{padding-top:calc(22px + env(safe-area-inset-top));padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+ .pills{bottom:calc(24px + env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+ .win-fit{--s:.335;width:calc(1040px * var(--s));height:calc(542px * var(--s));margin:0 auto}
+ .win{zoom:normal;transform:scale(var(--s));transform-origin:0 0}
+}
+@media (max-width:380px){.win-fit{--s:.31}}
+@media (max-width:354px){.win-fit{--s:.27}}

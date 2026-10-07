@@ -245,8 +245,19 @@ the form posts normally and lands on `/thanks`.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, single-column features and
-statement, the window mockup shrunk as one picture (`zoom`), footer pills
-stacked.
+statement, footer pills stacked. The window mockup is shrunk as one
+picture: the design uses `zoom`, but in iPhone Safari that let the sidebar
+text reflow, so the live site draws it at its full 1040×542px and scales
+it with `transform: scale(var(--s))` inside a `.win-fit` wrapper that takes
+the scaled size (`--s` is .335, .31 below 381px wide, .27 below 355px).
+
+**iPhone details:** every page has `viewport-fit=cover`, so the page runs
+under the status bar. `html` and `body` use the sky's top colour (#F4F6F7
+light, #2E2F31 dark), because Safari tints the status-bar strip from the
+page background; theme-color uses the same two colours. The header adds
+`env(safe-area-inset-top)` to its top padding, the footer pills add
+`env(safe-area-inset-bottom)`, and both keep clear of the notch in
+landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 ## Must-haves
 
