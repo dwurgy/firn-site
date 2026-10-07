@@ -32,8 +32,10 @@ unless David changes it.
   image shown when someone shares a firnbrowser.com link (Open Graph /
   Twitter card), in the First light style: logo, "A calm browser for
   everyone.", firnbrowser.com, snow at sunrise. Made in Claude Design as a
-  finished image. It stays light in both modes, because it shows up in
-  other people's apps. Every page's `og:image` and `twitter:image` use the
+  finished image, exported without the paper grain so the PNG stays small
+  (about 270 KB; WhatsApp skips preview images over about 600 KB). Keep
+  it a PNG and don't recompress it. It stays light in both modes, because
+  it shows up in other people's apps. Every page's `og:image` and `twitter:image` use the
   full URL `https://firnbrowser.com/assets/firn-share-preview-v4.png`. When
   it changes, use a new file name (v5, …) so apps fetch the new picture.
 
