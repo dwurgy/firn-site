@@ -45,6 +45,15 @@ in the home subhead). Don't rewrite headlines or reword claims. Every privacy
 claim on the site has been checked to be true; changing the wording can make
 it untrue.
 
+### Voice
+
+- **Serial (Oxford) comma, always.** In a list of three or more, put a
+  comma before the final "and" or "or": "Coming soon to macOS, Windows,
+  and Linux", "Vertical tabs, spaces, and split view". This applies
+  everywhere: page copy, page titles, meta descriptions, Open Graph and
+  Twitter text, alt text, and release notes. (Two items take no comma:
+  "mail and calendar".)
+
 ### First light: the idea (so new parts fit)
 
 Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
@@ -223,9 +232,9 @@ block (see the comment in the file), put it at the top and change the text.
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
 
 **Copy notes (home):**
-- Eyebrow: "Coming soon to macOS, Windows and Linux"; on phones "Coming
+- Eyebrow: "Coming soon to macOS, Windows, and Linux"; on phones "Coming
   soon".
-- Subhead: "Vertical tabs, spaces and split view, without the learning
+- Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
 - Sign-up: placeholder "Your email"; visually hidden label "Email address,
@@ -233,7 +242,7 @@ block (see the comment in the file), put it at the top and change the text.
 - Thank-you: "Thank you. One email when Firn is ready, nothing else."
 - Error for a mistyped address: "That doesn't look like an email address."
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
-  with vertical tabs, spaces and split view. Coming soon to macOS, Windows
+  with vertical tabs, spaces, and split view. Coming soon to macOS, Windows,
   and Linux."
 
 **Sign-up capsule:** one box (max 420px, 56px tall, radius 14px) holding the
@@ -275,7 +284,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 - `[Screenshot of Firn goes here]` in the window mockup: David will provide a
   real screenshot.
-- The "Coming soon to macOS, Windows and Linux" eyebrow (phone: "Coming
+- The "Coming soon to macOS, Windows, and Linux" eyebrow (phone: "Coming
   soon") may change.
 - The release notes entries are samples until the first real version.
 
