@@ -180,6 +180,19 @@ export password (or any other secret) in this repo.
   list. This is done in the dashboard rather than in code so that static
   files don't count against the Functions request allowance.
 
+## Phone layout
+
+At 600px wide and below, the hero is tighter (design: `design/phone-proposal-light.html`
+and `-dark.html`, view at 393px; before/after in `design/phone-before-after-*.png`).
+It's one `@media (max-width: 600px)` block at the end of `public/styles.css`:
+frame padding 8px; header shows only the logo, centered, 30px tall (the
+links stay in the footer); eyebrow reads just "Coming soon"; smaller hero
+type; email field and button on one row; snow art at a fixed 210px height
+(`background-size: auto 210px`, cropped at the sides); window mockup
+overlaps the snow by 36px. Ignore the proposal files' eyebrow text ("Windows
+first") and their squashed mockup: the eyebrow is as above, and the mockup
+still shrinks as one picture.
+
 ## Must-haves
 
 - Works and looks right at phone width (see the phone screenshot). On phones,
@@ -195,7 +208,8 @@ export password (or any other secret) in this repo.
 
 - `[Screenshot of Firn goes here]` in the window mockup: David will provide a
   real screenshot.
-- The "Coming soon to Windows, then macOS and Linux" line may change.
+- The "Coming soon to macOS, Windows and Linux" line (phone: "Coming soon")
+  may change.
 
 ## Project layout
 

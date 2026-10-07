@@ -487,3 +487,57 @@ input:focus {
   flex-wrap: wrap;
 }
 .footer-nav a { color: var(--ink-muted); }
+
+/* ---------- Phone (design/phone-proposal-*.html) ---------- */
+
+.eyebrow-short { display: none; }
+
+@media (max-width: 600px) {
+  .frame { padding: 8px; }
+
+  /* Logo only, centered; the links stay in the footer. */
+  .site-header {
+    padding: 22px 24px 6px;
+    justify-content: center;
+  }
+  .logo-link img { height: 30px; }
+  .header-nav { display: none; }
+
+  /* Snow art at a fixed 210px height, cropped at the sides, pinned to the
+     bottom. The 214px bottom padding keeps its crystals below the text. */
+  .hero {
+    padding: 36px 24px 214px;
+    background-size: auto 210px;
+  }
+  .hero-inner { gap: 18px; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .eyebrow-long { display: none; }
+  .eyebrow-short { display: inline; }
+
+  .hero h1 {
+    font-size: 46px;
+    line-height: 1.02;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .signup {
+    margin-top: 6px;
+    gap: 8px;
+  }
+  /* Email field and button share one row. */
+  .signup-row { flex-wrap: nowrap; }
+  .signup input { flex: 1 1 auto; }
+
+  /* The mockup overlaps only the deepest band of snow. */
+  .showcase {
+    margin-top: -36px;
+    padding: 0 16px;
+  }
+}
