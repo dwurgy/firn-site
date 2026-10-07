@@ -1,10 +1,12 @@
-// Sends the sign-up form in the background and swaps in the thank-you note,
-// so the visitor stays on the page. Without JavaScript the form still works:
-// the browser posts it and lands on the thanks page.
+// Sends the sign-up form in the background, then hides the form and shows
+// the thank-you message (.thanks), so the visitor stays on the page.
+// Without JavaScript the form still works: the browser posts it and lands
+// on the thanks page.
 
 const form = document.querySelector('.signup');
 const button = form.querySelector('button');
 const error = form.querySelector('.signup-error');
+const thanks = document.querySelector('.thanks');
 
 const messages = {
   invalid: "That doesn't look like an email address.",
@@ -26,8 +28,8 @@ form.addEventListener('submit', async (event) => {
     });
     const result = await response.json();
     if (result.ok) {
-      const thanks = document.getElementById('thanks').content.cloneNode(true);
-      form.replaceWith(thanks);
+      form.hidden = true;
+      thanks.hidden = false;
       return;
     }
     reason = result.error;

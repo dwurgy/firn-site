@@ -5,97 +5,96 @@ the separate `dwurgy/firn` repo). Built by David with Claude. David is not a
 professional developer: explain decisions in plain language, keep changes
 small, and stop after each step so he can look at it.
 
-Right now this is a **coming-soon page**: one page that says what Firn is,
-shows what it looks like, and collects emails from people who want to try it.
-A fuller site (download button, features, privacy page) comes later, when Firn
-has an installer ready for testers.
+Right now this is a **coming-soon site**: a home page that says what Firn is,
+shows what it looks like, and collects emails from people who want to try it,
+plus a release notes page and a support page. A fuller site (download button,
+privacy page) comes later, when Firn has an installer ready for testers.
 
 ---
 
 ## The design is decided: follow it
 
-The design was made in Claude Design and is final unless David changes it.
+The current design is **First light**, made in Claude Design. It is final
+unless David changes it.
 
-- `design/coming-soon-reference.html`: the page as plain HTML with inline
-  styles. It's the source of truth for layout, sizes, spacing, colors and copy.
-  Rebuild it cleanly (move styles into a stylesheet), but the result should
-  look identical.
-- `design/coming-soon-desktop.png` and `design/coming-soon-phone.png`: how it
-  should look at 1440px and at phone width.
+- `design/first-light/`: the finished design. `index.html`,
+  `release-notes.html` and `support.html` with one shared `site.css`, the
+  assets they use, a short `README.md`, and `shots/` with every page at
+  1440px and 393px in light and dark. It's the source of truth for layout,
+  sizes, spacing, colours and copy.
+- The live site is built from it: `public/site.css` is the design's
+  `site.css` (minus its `.theme-dark` block, which only exists for the
+  design tool) plus a few live-site additions at the end. The live pages
+  use the design's markup with the real head (favicons, Open Graph), clean
+  links and the working sign-up form. At 1440px and 393px they render
+  pixel for pixel like the design files.
 - `design/share-preview-reference.html` and `assets/firn-share-preview-v3.png`:
   the 1200×630 image shown when someone shares the link (Open Graph / Twitter
-  card).
+  card). It keeps the earlier snow art (`design/assets/firn-snow-layers.svg`).
 
-**Copy is final.** Don't rewrite headlines or reword claims. Every privacy
-claim on the page has been checked to be true; changing the wording can make it
-untrue.
+**Copy is final**, as written in the design files (including the line break
+in the home subhead). Don't rewrite headlines or reword claims. Every privacy
+claim on the site has been checked to be true; changing the wording can make
+it untrue.
 
-### The idea behind it (so new parts fit)
+### First light: the idea (so new parts fit)
 
-- **The site is a Firn window.** A warm sand frame (`#E9E3DA`) surrounds a
-  page-white sheet (`#FBFAF8`) that floats inside it: 12px inset, 14px corners,
-  Firn's warm-brown shadow. Same as a web page inside the app.
-- **The snow layers** (`assets/firn-snow-layers.svg`) are the snow-to-firn-to-ice
-  cross-section in five glacier tints. They sit at the bottom of the hero,
-  full width, at their natural height (`background-size: 100% auto`, pinned to
-  the bottom), never stretched to cover the hero. The window mockup overlaps
-  them so it looks like it's resting on the snow. The few faint crystals in
-  that art must not sit on top of text: adjust the hero spacing if one does.
-- **Blue is for branding only.** It appears in the logo, the snow layers and
-  the link preview. Buttons, links and text stay in warm neutrals. The main
-  button is ink (`#241F1B`) with page-white text.
-- **Calm.** Generous space, nothing busy, no animations beyond a gentle 200ms
-  ease-out on hover/focus. No carousels, pop-ups, cookie banners (there are no
-  cookies), chat widgets or stock photos.
+Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
+hand. Cool glacier light high up, warm sunrise low.
 
-### Tokens
+- **Edge to edge.** No frame around the page any more: the page colour runs
+  to the window edges.
+- **Sky glow.** Each page starts with a soft morning sky (`.sky`): cool
+  glacier blue at the top, warm peach and rose glows lower down, fading out
+  as you scroll. Inner pages use a shorter sky (`.sky.short`).
+- **Paper grain.** A faint warm noise texture over the whole page
+  (`.sheet::after`, an inline SVG filter, no image file).
+- **Frosted glass.** The window mockup, the footer pills, the support cards
+  and the release-note badges are semi-clear panels with a soft edge and a
+  `backdrop-filter` blur. Where a browser can't blur, the semi-opaque
+  background alone still reads fine.
+- **Colour light behind the window.** On the home page, blurred patches of
+  glacier, sunrise, sage and lilac light (`.light`) sit behind the frosted
+  window mockup.
+- **Sunrise snow footer ("dawn").** Every page ends in the snow layers with
+  the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
+  the "clear" version (`firn-snow-layers-clear.svg`, dark:
+  `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
+  through. Two frosted pills sit on the snow: "Free and open source, MPL 2.0"
+  and the footer links (GitHub, Reddit, Release notes, Support).
+- **Drifting flakes.** A few faint Firn flakes float in the home hero
+  (`.fl`). They're hidden below 1000px wide, where they would land on text.
+  No crystal or flake may sit on text.
+- **Blue is for branding only.** Logo, snow, flakes, glows. Buttons, links
+  and text stay in warm neutrals. The main button is ink with page-white text.
+- **Calm.** Generous space; motion is only small 200ms hover/focus
+  transitions, switched off for `prefers-reduced-motion`. No carousels,
+  pop-ups, cookie banners, chat widgets or stock photos.
 
-```
-Colors   frame #E9E3DA · page #FBFAF8 · ink #241F1B · ink-muted #5E564E
-         ink-faint #9D9389 (placeholders only) · glacier #7F9CB0
-         glacier-deep #6E98B2 · frost rgba(130,168,190,0.45) (focus ring)
-         space colors (used in the window mockup): Sage #8FAE8B,
-         Sand #C9A27E, Lagoon #6FA3A0, Glacier #7F9CB0
-Type     Headlines: Fraunces with soft corners on and wonky letters off
-         (font-variation-settings 'SOFT' 100, 'WONK' 0; optical sizing auto),
-         weight 360–400. Everything else: system-ui, -apple-system,
-         'Segoe UI', sans-serif.
-Radius   10px fields and buttons · 12px the floating page · 14px cards/panels
-Shadows  page: 0 1px 3px rgba(60,40,20,.14), 0 6px 20px rgba(60,40,20,.2)
-         window: 0 2px 8px rgba(40,28,16,.14), 0 18px 48px rgba(40,28,16,.22)
-```
+### Colours and type
 
-### Dark mode
-
-The page follows the visitor's system setting (`prefers-color-scheme: dark`),
-the same way Firn follows the OS. No toggle. Layout, spacing and copy are the
-same in both modes; only colours, shadows and two images change. All colours
-are CSS variables in `public/styles.css`, with one dark block that redefines
-them. Reference: `design/coming-soon-dark-reference.html` and the
-`coming-soon-dark-*.png` screenshots.
+All colours are CSS variables at the top of `public/site.css`; the
+`prefers-color-scheme: dark` block redefines them for dark mode.
 
 ```
-Colors   frame #3A3734 · page #2B2826 · ink #F5F1EC · ink-muted #D4CDC5
-         ink-faint #958D85 (placeholders) · links #F5F1EC, hover #D4CDC5
-         main button: background #F5F1EC, text #2B2826
-         email field: background rgba(255,250,245,.08),
-         border 1px rgba(255,250,245,.12)
-         focus ring rgba(160,196,214,.45)
-         mockup tiles rgba(255,250,245,.08) · highlighted tab
-         rgba(255,250,245,.14) · footer border rgba(255,250,245,.08)
-         "thanks" background rgba(43,40,38,.85)
-         space colours in the mockup are the same in both modes
-Shadows  page: 0 1px 3px rgba(0,0,0,.3), 0 6px 22px rgba(0,0,0,.35)
-         window: 0 2px 8px rgba(0,0,0,.3), 0 18px 48px rgba(0,0,0,.4)
-         small (highlighted tab): 0 1px 2px rgba(0,0,0,.15)
-Images   header logo: assets/firn-lockup-on-dark.svg (via <picture>)
-         hero: assets/firn-snow-layers-dark.svg, same sizing rules as light
-Meta     color-scheme "light dark"; theme-color #E9E3DA light, #3A3734 dark
+Light   page #FBFAF8 · ink #241F1B · muted #5E564E · faint #9D9389
+        frame/sand #E9E3DA · sky top #F4F6F7 · frost rgba(130,168,190,.45)
+Dark    page #2B2826 · ink #F5F1EC · muted #D4CDC5 · faint #958D85
+        frame #3A3734 · sky top #2E2F31 · frost rgba(160,196,214,.45)
+Space colours (mockup dots, feature dots): Sage #8FAE8B, Sand #C9A27E,
+        Lagoon #6FA3A0, Glacier #7F9CB0, Lilac #8E8FB8
+Type    Headlines: Fraunces, soft corners on, wonky letters off
+        ('SOFT' 100, 'WONK' 0, optical sizing auto), weight 360–400.
+        Everything else: system-ui, -apple-system, 'Segoe UI', sans-serif.
 ```
 
-Feature cards use the frame colour (#3A3734), as in the dark reference file.
-The link preview image stays light in both modes, because it shows up in
-other people's apps.
+### Dark mode: "blue hour"
+
+Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
+way Firn follows the OS. No toggle. Same layout and copy; the sky turns to a
+dim blue-hour glow, glass darkens, the sun is a low ember behind dark snow,
+the grain switches to a soft-light blend, and the header logo swaps to
+`firn-lockup-on-dark.svg`. theme-color: #F4F6F7 light, #2E2F31 dark.
 
 ### Fonts
 
@@ -180,67 +179,62 @@ export password (or any other secret) in this repo.
   list. This is done in the dashboard rather than in code so that static
   files don't count against the Functions request allowance.
 
-## Hero, header and sign-up (current)
+## Pages, header and sign-up
 
-The latest full-page design is `design/phone-proposal-light.html` and
-`-dark.html` (view at 1440px and 393px), with screenshots in
-`design/hero-*.png`. For the header, hero and sign-up it supersedes
-`coming-soon-reference.html`; everything below the hero is unchanged. One
-exception: on phones the window mockup still shrinks as one picture (the
-proposal files show it squashed).
+**Pages:** `/` (home), `/release-notes`, `/support`, and `/thanks` (only
+seen after signing up with JavaScript off). Cloudflare serves them without
+`.html`; links use the clean addresses.
 
-**Header (all sizes):** logo only, left-aligned. The r/FirnBrowser and
-Source code links live in the footer only. The right side is kept free for a
-small menu later (release notes, donate); nothing there yet.
+**Header (every page):** logo on the left; "Release notes" and "Support" on
+the right, with `aria-current="page"` on the current page.
 
-**Copy (final, all sizes):**
-- Eyebrow, sentence case, ink-muted: "Coming soon to macOS, Windows and
-  Linux" (15px); on phones just "Coming soon" (14px).
+**Footer (every page):** the dawn snow section with its two pills, always at
+the bottom of the page.
+
+**Release notes:** entries are `<article class="entry">` blocks, newest on
+top. The current ones are marked "Sample entry". To add a version, copy one
+block (see the comment in the file), put it at the top and change the text.
+
+**Support:** the main button goes to GitHub Sponsors
+(`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
+
+**Copy notes (home):**
+- Eyebrow: "Coming soon to macOS, Windows and Linux"; on phones "Coming
+  soon".
 - Subhead: "Vertical tabs, spaces and split view, without the learning
-  curve. Your data stays on your device."
-- Sign-up: no visible label or note. Placeholder "Your email". A visually
-  hidden label for screen readers: "Email address, to hear once when Firn is
-  ready".
-- Thank-you (replaces the box after signing up, and on `/thanks`): "Thank
-  you. One email when Firn is ready, nothing else."
+  curve.<br> Your data stays on your device." (the line break is
+  intentional and hidden on phones).
+- Sign-up: placeholder "Your email"; visually hidden label "Email address,
+  to hear once when Firn is ready".
+- Thank-you: "Thank you. One email when Firn is ready, nothing else."
 - Error for a mistyped address: "That doesn't look like an email address."
+- Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
+  with vertical tabs, spaces and split view. Coming soon to macOS, Windows
+  and Linux."
 
-**Sign-up capsule:** one centered box, max-width 420px, 56px tall, radius
-14px, padding 5px 5px 5px 20px, 1px border, soft shadow. Inside: the email
-field (no border, transparent) and the Notify me button (44px tall, radius
-10px, 15px, weight 500). When the field is focused the whole box gets the
-frost ring (box-shadow 0 0 0 3px frost); the field has no ring of its own.
-The button keeps its own ring when tabbed to.
+**Sign-up capsule:** one box (max 420px, 56px tall, radius 14px) holding the
+borderless email field and the Notify me button. The whole box gets the
+frost ring while it has focus. After a successful sign-up, `signup.js` hides
+the form and un-hides the `.thanks` paragraph. The hidden "website" field is
+the spam trap; `.signup-error` shows the error messages. Without JavaScript
+the form posts normally and lands on `/thanks`.
 
-```
-Light   box #FFFFFF · border rgba(60,40,20,.12)
-        shadow 0 1px 2px rgba(60,40,20,.06), 0 6px 18px rgba(60,40,20,.07)
-        button #241F1B, text #FBFAF8
-Dark    box rgba(255,250,245,.08) · border rgba(255,250,245,.12)
-        shadow 0 1px 2px rgba(0,0,0,.15), 0 6px 18px rgba(0,0,0,.18)
-        button #F5F1EC, text #2B2826
-```
-
-Desktop hero bottom padding is 300px (more on very wide screens) so the snow
-crystals stay clear of the capsule.
-
-**Phone (max-width: 600px)**, one block at the end of `public/styles.css`:
-frame padding 8px; header padding 22px 24px 6px, logo 30px, still
-left-aligned; hero padding 36px 24px 214px, gap 18px; h1 46px / 1.02;
-subhead 17px / 1.5; snow art at a fixed 210px height
-(`background-size: auto 210px`, cropped at the sides, pinned to the bottom);
-window mockup margin-top -36px, side padding 16px.
+**Phone (max-width: 600px):** the design's phone block at the end of
+`site.css`: tighter header and hero, h1 46px, single-column features and
+statement, the window mockup shrunk as one picture (`zoom`), footer pills
+stacked.
 
 ## Must-haves
 
-- Works and looks right at phone width (see the phone screenshot). On phones,
-  the window mockup should shrink as one picture rather than squash its
-  sidebar. It will become a real screenshot image later.
+- Works and looks right at phone width (see `design/first-light/shots/`).
+  On phones the window mockup shrinks as one picture rather than squashing
+  its sidebar. It will become a real screenshot image later.
 - Accessible: real `<label>` for the email field (visually hidden), visible
-  focus ring (frost), good contrast, alt text on the logo.
-- Page title, description, Open Graph and Twitter tags using
+  focus ring (frost), good contrast, alt text on the logo, `aria-current`
+  on the current page, decorative pieces `aria-hidden`.
+- Page title, description, Open Graph and Twitter tags on every page, using
   `assets/firn-share-preview-v3.png`.
-- Fast: no build step needed to view it; images and fonts sized sensibly.
+- Fast: no build step; no JavaScript needed for the look.
 
 ## Placeholders to fill later
 
@@ -248,11 +242,13 @@ window mockup margin-top -36px, side padding 16px.
   real screenshot.
 - The "Coming soon to macOS, Windows and Linux" eyebrow (phone: "Coming
   soon") may change.
+- The release notes entries are samples until the first real version.
 
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`). Sign-up code is in `functions/` (Cloudflare Pages
+`public/assets/`): the three pages plus `thanks.html`, `site.css`,
+`signup.js` and `site.webmanifest`. Sign-up code is in `functions/` (Cloudflare Pages
 Functions, D1 database bound as `DB`), the database setup in `migrations/`.
 See README.md.
 

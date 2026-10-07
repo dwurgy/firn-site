@@ -5,32 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thank you · Firn</title>
 <meta name="robots" content="noindex">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#E9E3DA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#3A3734" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/favicon/favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon/firn-favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2F31" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-
 <!-- Shown after signing up with JavaScript turned off. -->
-<div class="frame">
-<div class="sheet">
-
-<header class="site-header">
-  <a href="/" class="logo-link" aria-label="Firn home"><picture><source srcset="assets/firn-lockup-on-dark.svg" media="(prefers-color-scheme: dark)"><img src="assets/firn-lockup.svg" alt="firn" width="74" height="34"></picture></a>
-</header>
-
-<main class="hero">
-  <div class="hero-inner">
-    <div role="status" class="thanks">Thank you. One email when Firn is ready, nothing else.</div>
-    <a href="/">Back to firnbrowser.com</a>
-  </div>
+<div class="frame"><div class="sheet">
+<div class="sky short" aria-hidden="true"></div>
+<header><a href="/" aria-label="Firn home"><img class="logo-l" src="assets/firn-lockup.svg" alt="firn" width="74" height="34"><img class="logo-d" src="assets/firn-lockup-on-dark.svg" alt="firn" width="74" height="34"></a>
+<nav class="top" aria-label="Pages"><a href="/release-notes">Release notes</a><a href="/support">Support</a></nav></header>
+<main>
+<section class="intro"><p class="thanks" role="status">Thank you. One email when Firn is ready, nothing else.</p><p><a href="/">Back to firnbrowser.com</a></p></section>
 </main>
-
-</div>
-</div>
-
+<footer class="dawn">
+<div class="sun" aria-hidden="true"></div><div class="snow" aria-hidden="true"></div>
+<div class="pills"><div class="pill"><p>Free and open source, MPL 2.0</p></div>
+<nav class="pill" aria-label="Footer"><a href="https://github.com/dwurgy/firn">GitHub</a><i aria-hidden="true"></i><a href="https://www.reddit.com/r/FirnBrowser">Reddit</a><i aria-hidden="true"></i><a href="/release-notes">Release notes</a><i aria-hidden="true"></i><a href="/support">Support</a></nav></div>
+</footer>
+</div></div>
 </body>
 </html>

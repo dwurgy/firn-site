@@ -6,7 +6,7 @@
   "scope": "/",
   "display": "browser",
   "background_color": "#FBFAF8",
-  "theme_color": "#E9E3DA",
+  "theme_color": "#F4F6F7",
   "icons": [
     {
       "src": "/assets/favicon/firn-favicon-192.png",
