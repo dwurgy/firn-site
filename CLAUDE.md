@@ -29,16 +29,17 @@ unless David changes it.
   links and the working sign-up form. At 1440px and 393px they render
   the same as the design files, apart from the scroll-performance changes
   below (no pixel differs by more than 9/255, which is invisible).
-- `public/assets/firn-share-preview-v4.png`: the link preview, the 1200×630
+- `public/assets/firn-share-preview-v5.png`: the link preview, the 1200×630
   image shown when someone shares a firnbrowser.com link (Open Graph /
-  Twitter card), in the First light style: logo, "A calm browser for
-  everyone.", firnbrowser.com, snow at sunrise. Made in Claude Design as a
+  Twitter card), in the First light style: logo, "A calm browser **for
+  everyone.**" (the emphasis in weight 600, matching the home headline),
+  firnbrowser.com, snow at sunrise. Made in Claude Design as a
   finished image, exported without the paper grain so the PNG stays small
   (about 270 KB; WhatsApp skips preview images over about 600 KB). Keep
   it a PNG and don't recompress it. It stays light in both modes, because
   it shows up in other people's apps. Every page's `og:image` and `twitter:image` use the
-  full URL `https://firnbrowser.com/assets/firn-share-preview-v4.png`. When
-  it changes, use a new file name (v5, …) so apps fetch the new picture.
+  full URL `https://firnbrowser.com/assets/firn-share-preview-v5.png`. When
+  it changes, use a new file name (v6, …) so apps fetch the new picture.
 
 **Copy is final**, as written in the design files (including the line break
 in the home subhead). Don't rewrite headlines or reword claims. Every privacy
@@ -288,7 +289,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  `assets/firn-share-preview-v4.png`.
+  `assets/firn-share-preview-v5.png`.
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Placeholders to fill later
