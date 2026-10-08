@@ -22,6 +22,11 @@ unless David changes it.
   assets they use, a short `README.md`, and `shots/` with every page at
   1440px and 393px in light and dark. It's the source of truth for layout,
   sizes, spacing, colours and copy.
+- `design/about/`: the About page, designed later in the same style:
+  `about.html`, its CSS (`about.css-snippet.css`, added to `site.css` just
+  before the dawn section) and `reference/` shots at 1440px and 393px in
+  light and dark. The live page matches them, apart from the phone footer
+  links (see "Footer" below).
 - The live site is built from it: `public/site.css` is the design's
   `site.css` (minus its `.theme-dark` block, which only exists for the
   design tool) plus a few live-site additions at the end. The live pages
@@ -83,7 +88,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL 2.0"
-  and the footer links (GitHub, Reddit, Release notes, Support).
+  and the footer links (GitHub, Reddit, About, Release notes, Support).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -226,15 +231,23 @@ export password (or any other secret) in this repo.
 
 ## Pages, header and sign-up
 
-**Pages:** `/` (home), `/release-notes`, `/support`, and `/thanks` (only
+**Pages:** `/` (home), `/about`, `/release-notes`, `/support`, and `/thanks` (only
 seen after signing up with JavaScript off). Cloudflare serves them without
 `.html`; links use the clean addresses.
 
-**Header (every page):** logo on the left; "Release notes" and "Support" on
-the right, with `aria-current="page"` on the current page.
+**Header (every page):** logo on the left; "About", "Release notes" and
+"Support" on the right, with `aria-current="page"` on the current page.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
-the bottom of the page.
+the bottom of the page. The links pill: GitHub, Reddit, About, Release
+notes, Support. On phones it wraps into two rows, "GitHub | Reddit | About"
+and "Release notes | Support" (the third divider becomes the line break),
+so no divider is left dangling at the end of a row.
+
+**About:** the story in `<article class="part">` blocks (heading on the
+left, text on the right; stacked on phones), with the frosted definition
+card `.def` and the promise list `.promises`. The copy is David's; use it
+as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top. The current ones are marked "Sample entry". To add a version, copy one
@@ -316,7 +329,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`): the three pages plus `thanks.html`, `site.css`,
+`public/assets/`): the four pages plus `thanks.html`, `site.css`,
 `signup.js`, `edges.js` and `site.webmanifest`. Sign-up code is in `functions/` (Cloudflare Pages
 Functions, D1 database bound as `DB`), the database setup in `migrations/`.
 See README.md.
