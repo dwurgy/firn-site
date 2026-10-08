@@ -120,6 +120,13 @@ past the patch. It renders within 3/255 of the old blur. So also: no large
 `filter: blur()` on anything that scrolls; bake the blur into an image or
 mask instead.
 
+The grain doesn't blend any more either: Gecko also redoes a full-page
+`mix-blend-mode` layer on every scroll frame. It's a plain see-through
+texture now: light mode the same grain at the same strength (within 5/255
+of the old multiply blend); dark mode a faint near-black grain at .15
+(the old soft-light blend barely showed, and this matches it within 4/255).
+So: no `mix-blend-mode` on anything big.
+
 ### Colours and type
 
 All colours are CSS variables at the top of `public/site.css`; the
@@ -153,7 +160,7 @@ margins on the smallest phones.
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
 way Firn follows the OS. No toggle. Same layout and copy; the sky turns to a
 dim blue-hour glow, glass darkens, the sun is a low ember behind dark snow,
-the grain switches to a soft-light blend, and the header logo swaps to
+the grain turns a faint near-black, and the header logo swaps to
 `firn-lockup-on-dark.svg`. theme-color: #F4F6F7 light, #2E2F31 dark.
 
 ### Fonts
