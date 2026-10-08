@@ -227,10 +227,9 @@ password or any other secret in this repo.
 - **Domains:** firnbrowser.com and www.firnbrowser.com, added under the
   project's Custom domains. The project's own address,
   `firn-site-e8s.pages.dev`, redirects to firnbrowser.com (see below).
-- The sign-up database (D1 `firn-signups`, bound as `DB`), the
+- The sign-up database (D1 `firn-signups`), its `DB` binding, the
   `EXPORT_PASSWORD` secret and the "Sign-up limit" rate limiting rule were
-  only for the email sign-up. Once removed in the dashboard, nothing here
-  needs them.
+  only for the email sign-up. David removed them all from the dashboard.
 - **pages.dev redirect:** account-level Bulk Redirects. The list
   `pages_dev_redirect` sends `firn-site-e8s.pages.dev` to
   `https://firnbrowser.com` (301), with preserve query string, subpath
