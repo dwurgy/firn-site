@@ -222,3 +222,8 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    instead; then strip and sky meet without a visible line. */
 @media (max-width:600px){html,body{background:#DDE3E7}}
 @media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#383D42}}
+/* Bottom strip: near the end of a page edges.js adds .at-end, and the page
+   background becomes the snow's deepest colour, so the strip Safari shows
+   below the page (behind its toolbar) continues the snow. */
+html.at-end,html.at-end body{background:#6B94AD}
+@media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}

@@ -281,7 +281,13 @@ On phones (600px and narrower) that edge is a little bluer than `--sky-top`
 because the cool glow is strongest there, so `html`/`body` and phone-only
 theme-color tags use the measured colour: #DDE3E7 light, #383D42 dark (the
 same on every page, within a few shades across the width). Wider screens
-keep the sky's top colour, #F4F6F7 / #2E2F31. Every page also has
+keep the sky's top colour, #F4F6F7 / #2E2F31. The same colour also fills
+the strip below the page, behind Safari's bottom toolbar, once you scroll to
+the end. So `edges.js` (on every page) adds `.at-end` to `<html>` when you're
+near the end of a page you've scrolled, and `site.css` then switches the page
+background to the snow's deepest colour, #6B94AD light, #536573 dark, so the
+snow seems to run to the bottom edge. Pages too short to scroll keep the sky
+colour. Without JavaScript only that strip differs. Every page also has
 `viewport-fit=cover`. The header adds
 `env(safe-area-inset-top)` to its top padding, the footer pills add
 `env(safe-area-inset-bottom)`, and both keep clear of the notch in
@@ -311,7 +317,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the three pages plus `thanks.html`, `site.css`,
-`signup.js` and `site.webmanifest`. Sign-up code is in `functions/` (Cloudflare Pages
+`signup.js`, `edges.js` and `site.webmanifest`. Sign-up code is in `functions/` (Cloudflare Pages
 Functions, D1 database bound as `DB`), the database setup in `migrations/`.
 See README.md.
 
