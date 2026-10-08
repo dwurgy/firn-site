@@ -239,10 +239,10 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    below the page (behind its toolbar) continues the snow. */
 html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
-/* Phones: five footer links don't fit on one row, and wrapping anywhere left
-   a divider dangling at the end of the first row. So the third divider (after
-   About) becomes a line break: GitHub | Reddit | About, then Release notes |
-   Support. The break is a row of its own, so the row gap is halved to keep the
+/* Phones: the six footer links don't fit on one row, and wrapping anywhere
+   left a divider dangling at the end of a row. So the third divider (after
+   Email) becomes a line break: GitHub | Reddit | Email, then About | Release
+   notes | Support. The break is a row of its own, so the row gap is halved to keep the
    spacing between the two rows the same as before. */
 @media (max-width:600px){nav.pill{row-gap:7px}nav.pill i:nth-of-type(3){flex-basis:100%;height:0}}
 /* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
@@ -289,3 +289,9 @@ html.at-end,html.at-end body{background:#6B94AD}
 .dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
 .os-mobile .dl,.os-mobile .dl-note{display:none}.os-mobile .dl-mobile{display:block}
 @media (max-width:600px){.dl{flex-direction:column;width:100%;max-width:320px}.dl .btn{justify-content:center}}
+/* Footer pills on tablets (601–899px wide): side by side they don't fit, and
+   their text wrapped inside the pills. So below 900px they stack, centred,
+   like on phones (where the links pill also wraps into two rows), and the
+   text inside a pill never wraps. */
+.pill p,.pill a{white-space:nowrap}
+@media (max-width:899px){.pills{flex-direction:column;align-items:center;gap:10px}}

@@ -89,7 +89,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL 2.0"
-  and the footer links (GitHub, Reddit, About, Release notes, Support).
+  and the footer links (GitHub, Reddit, Email, About, Release notes, Support).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -248,10 +248,22 @@ serves them without `.html`; links use the clean addresses.
 "Support" on the right, with `aria-current="page"` on the current page.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
-the bottom of the page. The links pill: GitHub, Reddit, About, Release
-notes, Support. On phones it wraps into two rows, "GitHub | Reddit | About"
-and "Release notes | Support" (the third divider becomes the line break),
-so no divider is left dangling at the end of a row.
+the bottom of the page. The links pill: GitHub, Reddit, Email
+(`mailto:hello@firnbrowser.com`), About, Release notes, Support. Text in a
+pill never wraps. Below 900px wide the two pills stack, centred; on phones
+the links pill wraps into two rows, "GitHub | Reddit | Email" and "About |
+Release notes | Support" (the third divider becomes the line break), so no
+divider is left dangling at the end of a row.
+
+**Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
+Routing. Linked as "Email" in the footer and as "Say hello" in the Support
+page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
+off (it adds a script and breaks the link without JavaScript).
+
+**When links get too many:** the header (About, Release notes, Support) has
+room for about one more link on a 320px phone; a fifth needs a menu button,
+so tell David before adding one. The footer pill can take a few more links,
+since it wraps into rows; keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
@@ -271,6 +283,7 @@ text.
 
 **Support:** the main button goes to GitHub Sponsors
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
+"Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
 - Eyebrow: "Now available for macOS and Windows, Linux coming soon"; on
