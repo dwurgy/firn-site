@@ -1,0 +1,8 @@
+# Cloudflare Pages reads this file (it isn't published as a page).
+# Browsers must check for a newer site.css or script on every visit, so a
+# change to the site never gets stuck behind an old copy. Unchanged files
+# are still not downloaded again (the server just answers "not modified").
+/*.css
+  Cache-Control: no-cache
+/*.js
+  Cache-Control: no-cache

@@ -352,6 +352,13 @@ The published site lives in `public/` (so the assets above are at
 `public/assets/`): the four pages, `site.css`, `download.js`, `edges.js`
 and `site.webmanifest`. There is no server code. See README.md.
 
+**Old copies in browsers:** Zen once kept showing an old `site.css` after a
+change (the new download button looked unstyled, and the old slow blur and
+grain came back). So every page links `site.css?v=N`, `edges.js?v=N` and
+`download.js?v=N`: when you change one of those files, raise its `N` on every
+page that links it, so browsers fetch the new copy. `public/_headers` also
+tells browsers to check for a newer CSS or JS file on every visit.
+
 ## How to work
 
 - Small steps, one at a time. After each, say in plain words what changed and
