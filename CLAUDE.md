@@ -5,10 +5,10 @@ the separate `dwurgy/firn` repo). Built by David with Claude. David is not a
 professional developer: explain decisions in plain language, keep changes
 small, and stop after each step so he can look at it.
 
-Right now this is a **coming-soon site**: a home page that says what Firn is,
-shows what it looks like, and collects emails from people who want to try it,
-plus a release notes page and a support page. A fuller site (download button,
-privacy page) comes later, when Firn has an installer ready for testers.
+Firn is out (0.1.0 on October 8, 2026, for macOS and Windows). The site is a
+home page that says what Firn is, shows what it looks like, and has the
+download button, plus About, release notes and support pages. A privacy page
+(what Firn does and doesn't collect, in plain words) may come later.
 
 ---
 
@@ -31,7 +31,8 @@ unless David changes it.
   `site.css` (minus its `.theme-dark` block, which only exists for the
   design tool) plus a few live-site additions at the end. The live pages
   use the design's markup with the real head (favicons, Open Graph), clean
-  links and the working sign-up form. At 1440px and 393px they render
+  links and, on home, the download button in place of the design's email
+  sign-up (that was removed when Firn came out). At 1440px and 393px they render
   the same as the design files, apart from the scroll-performance changes
   below (no pixel differs by more than 9/255, which is invisible).
 - `public/assets/firn-share-preview-v5.png`: the link preview, the 1200×630
@@ -194,10 +195,10 @@ Firn's promise is privacy, so the website keeps it too:
 - Visitor counts, if any, only via Cloudflare Web Analytics (cookieless).
   Ask David before turning it on.
 - No cookies.
-- Email sign-ups are stored on David's own Cloudflare account (a small Worker
-  plus a D1 database), never a third-party form or mailing-list service. Store
-  only the email address and the date. Add a simple way for David to export
-  the list. Basic protection against spam (rate limit, honeypot field).
+- No forms that collect anything. (Until Firn came out the home page had an
+  email sign-up, stored only on David's Cloudflare account. It was removed;
+  David exported the list to send the one promised email.)
+- Downloads come straight from Firn's GitHub releases (see "Download").
 
 ---
 
@@ -207,14 +208,14 @@ Firn's promise is privacy, so the website keeps it too:
 - The domain firnbrowser.com is already on David's Cloudflare account (his
   personal site is there too). Walk him through connecting the custom domain
   step by step, in plain words.
-- Keep it a simple static site: plain HTML and CSS, plus the one Worker for
-  sign-ups. No framework unless there's a strong reason; ask first.
+- Keep it a simple static site: plain HTML and CSS and two small scripts, no
+  server code. No framework unless there's a strong reason; ask first.
 
 ## Cloudflare setup
 
 These settings live in David's Cloudflare dashboard, not in this repo. They're
-written down here so the setup can be understood or rebuilt. Never put the
-export password (or any other secret) in this repo.
+written down here so the setup can be understood or rebuilt. Never put a
+password or any other secret in this repo.
 
 - **Pages project** `firn-site`, connected to GitHub `dwurgy/firn-site` (the
   Cloudflare GitHub app only has access to this repo). Production branch
@@ -224,20 +225,10 @@ export password (or any other secret) in this repo.
 - **Domains:** firnbrowser.com and www.firnbrowser.com, added under the
   project's Custom domains. The project's own address,
   `firn-site-e8s.pages.dev`, redirects to firnbrowser.com (see below).
-- **Database:** D1 database `firn-signups`, created by running
-  `migrations/0001_create_signups.sql` in its Console. Bound to the project
-  as `DB` (Settings → Bindings, Production only).
-- **Export password:** secret `EXPORT_PASSWORD` (Settings → Variables and
-  Secrets, Production only). It protects `/admin/export`; without it that page
-  doesn't exist. To change it, edit the secret, then redeploy.
-- Changes to bindings or secrets only take effect after a new deployment
-  (Deployments → ⋯ → Retry deployment).
-- Preview deployments have no database, so sign-ups there show an error.
-  That's expected.
-- **Spam limit:** a rate limiting rule on the firnbrowser.com zone
-  (Security → WAF), named "Sign-up limit". When URI Path equals
-  `/api/signup`, per IP, more than 5 requests in 10 seconds: block for 10
-  seconds. The free plan allows one such rule.
+- The sign-up database (D1 `firn-signups`, bound as `DB`), the
+  `EXPORT_PASSWORD` secret and the "Sign-up limit" rate limiting rule were
+  only for the email sign-up. Once removed in the dashboard, nothing here
+  needs them.
 - **pages.dev redirect:** account-level Bulk Redirects. The list
   `pages_dev_redirect` sends `firn-site-e8s.pages.dev` to
   `https://firnbrowser.com` (301), with preserve query string, subpath
@@ -246,11 +237,10 @@ export password (or any other secret) in this repo.
   list. This is done in the dashboard rather than in code so that static
   files don't count against the Functions request allowance.
 
-## Pages, header and sign-up
+## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/support`, and `/thanks` (only
-seen after signing up with JavaScript off). Cloudflare serves them without
-`.html`; links use the clean addresses.
+**Pages:** `/` (home), `/about`, `/release-notes`, and `/support`. Cloudflare
+serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
 "Support" on the right, with `aria-current="page"` on the current page.
@@ -270,7 +260,10 @@ as written.
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
 bold first line is the heading, then the paragraph and the list (bold
 lead-ins in ink). The left column has the version, the release date and a
-badge with the "For …" line ("For Windows and Mac"). To add a version, copy
+badge with the "For …" line ("For Windows and Mac"; no badge when the
+version has no such line). A "### New" (or Better, Fixed) heading in the
+CHANGELOG becomes an `<h3>`. Every release gets an entry, small ones too:
+David likes showing all updates. To add a version, copy
 the block (see the comment in the file), put it at the top and change the
 text.
 
@@ -278,25 +271,33 @@ text.
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
 
 **Copy notes (home):**
-- Eyebrow: "Coming soon to macOS, Windows, and Linux"; on phones "Coming
-  soon".
+- Eyebrow: "Now available for macOS and Windows, Linux coming soon"; on
+  phones "Now available for macOS and Windows" (the long line doesn't fit
+  on one line there).
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
-- Sign-up: placeholder "Your email"; visually hidden label "Email address,
-  to hear once when Firn is ready".
-- Thank-you: "Thank you. One email when Firn is ready, nothing else."
-- Error for a mistyped address: "That doesn't look like an email address."
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
-  with vertical tabs, spaces, and split view. Coming soon to macOS, Windows,
-  and Linux."
+  with vertical tabs, spaces, and split view. Now available for macOS and
+  Windows, Linux coming soon."
 
-**Sign-up capsule:** one box (max 420px, 56px tall, radius 14px) holding the
-borderless email field and the Notify me button. The whole box gets the
-frost ring while it has focus. After a successful sign-up, `signup.js` hides
-the form and un-hides the `.thanks` paragraph. The hidden "website" field is
-the spam trap; `.signup-error` shows the error messages. Without JavaScript
-the form posts normally and lands on `/thanks`.
+**Download:** in the hero, under the subhead (`.get`), the ink `.btn` from
+the Support page with a download arrow: "Download for Mac"
+(`https://github.com/dwurgy/firn/releases/latest/download/Firn.for.Mac.zip`)
+and "Download for Windows"
+(`https://github.com/dwurgy/firn/releases/latest/download/Firn.Setup.exe`).
+Both links always fetch the newest release, so they never need updating.
+Under them: "Windows may say “Windows protected your PC”. Click More info,
+then Run anyway." (needed until Windows code signing). `download.js`, loaded
+in `<head>` without `defer` so the right button shows from the first paint,
+adds `.os-mac` or `.os-win` to `<html>`; then only that button shows (the
+Windows note goes with the Windows button) plus an "Other platforms" button
+that brings back both. Phones and tablets (iPads report themselves as
+Macs, so a Mac with a touch screen counts as a tablet) can't install Firn, so
+they get `.os-mobile`: no buttons, just the line "Visit firnbrowser.com on
+your computer to download it. Coming to iOS." Linux and visitors without
+JavaScript see both buttons and the note; on a phone without JavaScript the
+buttons stack, full width up to 320px.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, single-column features and
@@ -332,7 +333,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 - Works and looks right at phone width (see `design/first-light/shots/`).
   On phones the window mockup shrinks as one picture rather than squashing
   its sidebar. It will become a real screenshot image later.
-- Accessible: real `<label>` for the email field (visually hidden), visible
+- Accessible: visible
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
@@ -343,16 +344,13 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 - `[Screenshot of Firn goes here]` in the window mockup: David will provide a
   real screenshot.
-- The "Coming soon to macOS, Windows, and Linux" eyebrow (phone: "Coming
-  soon") may change.
+- The eyebrow's "Linux coming soon" changes when Linux is ready.
 
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`): the four pages plus `thanks.html`, `site.css`,
-`signup.js`, `edges.js` and `site.webmanifest`. Sign-up code is in `functions/` (Cloudflare Pages
-Functions, D1 database bound as `DB`), the database setup in `migrations/`.
-See README.md.
+`public/assets/`): the four pages, `site.css`, `download.js`, `edges.js`
+and `site.webmanifest`. There is no server code. See README.md.
 
 ## How to work
 

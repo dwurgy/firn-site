@@ -67,14 +67,6 @@ nav.top a:hover,nav.top a[aria-current]{color:var(--ink)}
 .hero h1{margin:0;font-size:76px;line-height:1.04;font-weight:360;letter-spacing:-.015em}
 .hero h1 .em{font-weight:600;white-space:nowrap}
 .lede{margin:0;font-size:19px;line-height:1.55;color:var(--muted)}
-/* sign-up capsule */
-.signup{width:100%;max-width:420px;margin-top:12px}
-.capsule{display:flex;align-items:center;gap:6px;height:56px;padding:5px 5px 5px 20px;border:1px solid var(--field-line);border-radius:14px;background:var(--field);box-shadow:var(--shadow-field)}
-.capsule:focus-within{box-shadow:0 0 0 3px var(--frost)}
-.capsule input{flex:1;min-width:0;height:100%;border:0;outline:none;background:transparent;font:inherit;font-size:16px;color:var(--ink)}
-.capsule input::placeholder{color:var(--faint)}
-.capsule button{flex:none;height:44px;padding:0 20px;border:0;border-radius:10px;background:var(--btn);color:var(--btn-ink);font:inherit;font-size:15px;font-weight:500;cursor:pointer}
-.thanks{margin:12px 0 0;padding:16px 22px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-edge);font-size:16px}
 /* stage: window on colour light */
 .stage{position:relative;margin-top:72px;padding:64px 32px 72px}
 .light{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--light-op);pointer-events:none}
@@ -168,7 +160,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .pill p{margin:0}
 .pill a{color:var(--ink);text-decoration:none}.pill a:hover{text-decoration:underline}
 .pill i{width:1px;height:16px;background:var(--line)}
-@media (prefers-reduced-motion:no-preference){.capsule button,.btn,nav.top a{transition:opacity .2s cubic-bezier(.33,1,.68,1),color .2s}.capsule{transition:box-shadow .2s cubic-bezier(.33,1,.68,1)}}
+@media (prefers-reduced-motion:no-preference){.btn,nav.top a{transition:opacity .2s cubic-bezier(.33,1,.68,1),color .2s}}
 /* phones */
 @media (max-width:600px){
  header{padding:22px 24px 6px} header img{height:30px} nav.top{gap:20px;font-size:14px}
@@ -197,10 +189,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 }
 
 /* Live-site additions (not in the design files) */
-/* Sign-up: error message, spam trap, busy button */
-.signup-error{margin:12px 0 0;font-size:14px;color:var(--ink)}
-.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.capsule button:disabled{cursor:progress;opacity:.7}
 /* The hero's floating flakes sit on the text below about 970px wide; the
    design hides them on phones, this extends that to tablets. */
 @media (max-width:999px){.hero .fl{display:none}}
@@ -281,3 +269,20 @@ html.at-end,html.at-end body{background:#6B94AD}
 /* Release notes: the bold lead-in of each list item ("Spaces", "Basecamp")
    in ink, like the About page's promise list. */
 .entry li strong{color:var(--ink);font-weight:600}
+/* Download (in the hero, where the sign-up was): the ink .btn from the
+   Support page. download.js adds .os-mac or .os-win to <html> and only that
+   button shows (the Windows note goes with the Windows button); otherwise
+   both show. Phones and tablets (.os-mobile) get the .dl-mobile line
+   instead. Where buttons show on a phone (no JavaScript), they stack, full
+   width up to 320px. */
+.get{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:12px}
+.dl{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
+.dl-note .q{white-space:nowrap}
+.dl-other{padding:0;border:0;background:none;font:inherit;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dl-other:hover{color:var(--ink)}
+.dl-other[hidden]{display:none}
+.os-mac .dl-win,.os-mac .dl-note,.os-win .dl-mac{display:none}
+.dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
+.os-mobile .dl,.os-mobile .dl-note{display:none}.os-mobile .dl-mobile{display:block}
+@media (max-width:600px){.dl{flex-direction:column;width:100%;max-width:320px}.dl .btn{justify-content:center}}
