@@ -272,10 +272,17 @@ text reflow, so the live site draws it at its full 1040×542px and scales
 it with `transform: scale(var(--s))` inside a `.win-fit` wrapper that takes
 the scaled size (`--s` is .335, .31 below 381px wide, .27 below 355px).
 
-**iPhone details:** every page has `viewport-fit=cover`, so the page runs
-under the status bar. `html` and `body` use the sky's top colour (#F4F6F7
-light, #2E2F31 dark), because Safari tints the status-bar strip from the
-page background; theme-color uses the same two colours. The header adds
+**iPhone details:** in normal Safari browsing the strip behind the clock
+and Dynamic Island is not part of the page: the page starts below it, and
+Safari paints the strip with one flat colour taken from the page background
+(`html`/`body`; older Safari uses theme-color). No website can draw its glow
+up there, so the strip's colour is matched to the sky's top edge instead.
+On phones (600px and narrower) that edge is a little bluer than `--sky-top`
+because the cool glow is strongest there, so `html`/`body` and phone-only
+theme-color tags use the measured colour: #DDE3E7 light, #383D42 dark (the
+same on every page, within a few shades across the width). Wider screens
+keep the sky's top colour, #F4F6F7 / #2E2F31. Every page also has
+`viewport-fit=cover`. The header adds
 `env(safe-area-inset-top)` to its top padding, the footer pills add
 `env(safe-area-inset-bottom)`, and both keep clear of the notch in
 landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
