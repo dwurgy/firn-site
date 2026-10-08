@@ -276,7 +276,7 @@ html.at-end,html.at-end body{background:#6B94AD}
    instead. Where buttons show on a phone (no JavaScript), they stack, full
    width up to 320px. */
 .get{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:12px}
-.dl{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.dl{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
 .dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
 .dl-note .q{white-space:nowrap}
 .dl-other{padding:0;border:0;background:none;font:inherit;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
