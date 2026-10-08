@@ -266,8 +266,13 @@ since it wraps into rows; keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
-card `.def` and the promise list `.promises`. The copy is David's; use it
-as written.
+card `.def` and the promise list `.promises`. Under the `.def` card in "The
+word": the snow-to-ice layers diagram (`<figure class="layers">`): four
+bands with wavy top edges (`.ly1`–`.ly4`: Fresh snow, Settled snow, Firn in
+weight 600, Glacier ice), each with a small glyph (the Firn row uses the
+page's `#flake` symbol), labels in ink, and a caption. Band and glyph
+colours are `--l1`–`--l4`, `--gl-a` and `--gl-b` at the top of `site.css`
+(light and dark). The copy is David's; use it as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
@@ -293,6 +298,10 @@ text.
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
+- "Less, on purpose." cards: "Nothing loud." ends "Ads are blocked from the
+  start, so nothing competes for your attention."; "Nothing collected." starts
+  "No tracking, no telemetry, no account required, and trackers are blocked
+  from the start." (added when Firn's ad and tracker blocking shipped).
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
   with vertical tabs, spaces, and split view. Now available for macOS and
   Windows, Linux coming soon."

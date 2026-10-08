@@ -16,7 +16,7 @@
 --panel:linear-gradient(160deg,#EEF2F4,#F6EEE6);--wm-op:.10;
 --sun:rgba(244,194,152,.62);--sun-mid:rgba(244,194,152,.22);
 --snow:url(assets/firn-snow-layers-clear.svg);--flake:#7F9CB0;--flake-op:1;
---grain-op:.13;--grain-blend:multiply;--logo-l:block;--logo-d:none}
+--grain-op:.13;--grain-blend:multiply;--l1:#E6EDF1;--l2:#CCDAE3;--l3:#A6BFCF;--l4:#86A9BF;--gl-a:#6E98B2;--gl-b:#FBFAF8;--logo-l:block;--logo-d:none}
 @media (prefers-color-scheme:dark){:root{--frame:#3A3734;--page:#2B2826;--ink:#F5F1EC;--muted:#D4CDC5;--faint:#958D85;--line:rgba(255,250,245,.09);
 --btn:#F5F1EC;--btn-ink:#2B2826;--field:rgba(255,250,245,.08);--field-line:rgba(255,250,245,.12);
 --frost:rgba(160,196,214,.45);--dot-glacier:#8FB0C6;
@@ -30,7 +30,7 @@
 --panel:linear-gradient(160deg,rgba(110,152,178,.10),rgba(214,146,104,.07));--wm-op:.10;
 --sun:rgba(214,140,96,.30);--sun-mid:rgba(214,140,96,.10);
 --snow:url(assets/firn-snow-layers-dark-clear.svg);--flake:#7F9CB0;--flake-op:.6;
---grain-op:.5;--grain-blend:soft-light;--logo-l:none;--logo-d:block;}}
+--grain-op:.5;--grain-blend:soft-light;--l1:#3A3F46;--l2:#414B55;--l3:#495865;--l4:#536777;--gl-a:#8FB0C6;--gl-b:#DCE5EB;--logo-l:none;--logo-d:block;}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 .serif{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-optical-sizing:auto}
@@ -149,6 +149,20 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .sign span{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:24px;color:var(--ink)}
 @media (max-width:600px){.story{padding:48px 24px 16px}.part{grid-template-columns:1fr;gap:12px;padding:32px 0}
  .part p{font-size:17px}.part p.big{font-size:24px}.def{padding:22px 22px}.def .w{font-size:38px}}
+/* about: snow-to-ice layers in "The word" (design/about) */
+.layers{margin:0 0 28px}
+.layers ol{list-style:none;margin:0;padding:0;border-radius:14px;overflow:hidden}
+.ly{position:relative;display:grid;grid-template-columns:56px 1fr;align-items:center;gap:20px;padding:22px 28px;color:var(--ink)}
+.ly .wv{position:absolute;left:0;top:-15px;width:100%;height:16px;fill:var(--lc)}
+.ly{background:var(--lc)}
+.ly1{--lc:var(--l1)}.ly2{--lc:var(--l2)}.ly3{--lc:var(--l3)}.ly4{--lc:var(--l4)}
+.ly .gl{width:56px;height:56px;color:var(--gc,var(--gl-a))}.ly .gl svg{width:100%;height:100%;display:block}
+.ly3,.ly4{--gc:var(--gl-b)}
+.ly b{display:block;font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-weight:400;font-size:22px;line-height:1.2}
+.ly.is-firn b{font-weight:600}
+.ly div span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--ink)}
+.layers figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+@media (max-width:600px){.ly{grid-template-columns:44px 1fr;gap:16px;padding:20px 20px}.ly .gl{width:44px;height:44px}.ly b{font-size:20px}}
 /* dawn: sunrise behind the snow, footer pills on it */
 .dawn{position:relative;margin-top:auto;padding-top:40px;height:600px;overflow:hidden;flex:none}
 .dawn .sun{position:absolute;left:50%;bottom:-50px;width:1500px;height:540px;transform:translateX(-50%);pointer-events:none;

@@ -1,3 +1,8 @@
+/* Add these variables to the existing theme blocks:
+   light :root  ->  --l1:#E6EDF1;--l2:#CCDAE3;--l3:#A6BFCF;--l4:#86A9BF;--gl-a:#6E98B2;--gl-b:#FBFAF8;
+   dark (both the prefers-color-scheme block and .theme-dark)
+                ->  --l1:#3A3F46;--l2:#414B55;--l3:#495865;--l4:#536777;--gl-a:#8FB0C6;--gl-b:#DCE5EB;
+*/
 /* about */
 .story{position:relative;z-index:2;max-width:880px;width:100%;margin:0 auto;padding:72px 32px 24px}
 .part{display:grid;grid-template-columns:180px 1fr;gap:32px;padding:40px 0;border-top:1px solid var(--line)}
@@ -22,3 +27,16 @@
 .sign span{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:24px;color:var(--ink)}
 @media (max-width:600px){.story{padding:48px 24px 16px}.part{grid-template-columns:1fr;gap:12px;padding:32px 0}
  .part p{font-size:17px}.part p.big{font-size:24px}.def{padding:22px 22px}.def .w{font-size:38px}}
+.layers{margin:0 0 28px}
+.layers ol{list-style:none;margin:0;padding:0;border-radius:14px;overflow:hidden}
+.ly{position:relative;display:grid;grid-template-columns:56px 1fr;align-items:center;gap:20px;padding:22px 28px;color:var(--ink)}
+.ly .wv{position:absolute;left:0;top:-15px;width:100%;height:16px;fill:var(--lc)}
+.ly{background:var(--lc)}
+.ly1{--lc:var(--l1)}.ly2{--lc:var(--l2)}.ly3{--lc:var(--l3)}.ly4{--lc:var(--l4)}
+.ly .gl{width:56px;height:56px;color:var(--gc,var(--gl-a))}.ly .gl svg{width:100%;height:100%;display:block}
+.ly3,.ly4{--gc:var(--gl-b)}
+.ly b{display:block;font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-weight:400;font-size:22px;line-height:1.2}
+.ly.is-firn b{font-weight:600}
+.ly div span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--ink)}
+.layers figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+@media (max-width:600px){.ly{grid-template-columns:44px 1fr;gap:16px;padding:20px 20px}.ly .gl{width:44px;height:44px}.ly b{font-size:20px}}
