@@ -128,7 +128,9 @@ sky.** On the home page the headline is
 `.hero h1 .em { font-weight: 600; white-space: nowrap; }`: the period sits
 inside the span, so "for everyone." always stays together on one line. 600
 is a real weight of the variable font (the `@font-face` declares
-`font-weight: 100 900`, so the browser never fakes bold).
+`font-weight: 100 900`, so the browser never fakes bold). Below 340px wide the
+headline drops from 46px to 44px so the bold phrase fits inside the side
+margins on the smallest phones.
 
 ### Dark mode: "blue hour"
 

@@ -212,3 +212,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
 }
 @media (max-width:380px){.win-fit{--s:.31}}
 @media (max-width:354px){.win-fit{--s:.27}}
+/* Smallest phones: at 46px, the bold "for everyone." (277px) is wider than
+   the 272px text area at 320px. 44px keeps it inside the margins. */
+@media (max-width:339px){.hero h1{font-size:44px}}
