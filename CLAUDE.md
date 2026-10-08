@@ -113,13 +113,15 @@ ones. Small glass pieces (pills, cards) are fine.
 
 Firefox-based browsers (Firefox, Zen) were still slow over the haze: Gecko
 redoes a `filter: blur()` on every scroll frame, and the colour light behind
-the window was four big `filter: blur(70px)` patches. So each `.light` now
-has no filter; its colour (`--c`, set inline in index.html) shows through a
-`::before` with a ready-made soft mask (`--m`): an SVG of the same ellipse
-with the same Gaussian blur, reaching 3 blur-widths (210px, 132px on phones)
-past the patch. It renders within 3/255 of the old blur. So also: no large
-`filter: blur()` on anything that scrolls; bake the blur into an image or
-mask instead.
+the window was four big `filter: blur(70px)` patches. A first fix drew them
+through a soft SVG mask, which was still choppy in Zen. Now each `.light`
+has no filter and no opacity; its `::before` is a plain radial gradient
+(`--g`, `closest-side`), its colour (`--c`, set inline in index.html) fading
+along the measured curve of the old blur, with the light's strength (`--o`)
+built into the colours via `color-mix`. It reaches 175px (110px on phones)
+past the patch. Renders within 5/255 of the old blur. So also: no large
+`filter: blur()`, image masks or see-through groups on anything that
+scrolls; use plain gradients or images.
 
 The grain doesn't blend any more either: Gecko also redoes a full-page
 `mix-blend-mode` layer on every scroll frame. It's a plain see-through
