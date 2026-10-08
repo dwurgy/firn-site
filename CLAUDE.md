@@ -267,8 +267,12 @@ card `.def` and the promise list `.promises`. The copy is David's; use it
 as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
-top. The current ones are marked "Sample entry". To add a version, copy one
-block (see the comment in the file), put it at the top and change the text.
+top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
+bold first line is the heading, then the paragraph and the list (bold
+lead-ins in ink). The left column has the version, the release date and a
+badge with the "For …" line ("For Windows and Mac"). To add a version, copy
+the block (see the comment in the file), put it at the top and change the
+text.
 
 **Support:** the main button goes to GitHub Sponsors
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
@@ -341,7 +345,6 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
   real screenshot.
 - The "Coming soon to macOS, Windows, and Linux" eyebrow (phone: "Coming
   soon") may change.
-- The release notes entries are samples until the first real version.
 
 ## Project layout
 
