@@ -266,8 +266,13 @@ since it wraps into rows; keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
-card `.def` and the promise list `.promises`. The copy is David's; use it
-as written.
+card `.def` and the promise list `.promises`. Under the `.def` card in "The
+word": the snow-to-ice layers diagram (`<figure class="layers">`): four
+bands with wavy top edges (`.ly1`–`.ly4`: Fresh snow, Settled snow, Firn in
+weight 600, Glacier ice), each with a small glyph (the Firn row uses the
+page's `#flake` symbol), labels in ink, and a caption. Band and glyph
+colours are `--l1`–`--l4`, `--gl-a` and `--gl-b` at the top of `site.css`
+(light and dark). The copy is David's; use it as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
