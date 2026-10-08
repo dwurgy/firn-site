@@ -272,7 +272,9 @@ html.at-end,html.at-end body{background:#6B94AD}
 /* Download (in the hero, where the sign-up was): the ink .btn from the
    Support page. download.js adds .os-mac or .os-win to <html> and only that
    button shows (the Windows note goes with the Windows button); otherwise
-   both show. On phones the buttons stack, full width up to 320px. */
+   both show. Phones and tablets (.os-mobile) get the .dl-mobile line
+   instead. Where buttons show on a phone (no JavaScript), they stack, full
+   width up to 320px. */
 .get{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:12px}
 .dl{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 .dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
@@ -281,4 +283,6 @@ html.at-end,html.at-end body{background:#6B94AD}
 .dl-other:hover{color:var(--ink)}
 .dl-other[hidden]{display:none}
 .os-mac .dl-win,.os-mac .dl-note,.os-win .dl-mac{display:none}
+.dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
+.os-mobile .dl,.os-mobile .dl-note{display:none}.os-mobile .dl-mobile{display:block}
 @media (max-width:600px){.dl{flex-direction:column;width:100%;max-width:320px}.dl .btn{justify-content:center}}

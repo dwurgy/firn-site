@@ -292,9 +292,12 @@ then Run anyway." (needed until Windows code signing). `download.js`, loaded
 in `<head>` without `defer` so the right button shows from the first paint,
 adds `.os-mac` or `.os-win` to `<html>`; then only that button shows (the
 Windows note goes with the Windows button) plus an "Other platforms" button
-that brings back both. Phones, tablets (iPads report themselves as Macs, so
-touch screens are excluded), Linux, and visitors without JavaScript see both
-buttons and the note. On phones the buttons stack, full width up to 320px.
+that brings back both. Phones and tablets (iPads report themselves as
+Macs, so a Mac with a touch screen counts as a tablet) can't install Firn, so
+they get `.os-mobile`: no buttons, just the line "Visit firnbrowser.com on
+your computer to download it. Coming to iOS." Linux and visitors without
+JavaScript see both buttons and the note; on a phone without JavaScript the
+buttons stack, full width up to 320px.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, single-column features and
