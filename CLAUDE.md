@@ -293,6 +293,10 @@ text.
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
+- "Less, on purpose." cards: "Nothing loud." ends "Ads are blocked from the
+  start, so nothing competes for your attention."; "Nothing collected." starts
+  "No tracking, no telemetry, no account required, and trackers are blocked
+  from the start." (added when Firn's ad and tracker blocking shipped).
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
   with vertical tabs, spaces, and split view. Now available for macOS and
   Windows, Linux coming soon."
