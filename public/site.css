@@ -65,6 +65,7 @@ nav.top a:hover,nav.top a[aria-current]{color:var(--ink)}
 .eyebrow{margin:0;font-size:15px;color:var(--muted)}
 .eyebrow .short{display:none}
 .hero h1{margin:0;font-size:76px;line-height:1.04;font-weight:360;letter-spacing:-.015em}
+.hero h1 .em{font-weight:600;white-space:nowrap}
 .lede{margin:0;font-size:19px;line-height:1.55;color:var(--muted)}
 /* sign-up capsule */
 .signup{width:100%;max-width:420px;margin-top:12px}

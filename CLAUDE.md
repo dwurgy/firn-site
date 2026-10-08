@@ -121,6 +121,15 @@ Type    Headlines: Fraunces, soft corners on, wonky letters off
         Everything else: system-ui, -apple-system, 'Segoe UI', sans-serif.
 ```
 
+**Emphasis in Fraunces headlines is weight, never color: base 360, emphasis
+600, never heavier; blue and colored text fail contrast against the morning
+sky.** On the home page the headline is
+`A calm browser <span class="em">for everyone.</span>`, with
+`.hero h1 .em { font-weight: 600; white-space: nowrap; }`: the period sits
+inside the span, so "for everyone." always stays together on one line. 600
+is a real weight of the variable font (the `@font-face` declares
+`font-weight: 100 900`, so the browser never fakes bold).
+
 ### Dark mode: "blue hour"
 
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
