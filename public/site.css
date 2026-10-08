@@ -215,3 +215,15 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
 /* Smallest phones: at 46px, the bold "for everyone." (277px) is wider than
    the 272px text area at 320px. 44px keeps it inside the margins. */
 @media (max-width:339px){.hero h1{font-size:44px}}
+/* iPhone status bar: Safari paints the strip behind the clock with one flat
+   colour taken from the page background (the page itself starts below it).
+   On phones the sky's top edge is a little bluer than --sky-top, because the
+   cool glow is strongest there, so the strip uses that measured colour
+   instead; then strip and sky meet without a visible line. */
+@media (max-width:600px){html,body{background:#DDE3E7}}
+@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#383D42}}
+/* Bottom strip: near the end of a page edges.js adds .at-end, and the page
+   background becomes the snow's deepest colour, so the strip Safari shows
+   below the page (behind its toolbar) continues the snow. */
+html.at-end,html.at-end body{background:#6B94AD}
+@media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
