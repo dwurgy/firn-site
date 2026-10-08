@@ -110,6 +110,16 @@ page scrolls at about 60 fps. When adding new parts: no large
 `backdrop-filter` panels, and no full-page blended layer above blurred
 ones. Small glass pieces (pills, cards) are fine.
 
+Firefox-based browsers (Firefox, Zen) were still slow over the haze: Gecko
+redoes a `filter: blur()` on every scroll frame, and the colour light behind
+the window was four big `filter: blur(70px)` patches. So each `.light` now
+has no filter; its colour (`--c`, set inline in index.html) shows through a
+`::before` with a ready-made soft mask (`--m`): an SVG of the same ellipse
+with the same Gaussian blur, reaching 3 blur-widths (210px, 132px on phones)
+past the patch. It renders within 3/255 of the old blur. So also: no large
+`filter: blur()` on anything that scrolls; bake the blur into an image or
+mask instead.
+
 ### Colours and type
 
 All colours are CSS variables at the top of `public/site.css`; the

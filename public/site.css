@@ -257,3 +257,16 @@ html.at-end,html.at-end body{background:#6B94AD}
    Support. The break is a row of its own, so the row gap is halved to keep the
    spacing between the two rows the same as before. */
 @media (max-width:600px){nav.pill{row-gap:7px}nav.pill i:nth-of-type(3){flex-basis:100%;height:0}}
+/* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
+   light behind the window was four big filter: blur(70px) patches, and
+   Gecko redoes that blur on every scroll frame. Now each patch is its colour
+   (--c) shown through a soft mask that is the same ellipse, blurred the same
+   amount, ready-made as a small SVG. Same look, no live blur. The mask
+   reaches 3 blur-widths past the patch, like the blur did. */
+.light{filter:none}
+.light::before{content:"";position:absolute;inset:-210px;background:var(--c);-webkit-mask:var(--m) center/100% 100% no-repeat;mask:var(--m) center/100% 100% no-repeat}
+.stage .light:nth-child(1){--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='940' height='840'><filter id='b' filterUnits='userSpaceOnUse' x='0' y='0' width='940' height='840'><feGaussianBlur stdDeviation='70'/></filter><ellipse cx='470' cy='420' rx='260' ry='210' fill='white' filter='url(%23b)'/></svg>")}
+.stage .light:nth-child(2){--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='880' height='800'><filter id='b' filterUnits='userSpaceOnUse' x='0' y='0' width='880' height='800'><feGaussianBlur stdDeviation='70'/></filter><ellipse cx='440' cy='400' rx='230' ry='190' fill='white' filter='url(%23b)'/></svg>")}
+.stage .light:nth-child(3){--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='820'><filter id='b' filterUnits='userSpaceOnUse' x='0' y='0' width='900' height='820'><feGaussianBlur stdDeviation='70'/></filter><ellipse cx='450' cy='410' rx='240' ry='200' fill='white' filter='url(%23b)'/></svg>")}
+.stage .light:nth-child(4){--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='780' height='720'><filter id='b' filterUnits='userSpaceOnUse' x='0' y='0' width='780' height='720'><feGaussianBlur stdDeviation='70'/></filter><ellipse cx='390' cy='360' rx='180' ry='150' fill='white' filter='url(%23b)'/></svg>")}
+@media (max-width:600px){.light{filter:none}.light::before{inset:-132px}.stage .light:nth-child(n){--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='504' height='454'><filter id='b' filterUnits='userSpaceOnUse' x='0' y='0' width='504' height='454'><feGaussianBlur stdDeviation='44'/></filter><ellipse cx='252' cy='227' rx='120' ry='95' fill='white' filter='url(%23b)'/></svg>")}}
