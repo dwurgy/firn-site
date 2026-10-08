@@ -227,10 +227,9 @@ password or any other secret in this repo.
 - **Domains:** firnbrowser.com and www.firnbrowser.com, added under the
   project's Custom domains. The project's own address,
   `firn-site-e8s.pages.dev`, redirects to firnbrowser.com (see below).
-- The sign-up database (D1 `firn-signups`, bound as `DB`), the
+- The sign-up database (D1 `firn-signups`), its `DB` binding, the
   `EXPORT_PASSWORD` secret and the "Sign-up limit" rate limiting rule were
-  only for the email sign-up. Once removed in the dashboard, nothing here
-  needs them.
+  only for the email sign-up. David removed them all from the dashboard.
 - **pages.dev redirect:** account-level Bulk Redirects. The list
   `pages_dev_redirect` sends `firn-site-e8s.pages.dev` to
   `https://firnbrowser.com` (301), with preserve query string, subpath
@@ -277,7 +276,9 @@ lead-ins in ink). The left column has the version, the release date and a
 badge with the "For …" line ("For Windows and Mac"; no badge when the
 version has no such line). A "### New" (or Better, Fixed) heading in the
 CHANGELOG becomes an `<h3>`. Every release gets an entry, small ones too:
-David likes showing all updates. To add a version, copy
+David likes showing all updates. When David says a new version is out,
+add it and open the PR right away, without asking first (he asked for
+that). To add a version, copy
 the block (see the comment in the file), put it at the top and change the
 text.
 
