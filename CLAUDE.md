@@ -89,7 +89,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL 2.0"
-  and the footer links (GitHub, Reddit, About, Release notes, Support).
+  and the footer links (GitHub, Reddit, Email, About, Release notes, Support).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -113,13 +113,15 @@ ones. Small glass pieces (pills, cards) are fine.
 
 Firefox-based browsers (Firefox, Zen) were still slow over the haze: Gecko
 redoes a `filter: blur()` on every scroll frame, and the colour light behind
-the window was four big `filter: blur(70px)` patches. So each `.light` now
-has no filter; its colour (`--c`, set inline in index.html) shows through a
-`::before` with a ready-made soft mask (`--m`): an SVG of the same ellipse
-with the same Gaussian blur, reaching 3 blur-widths (210px, 132px on phones)
-past the patch. It renders within 3/255 of the old blur. So also: no large
-`filter: blur()` on anything that scrolls; bake the blur into an image or
-mask instead.
+the window was four big `filter: blur(70px)` patches. A first fix drew them
+through a soft SVG mask, which was still choppy in Zen. Now each `.light`
+has no filter and no opacity; its `::before` is a plain radial gradient
+(`--g`, `closest-side`), its colour (`--c`, set inline in index.html) fading
+along the measured curve of the old blur, with the light's strength (`--o`)
+built into the colours via `color-mix`. It reaches 175px (110px on phones)
+past the patch. Renders within 5/255 of the old blur. So also: no large
+`filter: blur()`, image masks or see-through groups on anything that
+scrolls; use plain gradients or images.
 
 The grain doesn't blend any more either: Gecko also redoes a full-page
 `mix-blend-mode` layer on every scroll frame. It's a plain see-through
@@ -246,10 +248,22 @@ serves them without `.html`; links use the clean addresses.
 "Support" on the right, with `aria-current="page"` on the current page.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
-the bottom of the page. The links pill: GitHub, Reddit, About, Release
-notes, Support. On phones it wraps into two rows, "GitHub | Reddit | About"
-and "Release notes | Support" (the third divider becomes the line break),
-so no divider is left dangling at the end of a row.
+the bottom of the page. The links pill: GitHub, Reddit, Email
+(`mailto:hello@firnbrowser.com`), About, Release notes, Support. Text in a
+pill never wraps. Below 900px wide the two pills stack, centred; on phones
+the links pill wraps into two rows, "GitHub | Reddit | Email" and "About |
+Release notes | Support" (the third divider becomes the line break), so no
+divider is left dangling at the end of a row.
+
+**Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
+Routing. Linked as "Email" in the footer and as "Say hello" in the Support
+page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
+off (it adds a script and breaks the link without JavaScript).
+
+**When links get too many:** the header (About, Release notes, Support) has
+room for about one more link on a 320px phone; a fifth needs a menu button,
+so tell David before adding one. The footer pill can take a few more links,
+since it wraps into rows; keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
@@ -269,6 +283,7 @@ text.
 
 **Support:** the main button goes to GitHub Sponsors
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
+"Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
 - Eyebrow: "Now available for macOS and Windows, Linux coming soon"; on
