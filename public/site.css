@@ -70,18 +70,6 @@ nav.top a:hover,nav.top a[aria-current]{color:var(--ink)}
 /* stage: window on colour light */
 .stage{position:relative;margin-top:72px;padding:64px 32px 72px}
 .light{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--light-op);pointer-events:none}
-.win{position:relative;z-index:2;max-width:1040px;margin:0 auto;border-radius:14px;padding:10px;background:var(--win-glass);border:1px solid var(--glass-edge);
- backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);box-shadow:var(--shadow-win)}
-.win .in{display:flex;gap:10px;height:520px}
-.side{flex:0 0 230px;display:flex;flex-direction:column;gap:14px;padding:8px 6px}
-.bar{height:36px;border-radius:10px;background:var(--tile);display:flex;align-items:center;padding:0 12px;font-size:13px;color:var(--faint)}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.tiles i{height:40px;border-radius:10px;background:var(--tile)}.tiles i:first-child{background:var(--tile-on)}
-.lbl{font-size:12px;color:var(--muted);padding:6px 6px 0}
-.tab{height:36px;border-radius:10px;display:flex;align-items:center;gap:10px;padding:0 12px;font-size:13px;color:var(--muted)}
-.tab.on{background:var(--tile-on);color:var(--ink)}
-.tab em{width:14px;height:14px;border-radius:4px}
-.dots{margin-top:auto;display:flex;gap:10px;padding:6px}.dots em{width:10px;height:10px;border-radius:99px}
-.pg{flex:1;border-radius:12px;background:var(--page);box-shadow:var(--shadow-page);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--faint)}
 /* features */
 h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:center}
 .feats{position:relative;z-index:2;max-width:1040px;width:100%;margin:0 auto;padding:96px 32px 24px}
@@ -182,7 +170,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
  .eyebrow{font-size:14px}.eyebrow .long{display:none}.eyebrow .short{display:inline}
  .hero h1{font-size:46px;line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
  .stage{margin-top:28px;padding:40px 16px 48px}
- .win{width:1040px;max-width:none;zoom:.335}
  .feats{padding:64px 24px 16px}h2{font-size:30px;margin-bottom:28px}
  .row{grid-template-columns:1fr}.row>div{border-left:0;border-top:1px solid var(--line);padding:24px 4px}.row>div:first-child{border-top:0}
  .statement{margin-top:56px;padding:0 16px}.statement .box{padding:44px 24px}.statement h2{font-size:34px;margin-bottom:28px}
@@ -206,38 +193,41 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 /* The hero's floating flakes sit on the text below about 970px wide; the
    design hides them on phones, this extends that to tablets. */
 @media (max-width:999px){.hero .fl{display:none}}
-/* Smooth scrolling. The window's live backdrop blur, combined with the
-   full-page grain blending on top of it, made the browser redo a large
-   blur and blend on every scroll frame (about 20 fps over the haze).
-   - The window keeps its semi-clear glass colour but drops the live blur:
-     behind it are only already-blurred colour glows, so blurring them
-     again changed nothing visible.
-   - The grain sits under the content (sky, glows, snow) instead of on top
-     of everything. Visually within 8/255 of the design at every pixel.
-   The footer pills and support cards keep their real frosted blur. */
-.win{backdrop-filter:none;-webkit-backdrop-filter:none}
+/* The home page screenshot of Firn, in place of the design's sketched
+   window: same place and max width, rounded corners (they also hide the
+   bit of desktop in the capture's square corners) and the window's soft
+   warm shadow. No backdrop blur (see "Smooth scrolling" below). The
+   width/height in the HTML keep its space while it loads. */
+.shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
+.shot img{display:block;width:100%;height:auto}
+/* Smooth scrolling. The design window's live backdrop blur, combined with
+   the full-page grain blending on top of it, made the browser redo a large
+   blur and blend on every scroll frame (about 20 fps over the haze). So
+   the screenshot has no backdrop blur, and the grain sits under the
+   content (sky, glows, snow) instead of on top of everything (visually
+   within 8/255 of the design at every pixel). The footer pills and
+   support cards keep their real frosted blur. */
 .sheet::after{z-index:0}
 /* iPhone: the page runs under the status bar (viewport-fit=cover). Safari
    tints the status-bar strip from the page background, so it's the sky's
    top colour; the header and footer pills keep clear of the status bar,
    home indicator and (in landscape) the notch. iOS text autosizing is off
-   so the scaled mockup's small text isn't enlarged. */
+   so phone text keeps the sizes set here. */
 html,body{background:var(--sky-top)}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
 .pills{bottom:calc(36px + env(safe-area-inset-bottom));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
-/* Phones: the window mockup is drawn at its full 1040×542px and scaled down
-   as one picture with transform (Safari's zoom let the sidebar text
-   reflow). .win-fit takes the scaled size so the page flows around it.
-   --s keeps it inside the 16px side padding on narrower phones. */
+/* Phones: the whole screenshot would be too small to read, so it shows
+   only its top-left part (the sidebar and the start of the page) in a 4:3
+   frame. The image is drawn 2.25 times the frame's width, so the frame
+   holds the left 640×480 of the 1440×900 capture; object-fit/position keep
+   it anchored top left. */
 @media (max-width:600px){
  header{padding-top:calc(22px + env(safe-area-inset-top));padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
  .pills{bottom:calc(24px + env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
- .win-fit{--s:.335;width:calc(1040px * var(--s));height:calc(542px * var(--s));margin:0 auto}
- .win{zoom:normal;transform:scale(var(--s));transform-origin:0 0}
+ .shot{aspect-ratio:4/3}
+ .shot img{width:225%;height:187.5%;max-width:none;object-fit:cover;object-position:left top}
 }
-@media (max-width:380px){.win-fit{--s:.31}}
-@media (max-width:354px){.win-fit{--s:.27}}
 /* Smallest phones: at 46px, the bold "for everyone." (277px) is wider than
    the 272px text area at 320px. 44px keeps it inside the margins. */
 @media (max-width:339px){.hero h1{font-size:44px}}
