@@ -281,12 +281,15 @@ bold first line is the heading, then the paragraph and the list (bold
 lead-ins in ink). The left column has the version, the release date and a
 badge with the "For …" line ("For Windows and Mac"; no badge when the
 version has no such line). A "### New" (or Better, Fixed) heading in the
-CHANGELOG becomes an `<h3>`. Every release gets an entry, small ones too:
+CHANGELOG becomes an `<h3>`. Each entry has its own address: the
+`<article>` has the version as its `id` (`id="0.5.0"`) and the version name
+in the left column links to it (`href="#0.5.0"`, ink, underlined on hover),
+so `firnbrowser.com/release-notes#0.5.0` opens the page at that entry. Every release gets an entry, small ones too:
 David likes showing all updates. When David says a new version is out,
 add it and open the PR right away, without asking first (he asked for
 that). To add a version, copy
 the block (see the comment in the file), put it at the top and change the
-text.
+text, including the version in its `id` and link.
 
 **Support:** the main button goes to GitHub Sponsors
 (`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
