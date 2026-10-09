@@ -35,6 +35,8 @@ unless David changes it.
   sign-up (that was removed when Firn came out). At 1440px and 393px they render
   the same as the design files, apart from the scroll-performance changes
   below (no pixel differs by more than 9/255, which is invisible).
+  The one planned difference: on home, the design's sketched window is
+  now a real screenshot of Firn (see "Home screenshot").
 - `public/assets/firn-share-preview-v5.png`: the link preview, the 1200×630
   image shown when someone shares a firnbrowser.com link (Open Graph /
   Twitter card), in the First light style: logo, "A calm browser **for
@@ -75,15 +77,14 @@ hand. Cool glacier light high up, warm sunrise low.
   SVG filter, no image file). On the live site it sits on the scenery (sky,
   glows, snow) under the content, not on top of everything; see "Keep
   scrolling smooth" below.
-- **Frosted glass.** The window mockup, the footer pills, the support cards
-  and the release-note badges are semi-clear panels with a soft edge. The
-  pills and cards use a real `backdrop-filter` blur; the big window mockup
-  doesn't (see below), it only looks frosted because of its semi-clear
-  colour over the already-soft glows. Where a browser can't blur, the
+- **Frosted glass.** The footer pills, the support cards and the
+  release-note badges are semi-clear panels with a soft edge. The pills and
+  cards use a real `backdrop-filter` blur. Where a browser can't blur, the
   semi-opaque background alone still reads fine.
-- **Colour light behind the window.** On the home page, blurred patches of
-  glacier, sunrise, sage and lilac light (`.light`) sit behind the frosted
-  window mockup.
+- **Screenshot on colour light.** On the home page, blurred patches of
+  glacier, sunrise, sage and lilac light (`.light`) sit behind a real
+  screenshot of Firn (`.shot`, see "Home screenshot" below), where the
+  design had a sketched, frosted window.
 - **Sunrise snow footer ("dawn").** Every page ends in the snow layers with
   the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
@@ -105,7 +106,7 @@ A live `backdrop-filter` blur on a big element, combined with a full-page
 layer that blends (`mix-blend-mode`) on top of it, makes the browser redo a
 large blur and blend on every scroll frame. On the home page that dropped
 scrolling over the haze to about 20 frames per second. So, at the end of
-`public/site.css`: the window mockup has no backdrop blur, and the grain
+`public/site.css`: the window (now the screenshot) has no backdrop blur, and the grain
 sits under the content (`z-index: 0`) instead of over it. After that every
 page scrolls at about 60 fps. When adding new parts: no large
 `backdrop-filter` panels, and no full-page blended layer above blurred
@@ -140,7 +141,7 @@ Light   page #FBFAF8 · ink #241F1B · muted #5E564E · faint #9D9389
         frame/sand #E9E3DA · sky top #F4F6F7 · frost rgba(130,168,190,.45)
 Dark    page #2B2826 · ink #F5F1EC · muted #D4CDC5 · faint #958D85
         frame #3A3734 · sky top #2E2F31 · frost rgba(160,196,214,.45)
-Space colours (mockup dots, feature dots): Sage #8FAE8B, Sand #C9A27E,
+Space colours (feature dots): Sage #8FAE8B, Sand #C9A27E,
         Lagoon #6FA3A0, Glacier #7F9CB0, Lilac #8E8FB8
 Type    Headlines: Fraunces, soft corners on, wonky letters off
         ('SOFT' 100, 'WONK' 0, optical sizing auto), weight 360–400.
@@ -326,11 +327,26 @@ buttons stack, full width up to 320px.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, single-column features and
-statement, footer pills stacked. The window mockup is shrunk as one
-picture: the design uses `zoom`, but in iPhone Safari that let the sidebar
-text reflow, so the live site draws it at its full 1040×542px and scales
-it with `transform: scale(var(--s))` inside a `.win-fit` wrapper that takes
-the scaled size (`--s` is .335, .31 below 381px wide, .27 below 355px).
+statement, footer pills stacked. The home screenshot is cropped rather
+than shrunk (see below).
+
+**Home screenshot:** under the hero, in the design's window spot (max
+1040px wide, on the colour light), a real capture of Firn on a Mac:
+`public/assets/screens/firn-hero.webp` (1440×900), `firn-hero@2x.webp`
+(2880×1800) and `firn-hero.jpg` (fallback), in a `<picture class="shot">`
+with `width`/`height` set so nothing jumps while it loads, and
+`loading="eager"` (it's near the top). CSS rounds its corners (12px,
+`overflow: hidden`), which also hides the bit of desktop in the capture's
+square corners, and gives it the window's soft warm shadow (`--shadow-win`);
+no backdrop blur. It stays light in dark mode: it's a real capture. On
+phones the whole picture would be too small to read, so it shows only the
+top-left part (sidebar and start of the page) in a 4:3 frame: the image is
+drawn 2.25× the frame's width with `object-fit: cover` and
+`object-position: left top`, so the frame holds the left 640×480 of the
+capture. Alt text: "Firn on a Mac: a sidebar with spaces, Basecamp, and
+tabs on the left, a Wikipedia article about firn on the right." A new
+screenshot keeps the same file names and size, or update the HTML to
+match.
 
 **iPhone details:** in normal Safari browsing the strip behind the clock
 and Dynamic Island is not part of the page: the page starts below it, and
@@ -356,8 +372,8 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 ## Must-haves
 
 - Works and looks right at phone width (see `design/first-light/shots/`).
-  On phones the window mockup shrinks as one picture rather than squashing
-  its sidebar. It will become a real screenshot image later.
+  On phones the home screenshot is cropped to its left part rather than
+  shrunk until it's unreadable.
 - Accessible: visible
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
@@ -367,8 +383,6 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 ## Placeholders to fill later
 
-- `[Screenshot of Firn goes here]` in the window mockup: David will provide a
-  real screenshot.
 - The eyebrow's "Linux coming soon" changes when Linux is ready.
 
 ## Project layout
