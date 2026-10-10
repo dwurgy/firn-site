@@ -307,7 +307,8 @@ text, including the version in its `id` and link.
 - "Less, on purpose." cards: "Nothing loud." ends "Ads are blocked from the
   start, so nothing competes for your attention."; "Nothing collected." starts
   "No tracking, no telemetry, no account required, and trackers are blocked
-  from the start." (added when Firn's ad and tracker blocking shipped).
+  by default." (added when Firn's ad and tracker blocking shipped; "by
+  default" so it doesn't repeat "from the start" from the card before).
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
   with vertical tabs, spaces, and split view. Now available for macOS and
   Windows, Linux coming soon."
