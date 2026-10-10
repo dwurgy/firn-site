@@ -97,7 +97,9 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Blue is for branding only.** Logo, snow, flakes, glows. Buttons, links
   and text stay in warm neutrals. The main button is ink with page-white text.
 - **Calm.** Generous space; motion is only small 200ms hover/focus
-  transitions, switched off for `prefers-reduced-motion`. No carousels,
+  transitions, switched off for `prefers-reduced-motion`, and the home
+  feature videos, which play only while on screen and never with reduced
+  motion (see "Home features"). No carousels,
   pop-ups, cookie banners, chat widgets or stock photos.
 
 ### Keep scrolling smooth
@@ -211,7 +213,7 @@ Firn's promise is privacy, so the website keeps it too:
 - The domain firnbrowser.com is already on David's Cloudflare account (his
   personal site is there too). Walk him through connecting the custom domain
   step by step, in plain words.
-- Keep it a simple static site: plain HTML and CSS and two small scripts, no
+- Keep it a simple static site: plain HTML and CSS and three small scripts, no
   server code. No framework unless there's a strong reason; ask first.
 
 ## Cloudflare setup
@@ -329,7 +331,7 @@ JavaScript see both buttons and the note; on a phone without JavaScript the
 buttons stack, full width up to 320px.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
-`site.css`: tighter header and hero, h1 46px, single-column features and
+`site.css`: tighter header and hero, h1 46px, features stacked (text above video) and single-column
 statement, footer pills stacked. The home screenshot is cropped rather
 than shrunk (see below).
 
@@ -350,6 +352,25 @@ capture. Alt text: "Firn on a Mac: a sidebar with spaces, Basecamp, and
 tabs on the left, a Wikipedia article about firn on the right." A new
 screenshot keeps the same file names and size, or update the HTML to
 match.
+
+**Home features:** under "All the good ideas. None of the homework.", four
+rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones).
+Each has the feature's dot, title and description (the design's copy, as
+written) on one side and a looping video of it on the other, 60% of the
+content width; the sides switch each row (text first on odd rows). The
+videos are real recordings of Firn on a Mac, silent, 1440×900 H.264:
+`public/assets/screens/firn-spaces.mp4`, `firn-basecamp.mp4`,
+`firn-lookout.mp4` and `firn-split-view.mp4`, each with a first-frame
+poster (`…-poster.webp`). Markup: `<video class="clip" muted loop
+playsinline preload="none" width="1440" height="900" poster="…"
+aria-label="…">` with an mp4 `<source>`; no controls. Like the hero
+screenshot: 12px rounded corners, `overflow: hidden`, `--shadow-win`, no
+backdrop blur. `loops.js` (home only, `defer`) plays a video only while at
+least half of it is on screen (IntersectionObserver) and pauses it when it
+leaves; with `prefers-reduced-motion` on it never plays, so only the
+poster shows (also the case without JavaScript). On phones the text sits
+above a full-width video, same rule. The aria-labels say what happens in
+each clip, e.g. "Switching between three spaces in Firn".
 
 **iPhone details:** in normal Safari browsing the strip behind the clock
 and Dynamic Island is not part of the page: the page starts below it, and
@@ -391,13 +412,13 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`): the four pages, `site.css`, `download.js`, `edges.js`
-and `site.webmanifest`. There is no server code. See README.md.
+`public/assets/`): the four pages, `site.css`, `download.js`, `edges.js`,
+`loops.js` and `site.webmanifest`. There is no server code. See README.md.
 
 **Old copies in browsers:** Zen once kept showing an old `site.css` after a
 change (the new download button looked unstyled, and the old slow blur and
 grain came back). So every page links `site.css?v=N`, `edges.js?v=N` and
-`download.js?v=N`: when you change one of those files, raise its `N` on every
+`download.js?v=N` (home also `loops.js?v=N`): when you change one of those files, raise its `N` on every
 page that links it, so browsers fetch the new copy. `public/_headers` also
 tells browsers to check for a newer CSS or JS file on every visit.
 
