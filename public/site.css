@@ -73,10 +73,6 @@ nav.top a:hover,nav.top a[aria-current]{color:var(--ink)}
 /* features */
 h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:center}
 .feats{position:relative;z-index:2;max-width:1040px;width:100%;margin:0 auto;padding:96px 32px 24px}
-.row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.row>div{padding:32px 24px;border-left:1px solid var(--line)}.row>div:first-child{border-left:0}
-.row em{display:block;width:10px;height:10px;border-radius:99px;margin-bottom:18px}
-.row h3{margin:0 0 8px;font-size:18px;font-weight:600}.row p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
 /* statement */
 .statement{position:relative;z-index:2;max-width:1040px;width:100%;margin:96px auto 0;padding:0 32px}
 .statement .box{position:relative;overflow:hidden;border-radius:20px;background:var(--panel);padding:72px 64px}
@@ -171,7 +167,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
  .hero h1{font-size:46px;line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
  .stage{margin-top:28px;padding:40px 16px 48px}
  .feats{padding:64px 24px 16px}h2{font-size:30px;margin-bottom:28px}
- .row{grid-template-columns:1fr}.row>div{border-left:0;border-top:1px solid var(--line);padding:24px 4px}.row>div:first-child{border-top:0}
  .statement{margin-top:56px;padding:0 16px}.statement .box{padding:44px 24px}.statement h2{font-size:34px;margin-bottom:28px}
  .statement .wm{width:280px;height:280px;right:-80px;top:-60px}
  .lg{grid-template-columns:1fr;gap:24px}
@@ -200,6 +195,25 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
    width/height in the HTML keep its space while it loads. */
 .shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
 .shot img{display:block;width:100%;height:auto}
+/* Home features: four rows, the text (dot, title, description) on one side
+   and a looping video of the feature on the other (60% of the width),
+   switching sides each row. Each video is a real recording, framed like
+   the hero screenshot: rounded corners and the same soft warm shadow, no
+   controls, no backdrop blur. loops.js plays it only while it's on screen.
+   On phones the text sits above a full-width video. */
+.tour{display:grid;gap:96px}
+.feat{display:grid;grid-template-columns:minmax(0,1fr) 60%;gap:56px;align-items:center}
+.feat:nth-child(even){grid-template-columns:60% minmax(0,1fr)}
+.feat:nth-child(even) .txt{order:2}
+.feat em{display:block;width:10px;height:10px;border-radius:99px;margin-bottom:18px}
+.feat h3{margin:0 0 8px;font-size:22px;font-weight:600}.feat p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
+.clip{display:block;width:100%;height:auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win);background:var(--frame)}
+@media (max-width:600px){
+ .tour{gap:56px}
+ .feat,.feat:nth-child(even){grid-template-columns:1fr;gap:20px}
+ .feat:nth-child(even) .txt{order:0}
+ .feat h3{font-size:19px}.feat p{font-size:16px}
+}
 /* Smooth scrolling. The design window's live backdrop blur, combined with
    the full-page grain blending on top of it, made the browser redo a large
    blur and blend on every scroll frame (about 20 fps over the haze). So
