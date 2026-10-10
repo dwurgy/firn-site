@@ -337,8 +337,8 @@ than shrunk (see below).
 
 **Home screenshot:** under the hero, in the design's window spot (max
 1040px wide, on the colour light), a real capture of Firn on a Mac:
-`public/assets/screens/firn-hero.webp` (1440×900), `firn-hero@2x.webp`
-(2880×1800) and `firn-hero.jpg` (fallback), in a `<picture class="shot">`
+`public/assets/screens/firn-hero-v2.webp` (1440×900) and `firn-hero-v2.jpg`
+(fallback), in a `<picture class="shot">`
 with `width`/`height` set so nothing jumps while it loads, and
 `loading="eager"` (it's near the top). CSS rounds its corners (12px,
 `overflow: hidden`), which also hides the bit of desktop in the capture's
@@ -348,10 +348,15 @@ phones the whole picture would be too small to read, so it shows only the
 top-left part (sidebar and start of the page) in a 4:3 frame: the image is
 drawn 2.25× the frame's width with `object-fit: cover` and
 `object-position: left top`, so the frame holds the left 640×480 of the
-capture. Alt text: "Firn on a Mac: a sidebar with spaces, Basecamp, and
-tabs on the left, a Wikipedia article about firn on the right." A new
-screenshot keeps the same file names and size, or update the HTML to
-match.
+capture. For now it's a still frame from the Split view clip (a website
+with a leafy tree and a church roof, the mouse pointer painted out), so
+there's no sharper 2× copy; the first version, a white Wikipedia page,
+was too bright. A real screenshot will replace it: then add a 2× file
+back to the `srcset`. Alt text: "Firn on a Mac: a sidebar with a Weekend
+space, Basecamp, and tabs on the left, a website with a leafy tree and a
+tiled church roof against a blue sky on the right." A new picture gets a
+new file name (v3, …) so browsers don't keep showing a saved copy of the
+old one; update the HTML and alt text to match.
 
 **Home features:** under "All the good ideas. None of the homework.", four
 rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones).
