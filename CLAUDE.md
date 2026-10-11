@@ -337,27 +337,27 @@ statement, footer pills stacked. The home screenshot is cropped rather
 than shrunk (see below).
 
 **Home screenshot:** under the hero, in the design's window spot (max
-1040px wide, on the colour light), a real capture of Firn on a Mac:
-`public/assets/screens/firn-hero-v2.webp` (1440×900) and `firn-hero-v2.jpg`
-(fallback), in a `<picture class="shot">`
-with `width`/`height` set so nothing jumps while it loads, and
-`loading="eager"` (it's near the top). CSS rounds its corners (12px,
-`overflow: hidden`), which also hides the bit of desktop in the capture's
-square corners, and gives it the window's soft warm shadow (`--shadow-win`);
-no backdrop blur. It stays light in dark mode: it's a real capture. On
-phones the whole picture would be too small to read, so it shows only the
+1040px wide, on the colour light), a real screenshot of Firn on a Mac (the
+Weekend space, Basecamp with calendar, Gmail, YouTube, and GitHub, and a
+website with a leafy tree and a church roof), cropped 2px inside the
+window's edge: `public/assets/screens/firn-hero-v3.webp` (1440×910),
+`firn-hero-v3@2x.webp` (1947×1230, the full crop, for sharp screens) and
+`firn-hero-v3.jpg` (fallback), in a `<picture class="shot">` (`srcset` 1x
+and 2x) with `width`/`height` set (1440×910) so nothing jumps while it
+loads, and `loading="eager"` (it's near the top). CSS rounds its corners
+(12px, `overflow: hidden`), which hides the bit of desktop in the window's
+corners, and gives it the window's soft warm shadow (`--shadow-win`); no
+backdrop blur. It stays light in dark mode: it's a real capture. On phones
+the whole picture would be too small to read, so it shows only the
 top-left part (sidebar and start of the page) in a 4:3 frame: the image is
 drawn 2.25× the frame's width with `object-fit: cover` and
-`object-position: left top`, so the frame holds the left 640×480 of the
-capture. For now it's a still frame from the Split view clip (a website
-with a leafy tree and a church roof, the mouse pointer painted out), so
-there's no sharper 2× copy; the first version, a white Wikipedia page,
-was too bright. A real screenshot will replace it: then add a 2× file
-back to the `srcset`. Alt text: "Firn on a Mac: a sidebar with a Weekend
-space, Basecamp, and tabs on the left, a website with a leafy tree and a
-tiled church roof against a blue sky on the right." A new picture gets a
-new file name (v3, …) so browsers don't keep showing a saved copy of the
-old one; update the HTML and alt text to match.
+`object-position: left top`. Earlier versions: a white Wikipedia page
+(too bright), then a still frame from the Split view clip (too soft).
+Alt text: "Firn on a Mac: a sidebar with Basecamp shortcuts, a Weekend
+space, and tabs on the left, a website with a leafy tree and a tiled
+church roof against a blue sky on the right." A new picture gets a new
+file name (v4, …) so browsers don't keep showing a saved copy of the old
+one; update the HTML, its size and the alt text to match.
 
 **Home features:** under "All the good ideas. None of the homework.", four
 rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones).
