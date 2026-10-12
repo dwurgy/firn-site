@@ -319,8 +319,11 @@ the Support page with a download arrow: "Download for Mac"
 and "Download for Windows"
 (`https://github.com/dwurgy/firn/releases/latest/download/Firn.Setup.exe`).
 Both links always fetch the newest release, so they never need updating.
-Under them: "Windows may say “Windows protected your PC”. Click More info,
-then Run anyway." (needed until Windows code signing). `download.js`, loaded
+Under them: "If Windows shows a warning, click More info, then Run
+anyway." Firn for Windows is signed since 0.7.3, but Windows keeps showing
+its "Windows protected your PC" screen for a new signature until enough
+people have downloaded it; remove the note once a fresh download on
+Windows shows no warning. `download.js`, loaded
 in `<head>` without `defer` so the right button shows from the first paint,
 adds `.os-mac` or `.os-win` to `<html>`; then only that button shows (the
 Windows note goes with the Windows button) plus an "Other platforms" button
