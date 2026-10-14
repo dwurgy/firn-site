@@ -437,3 +437,21 @@ tells browsers to check for a newer CSS or JS file on every visit.
   how to check it.
 - Ask before adding any dependency or service.
 - Commit to Git after each working step with a clear message.
+
+- **Pick the model before starting** (David is on the Pro plan and wants his limits to last the week). Before starting any task, say in one line which model it needs and why: "Sonnet is fine: <reason>" or "This needs Opus: <reason>. Switch with /model, then say go." If it needs Opus and you're running Sonnet, stop and wait. If you're running Opus and Sonnet would do, say so and wait, so David can switch. Don't start the work until the model fits. If a Sonnet task turns out harder than it looked (the first fix didn't work, the cause isn't clear, it spreads across many files), stop and say so rather than guessing on.
+  - **Sonnet:** a release notes entry, copy and wording changes, a small CSS tweak, raising a `?v=N`, swapping a screenshot or clip for a new file name, alt text, meta tags, adding a link, answering questions about the site.
+  - **Opus:** anything touching the privacy rules (scripts, headers, analytics, third-party anything), Cloudflare setup, scroll performance or rendering differences between browsers (Safari, Firefox, Zen), a new page or section that has to match the design across light, dark, and phone, and changes to `download.js`, `edges.js`, or `loops.js`.
+  - When unsure, say which way it leans and why, in one line, and let David pick.
+
+- **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
+  - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). `public/site.css` is long: read the section you're changing, not the file. Don't re-read a file already read in this conversation unless it changed.
+  - **Images cost the most.** Don't open the design's screenshots (`design/first-light/shots/`, `design/about/reference/`) unless the task is matching the design, and then only the one you need. Look at your own result once per step, not after every small edit.
+  - **Keep searching out of this conversation.** For broad questions ("where is X used", "which pages link Y"), use the Explore agent. Don't spawn agents for anything else (each starts cold).
+  - **Plan before multi-page work.** Say the plan in a few lines and wait for my OK.
+  - **One task per conversation, small steps.** A long conversation is re-read on every message, so its cost grows with every reply.
+  - **Checkpoints.** When a step works and is committed, say so and tell me which fits: "/clear" (next task is unrelated) or "/compact" (same work continues). You can't run these yourself, so tell me. Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
+  - **Short replies.** After a change: what changed, where, and how to check it, in a few lines. Don't recap the diff, repeat my request back, or paste whole files. Use Edit for changes, not rewriting a file.
+  - **Quiet output.** Pipe long command output through tail or grep.
+  - **Stuck rule.** After two failed attempts at the same fix, stop. Say what's known, what's been ruled out, and whether a fresh session or Opus would help. Don't try a third time.
+  - **Breaks.** The conversation's saved copy goes cold after about 5 minutes idle, so resuming a long one costs a full re-read. Finish and commit a step before I step away, and suggest /clear if it's a good moment.
+  - **Keep CLAUDE.md lean.** New notes are 1 to 3 lines: what changed, where, how to check it. The reasoning belongs in the commit message.
