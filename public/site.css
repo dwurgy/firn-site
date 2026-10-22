@@ -133,6 +133,12 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .sign span{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:24px;color:var(--ink)}
 @media (max-width:600px){.story{padding:48px 24px 16px}.part{grid-template-columns:1fr;gap:12px;padding:32px 0}
  .part p{font-size:17px}.part p.big{font-size:24px}.def{padding:22px 22px}.def .w{font-size:38px}}
+/* mac: the transition page, one column like a blog post (headings in the text, no left labels) */
+.post{position:relative;z-index:2;max-width:720px;width:100%;margin:0 auto;padding:56px 32px 24px}
+.post p{margin:0 0 20px;font-size:18px;line-height:1.7;color:var(--muted)}
+.post h2{margin:56px 0 20px;font-size:32px;text-align:left}
+.post .promises{margin:8px 0 28px}
+@media (max-width:600px){.post{padding:40px 24px 16px}.post p{font-size:17px}.post h2{margin:44px 0 16px;font-size:26px}}
 /* about: snow-to-ice layers in "The word" (design/about) */
 .layers{margin:0 0 28px}
 .layers ol{list-style:none;margin:0;padding:0;border-radius:14px;overflow:hidden}
