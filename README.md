@@ -1,5 +1,5 @@
 # firn-site
-The website for Firn, a calm browser, made for Mac. firnbrowser.com
+The website for Firn. A calm browser, made for Mac. firnbrowser.com
 
 ## What's where
 
