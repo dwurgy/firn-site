@@ -5,10 +5,12 @@ the separate `dwurgy/firn` repo). Built by David with Claude. David is not a
 professional developer: explain decisions in plain language, keep changes
 small, and stop after each step so he can look at it.
 
-Firn is out (0.1.0 on October 8, 2026, for macOS and Windows). The site is a
-home page that says what Firn is, shows what it looks like, and has the
-download button, plus About, release notes and support pages. A privacy page
-(what Firn does and doesn't collect, in plain words) may come later.
+Firn came out as an Electron app (0.1.0 on October 8, 2026, for macOS and
+Windows). It is now becoming a native Mac app (Swift, WebKit); the Electron
+app ends at 0.11.0, and Windows stops there. The site is a home page that says
+what Firn is and shows what it looks like, plus About, release notes, support,
+and `/mac` (the farewell to Electron and Windows). There are no download
+buttons until the native Mac app launches.
 
 **Reasons and history** behind the rules below (the scroll-performance
 investigation, the iPhone strip, the home screenshot and videos, why `?v=N`
@@ -37,8 +39,8 @@ unless David changes it.
   `site.css` (minus its `.theme-dark` block, which only exists for the
   design tool) plus a few live-site additions at the end. The live pages
   use the design's markup with the real head (favicons, Open Graph), clean
-  links and, on home, the download button in place of the design's email
-  sign-up (that was removed when Firn came out). At 1440px and 393px they render
+  links and, on home, a link to `/mac` in place of the design's email
+  sign-up (later the download buttons; see "Download"). At 1440px and 393px they render
   the same as the design files, apart from the scroll-performance changes
   below (no pixel differs by more than 9/255, which is invisible).
   The one planned difference: on home, the design's sketched window is
@@ -199,7 +201,7 @@ Firn's promise is privacy, so the website keeps it too:
 - The domain firnbrowser.com is already on David's Cloudflare account (his
   personal site is there too). Walk him through connecting the custom domain
   step by step, in plain words.
-- Keep it a simple static site: plain HTML and CSS and three small scripts, no
+- Keep it a simple static site: plain HTML and CSS and two small scripts, no
   server code. No framework unless there's a strong reason; ask first.
 
 ## Cloudflare setup
@@ -222,7 +224,8 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, and `/support`. Cloudflare
+**Pages:** `/` (home), `/about`, `/release-notes`, `/support`, and `/mac`
+(one-column `.post` page, not in the header or footer). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
@@ -275,9 +278,7 @@ text, including the version in its `id` and link.
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
-- Eyebrow: "Now available for macOS and Windows, Linux coming soon"; on
-  phones "Now available for macOS and Windows" (the long line doesn't fit
-  on one line there).
+- Eyebrow: "The new Firn for Mac is coming soon".
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
@@ -287,28 +288,16 @@ text, including the version in its `id` and link.
   by default." (added when Firn's ad and tracker blocking shipped; "by
   default" so it doesn't repeat "from the start" from the card before).
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
-  with vertical tabs, spaces, and split view. Now available for macOS and
-  Windows, Linux coming soon."
+  with vertical tabs, spaces, and split view. The new Firn for Mac is coming
+  soon."
 
-**Download:** in the hero, under the subhead (`.get`), the ink `.btn` from
-the Support page with a download arrow: "Download for Mac"
-(`https://github.com/dwurgy/firn/releases/latest/download/Firn.for.Mac.zip`)
-and "Download for Windows"
-(`https://github.com/dwurgy/firn/releases/latest/download/Firn.Setup.exe`).
-Both links always fetch the newest release, so they never need updating.
-Under them: "If Windows shows a warning, click More info, then Run
-anyway." Remove this note once a fresh download on Windows shows no
-warning (why it's there: `docs/DESIGN-NOTES.md`, "Windows download
-note"). `download.js`, loaded
-in `<head>` without `defer` so the right button shows from the first paint,
-adds `.os-mac` or `.os-win` to `<html>`; then only that button shows (the
-Windows note goes with the Windows button) plus an "Other platforms" button
-that brings back both. Phones and tablets (iPads report themselves as
-Macs, so a Mac with a touch screen counts as a tablet) can't install Firn, so
-they get `.os-mobile`: no buttons, just the line "Visit firnbrowser.com on
-your computer to download it. Coming to iOS." Linux and visitors without
-JavaScript see both buttons and the note; on a phone without JavaScript the
-buttons stack, full width up to 320px.
+**Download:** none until the native Mac app launches. Under the subhead,
+`.get` holds one ink, underlined link, "Why Firn is becoming a Mac app →",
+to `/mac`. The old buttons and `download.js` (Mac/Windows/phone detection)
+were removed in the commit "Home: no download buttons until the native Mac
+app"; bring them back from Git history when the Mac app launches.
+**Before `/mac` goes live:** `github.com/dwurgy/firn-legacy` (linked from
+`/mac`) must be public and hold the Windows code.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, features stacked (text above video) and single-column
@@ -368,18 +357,14 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
   `assets/firn-share-preview-v5.png`.
 - Fast: no build step; no JavaScript needed for the look.
 
-## Placeholders to fill later
-
-- The eyebrow's "Linux coming soon" changes when Linux is ready.
-
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`): the four pages, `site.css`, `download.js`, `edges.js`,
+`public/assets/`): the five pages, `site.css`, `edges.js`,
 `loops.js` and `site.webmanifest`. There is no server code. See README.md.
 
-**Old copies in browsers:** every page links `site.css?v=N`, `edges.js?v=N`
-and `download.js?v=N` (home also `loops.js?v=N`): when you change one of those
+**Old copies in browsers:** every page links `site.css?v=N` and
+`edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
 files, raise its `N` on every page that links it, so browsers fetch the new
 copy. `public/_headers` also tells browsers to check for a newer CSS or JS
 file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
@@ -393,7 +378,7 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
 
 - **Pick the model before starting** (David is on the Pro plan and wants his limits to last the week). Before starting any task, say in one line which model it needs and why: "Sonnet is fine: <reason>" or "This needs Opus: <reason>. Switch with /model, then say go." If it needs Opus and you're running Sonnet, stop and wait. If you're running Opus and Sonnet would do, say so and wait, so David can switch. Don't start the work until the model fits. If a Sonnet task turns out harder than it looked (the first fix didn't work, the cause isn't clear, it spreads across many files), stop and say so rather than guessing on.
   - **Sonnet:** a release notes entry, copy and wording changes, a small CSS tweak, raising a `?v=N`, swapping a screenshot or clip for a new file name, alt text, meta tags, adding a link, answering questions about the site.
-  - **Opus:** anything touching the privacy rules (scripts, headers, analytics, third-party anything), Cloudflare setup, scroll performance or rendering differences between browsers (Safari, Firefox, Zen), a new page or section that has to match the design across light, dark, and phone, and changes to `download.js`, `edges.js`, or `loops.js`.
+  - **Opus:** anything touching the privacy rules (scripts, headers, analytics, third-party anything), Cloudflare setup, scroll performance or rendering differences between browsers (Safari, Firefox, Zen), a new page or section that has to match the design across light, dark, and phone, and changes to `edges.js` or `loops.js`.
   - When unsure, say which way it leans and why, in one line, and let David pick.
 
 - **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
