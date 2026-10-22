@@ -93,7 +93,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. Two frosted pills sit on the snow: "Free and open source, MPL 2.0"
+  through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
   and the footer links (GitHub, Reddit, Email, About, Release notes, Support).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
