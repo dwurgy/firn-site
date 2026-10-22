@@ -120,8 +120,8 @@ _Moved word for word from CLAUDE.md ("Project layout"). The rule is kept in CLAU
 
 **Old copies in browsers:** Zen once kept showing an old `site.css` after a
 change (the new download button looked unstyled, and the old slow blur and
-grain came back). So every page links `site.css?v=N`, `edges.js?v=N` and
-`download.js?v=N` (home also `loops.js?v=N`): when you change one of those files, raise its `N` on every
+grain came back). So every page links `site.css?v=N` and `edges.js?v=N`
+(home also `loops.js?v=N`): when you change one of those files, raise its `N` on every
 page that links it, so browsers fetch the new copy. `public/_headers` also
 tells browsers to check for a newer CSS or JS file on every visit.
 
