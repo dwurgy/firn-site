@@ -45,12 +45,14 @@ unless David changes it.
   below (no pixel differs by more than 9/255, which is invisible).
   The one planned difference: on home, the design's sketched window is
   now a real screenshot of Firn (see "Home screenshot").
-- `public/assets/firn-share-preview-v5.png`: the 1200×630 link preview (Open
-  Graph / Twitter card), made in Claude Design, light in both modes. Keep it
+- `public/assets/firn-share-preview-v6.png`: the 1200×630 link preview (Open
+  Graph / Twitter card), made in Claude Design, light in both modes. Home
+  and `/mac` use v6 ("A calm browser, made for Mac."); About, Release notes,
+  and Support still use v5 ("for everyone"). Keep it
   a PNG, don't recompress it, and keep it small (about 270 KB; WhatsApp skips
-  images over about 600 KB). Every page's `og:image` and `twitter:image` use
-  the full URL `https://firnbrowser.com/assets/firn-share-preview-v5.png`.
-  When it changes, use a new file name (v6, …) so apps fetch the new
+  images over about 600 KB). Each page's `og:image` and `twitter:image` use
+  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v6.png`.
+  When it changes, use a new file name (v7, …) so apps fetch the new
   picture. (More: `docs/DESIGN-NOTES.md`, "Link preview image".)
 
 **Copy is final**, as written in the design files (including the line break
@@ -345,13 +347,6 @@ page background to #6B94AD light / #536573 dark. Every page has
 pills add `env(safe-area-inset-bottom)`, and both keep clear of the notch in
 landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
-## Day 2 changes (not yet done)
-
-- **Home link preview:** switch the home page's `og:image` and `twitter:image`
-  to `firn-share-preview-v6.png` ("A calm browser, made for Mac."), with the
-  matching `og:image:alt`. Until then home (and the other pages) keep v5;
-  only `/mac` uses v6.
-
 ## Must-haves
 
 - Works and looks right at phone width (see `design/first-light/shots/`).
@@ -361,7 +356,7 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  `assets/firn-share-preview-v5.png`.
+  a `firn-share-preview` image (v5 or v6, see above).
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Project layout
