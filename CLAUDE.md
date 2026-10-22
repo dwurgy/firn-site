@@ -345,6 +345,13 @@ page background to #6B94AD light / #536573 dark. Every page has
 pills add `env(safe-area-inset-bottom)`, and both keep clear of the notch in
 landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
+## Day 2 changes (not yet done)
+
+- **Home link preview:** switch the home page's `og:image` and `twitter:image`
+  to `firn-share-preview-v6.png` ("A calm browser, made for Mac."), with the
+  matching `og:image:alt`. Until then home (and the other pages) keep v5;
+  only `/mac` uses v6.
+
 ## Must-haves
 
 - Works and looks right at phone width (see `design/first-light/shots/`).
