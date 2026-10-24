@@ -247,8 +247,8 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
  .shot{aspect-ratio:4/3}
  .shot img{width:225%;height:187.5%;max-width:none;object-fit:cover;object-position:left top}
 }
-/* Smallest phones: at 46px, the bold "for everyone." (277px) is wider than
-   the 272px text area at 320px. 44px keeps it inside the margins. */
+/* Smallest phones: at 46px, the bold "made for Mac." (300px) is wider than
+   the 287px text area at 320px. 44px keeps it inside the margins. */
 @media (max-width:339px){.hero h1{font-size:44px}}
 /* iPhone status bar: Safari paints the strip behind the clock with one flat
    colour taken from the page background (the page itself starts below it).
