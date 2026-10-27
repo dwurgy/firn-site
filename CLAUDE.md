@@ -103,9 +103,9 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Blue is for branding only.** Logo, snow, flakes, glows. Buttons, links
   and text stay in warm neutrals. The main button is ink with page-white text.
 - **Calm.** Generous space; motion is only small 200ms hover/focus
-  transitions, switched off for `prefers-reduced-motion`, and the home
-  feature videos, which play only while on screen and never with reduced
-  motion (see "Home features"). No carousels,
+  transitions, switched off for `prefers-reduced-motion`, and (when they
+  return) the home feature videos, which play only while on screen and
+  never with reduced motion (see "Home features"). No carousels,
   pop-ups, cookie banners, chat widgets or stock photos.
 
 ### Keep scrolling smooth
@@ -308,24 +308,31 @@ than shrunk (see below).
 
 **Home screenshot:** under the hero, in the design's window spot (max
 1040px wide, on the colour light), a real screenshot of Firn on a Mac,
-cropped 2px inside the window's edge: `public/assets/screens/firn-hero-v3.webp`
-(1440×910), `firn-hero-v3@2x.webp` (1947×1230) and `firn-hero-v3.jpg`
-(fallback), in a `<picture class="shot">` (`srcset` 1x and 2x) with
-`width`/`height` set (1440×910) and `loading="eager"`. CSS: 12px corners,
-`overflow: hidden`, `--shadow-win`, no backdrop blur; it stays light in dark
-mode. On phones it shows only the top-left part in a 4:3 frame (the image
+cropped 2px inside the window's edge, in light and dark:
+`public/assets/screens/firn-hero-v4-light.webp` / `-dark.webp` (1440×898)
+and `@2x` (2080 wide), in a `<picture class="shot">` (a dark `<source
+media="(prefers-color-scheme: dark)">`, `srcset` 1x and 2x) with
+`width`/`height` set (1440×898) and `loading="eager"`. CSS: 12px corners,
+`overflow: hidden`, `--shadow-win`, no backdrop blur. Source PNGs:
+`design/screens-2026-10-26/` (window at 112,76, 2880×1800). On phones it shows only the top-left part in a 4:3 frame (the image
 drawn 2.25× the frame's width, `object-fit: cover`,
 `object-position: left top`). Alt text: "Firn on a Mac: a sidebar with
-Basecamp shortcuts, a Weekend space, and tabs on the left, a website with a
-leafy tree and a tiled church roof against a blue sky on the right." A new
-picture gets a new file name (v4, …); update the HTML, its size and the alt
+Basecamp shortcuts, a Weekend cooking folder, and tabs on the left, the Snow
+Peak website with a tent in a grassy field at dusk on the right." A new
+picture gets a new file name (v5, …); update the HTML, its size and the alt
 text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
 
 **Home features:** under "All the good ideas. None of the homework.", four
 rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones):
 the feature's dot, title and description (the design's copy, as written) on
-one side and a looping video on the other (60% of the content width, sides
-switching each row; on phones the text sits above a full-width video). The
+one side and a screenshot on the other (60% of the content width, sides
+switching each row; on phones the text sits above it). **For now these are
+still screenshots** (since 2026-10-27): `<picture class="clip">`, light and
+dark like the hero, `firn-spaces-v1`, `firn-basecamp-v1` (a 16:10 crop of
+the hero's top-left), `firn-lookout-v1`, `firn-split-view-v1` (720 wide,
+`@2x` 1440), `loading="lazy"`, alt text says what each shows. `loops.js` is
+not linked from home until loops return; the old loops are still in the
+repo, described here. The
 videos are silent 1440×900 H.264 recordings:
 `public/assets/screens/firn-spaces.mp4`, `firn-basecamp.mp4`,
 `firn-lookout.mp4` and `firn-split-view.mp4`, each with a first-frame

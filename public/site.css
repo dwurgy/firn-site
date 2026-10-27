@@ -201,11 +201,11 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
 .shot img{display:block;width:100%;height:auto}
 /* Home features: four rows, the text (dot, title, description) on one side
-   and a looping video of the feature on the other (60% of the width),
-   switching sides each row. Each video is a real recording, framed like
-   the hero screenshot: rounded corners and the same soft warm shadow, no
-   controls, no backdrop blur. loops.js plays it only while it's on screen.
-   On phones the text sits above a full-width video. */
+   and a screenshot of the feature on the other (60% of the width; light or
+   dark to match the visitor), switching sides each row. Framed like the
+   hero screenshot: rounded corners and the same soft warm shadow, no
+   backdrop blur. (.clip also fits a looping <video>, for when loops return.)
+   On phones the text sits above a full-width screenshot. */
 .tour{display:grid;gap:96px}
 .feat{display:grid;grid-template-columns:minmax(0,1fr) 60%;gap:56px;align-items:center}
 .feat:nth-child(even){grid-template-columns:60% minmax(0,1fr)}
@@ -213,6 +213,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .feat em{display:block;width:10px;height:10px;border-radius:99px;margin-bottom:18px}
 .feat h3{margin:0 0 8px;font-size:22px;font-weight:600}.feat p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
 .clip{display:block;width:100%;height:auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win);background:var(--frame)}
+.clip img{display:block;width:100%;height:auto}
 @media (max-width:600px){
  .tour{gap:56px}
  .feat,.feat:nth-child(even){grid-template-columns:1fr;gap:20px}
