@@ -1,0 +1,5 @@
+# Cloudflare Pages reads this file (it isn't published as a page).
+# Installed copies of Firn check /appcast.xml for updates. It forwards
+# (302, temporary) to the feed in the app's repo, so the site never needs
+# a copy of it and never needs touching when a new version comes out.
+/appcast.xml https://raw.githubusercontent.com/dwurgy/firn/main/appcast.xml 302
