@@ -6,11 +6,12 @@ professional developer: explain decisions in plain language, keep changes
 small, and stop after each step so he can look at it.
 
 Firn came out as an Electron app (0.1.0 on October 8, 2026, for macOS and
-Windows). It is now becoming a native Mac app (Swift, WebKit); the Electron
-app ends at 0.11.0, and Windows stops there. The site is a home page that says
-what Firn is and shows what it looks like, plus About, release notes, support,
-and `/mac` (the farewell to Electron and Windows). There are no download
-buttons until the native Mac app launches.
+Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
+1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), Mac only, a
+fresh start that brings nothing over from the old Firn. The site is a home
+page that says what Firn is, shows what it looks like and has the download
+button, plus About, release notes, support, and `/mac` (the farewell to
+Electron and Windows, kept as written but no longer linked).
 
 **Reasons and history** behind the rules below (the scroll-performance
 investigation, the iPhone strip, the home screenshot and videos, why `?v=N`
@@ -227,7 +228,7 @@ Never put a password or any other secret in this repo.
 ## Pages, header and download
 
 **Pages:** `/` (home), `/about`, `/release-notes`, `/support`, and `/mac`
-(one-column `.post` page, not in the header or footer). Cloudflare
+(one-column `.post` page, not linked from any page). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
@@ -280,7 +281,7 @@ text, including the version in its `id` and link.
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
-- Eyebrow: "The new Firn for Mac is coming soon".
+- Eyebrow: "Firn 1.0 is here".
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
@@ -290,16 +291,20 @@ text, including the version in its `id` and link.
   by default." (added when Firn's ad and tracker blocking shipped; "by
   default" so it doesn't repeat "from the start" from the card before).
 - Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
-  with vertical tabs, spaces, and split view. The new Firn for Mac is coming
-  soon."
+  with vertical tabs, spaces, and split view. Now available for Mac."
 
-**Download:** none until the native Mac app launches. Under the subhead,
-`.get` holds one ink, underlined link, "Why Firn is becoming a Mac app →",
-to `/mac`. The old buttons and `download.js` (Mac/Windows/phone detection)
-were removed in the commit "Home: no download buttons until the native Mac
-app"; bring them back from Git history when the Mac app launches.
-**Before `/mac` goes live:** `github.com/dwurgy/firn-legacy` (linked from
-`/mac`) must be public and hold the Windows code.
+**Download:** under the subhead, `.get` holds one ink `.btn`, "Download for
+Mac", linked to
+`https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg` (always
+the newest version: never put a version number in it), and under it
+"Free. Needs macOS 14 or later." Phones (600px and narrower) see "Visit
+firnbrowser.com on your Mac to download it." instead (CSS only, no script).
+`github.com/dwurgy/firn-legacy` (linked from `/mac`) must be public and hold
+the Windows code.
+
+**Update feed:** `public/_redirects` sends `/appcast.xml` (302) to
+`raw.githubusercontent.com/dwurgy/firn/main/appcast.xml`, where installed
+copies of Firn check for updates. No copy of the feed lives on the site.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, features stacked (text above video) and single-column
