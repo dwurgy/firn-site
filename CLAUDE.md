@@ -280,8 +280,10 @@ the block (see the comment in the file), put it at the top and change the
 text, including the version in its `id` and link.
 
 **Tip jar** (`tip-jar.html`; renamed from Support): call it a tip jar and
-tips, never "donate" or "donation". The main button goes to GitHub Sponsors
-(`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
+tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
+Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it a
+lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
+"No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
