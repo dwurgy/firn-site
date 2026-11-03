@@ -231,7 +231,9 @@ Never put a password or any other secret in this repo.
 ## Pages, header and download
 
 **Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` (one-column `.post` page, linked only from the footer), and `/mac`
-(one-column `.post` page, not linked from any page). Cloudflare
+(one-column `.post` page, not linked from any page), plus `404.html`
+(shown by Cloudflare for any missing address, so every link and file in it
+starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
