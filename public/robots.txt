@@ -1,6 +1,8 @@
-# Every search engine may read the whole site, except /mac (the farewell
-# to the Electron app, kept but not linked from any page).
+# Every search engine may read the whole site. /mac (the farewell to the
+# Electron app, kept but not linked from any page) stays out of search
+# results through its own noindex tag; it must not be blocked here, or
+# search engines could never read that tag.
 User-agent: *
-Disallow: /mac
+Disallow:
 
 Sitemap: https://firnbrowser.com/sitemap.xml

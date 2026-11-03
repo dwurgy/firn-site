@@ -390,7 +390,7 @@ The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
 `loops.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
-**Search engines:** `robots.txt` blocks `/mac`; `sitemap.xml` lists every other page (not 404). A new page gets a line in `sitemap.xml`.
+**Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
 `edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
