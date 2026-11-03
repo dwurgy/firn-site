@@ -10,7 +10,7 @@ Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
 1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), Mac only, a
 fresh start that brings nothing over from the old Firn. The site is a home
 page that says what Firn is, shows what it looks like and has the download
-button, plus About, release notes, support, and `/mac` (the farewell to
+button, plus About, release notes, support, privacy, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
 **Reasons and history** behind the rules below (the scroll-performance
@@ -97,7 +97,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
-  and the footer links (GitHub, Reddit, Email, About, Release notes, Tip jar).
+  and the footer links (GitHub, Reddit, Email, Privacy, About, Release notes, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -230,7 +230,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), and `/mac`
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` (one-column `.post` page, linked only from the footer), and `/mac`
 (one-column `.post` page, not linked from any page). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
@@ -239,10 +239,10 @@ serves them without `.html`; links use the clean addresses.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
 the bottom of the page. The links pill: GitHub, Reddit, Email
-(`mailto:hello@firnbrowser.com`), About, Release notes, Tip jar. Text in a
-pill never wraps. Below 900px wide the two pills stack, centred; on phones
-the links pill wraps into two rows, "GitHub | Reddit | Email" and "About |
-Release notes | Tip jar" (the third divider becomes the line break), so no
+(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, Tip jar. Text in a
+pill never wraps. Below 1000px wide the two pills stack, centred; below 700px
+the links pill wraps into two rows, "GitHub | Reddit | Email | Privacy" and "About |
+Release notes | Tip jar" (the fourth divider becomes the line break), so no
 divider is left dangling at the end of a row.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
@@ -285,6 +285,11 @@ Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it a
 lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
 "No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
+
+**Privacy:** from `docs/privacy-page.md` in `dwurgy/firn`, checked against
+the app's code, plus a "This website" section. Every line must be literally
+true. When the app starts sending something new (e.g. passwords syncing via
+iCloud Keychain once the iOS app ships), update this page first.
 
 **Copy notes (home):**
 - Eyebrow: "Firn 1.0 is here".

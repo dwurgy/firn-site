@@ -138,6 +138,11 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .post h2{margin:44px 0 14px;font-size:28px;text-align:left}
 .post .promises{margin:4px 0 20px}.post .promises li{padding:11px 0;font-size:16px;line-height:1.55}.post .promises li:first-child{padding-top:0}
 @media (max-width:600px){.post{padding:36px 24px 16px}.post p{font-size:16px}.post h2{margin:36px 0 12px;font-size:24px}}
+/* privacy page: plain bullet lists, bold lead-ins in ink, file paths */
+.post .list{margin:0 0 16px;padding-left:22px;font-size:17px;line-height:1.6;color:var(--muted)}.post .list li{padding:2px 0}
+.post p strong{color:var(--ink);font-weight:600}
+.post code{font:15px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink)}
+@media (max-width:600px){.post .list{font-size:16px}}
 /* about: snow-to-ice layers in "The word" (design/about) */
 .layers{margin:0 0 28px}
 .layers ol{list-style:none;margin:0;padding:0;border-radius:14px;overflow:hidden}
@@ -274,7 +279,7 @@ html.at-end,html.at-end body{background:#6B94AD}
    Email) becomes a line break: GitHub | Reddit | Email, then About | Release
    notes | Support. The break is a row of its own, so the row gap is halved to keep the
    spacing between the two rows the same as before. */
-@media (max-width:600px){nav.pill{row-gap:7px}nav.pill i:nth-of-type(3){flex-basis:100%;height:0}}
+@media (max-width:600px){nav.pill{row-gap:7px}nav.pill i:nth-of-type(4){flex-basis:100%;height:0}}
 /* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
    light behind the window was four big filter: blur(70px) patches, which
    Gecko redoes on every scroll frame; a soft SVG mask in their place was
@@ -314,12 +319,15 @@ html.at-end,html.at-end body{background:#6B94AD}
 .dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
 .dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
 @media (max-width:600px){.get .btn,.dl-note{display:none}.dl-mobile{display:block}}
-/* Footer pills on tablets (601–899px wide): side by side they don't fit, and
-   their text wrapped inside the pills. So below 900px they stack, centred,
+/* Footer pills on tablets (601–999px wide): side by side they don't fit, and
+   their text wrapped inside the pills. So below 1000px they stack, centred,
    like on phones (where the links pill also wraps into two rows), and the
-   text inside a pill never wraps. */
+   text inside a pill never wraps. (Was 900px until Privacy made the links
+   pill about 634px wide.) Below 700px even the stacked links pill is too
+   wide for one row, so it splits into the phone's two rows there too. */
 .pill p,.pill a{white-space:nowrap}
-@media (max-width:899px){.pills{flex-direction:column;align-items:center;gap:10px}}
+@media (max-width:999px){.pills{flex-direction:column;align-items:center;gap:10px}}
+@media (min-width:601px) and (max-width:699px){nav.pill{height:auto;min-height:44px;padding:10px 20px;flex-wrap:wrap;justify-content:center;row-gap:7px}nav.pill i:nth-of-type(4){flex-basis:100%;height:0}}
 /* Tip jar: Ko-fi is the main (ink) button; GitHub Sponsors sits under it
    as a lighter outlined button in ink, no fill. */
 .btn.alt{margin-top:32px;background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--faint)}
