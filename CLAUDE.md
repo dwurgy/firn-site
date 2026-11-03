@@ -388,7 +388,9 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
-`loops.js` and `site.webmanifest`. There is no server code. See README.md.
+`loops.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+
+**Search engines:** `robots.txt` blocks `/mac`; `sitemap.xml` lists every other page (not 404). A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
 `edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
@@ -403,10 +405,7 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
 - Ask before adding any dependency or service.
 - Commit to Git after each working step with a clear message.
 
-- **Pick the model before starting** (David is on the Pro plan and wants his limits to last the week). Before starting any task, say in one line which model it needs and why: "Sonnet is fine: <reason>" or "This needs Opus: <reason>. Switch with /model, then say go." If it needs Opus and you're running Sonnet, stop and wait. If you're running Opus and Sonnet would do, say so and wait, so David can switch. Don't start the work until the model fits. If a Sonnet task turns out harder than it looked (the first fix didn't work, the cause isn't clear, it spreads across many files), stop and say so rather than guessing on.
-  - **Sonnet:** a release notes entry, copy and wording changes, a small CSS tweak, raising a `?v=N`, swapping a screenshot or clip for a new file name, alt text, meta tags, adding a link, answering questions about the site.
-  - **Opus:** anything touching the privacy rules (scripts, headers, analytics, third-party anything), Cloudflare setup, scroll performance or rendering differences between browsers (Safari, Firefox, Zen), a new page or section that has to match the design across light, dark, and phone, and changes to `edges.js` or `loops.js`.
-  - When unsure, say which way it leans and why, in one line, and let David pick.
+- **Model:** always Opus. Never suggest switching to Sonnet or ask which model a task needs.
 
 - **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
   - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). `public/site.css` is long: read the section you're changing, not the file. Don't re-read a file already read in this conversation unless it changed.

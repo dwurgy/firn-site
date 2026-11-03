@@ -1,0 +1,6 @@
+# Every search engine may read the whole site, except /mac (the farewell
+# to the Electron app, kept but not linked from any page).
+User-agent: *
+Disallow: /mac
+
+Sitemap: https://firnbrowser.com/sitemap.xml
