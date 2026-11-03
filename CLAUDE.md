@@ -106,7 +106,10 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Calm.** Generous space; motion is only small 200ms hover/focus
   transitions, switched off for `prefers-reduced-motion`, and (when they
   return) the home feature videos, which play only while on screen and
-  never with reduced motion (see "Home features"). No carousels,
+  never with reduced motion (see "Home features"). Besides those, the
+  footer sun rises once on first view (about 2s, `transform` and `opacity`
+  only, off with reduced motion; `edges.js`, see "Footer sunrise" in
+  `docs/DESIGN-NOTES.md`). No carousels,
   pop-ups, cookie banners, chat widgets or stock photos.
 
 ### Keep scrolling smooth
