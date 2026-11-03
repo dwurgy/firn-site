@@ -280,6 +280,7 @@ add it and open the PR right away, without asking first (he asked for
 that). To add a version, copy
 the block (see the comment in the file), put it at the top and change the
 text, including the version in its `id` and link.
+Also add it to `public/release-notes.xml` (the RSS feed for feed reader apps, linked from the page's head): copy the top `<item>`, change it, and update `lastBuildDate`.
 
 **Tip jar** (`tip-jar.html`; renamed from Support): call it a tip jar and
 tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
