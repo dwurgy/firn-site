@@ -114,6 +114,20 @@ poster shows (also the case without JavaScript). On phones the text sits
 above a full-width video, same rule. The aria-labels say what happens in
 each clip, e.g. "Switching between three spaces in Firn".
 
+## Footer sunrise
+
+Added 2026-11-03 so reaching the end of a page feels like a small moment
+of first light, not a show. The sun's finished spot is the plain CSS
+default, so without JavaScript or with `prefers-reduced-motion` it is
+simply up and nothing can get stuck low. `edges.js` sets `.sun-wait` on
+`.dawn` (sun 20% of its height lower, opacity .7, no transition, so the
+drop is never seen), and the first time 40% of the footer is on screen it
+swaps to `.sun-rise`, which carries a 2s `cubic-bezier(.33,1,.68,1)`
+ease-out (the hover curve; a steeper curve finished most of the move in
+under a second). Then the observer disconnects: no replay, nothing left
+running. Only `transform` and `opacity` change, on the one existing sun
+layer, and opacity ends at 1, so it keeps to the "Scrolling" rules.
+
 ## Old copies in browsers
 
 _Moved word for word from CLAUDE.md ("Project layout"). The rule is kept in CLAUDE.md._

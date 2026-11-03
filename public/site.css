@@ -156,6 +156,10 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .dawn{position:relative;margin-top:auto;padding-top:40px;height:600px;overflow:hidden;flex:none}
 .dawn .sun{position:absolute;left:50%;bottom:-50px;width:1500px;height:540px;transform:translateX(-50%);pointer-events:none;
  background:radial-gradient(closest-side,var(--sun),var(--sun-mid) 50%,transparent)}
+/* one-time sunrise: edges.js adds .sun-wait (low, dim, no transition), then .sun-rise on first view;
+   without JS or with reduced motion neither class is set and the sun stays in its finished spot */
+.dawn.sun-wait .sun{transform:translate(-50%,20%);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.dawn.sun-rise .sun{transition:transform 2s cubic-bezier(.33,1,.68,1),opacity 2s cubic-bezier(.33,1,.68,1)}}
 .dawn .snow{position:absolute;left:0;right:0;bottom:0;height:clamp(240px,20vw,288px);background:var(--snow) center bottom/max(100%,1100px) auto no-repeat}
 .pills{position:absolute;left:0;right:0;bottom:36px;z-index:3;max-width:1040px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:12px}
 .pill{display:flex;align-items:center;gap:20px;height:44px;padding:0 20px;border-radius:999px;font-size:14px;color:var(--ink);
