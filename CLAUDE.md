@@ -49,7 +49,7 @@ unless David changes it.
 - `public/assets/firn-share-preview-v6.png`: the 1200×630 link preview (Open
   Graph / Twitter card), made in Claude Design, light in both modes. Home
   and `/mac` use v6 ("A calm browser, made for Mac."); About, Release notes,
-  and Support still use v5 ("for everyone"). Keep it
+  and Tip jar still use v5 ("for everyone"). Keep it
   a PNG, don't recompress it, and keep it small (about 270 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
   the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v6.png`.
@@ -97,7 +97,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
-  and the footer links (GitHub, Reddit, Email, About, Release notes, Support).
+  and the footer links (GitHub, Reddit, Email, About, Release notes, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -230,27 +230,27 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/support`, and `/mac`
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), and `/mac`
 (one-column `.post` page, not linked from any page). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
-"Support" on the right, with `aria-current="page"` on the current page.
+"Tip jar" on the right, with `aria-current="page"` on the current page.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
 the bottom of the page. The links pill: GitHub, Reddit, Email
-(`mailto:hello@firnbrowser.com`), About, Release notes, Support. Text in a
+(`mailto:hello@firnbrowser.com`), About, Release notes, Tip jar. Text in a
 pill never wraps. Below 900px wide the two pills stack, centred; on phones
 the links pill wraps into two rows, "GitHub | Reddit | Email" and "About |
-Release notes | Support" (the third divider becomes the line break), so no
+Release notes | Tip jar" (the third divider becomes the line break), so no
 divider is left dangling at the end of a row.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
-Routing. Linked as "Email" in the footer and as "Say hello" in the Support
+Routing. Linked as "Email" in the footer and as "Say hello" in the Tip jar
 page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
 off (it adds a script and breaks the link without JavaScript).
 
-**When links get too many:** the header (About, Release notes, Support) has
+**When links get too many:** the header (About, Release notes, Tip jar) has
 room for about one more link on a 320px phone; a fifth needs a menu button,
 so tell David before adding one. The footer pill can take a few more links,
 since it wraps into rows; keep its rows even.
@@ -279,8 +279,11 @@ that). To add a version, copy
 the block (see the comment in the file), put it at the top and change the
 text, including the version in its `id` and link.
 
-**Support:** the main button goes to GitHub Sponsors
-(`github.com/sponsors/dwurgy`), so Sponsors must be set up on that account.
+**Tip jar** (`tip-jar.html`; renamed from Support): call it a tip jar and
+tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
+Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it a
+lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
+"No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
 
 **Copy notes (home):**
