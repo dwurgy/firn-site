@@ -96,8 +96,9 @@ hand. Cool glacier light high up, warm sunrise low.
   the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
-  and the footer links (GitHub, Reddit, Email, Privacy, About, Release notes, Tip jar).
+  through. Three frosted pills sit on the snow: "Free and open source, MPL-2.0",
+  the social logos (GitHub, Reddit, Discord, Threads), and the footer links
+  (Email, Privacy, About, Release notes, FAQ, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -230,19 +231,24 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` (one-column `.post` page, linked only from the footer), and `/mac`
-(one-column `.post` page, not linked from any page). Cloudflare
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
+(one-column `.post` page, not linked from any page), plus `404.html`
+(shown by Cloudflare for any missing address, so every link and file in it
+starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
 "Tip jar" on the right, with `aria-current="page"` on the current page.
 
-**Footer (every page):** the dawn snow section with its two pills, always at
-the bottom of the page. The links pill: GitHub, Reddit, Email
-(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, Tip jar. Text in a
-pill never wraps. Below 1000px wide the two pills stack, centred; below 700px
-the links pill wraps into two rows, "GitHub | Reddit | Email | Privacy" and "About |
-Release notes | Tip jar" (the fourth divider becomes the line break), so no
+**Footer (every page):** the dawn snow section with its three pills, always at
+the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
+GitHub, Reddit, Discord (`discord.gg/rZsVbT7794`, the David Wurgler Apps
+server) and Threads, inline Simple Icons SVGs (CC0), muted grey, ink on hover,
+each named by `aria-label`. The links pill: Email
+(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, FAQ, Tip jar. Text in a
+pill never wraps. Below 1080px wide the pills stack, centred; on phones
+the links pill wraps into two rows, "Email | Privacy | About" and "Release
+notes | FAQ | Tip jar" (the third divider becomes the line break), so no
 divider is left dangling at the end of a row.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
@@ -252,8 +258,8 @@ off (it adds a script and breaks the link without JavaScript).
 
 **When links get too many:** the header (About, Release notes, Tip jar) has
 room for about one more link on a 320px phone; a fifth needs a menu button,
-so tell David before adding one. The footer pill can take a few more links,
-since it wraps into rows; keep its rows even.
+so tell David before adding one. A new social account gets a logo in the social
+pill; the links pill wraps into rows, so keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
@@ -278,6 +284,7 @@ add it and open the PR right away, without asking first (he asked for
 that). To add a version, copy
 the block (see the comment in the file), put it at the top and change the
 text, including the version in its `id` and link.
+Also add it to `public/release-notes.xml` (the RSS feed for feed reader apps, linked from the page's head): copy the top `<item>`, change it, and update `lastBuildDate`.
 
 **Tip jar** (`tip-jar.html`; renamed from Support): call it a tip jar and
 tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
@@ -386,7 +393,9 @@ landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
-`loops.js` and `site.webmanifest`. There is no server code. See README.md.
+`loops.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+
+**Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
 `edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
@@ -401,10 +410,7 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
 - Ask before adding any dependency or service.
 - Commit to Git after each working step with a clear message.
 
-- **Pick the model before starting** (David is on the Pro plan and wants his limits to last the week). Before starting any task, say in one line which model it needs and why: "Sonnet is fine: <reason>" or "This needs Opus: <reason>. Switch with /model, then say go." If it needs Opus and you're running Sonnet, stop and wait. If you're running Opus and Sonnet would do, say so and wait, so David can switch. Don't start the work until the model fits. If a Sonnet task turns out harder than it looked (the first fix didn't work, the cause isn't clear, it spreads across many files), stop and say so rather than guessing on.
-  - **Sonnet:** a release notes entry, copy and wording changes, a small CSS tweak, raising a `?v=N`, swapping a screenshot or clip for a new file name, alt text, meta tags, adding a link, answering questions about the site.
-  - **Opus:** anything touching the privacy rules (scripts, headers, analytics, third-party anything), Cloudflare setup, scroll performance or rendering differences between browsers (Safari, Firefox, Zen), a new page or section that has to match the design across light, dark, and phone, and changes to `edges.js` or `loops.js`.
-  - When unsure, say which way it leans and why, in one line, and let David pick.
+- **Model:** always Opus. Never suggest switching to Sonnet or ask which model a task needs.
 
 - **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
   - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). `public/site.css` is long: read the section you're changing, not the file. Don't re-read a file already read in this conversation unless it changed.

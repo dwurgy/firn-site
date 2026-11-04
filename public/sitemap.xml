@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Every page search engines should find. /mac and the 404 page are left
+     out on purpose. Add a new page here when it goes live. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://firnbrowser.com/</loc></url>
+  <url><loc>https://firnbrowser.com/about</loc></url>
+  <url><loc>https://firnbrowser.com/release-notes</loc></url>
+  <url><loc>https://firnbrowser.com/tip-jar</loc></url>
+  <url><loc>https://firnbrowser.com/privacy</loc></url>
+  <url><loc>https://firnbrowser.com/faq</loc></url>
+</urlset>
