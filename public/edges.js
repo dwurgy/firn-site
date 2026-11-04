@@ -55,12 +55,13 @@ if (menuBtn && menu) {
     menuBtn.setAttribute('aria-expanded', open);
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
   };
-  // Once the page has scrolled 10px, the button stops in the top-right
+  // Once the page has scrolled 10px, the button glides into the top-right
   // corner and turns into a glass circle (.float-menu, see site.css), so the
-  // menu is always within reach. 10px is where the header's button meets the
-  // circle's spot, so nothing jumps and an open menu stays open.
+  // menu is always within reach. The button is always fixed to the screen,
+  // so this only fades and slides it; reading scrollY (not the header's
+  // position) keeps the check cheap on every scroll event.
   const float = () => {
-    root.classList.toggle('float-menu', header.getBoundingClientRect().top < -10);
+    root.classList.toggle('float-menu', window.scrollY > 10);
   };
   addEventListener('scroll', float, { passive: true });
   float();
