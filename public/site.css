@@ -11,7 +11,7 @@
 --shadow-field:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.07);
 --sky-cool:rgba(157,183,200,.30);--sky-warm:rgba(242,196,160,.42);--sky-warm2:rgba(236,206,186,.30);--sky-top:#F4F6F7;
 --light-1:#9DB7C8;--light-2:#F0CBA8;--light-3:#B9CDB5;--light-4:#E2CBB3;--light-op:.5;
---glass:rgba(251,250,248,.58);--glass-edge:rgba(255,255,255,.65);--glass-shadow:0 1px 2px rgba(40,60,80,.08),0 8px 24px rgba(40,60,80,.12);
+--glass:rgba(251,250,248,.58);--glass-menu:rgba(251,250,248,.86);--glass-edge:rgba(255,255,255,.65);--glass-shadow:0 1px 2px rgba(40,60,80,.08),0 8px 24px rgba(40,60,80,.12);
 --win-glass:rgba(233,227,218,.62);--tile:rgba(255,255,255,.5);--tile-on:rgba(255,255,255,.78);
 --panel:linear-gradient(160deg,#EEF2F4,#F6EEE6);--wm-op:.10;
 --sun:rgba(244,194,152,.62);--sun-mid:rgba(244,194,152,.22);
@@ -25,7 +25,7 @@
 --shadow-field:0 1px 2px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.18);
 --sky-cool:rgba(110,152,178,.22);--sky-warm:rgba(214,146,104,.16);--sky-warm2:rgba(160,120,110,.10);--sky-top:#2E2F31;
 --light-1:#4E6E84;--light-2:#7A5A48;--light-3:#4F6250;--light-4:#5B5070;--light-op:.55;
---glass:rgba(43,40,38,.55);--glass-edge:rgba(255,250,245,.10);--glass-shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.3);
+--glass:rgba(43,40,38,.55);--glass-menu:rgba(43,40,38,.86);--glass-edge:rgba(255,250,245,.10);--glass-shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.3);
 --win-glass:rgba(58,55,52,.62);--tile:rgba(255,250,245,.08);--tile-on:rgba(255,250,245,.14);
 --panel:linear-gradient(160deg,rgba(110,152,178,.10),rgba(214,146,104,.07));--wm-op:.10;
 --sun:rgba(214,140,96,.30);--sun-mid:rgba(214,140,96,.10);
@@ -353,8 +353,9 @@ html.at-end,html.at-end body{background:#6B94AD}
 
 /* Phone menu (edges.js). Wider screens, and phones without JavaScript, keep
    the three header links. On phones the button's two lines turn into an X and
-   the links open as a soft panel in the page colour (no big blur, see "Keep
-   scrolling smooth"), with the social logos under a thin line. */
+   the links open as a card of frosted glass like the footer pills, with a
+   denser fill (--glass-menu) so it reads evenly over text (card-sized,
+   and only while open, so it fits "Keep scrolling smooth"), with the social logos under a thin line. */
 .menu-btn,.menu-social{display:none}
 @media (max-width:600px) and (scripting:enabled){
  header{z-index:5}
@@ -363,7 +364,7 @@ html.at-end,html.at-end body{background:#6B94AD}
  .menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:25px}
  header.open .menu-btn i:first-child{transform:translateY(3.5px) rotate(45deg)}
  header.open .menu-btn i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
- nav.top{position:absolute;top:calc(100% + 6px);left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));flex-direction:column;gap:0;padding:14px 26px 22px;border-radius:20px;background:var(--page);border:1px solid var(--line);box-shadow:0 18px 48px -18px rgba(40,30,20,.28);
+ nav.top{position:absolute;top:calc(100% + 6px);left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));flex-direction:column;gap:0;padding:14px 26px 22px;border-radius:20px;background:var(--glass-menu);border:1px solid var(--glass-edge);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:var(--glass-shadow);
   visibility:hidden;opacity:0;transform:translateY(-10px) scale(.98);transform-origin:top right;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),visibility 0s .32s}
  header.open nav.top{visibility:visible;opacity:1;transform:none;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),visibility 0s}
  nav.top>a{padding:11px 0;font-size:20px;line-height:1.3;font-weight:400;color:var(--ink);opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s cubic-bezier(.33,1,.68,1)}
@@ -377,5 +378,17 @@ html.at-end,html.at-end body{background:#6B94AD}
  .menu-social a:hover{color:var(--ink)}
  .menu-social svg{width:20px;height:20px;fill:currentColor}
 }
-@media (max-width:600px) and (scripting:enabled) and (prefers-color-scheme:dark){nav.top{box-shadow:0 18px 48px -18px rgba(0,0,0,.6)}}
 @media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
+/* Floating menu button (edges.js adds .float-menu to <html> once the header
+   has scrolled away). The button stays in the top-right corner as a small
+   frosted glass circle, like the footer pills, and the panel opens under it. */
+@keyframes float-in{from{opacity:0;transform:scale(.85)}}
+@media (max-width:600px) and (scripting:enabled){
+ .float-menu .menu-btn{position:fixed;z-index:6;top:calc(12px + env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));margin:0;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);animation:float-in .2s cubic-bezier(.33,1,.68,1)}
+ header>a{display:flex;align-items:center;min-height:44px} /* keeps the header's height when the button leaves it */
+ .float-menu .menu-btn i{left:10px}
+ .float-menu .menu-btn i:first-child{top:17px}.float-menu .menu-btn i:last-child{top:24px}
+ .float-menu nav.top{position:fixed;top:calc(64px + env(safe-area-inset-top))}
+}
+@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.float-menu .menu-btn{animation:none}}

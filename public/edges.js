@@ -55,6 +55,17 @@ if (menuBtn && menu) {
     menuBtn.setAttribute('aria-expanded', open);
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
   };
+  // Once the header has scrolled out of sight, the button floats as a glass
+  // circle in the top-right corner (.float-menu, see site.css), so the menu
+  // is always within reach. Crossing that point closes an open menu.
+  const float = () => {
+    const away = header.getBoundingClientRect().bottom < 0;
+    if (away === root.classList.contains('float-menu')) return;
+    setOpen(false);
+    root.classList.toggle('float-menu', away);
+  };
+  addEventListener('scroll', float, { passive: true });
+  float();
   menuBtn.addEventListener('click', () => setOpen(!header.classList.contains('open')));
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && header.classList.contains('open')) { setOpen(false); menuBtn.focus(); }
