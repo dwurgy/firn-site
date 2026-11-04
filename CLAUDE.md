@@ -97,7 +97,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
-  and the footer links (GitHub, Reddit, Email, Privacy, About, Release notes, Tip jar).
+  and the footer links (GitHub, Reddit, Email, Privacy, About, Release notes, FAQ, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -230,7 +230,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` (one-column `.post` page, linked only from the footer), and `/mac`
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
@@ -241,10 +241,10 @@ serves them without `.html`; links use the clean addresses.
 
 **Footer (every page):** the dawn snow section with its two pills, always at
 the bottom of the page. The links pill: GitHub, Reddit, Email
-(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, Tip jar. Text in a
-pill never wraps. Below 1000px wide the two pills stack, centred; below 700px
+(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, FAQ, Tip jar. Text in a
+pill never wraps. Below 1080px wide the two pills stack, centred; below 800px
 the links pill wraps into two rows, "GitHub | Reddit | Email | Privacy" and "About |
-Release notes | Tip jar" (the fourth divider becomes the line break), so no
+Release notes | FAQ | Tip jar" (the fourth divider becomes the line break), so no
 divider is left dangling at the end of a row.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email

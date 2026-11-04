@@ -319,15 +319,16 @@ html.at-end,html.at-end body{background:#6B94AD}
 .dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
 .dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
 @media (max-width:600px){.get .btn,.dl-note{display:none}.dl-mobile{display:block}}
-/* Footer pills on tablets (601–999px wide): side by side they don't fit, and
-   their text wrapped inside the pills. So below 1000px they stack, centred,
+/* Footer pills on tablets (601–1079px wide): side by side they don't fit, and
+   their text wrapped inside the pills. So below 1080px they stack, centred,
    like on phones (where the links pill also wraps into two rows), and the
    text inside a pill never wraps. (Was 900px until Privacy made the links
-   pill about 634px wide.) Below 700px even the stacked links pill is too
-   wide for one row, so it splits into the phone's two rows there too. */
+   pill about 634px wide, and 1080px since FAQ made it about 702px.) Below 800px even the stacked links pill is too
+   wide for one row, so it splits into the phone's two rows there too. (Was
+   700px until FAQ made the links pill about 702px wide.) */
 .pill p,.pill a{white-space:nowrap}
-@media (max-width:999px){.pills{flex-direction:column;align-items:center;gap:10px}}
-@media (min-width:601px) and (max-width:699px){nav.pill{height:auto;min-height:44px;padding:10px 20px;flex-wrap:wrap;justify-content:center;row-gap:7px}nav.pill i:nth-of-type(4){flex-basis:100%;height:0}}
+@media (max-width:1079px){.pills{flex-direction:column;align-items:center;gap:10px}}
+@media (min-width:601px) and (max-width:799px){nav.pill{height:auto;min-height:44px;padding:10px 20px;flex-wrap:wrap;justify-content:center;row-gap:7px}nav.pill i:nth-of-type(4){flex-basis:100%;height:0}}
 /* Tip jar: Ko-fi is the main (ink) button; GitHub Sponsors sits under it
    as a lighter outlined button in ink, no fill. */
 .btn.alt{margin-top:32px;background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--faint)}
@@ -336,3 +337,6 @@ html.at-end,html.at-end body{background:#6B94AD}
 .intro p.feed{margin-top:10px;font-size:15px}
 .intro p.feed a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--faint)}
 .intro p.feed a:hover{color:var(--ink)}
+/* Footer links on the smallest phones (under 360px): a little less space
+   between links, so "About | Release notes | FAQ | Tip jar" stays one row. */
+@media (max-width:359px){nav.pill{column-gap:10px}}
