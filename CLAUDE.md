@@ -243,6 +243,8 @@ On phones (600px and narrower, with JavaScript) the links hide behind a
 two-line menu button that opens them as a solid panel, with the footer's
 social logos copied in below a line (`edges.js` + "Phone menu" at the end of
 `site.css`; without JavaScript the links show as before).
+Once the header scrolls away, the button floats top-right as a frosted glass
+circle (`.float-menu` on `<html>`, set by `edges.js`), all the way down.
 
 **Footer (every page):** the dawn snow section with its three pills, always at
 the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
