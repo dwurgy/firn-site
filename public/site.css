@@ -358,14 +358,15 @@ html.at-end,html.at-end body{background:#6B94AD}
 .menu-btn,.menu-social{display:none}
 @media (max-width:600px) and (scripting:enabled){
  header{z-index:5}
- .menu-btn{display:block;position:relative;width:44px;height:44px;margin-right:-10px;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s,border-color .2s,box-shadow .2s}
+ .menu-btn{display:block;position:fixed;z-index:6;top:calc(22px + env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));width:44px;height:44px;margin:0;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:translate .32s cubic-bezier(.33,1,.68,1)}
+ .menu-btn::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:50%;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);opacity:0;transition:opacity .3s cubic-bezier(.33,1,.68,1)}
  .menu-btn i{position:absolute;left:10px;width:22px;height:1.5px;border-radius:1px;background:currentColor;transition:transform .32s cubic-bezier(.33,1,.68,1)}
  .menu-btn i:first-child{top:17px}.menu-btn i:last-child{top:24px}
  header.open .menu-btn i:first-child{transform:translateY(3.5px) rotate(45deg)}
  header.open .menu-btn i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
- nav.top{position:absolute;top:calc(100% + 6px);left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));flex-direction:column;gap:0;padding:14px 26px 22px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:var(--glass-shadow);
-  visibility:hidden;opacity:0;transform:translateY(-10px) scale(.98);transform-origin:top right;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),visibility 0s .32s}
- header.open nav.top{visibility:visible;opacity:1;transform:none;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),visibility 0s}
+ nav.top{position:fixed;top:calc(78px + env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));flex-direction:column;gap:0;padding:14px 26px 22px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:var(--glass-shadow);
+  visibility:hidden;opacity:0;transform:translateY(-10px) scale(.98);transform-origin:top right;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),translate .32s cubic-bezier(.33,1,.68,1),visibility 0s .32s}
+ header.open nav.top{visibility:visible;opacity:1;transform:none;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),translate .32s cubic-bezier(.33,1,.68,1),visibility 0s}
  nav.top>a{padding:11px 0;font-size:20px;line-height:1.3;font-weight:400;color:var(--ink);opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s cubic-bezier(.33,1,.68,1)}
  nav.top>a[aria-current]{font-weight:600}
  header.open nav.top>a,header.open .menu-social{opacity:1;transform:none}
@@ -377,15 +378,15 @@ html.at-end,html.at-end body{background:#6B94AD}
  .menu-social a:hover{color:var(--ink)}
  .menu-social svg{width:20px;height:20px;fill:currentColor}
 }
-@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn,.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
-/* Floating menu button. Once you scroll 10px (the header's 22px top padding
-   minus the circle's 12px), edges.js adds .float-menu to <html>: the button
-   stops in the top-right corner, exactly where it already is, and fades into
-   a glass circle like the footer pills. The open panel keeps its spot too
-   (12px under the button), so an open menu stays put. */
+@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn,.menu-btn::before,.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
+/* Floating menu button. The button and its panel are always fixed to the
+   screen, sitting where the header puts them. Once you scroll 10px, edges.js
+   adds .float-menu to <html>: both glide up 10px to the corner and the glass
+   circle (on ::before, so only its opacity changes) fades in. Only translate
+   and opacity animate, so the phone's graphics chip does the work and nothing
+   jumps, even mid-flick. An open menu moves with its button and stays open. */
 @media (max-width:600px) and (scripting:enabled){
- .float-menu .menu-btn{position:fixed;z-index:6;top:calc(12px + env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));margin:0;border-radius:50%;
-  background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3)}
- header>a{display:flex;align-items:center;min-height:44px} /* keeps the header's height when the button leaves it */
- .float-menu nav.top{position:fixed;top:calc(68px + env(safe-area-inset-top))}
+ .float-menu .menu-btn,.float-menu nav.top{translate:0 -10px}
+ .float-menu .menu-btn::before{opacity:1}
+ header>a{display:flex;align-items:center;min-height:44px} /* keeps the header's height without the button */
 }
