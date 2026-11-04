@@ -358,9 +358,9 @@ html.at-end,html.at-end body{background:#6B94AD}
 .menu-btn,.menu-social{display:none}
 @media (max-width:600px) and (scripting:enabled){
  header{z-index:5}
- .menu-btn{display:block;position:relative;width:44px;height:44px;margin-right:-10px;padding:0;border:0;background:none;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent}
- .menu-btn i{position:absolute;left:11px;width:22px;height:1.5px;border-radius:1px;background:currentColor;transition:transform .32s cubic-bezier(.33,1,.68,1)}
- .menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:25px}
+ .menu-btn{display:block;position:relative;width:44px;height:44px;margin-right:-10px;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s,border-color .2s,box-shadow .2s}
+ .menu-btn i{position:absolute;left:10px;width:22px;height:1.5px;border-radius:1px;background:currentColor;transition:transform .32s cubic-bezier(.33,1,.68,1)}
+ .menu-btn i:first-child{top:17px}.menu-btn i:last-child{top:24px}
  header.open .menu-btn i:first-child{transform:translateY(3.5px) rotate(45deg)}
  header.open .menu-btn i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
  nav.top{position:absolute;top:calc(100% + 6px);left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));flex-direction:column;gap:0;padding:14px 26px 22px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:var(--glass-shadow);
@@ -377,17 +377,15 @@ html.at-end,html.at-end body{background:#6B94AD}
  .menu-social a:hover{color:var(--ink)}
  .menu-social svg{width:20px;height:20px;fill:currentColor}
 }
-@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
-/* Floating menu button (edges.js adds .float-menu to <html> once the header
-   has scrolled away). The button stays in the top-right corner as a small
-   frosted glass circle, like the footer pills, and the panel opens under it. */
-@keyframes float-in{from{opacity:0;transform:scale(.85)}}
+@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn,.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
+/* Floating menu button. Once you scroll 10px (the header's 22px top padding
+   minus the circle's 12px), edges.js adds .float-menu to <html>: the button
+   stops in the top-right corner, exactly where it already is, and fades into
+   a glass circle like the footer pills. The open panel keeps its spot too
+   (12px under the button), so an open menu stays put. */
 @media (max-width:600px) and (scripting:enabled){
  .float-menu .menu-btn{position:fixed;z-index:6;top:calc(12px + env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));margin:0;border-radius:50%;
-  background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);animation:float-in .2s cubic-bezier(.33,1,.68,1)}
+  background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3)}
  header>a{display:flex;align-items:center;min-height:44px} /* keeps the header's height when the button leaves it */
- .float-menu .menu-btn i{left:10px}
- .float-menu .menu-btn i:first-child{top:17px}.float-menu .menu-btn i:last-child{top:24px}
- .float-menu nav.top{position:fixed;top:calc(64px + env(safe-area-inset-top))}
+ .float-menu nav.top{position:fixed;top:calc(68px + env(safe-area-inset-top))}
 }
-@media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.float-menu .menu-btn{animation:none}}
