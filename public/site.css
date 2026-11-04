@@ -59,6 +59,7 @@ header img{height:34px;display:block}
 nav.top{display:flex;gap:28px;font-size:15px}
 nav.top a{text-decoration:none;color:var(--muted)}
 nav.top a:hover,nav.top a[aria-current]{color:var(--ink)}
+nav.top a.home{display:none} /* Home shows only inside the menus (phone menu and floating card, end of file) */
 /* hero */
 .hero{position:relative;padding:72px 32px 0;text-align:center}
 .hero .c{position:relative;z-index:2;max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px}
@@ -380,7 +381,9 @@ html.at-end,html.at-end body{background:#6B94AD}
  header.open nav.top>a:nth-child(1){transition-delay:.04s}
  header.open nav.top>a:nth-child(2){transition-delay:.08s}
  header.open nav.top>a:nth-child(3){transition-delay:.12s}
- .menu-social{display:flex;gap:22px;margin-top:14px;padding-top:18px;border-top:1px solid var(--line);opacity:0;transition:opacity .3s .16s}
+ header.open nav.top>a:nth-child(4){transition-delay:.16s}
+ nav.top>a.home{display:block}
+ .menu-social{display:flex;gap:22px;margin-top:14px;padding-top:18px;border-top:1px solid var(--line);opacity:0;transition:opacity .3s .2s}
 }
 @media (max-width:600px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn,.menu-btn::before,.menu-btn i,nav.top,header.open nav.top,nav.top>a,.menu-social{transition:none!important}}
 /* Floating menu button. The button and its panel are always fixed to the
@@ -413,6 +416,7 @@ html.at-end,html.at-end body{background:#6B94AD}
  .float-menu header.open nav.top{visibility:visible;opacity:1;transform:none;transition:opacity .28s cubic-bezier(.33,1,.68,1),transform .32s cubic-bezier(.33,1,.68,1),visibility 0s}
  .float-menu nav.top>a{padding:9px 0;font-size:16px;color:var(--ink)}
  .float-menu nav.top>a[aria-current]{font-weight:600}
+ .float-menu nav.top>a.home{display:block}
  .float-menu .menu-social{display:flex;gap:20px;margin-top:10px;padding-top:16px;border-top:1px solid var(--line)}
 }
 @media (min-width:601px) and (scripting:enabled) and (prefers-reduced-motion:reduce){.menu-btn,.float-menu .menu-btn,.menu-btn i,.float-menu header.closing nav.top,.float-menu header.open nav.top{transition:none!important}}
