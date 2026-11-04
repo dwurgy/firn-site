@@ -246,6 +246,9 @@ social logos copied in below a line (`edges.js` + "Phone menu" at the end of
 After 10px of scrolling the button stops top-right and turns into a frosted
 glass circle (`.float-menu` on `<html>`, set by `edges.js`), all the way down;
 an open menu stays open and doesn't move.
+Wider screens keep the links in the header; once it scrolls out of view the same
+glass circle appears top-right (in line with the column) and opens a small glass
+card of the links and social logos (end of `site.css`).
 
 **Footer (every page):** the dawn snow section with its three pills, always at
 the bottom of the page. The social pill (`nav.pill.social`): logo-only links to

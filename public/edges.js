@@ -50,18 +50,28 @@ if (menuBtn && menu) {
     row.innerHTML = social.innerHTML;
     menu.append(row);
   }
-  const setOpen = (open) => {
+  // quiet: close without the fade (wider screens, when the links go back
+  // into the header at the top of the page).
+  const setOpen = (open, quiet) => {
+    if (!open && !quiet && header.classList.contains('open')) {
+      header.classList.add('closing');
+      setTimeout(() => header.classList.remove('closing'), 400);
+    }
     header.classList.toggle('open', open);
     menuBtn.setAttribute('aria-expanded', open);
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
   };
-  // Once the page has scrolled 10px, the button glides into the top-right
-  // corner and turns into a glass circle (.float-menu, see site.css), so the
-  // menu is always within reach. The button is always fixed to the screen,
-  // so this only fades and slides it; reading scrollY (not the header's
-  // position) keeps the check cheap on every scroll event.
+  // On phones, once the page has scrolled 10px, the button glides into the
+  // top-right corner and turns into a glass circle (.float-menu, see
+  // site.css), so the menu is always within reach. The button is always fixed
+  // to the screen, so this only fades and slides it. On wider screens the
+  // header keeps its links, and the circle fades in only once the header has
+  // scrolled out of view; back at the top, an open menu closes.
+  const phone = matchMedia('(max-width: 600px)');
   const float = () => {
-    root.classList.toggle('float-menu', window.scrollY > 10);
+    const on = window.scrollY > (phone.matches ? 10 : header.offsetHeight);
+    root.classList.toggle('float-menu', on);
+    if (!on && !phone.matches && header.classList.contains('open')) setOpen(false, true);
   };
   addEventListener('scroll', float, { passive: true });
   float();
@@ -72,5 +82,5 @@ if (menuBtn && menu) {
   addEventListener('click', (e) => {
     if (header.classList.contains('open') && !header.contains(e.target)) setOpen(false);
   });
-  matchMedia('(max-width: 600px)').addEventListener('change', () => setOpen(false));
+  phone.addEventListener('change', () => { setOpen(false, true); float(); });
 }
