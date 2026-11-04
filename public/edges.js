@@ -33,3 +33,34 @@ if (dawn && 'IntersectionObserver' in window &&
   }, { threshold: 0.4 });
   watch.observe(dawn);
 }
+
+// Phone menu. On phones (600px and narrower) the header shows only the logo
+// and a two-line button; tapping it opens the page links as a soft panel,
+// with the footer's social logos copied in at the bottom. site.css does the
+// look and motion. Without JavaScript the button stays hidden and the three
+// links show in the header as before.
+const header = document.querySelector('header');
+const menuBtn = header && header.querySelector('.menu-btn');
+const menu = header && header.querySelector('nav.top');
+if (menuBtn && menu) {
+  const social = document.querySelector('nav.pill.social');
+  if (social) {
+    const row = document.createElement('div');
+    row.className = 'menu-social';
+    row.innerHTML = social.innerHTML;
+    menu.append(row);
+  }
+  const setOpen = (open) => {
+    header.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+  };
+  menuBtn.addEventListener('click', () => setOpen(!header.classList.contains('open')));
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('open')) { setOpen(false); menuBtn.focus(); }
+  });
+  addEventListener('click', (e) => {
+    if (header.classList.contains('open') && !header.contains(e.target)) setOpen(false);
+  });
+  matchMedia('(max-width: 600px)').addEventListener('change', () => setOpen(false));
+}

@@ -239,6 +239,10 @@ serves them without `.html`; links use the clean addresses.
 
 **Header (every page):** logo on the left; "About", "Release notes" and
 "Tip jar" on the right, with `aria-current="page"` on the current page.
+On phones (600px and narrower, with JavaScript) the links hide behind a
+two-line menu button that opens them as a solid panel, with the footer's
+social logos copied in below a line (`edges.js` + "Phone menu" at the end of
+`site.css`; without JavaScript the links show as before).
 
 **Footer (every page):** the dawn snow section with its three pills, always at
 the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
@@ -256,9 +260,8 @@ Routing. Linked as "Email" in the footer and as "Say hello" in the Tip jar
 page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
 off (it adds a script and breaks the link without JavaScript).
 
-**When links get too many:** the header (About, Release notes, Tip jar) has
-room for about one more link on a 320px phone; a fifth needs a menu button,
-so tell David before adding one. A new social account gets a logo in the social
+**When links get too many:** on wide screens the header has room for a few
+more links; on phones they go in the menu panel. A new social account gets a logo in the social
 pill; the links pill wraps into rows, so keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
