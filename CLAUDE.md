@@ -96,8 +96,9 @@ hand. Cool glacier light high up, warm sunrise low.
   the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. Two frosted pills sit on the snow: "Free and open source, MPL-2.0"
-  and the footer links (GitHub, Reddit, Email, Privacy, About, Release notes, FAQ, Tip jar).
+  through. Three frosted pills sit on the snow: "Free and open source, MPL-2.0",
+  the social logos (GitHub, Reddit, Discord, Threads), and the footer links
+  (Email, Privacy, About, Release notes, FAQ, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -239,12 +240,15 @@ serves them without `.html`; links use the clean addresses.
 **Header (every page):** logo on the left; "About", "Release notes" and
 "Tip jar" on the right, with `aria-current="page"` on the current page.
 
-**Footer (every page):** the dawn snow section with its two pills, always at
-the bottom of the page. The links pill: GitHub, Reddit, Email
+**Footer (every page):** the dawn snow section with its three pills, always at
+the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
+GitHub, Reddit, Discord (`discord.gg/rZsVbT7794`, the David Wurgler Apps
+server) and Threads, inline Simple Icons SVGs (CC0), muted grey, ink on hover,
+each named by `aria-label`. The links pill: Email
 (`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, FAQ, Tip jar. Text in a
-pill never wraps. Below 1080px wide the two pills stack, centred; below 800px
-the links pill wraps into two rows, "GitHub | Reddit | Email | Privacy" and "About |
-Release notes | FAQ | Tip jar" (the fourth divider becomes the line break), so no
+pill never wraps. Below 1080px wide the pills stack, centred; on phones
+the links pill wraps into two rows, "Email | Privacy | About" and "Release
+notes | FAQ | Tip jar" (the third divider becomes the line break), so no
 divider is left dangling at the end of a row.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
@@ -254,8 +258,8 @@ off (it adds a script and breaks the link without JavaScript).
 
 **When links get too many:** the header (About, Release notes, Tip jar) has
 room for about one more link on a 320px phone; a fifth needs a menu button,
-so tell David before adding one. The footer pill can take a few more links,
-since it wraps into rows; keep its rows even.
+so tell David before adding one. A new social account gets a logo in the social
+pill; the links pill wraps into rows, so keep its rows even.
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
