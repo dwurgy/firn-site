@@ -97,7 +97,7 @@ hand. Cool glacier light high up, warm sunrise low.
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
   through. Three frosted pills sit on the snow: "Free and open source, MPL-2.0",
-  the social logos (GitHub, Reddit, Discord, Threads), and the footer links
+  the social logos (GitHub, Discord, Threads), and the footer links
   (Email, Privacy, About, Release notes, FAQ, Tip jar).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
@@ -242,7 +242,7 @@ serves them without `.html`; links use the clean addresses.
 
 **Footer (every page):** the dawn snow section with its three pills, always at
 the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
-GitHub, Reddit, Discord (`discord.gg/rZsVbT7794`, the David Wurgler Apps
+GitHub, Discord (`discord.gg/rZsVbT7794`, the David Wurgler Apps
 server) and Threads, inline Simple Icons SVGs (CC0), muted grey, ink on hover,
 each named by `aria-label`. The links pill: Email
 (`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, FAQ, Tip jar. Text in a
@@ -291,7 +291,9 @@ tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
 Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it a
 lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
 "No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
-"Other ways to help" ends with "Say hello" (hello@firnbrowser.com).
+"Other ways to help" ends with "Say hello" (hello@firnbrowser.com). It lists both
+Threads accounts: @firnbrowser (major releases; also the footer logo) and
+David's @dwurgy (day to day). Reddit is gone (it points to Discord now).
 
 **Privacy:** from `docs/privacy-page.md` in `dwurgy/firn`, checked against
 the app's code, plus a "This website" section. Every line must be literally

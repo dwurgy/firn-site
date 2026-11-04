@@ -276,7 +276,7 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
 /* Phones: the six footer links don't fit on one row, and wrapping anywhere
    left a divider dangling at the end of a row. So the third divider (after
-   Email) becomes a line break: GitHub | Reddit | Email, then About | Release
+   Email) becomes a line break: GitHub | Email, then About | Release
    notes | Support. The break is a row of its own, so the row gap is halved to keep the
    spacing between the two rows the same as before. */
 @media (max-width:600px){nav.pill:not(.social){row-gap:7px}nav.pill i:nth-of-type(3){flex-basis:100%;height:0}}
@@ -339,7 +339,7 @@ html.at-end,html.at-end body{background:#6B94AD}
 /* Footer links on the smallest phones (under 360px): a little less space
    between links, so "About | Release notes | FAQ | Tip jar" stays one row. */
 @media (max-width:359px){nav.pill:not(.social){column-gap:10px}}
-/* Footer: GitHub, Reddit, Discord, and Threads as a small pill of logos
+/* Footer: GitHub, Discord, and Threads as a small pill of logos
    (Simple Icons, CC0, inline SVG so nothing loads from elsewhere), in the
    footer text's warm grey, ink on hover. Each link is named by aria-label.
    With them out of the links pill, its phone rows are "Email | Privacy |
