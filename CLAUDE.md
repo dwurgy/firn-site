@@ -283,9 +283,10 @@ David's; use it as written.
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
 bold first line is the heading, then the paragraph and the list (bold
-lead-ins in ink). The left column has the version, the release date and a
-badge with the "For …" line ("For Windows and Mac"; no badge when the
-version has no such line). A "### New" (or Better, Fixed) heading in the
+lead-ins in ink). The left column has the version, the release date and one
+badge per platform it's for (`<span class="badge">Mac</span>`, also
+"iPhone", "iPad"); every entry gets at least one. Only 1.0.0 and later are
+listed (the Electron 0.x notes were removed on 2026-11-05). A "### New" (or Better, Fixed) heading in the
 CHANGELOG becomes an `<h3>`. Each entry has its own address: the
 `<article>` has the version as its `id` (`id="0.5.0"`) and the version name
 in the left column links to it (`href="#0.5.0"`, ink, underlined on hover),
