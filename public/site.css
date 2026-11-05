@@ -424,3 +424,4 @@ html.at-end,html.at-end body{background:#6B94AD}
    current page stays ink and bold). Only with a mouse; touch keeps them ink. */
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
+.badge+.badge{margin-left:6px}
