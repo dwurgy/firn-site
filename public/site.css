@@ -401,7 +401,7 @@ html.at-end,html.at-end body{background:#6B94AD}
 .foot svg{width:15px;height:15px;fill:currentColor;flex:none}
 .foot .legal{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
 .foot .legal p{margin:0;font-size:13px}
-.menu-social span{display:none}
+.menu-social span,.menu-social .fh{display:none}
 @media (max-width:600px){
  .dawn{height:520px}
  .foot{bottom:252px;padding:0 max(24px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));font-size:13px}
@@ -417,3 +417,21 @@ html.at-end,html.at-end body{background:#6B94AD}
 .foot .mark{justify-self:end;width:64px;height:64px}
 @media (prefers-color-scheme:dark){.foot .mark{opacity:.75}}
 @media (max-width:600px){.foot .cols{grid-template-columns:repeat(3,auto)}.foot .mark{display:none}}
+/* Menu extras (2026-11-09): FAQ and Privacy (a.more) show only inside the
+   menus, smaller and muted under a thin line; "Download for Mac" (a.dl) shows
+   only in the wide-screen floating card, as a small ink button (no download
+   on phones). In the header row neither shows. */
+nav.top a.more,nav.top a.dl{display:none}
+@media (max-width:600px) and (scripting:enabled){
+ nav.top>a.more{display:block;padding:7px 0;font-size:16px;color:var(--muted)}
+ nav.top>a.more[aria-current]{color:var(--ink)}
+ nav.top>a:not(.more)+a.more{margin-top:10px;padding-top:18px;border-top:1px solid var(--line)}
+ header.open nav.top>a:nth-child(5){transition-delay:.2s,.2s,0s}
+ header.open nav.top>a:nth-child(6),header.open nav.top>a:nth-child(7){transition-delay:.24s,.24s,0s}
+}
+@media (min-width:601px) and (scripting:enabled){
+ .float-menu nav.top>a.more{display:block;padding:5px 0;font-size:14px}
+ .float-menu nav.top>a:not(.more)+a.more{margin-top:8px;padding-top:14px;border-top:1px solid var(--line)}
+ .float-menu nav.top>a.dl{display:block;margin-top:14px;padding:10px 18px;border-radius:10px;background:var(--btn);color:var(--btn-ink);font-size:14px;font-weight:500;text-align:center}
+ .float-menu nav.top>a.dl:hover{opacity:.85;color:var(--btn-ink)}
+}

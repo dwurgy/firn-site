@@ -240,6 +240,9 @@ serves them without `.html`; links use the clean addresses.
 "Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
 A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
 (phone menu and floating card), never in the header row; bold on home.
+Also menu-only: FAQ and Privacy (`a.more`, smaller and muted under a line)
+and, on wide screens only, a "Download for Mac" ink button (`a.dl`, same
+link as home); "Menu extras" at the end of `site.css`.
 On phones (600px and narrower, with JavaScript) the links hide behind a
 two-line menu button that opens them as a frosted glass card, with the footer's
 social logos copied in below a line (`edges.js` + "Phone menu" at the end of
