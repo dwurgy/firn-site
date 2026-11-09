@@ -451,3 +451,8 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-reduced-motion:reduce){.foot a{transition:none}}
 .foot .legal a{display:inline;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .foot .legal a:hover{text-decoration-color:currentColor}
+/* The Firn flake on the right of the footer columns (wide screens only). */
+.foot .cols{grid-template-columns:repeat(3,minmax(0,180px)) 1fr}
+.foot .mark{justify-self:end;width:64px;height:64px}
+@media (prefers-color-scheme:dark){.foot .mark{opacity:.75}}
+@media (max-width:600px){.foot .cols{grid-template-columns:repeat(3,auto)}.foot .mark{display:none}}
