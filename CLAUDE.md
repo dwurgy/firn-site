@@ -84,8 +84,8 @@ hand. Cool glacier light high up, warm sunrise low.
   SVG filter, no image file). On the live site it sits on the scenery (sky,
   glows, snow) under the content, not on top of everything; see "Keep
   scrolling smooth" below.
-- **Frosted glass.** The footer pills, the support cards and the
-  release-note badges are semi-clear panels with a soft edge. The pills and
+- **Frosted glass.** The menu card and circle, the support cards and the
+  release-note badges are semi-clear panels with a soft edge. The menu and
   cards use a real `backdrop-filter` blur. Where a browser can't blur, the
   semi-opaque background alone still reads fine.
 - **Screenshot on colour light.** On the home page, blurred patches of
@@ -96,9 +96,8 @@ hand. Cool glacier light high up, warm sunrise low.
   the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
   the "clear" version (`firn-snow-layers-clear.svg`, dark:
   `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. Three frosted pills sit on the snow: "Free and open source, MPL-2.0",
-  the social logos (GitHub, Discord, Threads), and the footer links
-  (Email, Privacy, About, Release notes, FAQ, Tip jar).
+  through. The footer links sit on the sunrise just above the snow (see
+  "Footer" below).
 - **Drifting flakes.** A few faint Firn flakes float in the home hero
   (`.fl`). They're hidden below 1000px wide, where they would land on text.
   No crystal or flake may sit on text.
@@ -118,7 +117,7 @@ hand. Cool glacier light high up, warm sunrise low.
 Rules (the investigation, numbers and history are in `docs/DESIGN-NOTES.md`,
 "Scrolling"):
 
-- No large `backdrop-filter` panels. Small glass pieces (pills, cards) are
+- No large `backdrop-filter` panels. Small glass pieces (menu, cards) are
   fine. The window (the screenshot) has none.
 - No large `filter: blur()`, image masks, or see-through groups on anything
   that scrolls; use plain gradients or images. Each `.light` is a plain radial
@@ -231,18 +230,21 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
-**Header (every page):** logo on the left; "About", "Release notes" and
-"Tip jar" on the right, with `aria-current="page"` on the current page.
+**Header (every page):** logo on the left; "About", "Release notes",
+"Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
 A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
 (phone menu and floating card), never in the header row; bold on home.
+Also menu-only: FAQ and Privacy (`a.more`, smaller and muted under a line)
+and, on wide screens only, a "Download for Mac" ink button (`a.dl`, same
+link as home); "Menu extras" at the end of `site.css`.
 On phones (600px and narrower, with JavaScript) the links hide behind a
-two-line menu button that opens them as a frosted glass card like the pills, with the footer's
+two-line menu button that opens them as a frosted glass card, with the footer's
 social logos copied in below a line (`edges.js` + "Phone menu" at the end of
 `site.css`; without JavaScript the links show as before).
 After 10px of scrolling the button stops top-right and turns into a frosted
@@ -252,25 +254,27 @@ Wider screens keep the links in the header; once it scrolls out of view the same
 glass circle appears top-right (in line with the column) and opens a small glass
 card of the links and social logos (end of `site.css`).
 
-**Footer (every page):** the dawn snow section with its three pills, always at
-the bottom of the page. The social pill (`nav.pill.social`): logo-only links to
-GitHub, Discord (`discord.gg/rZsVbT7794`, the David Wurgler Apps
-server) and Threads, inline Simple Icons SVGs (CC0), muted grey, ink on hover,
-each named by `aria-label`. The links pill: Email
-(`mailto:hello@firnbrowser.com`), Privacy, About, Release notes, FAQ, Tip jar. Text in a
-pill never wraps. Below 1080px wide the pills stack, centred; on phones
-the links pill wraps into two rows, "Email | Privacy | About" and "Release
-notes | FAQ | Tip jar" (the third divider becomes the line break), so no
-divider is left dangling at the end of a row.
+**Footer (every page):** the dawn section (sun and snow), always at the
+bottom of the page, with plain link columns (no glass) on the sunrise just
+above the snow, so the flakes drawn in the snow's top edge never sit on
+text: **Firn** (About, Release notes, Privacy), **Community** (`nav.social`:
+GitHub, Discord `discord.gg/rZsVbT7794` (the David Wurgler Apps server),
+Threads, each an inline Simple Icons SVG (CC0) plus its name; `edges.js`
+copies these into the menu, logos only) and **Support** (Support, FAQ, Email,
+Tip jar). The Firn flake (`firn-mark.svg`) sits on the
+right on wide screens, hidden on phones. Under a thin line: "Firn · A
+<a>David Wurgler</a> app · © 2026" (links to davidwurgler.com, David's
+portfolio) and "Free and open source, MPL-2.0". Styles: "Footer" at the end
+of `site.css`. Same markup on every page (links start with `/`).
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
-Routing. Linked as "Email" in the footer and as "Say hello" in the Tip jar
+Routing. Linked as "Email" in the footer, on the Support page and as "Say hello" in the Tip jar
 page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
 off (it adds a script and breaks the link without JavaScript).
 
 **When links get too many:** on wide screens the header has room for a few
-more links; on phones they go in the menu panel. A new social account gets a logo in the social
-pill; the links pill wraps into rows, so keep its rows even.
+more links; on phones they go in the menu panel. A new social account gets a
+line in the Community column; keep the columns short (four or five links).
 
 **About:** the story in `<article class="part">` blocks (heading on the
 left, text on the right; stacked on phones), with the frosted definition
@@ -340,7 +344,7 @@ copies of Firn check for updates. No copy of the feed lives on the site.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
 `site.css`: tighter header and hero, h1 46px, features stacked (text above video) and single-column
-statement, footer pills stacked. The home screenshot is cropped rather
+statement, footer columns side by side and the bottom line centred. The home screenshot is cropped rather
 than shrunk (see below).
 
 **Home screenshot:** under the hero, in the design's window spot (max
@@ -387,9 +391,8 @@ light / #383D42 dark (wider screens: the sky's top colour, #F4F6F7 /
 #2E2F31), the same on every page. `edges.js` (on every page) adds `.at-end`
 to `<html>` near the end of a scrolled page, and `site.css` then switches the
 page background to #6B94AD light / #536573 dark. Every page has
-`viewport-fit=cover`; the header adds `env(safe-area-inset-top)`, the footer
-pills add `env(safe-area-inset-bottom)`, and both keep clear of the notch in
-landscape. iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
+`viewport-fit=cover`; the header adds `env(safe-area-inset-top)` and keeps clear of the notch in
+landscape (the footer links sit high above the home indicator). iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 ## Must-haves
 

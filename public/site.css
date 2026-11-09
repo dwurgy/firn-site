@@ -158,7 +158,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .ly div span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--ink)}
 .layers figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
 @media (max-width:600px){.ly{grid-template-columns:44px 1fr;gap:16px;padding:20px 20px}.ly .gl{width:44px;height:44px}.ly b{font-size:20px}}
-/* dawn: sunrise behind the snow, footer pills on it */
+/* dawn: sunrise behind the snow, footer links on it (see "Footer" at the end) */
 .dawn{position:relative;margin-top:auto;padding-top:40px;height:600px;overflow:hidden;flex:none}
 .dawn .sun{position:absolute;left:50%;bottom:-50px;width:1500px;height:540px;transform:translateX(-50%);pointer-events:none;
  background:radial-gradient(closest-side,var(--sun),var(--sun-mid) 50%,transparent)}
@@ -169,12 +169,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 @media (prefers-color-scheme:light){.dawn.sun-wait .sun{transform:translate(-50%,35%);opacity:.35}}
 @media (prefers-reduced-motion:no-preference){.dawn.sun-rise .sun{transition:transform 2s cubic-bezier(.33,1,.68,1),opacity 2s cubic-bezier(.33,1,.68,1)}}
 .dawn .snow{position:absolute;left:0;right:0;bottom:0;height:clamp(240px,20vw,288px);background:var(--snow) center bottom/max(100%,1100px) auto no-repeat}
-.pills{position:absolute;left:0;right:0;bottom:36px;z-index:3;max-width:1040px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:12px}
-.pill{display:flex;align-items:center;gap:20px;height:44px;padding:0 20px;border-radius:999px;font-size:14px;color:var(--ink);
- background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:var(--glass-shadow)}
-.pill p{margin:0}
-.pill a{color:var(--ink);text-decoration:none}.pill a:hover{text-decoration:underline}
-.pill i{width:1px;height:16px;background:var(--line)}
 @media (prefers-reduced-motion:no-preference){.btn,nav.top a{transition:opacity .2s cubic-bezier(.33,1,.68,1),color .2s}}
 /* phones */
 @media (max-width:600px){
@@ -197,8 +191,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
  .hero .fl{display:none}
  .sky{height:820px}.sky.short{height:560px}
  .light{width:240px !important;height:190px !important;filter:blur(44px)}
- .pills{flex-direction:column;align-items:center;bottom:24px;padding:0 16px;gap:10px}
- .pill{height:auto;min-height:40px;padding:10px 16px;gap:14px;font-size:13px;flex-wrap:wrap;justify-content:center}
 }
 
 /* Live-site additions (not in the design files) */
@@ -248,7 +240,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 html,body{background:var(--sky-top)}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
-.pills{bottom:calc(36px + env(safe-area-inset-bottom));padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
 /* Phones: the whole screenshot would be too small to read, so it shows
    only its top-left part (the sidebar and the start of the page) in a 4:3
    frame. The image is drawn 2.25 times the frame's width, so the frame
@@ -256,7 +247,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    it anchored top left. */
 @media (max-width:600px){
  header{padding-top:calc(22px + env(safe-area-inset-top));padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
- .pills{bottom:calc(24px + env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
  .shot{aspect-ratio:4/3}
  .shot img{width:225%;height:187.5%;max-width:none;object-fit:cover;object-position:left top}
 }
@@ -275,12 +265,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    below the page (behind its toolbar) continues the snow. */
 html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
-/* Phones: the six footer links don't fit on one row, and wrapping anywhere
-   left a divider dangling at the end of a row. So the third divider (after
-   Email) becomes a line break: GitHub | Email, then About | Release
-   notes | Support. The break is a row of its own, so the row gap is halved to keep the
-   spacing between the two rows the same as before. */
-@media (max-width:600px){nav.pill:not(.social){row-gap:7px}nav.pill i:nth-of-type(3){flex-basis:100%;height:0}}
 /* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
    light behind the window was four big filter: blur(70px) patches, which
    Gecko redoes on every scroll frame; a soft SVG mask in their place was
@@ -320,15 +304,6 @@ html.at-end,html.at-end body{background:#6B94AD}
 .dl-note{margin:0;max-width:420px;font-size:14px;line-height:1.5;color:var(--muted);text-wrap:balance}
 .dl-mobile{display:none;margin:0;max-width:420px;font-size:16px;line-height:1.5;color:var(--muted);text-wrap:balance}
 @media (max-width:600px){.get .btn,.dl-note{display:none}.dl-mobile{display:block}}
-/* Footer pills on tablets (601–1079px wide): side by side they don't fit, and
-   their text wrapped inside the pills. So below 1080px they stack, centred,
-   like on phones (where the links pill also wraps into two rows), and the
-   text inside a pill never wraps. (Was 900px until Privacy made the links
-   pill about 634px wide, and 1080px since FAQ made it about 702px.) (Below 800px the links pill
-   also split into two rows, until the social links moved into their own
-   pill and it shrank to about 532px.) */
-.pill p,.pill a{white-space:nowrap}
-@media (max-width:1079px){.pills{flex-direction:column;align-items:center;gap:10px}}
 /* Tip jar: Ko-fi is the main (ink) button; GitHub Sponsors sits under it
    as a lighter outlined button in ink, no fill. */
 .btn.alt{margin-top:32px;background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--faint)}
@@ -337,20 +312,6 @@ html.at-end,html.at-end body{background:#6B94AD}
 .intro p.feed{margin-top:10px;font-size:15px}
 .intro p.feed a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--faint)}
 .intro p.feed a:hover{color:var(--ink)}
-/* Footer links on the smallest phones (under 360px): a little less space
-   between links, so "About | Release notes | FAQ | Tip jar" stays one row. */
-@media (max-width:359px){nav.pill:not(.social){column-gap:10px}}
-/* Footer: GitHub, Discord, and Threads as a small pill of logos
-   (Simple Icons, CC0, inline SVG so nothing loads from elsewhere), in the
-   footer text's warm grey, ink on hover. Each link is named by aria-label.
-   With them out of the links pill, its phone rows are "Email | Privacy |
-   About" and "Release notes | FAQ | Tip jar" (the third divider breaks). */
-.pill.social{gap:18px;padding:0 18px}
-.pill.social a{display:flex;color:var(--muted);transition:color .2s}
-.pill.social a:hover{color:var(--ink)}
-.pill.social svg{width:18px;height:18px;fill:currentColor}
-@media (max-width:600px){.pill.social{padding:0 16px;gap:18px}}
-@media (prefers-reduced-motion:reduce){.pill.social a{transition:none}}
 
 /* Phone menu (edges.js). Wider screens (until scrolled, see the end), and phones without JavaScript, keep
    the three header links. On phones the button's two lines turn into an X and
@@ -425,3 +386,52 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
 .badge+.badge{margin-left:6px}
+/* Footer (2026-11-09): the three pills became link columns on the snow
+   (Firn, Community, Support) with a line under them, "Firn · A David
+   Wurgler app · © 2026" and the licence. No glass. It sits on the sunrise
+   just above the snow, so no drawn flake lands on text and the dark snow
+   bands never sit behind it. */
+.foot{position:absolute;left:0;right:0;bottom:calc(clamp(240px,20vw,288px) + 12px);z-index:3;max-width:1040px;margin:0 auto;
+ padding:0 max(32px,env(safe-area-inset-right)) 0 max(32px,env(safe-area-inset-left));font-size:14px;color:var(--muted)}
+.foot .cols{display:grid;grid-template-columns:repeat(3,minmax(0,180px));gap:24px}
+.foot nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.foot .fh{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.foot a{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s}
+.foot a:hover{color:var(--ink)}
+.foot svg{width:15px;height:15px;fill:currentColor;flex:none}
+.foot .legal{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.foot .legal p{margin:0;font-size:13px}
+.menu-social span,.menu-social .fh{display:none}
+@media (max-width:600px){
+ .dawn{height:520px}
+ .foot{bottom:252px;padding:0 max(24px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));font-size:13px}
+ .foot .cols{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:16px}
+ .foot nav{gap:9px}
+ .foot .legal{flex-direction:column;align-items:center;text-align:center;margin-top:22px;padding-top:14px}
+}
+@media (prefers-reduced-motion:reduce){.foot a{transition:none}}
+.foot .legal a{display:inline;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.foot .legal a:hover{text-decoration-color:currentColor}
+/* The Firn flake on the right of the footer columns (wide screens only). */
+.foot .cols{grid-template-columns:repeat(3,minmax(0,180px)) 1fr}
+.foot .mark{justify-self:end;width:64px;height:64px}
+@media (prefers-color-scheme:dark){.foot .mark{opacity:.75}}
+@media (max-width:600px){.foot .cols{grid-template-columns:repeat(3,auto)}.foot .mark{display:none}}
+/* Menu extras (2026-11-09): FAQ and Privacy (a.more) show only inside the
+   menus, smaller and muted under a thin line; "Download for Mac" (a.dl) shows
+   only in the wide-screen floating card, as a small ink button (no download
+   on phones). In the header row neither shows. */
+nav.top a.more,nav.top a.dl{display:none}
+@media (max-width:600px) and (scripting:enabled){
+ nav.top>a.more{display:block;padding:7px 0;font-size:16px;color:var(--muted)}
+ nav.top>a.more[aria-current]{color:var(--ink)}
+ nav.top>a:not(.more)+a.more{margin-top:10px;padding-top:18px;border-top:1px solid var(--line)}
+ header.open nav.top>a:nth-child(5){transition-delay:.2s,.2s,0s}
+ header.open nav.top>a:nth-child(6),header.open nav.top>a:nth-child(7){transition-delay:.24s,.24s,0s}
+}
+@media (min-width:601px) and (scripting:enabled){
+ .float-menu nav.top>a.more{display:block;padding:5px 0;font-size:14px}
+ .float-menu nav.top>a:not(.more)+a.more{margin-top:8px;padding-top:14px;border-top:1px solid var(--line)}
+ .float-menu nav.top>a.dl{display:block;margin-top:14px;padding:10px 18px;border-radius:10px;background:var(--btn);color:var(--btn-ink);font-size:14px;font-weight:500;text-align:center}
+ .float-menu nav.top>a.dl:hover{opacity:.85;color:var(--btn-ink)}
+}
