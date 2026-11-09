@@ -230,14 +230,14 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar` (was `/support`, which `_redirects` forwards 301), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
+**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
-**Header (every page):** logo on the left; "About", "Release notes" and
-"Tip jar" on the right, with `aria-current="page"` on the current page.
+**Header (every page):** logo on the left; "About", "Release notes",
+"Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
 A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
 (phone menu and floating card), never in the header row; bold on home.
 On phones (600px and narrower, with JavaScript) the links hide behind a
@@ -257,15 +257,15 @@ above the snow, so the flakes drawn in the snow's top edge never sit on
 text: **Firn** (About, Release notes, Privacy), **Community** (`nav.social`:
 GitHub, Discord `discord.gg/rZsVbT7794` (the David Wurgler Apps server),
 Threads, each an inline Simple Icons SVG (CC0) plus its name; `edges.js`
-copies these into the menu, logos only) and **Support** (FAQ, Report a bug
-→ `/faq#bugs`, Email, Tip jar). The Firn flake (`firn-mark.svg`) sits on the
+copies these into the menu, logos only) and **Support** (Support, FAQ, Email,
+Tip jar). The Firn flake (`firn-mark.svg`) sits on the
 right on wide screens, hidden on phones. Under a thin line: "Firn · A
 <a>David Wurgler</a> app · © 2026" (links to davidwurgler.com, David's
 portfolio) and "Free and open source, MPL-2.0". Styles: "Footer" at the end
 of `site.css`. Same markup on every page (links start with `/`).
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
-Routing. Linked as "Email" in the footer and as "Say hello" in the Tip jar
+Routing. Linked as "Email" in the footer, on the Support page and as "Say hello" in the Tip jar
 page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
 off (it adds a script and breaks the link without JavaScript).
 
