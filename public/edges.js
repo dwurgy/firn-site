@@ -43,7 +43,7 @@ const header = document.querySelector('header');
 const menuBtn = header && header.querySelector('.menu-btn');
 const menu = header && header.querySelector('nav.top');
 if (menuBtn && menu) {
-  const social = document.querySelector('nav.pill.social');
+  const social = document.querySelector('nav.social');
   if (social) {
     const row = document.createElement('div');
     row.className = 'menu-social';

@@ -425,3 +425,27 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
 .badge+.badge{margin-left:6px}
+/* Footer (2026-11-09): the three pills became link columns on the snow
+   (Firn, Community, Support) with a line under them, "Firn · A David
+   Wurgler app · © 2026" and the licence. No glass. It sits on the sunrise
+   just above the snow, so no drawn flake lands on text and the dark snow
+   bands never sit behind it. */
+.foot{position:absolute;left:0;right:0;bottom:calc(clamp(240px,20vw,288px) + 12px);z-index:3;max-width:1040px;margin:0 auto;
+ padding:0 max(32px,env(safe-area-inset-right)) 0 max(32px,env(safe-area-inset-left));font-size:14px;color:var(--muted)}
+.foot .cols{display:grid;grid-template-columns:repeat(3,minmax(0,180px));gap:24px}
+.foot nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.foot .fh{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.foot a{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s}
+.foot a:hover{color:var(--ink)}
+.foot svg{width:15px;height:15px;fill:currentColor;flex:none}
+.foot .legal{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.foot .legal p{margin:0;font-size:13px}
+.menu-social span{display:none}
+@media (max-width:600px){
+ .dawn{height:520px}
+ .foot{bottom:252px;padding:0 max(24px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));font-size:13px}
+ .foot .cols{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:16px}
+ .foot nav{gap:9px}
+ .foot .legal{flex-direction:column;align-items:center;text-align:center;margin-top:22px;padding-top:14px}
+}
+@media (prefers-reduced-motion:reduce){.foot a{transition:none}}
