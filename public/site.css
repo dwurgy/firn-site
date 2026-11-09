@@ -449,3 +449,5 @@ html.at-end,html.at-end body{background:#6B94AD}
  .foot .legal{flex-direction:column;align-items:center;text-align:center;margin-top:22px;padding-top:14px}
 }
 @media (prefers-reduced-motion:reduce){.foot a{transition:none}}
+.foot .legal a{display:inline;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.foot .legal a:hover{text-decoration-color:currentColor}
