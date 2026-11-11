@@ -223,3 +223,8 @@ _Moved word for word from CLAUDE.md ("The design is decided"). The rule is kept 
   it shows up in other people's apps. Every page's `og:image` and `twitter:image` use the
   full URL `https://firnbrowser.com/assets/firn-share-preview-v5.png`. When
   it changes, use a new file name (v6, …) so apps fetch the new picture.
+- **v7 (2026-11-11):** v6 redrawn after the new Gooper Condensed logo and
+  Gooper Deck headlines: same words, layout, sky, sun, and snow. Built in
+  HTML (`design/share-preview/`) and screenshotted, since Claude Design's
+  v6 had the old logo and serif. Every page uses v7 (About, Release
+  notes, and Tip jar moved from v5 the same day).
