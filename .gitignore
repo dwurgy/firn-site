@@ -147,3 +147,11 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Font files: never commit them. Gooper Deck and Gooper Condensed are
+# licensed and the license doesn't allow sharing them; the site's fonts
+# load from fonts.firnbrowser.com (an R2 bucket on David's Cloudflare account).
+*.woff2
+*.woff
+*.otf
+*.ttf
