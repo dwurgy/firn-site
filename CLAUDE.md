@@ -46,14 +46,16 @@ unless David changes it.
   below (no pixel differs by more than 9/255, which is invisible).
   The one planned difference: on home, the design's sketched window is
   now a real screenshot of Firn (see "Home screenshot").
-- `public/assets/firn-share-preview-v6.png`: the 1200×630 link preview (Open
-  Graph / Twitter card), made in Claude Design, light in both modes. Home
-  and `/mac` use v6 ("A calm browser, made for Mac."); About, Release notes,
-  and Tip jar still use v5 ("for everyone"). Keep it
-  a PNG, don't recompress it, and keep it small (about 270 KB; WhatsApp skips
+- `public/assets/firn-share-preview-v7.png`: the 1200×630 link preview (Open
+  Graph / Twitter card), light in both modes. v7 (2026-11-11) is v6
+  redrawn with the Gooper Condensed logo and a Gooper Deck headline ("A calm
+  browser, made for Mac."), rendered from `design/share-preview/og.html`;
+  used by every page except About, Release notes, and Tip jar, which still
+  use v5 ("for everyone"). Keep it
+  a PNG, don't recompress it, and keep it small (about 300 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
-  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v6.png`.
-  When it changes, use a new file name (v7, …) so apps fetch the new
+  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v7.png`.
+  When it changes, use a new file name (v8, …) so apps fetch the new
   picture. (More: `docs/DESIGN-NOTES.md`, "Link preview image".)
 
 **Copy is final**, as written in the design files (including the line break
@@ -414,7 +416,7 @@ landscape (the footer links sit high above the home indicator). iOS text autosiz
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  a `firn-share-preview` image (v5 or v6, see above).
+  a `firn-share-preview` image (v5 or v7, see above).
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Project layout
