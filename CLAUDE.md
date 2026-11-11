@@ -139,21 +139,19 @@ Dark    page #2B2826 · ink #F5F1EC · muted #D4CDC5 · faint #958D85
         frame #3A3734 · sky top #2E2F31 · frost rgba(160,196,214,.45)
 Space colours (feature dots): Sage #8FAE8B, Sand #C9A27E,
         Lagoon #6FA3A0, Glacier #7F9CB0, Lilac #8E8FB8
-Type    Headlines: Fraunces, soft corners on, wonky letters off
-        ('SOFT' 100, 'WONK' 0, optical sizing auto), weight 360–400.
+Type    Headlines (.serif): ui-serif, "New York", Georgia, serif;
+        weight 400, emphasis 600.
         Everything else: system-ui, -apple-system, 'Segoe UI', sans-serif.
 ```
 
-**Emphasis in Fraunces headlines is weight, never color: base 360, emphasis
-600, never heavier; blue and colored text fail contrast against the morning
+**Emphasis in headlines is weight, never color: base 400, emphasis 600,
+never heavier; blue and colored text fail contrast against the morning
 sky.** On the home page the headline is
-`A calm browser <span class="em">for everyone.</span>`, with
+`A calm browser, <span class="em">made for Mac.</span>`, with
 `.hero h1 .em { font-weight: 600; white-space: nowrap; }`: the period sits
-inside the span, so "for everyone." always stays together on one line. 600
-is a real weight of the variable font (the `@font-face` declares
-`font-weight: 100 900`, so the browser never fakes bold). Below 340px wide the
-headline drops from 46px to 44px so the bold phrase fits inside the side
-margins on the smallest phones.
+inside the span, so the phrase always stays on one line. On phones the
+headline is `min(46px, (100vw - 48px) / 7.4)`, so the bold phrase fits
+inside the side margins on small phones.
 
 ### Dark mode: "blue hour"
 
@@ -165,10 +163,9 @@ the grain turns a faint near-black, and the header logo swaps to
 
 ### Fonts
 
-Self-host Fraunces from `assets/fonts/fraunces.woff2` (a variable font; keep
-`Fraunces-OFL.txt` next to it, the license requires it). The reference file
-loads it from Google Fonts only for convenience: the real site must not call
-Google or any other third party.
+Headlines use New York, Apple's serif, from the visitor's own device
+(`ui-serif`); other systems get Georgia. The site loads no font files: don't
+add any, and never call Google Fonts or any other third party.
 
 ### Logo and icons
 
@@ -343,7 +340,7 @@ the Windows code.
 copies of Firn check for updates. No copy of the feed lives on the site.
 
 **Phone (max-width: 600px):** the design's phone block at the end of
-`site.css`: tighter header and hero, h1 46px, features stacked (text above video) and single-column
+`site.css`: tighter header and hero, h1 up to 46px, features stacked (text above video) and single-column
 statement, footer columns side by side and the bottom line centred. The home screenshot is cropped rather
 than shrunk (see below).
 

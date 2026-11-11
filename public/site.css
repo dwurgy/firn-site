@@ -1,7 +1,6 @@
 /* First light: firnbrowser.com's stylesheet (design: design/first-light/).
    Light mode is "first light", dark mode ("blue hour") is the
    prefers-color-scheme block. Phone layout below 600px at the end. */
-@font-face{font-family:'Fraunces';src:url(assets/fonts/fraunces.woff2) format('woff2');font-weight:100 900;font-display:swap}
 :root{color-scheme:light dark;
 --frame:#E9E3DA;--page:#FBFAF8;--ink:#241F1B;--muted:#5E564E;--faint:#9D9389;--line:rgba(60,40,20,.10);
 --btn:#241F1B;--btn-ink:#FBFAF8;--field:#FFFFFF;--field-line:rgba(60,40,20,.12);
@@ -33,7 +32,7 @@
 --grain-op:.5;--grain-blend:soft-light;--l1:#3A3F46;--l2:#414B55;--l3:#495865;--l4:#536777;--gl-a:#8FB0C6;--gl-b:#DCE5EB;--logo-l:none;--logo-d:block;}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-.serif{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-optical-sizing:auto}
+.serif{font-family:ui-serif,"New York",Georgia,serif}
 a{color:var(--ink)}
 :focus-visible{outline:3px solid var(--frost);outline-offset:2px;border-radius:10px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -64,14 +63,14 @@ nav.top a.home{display:none} /* Home shows only inside the menus (phone menu and
 .hero{position:relative;padding:72px 32px 0;text-align:center}
 .hero .c{position:relative;z-index:2;max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px}
 .eyebrow{margin:0;font-size:15px;color:var(--muted)}
-.hero h1{margin:0;font-size:76px;line-height:1.04;font-weight:360;letter-spacing:-.015em}
+.hero h1{margin:0;font-size:76px;line-height:1.04;font-weight:400;letter-spacing:-.015em}
 .hero h1 .em{font-weight:600;white-space:nowrap}
 .lede{margin:0;font-size:19px;line-height:1.55;color:var(--muted)}
 /* stage: window on colour light */
 .stage{position:relative;margin-top:72px;padding:64px 32px 72px}
 .light{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--light-op);pointer-events:none}
 /* features */
-h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:center}
+h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:center}
 .feats{position:relative;z-index:2;max-width:1040px;width:100%;margin:0 auto;padding:96px 32px 24px}
 /* statement */
 .statement{position:relative;z-index:2;max-width:1040px;width:100%;margin:96px auto 0;padding:0 32px}
@@ -82,7 +81,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .lg h3{margin:0 0 8px;font-size:22px;font-weight:400}.lg p{margin:0;font-size:16px;line-height:1.6;color:var(--muted)}
 /* inner pages */
 .intro{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:64px 32px 0;text-align:center}
-.intro h1{margin:0;font-size:56px;line-height:1.05;font-weight:360;letter-spacing:-.015em}
+.intro h1{margin:0;font-size:56px;line-height:1.05;font-weight:400;letter-spacing:-.015em}
 .intro p{margin:18px 0 0;font-size:19px;line-height:1.55;color:var(--muted);text-wrap:balance}
 .notes{position:relative;z-index:2;max-width:880px;width:100%;margin:0 auto;padding:72px 32px 24px}
 .entry{display:grid;grid-template-columns:180px 1fr;gap:32px;padding:40px 0;border-top:1px solid var(--line)}
@@ -116,9 +115,9 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .part>h2{margin:4px 0 0;text-align:left;font-size:15px;line-height:1.5;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:600;color:var(--ink)}
 .part p{margin:0 0 18px;font-size:18px;line-height:1.65;color:var(--muted)}
 .part p:last-child{margin-bottom:0}
-.part p.big{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:28px;line-height:1.3;font-weight:360;color:var(--ink);text-wrap:balance}
+.part p.big{font-family:ui-serif,"New York",Georgia,serif;font-size:28px;line-height:1.3;font-weight:400;color:var(--ink);text-wrap:balance}
 .def{margin:0 0 24px;border-radius:14px;padding:28px 30px;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.def .w{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:44px;line-height:1;font-weight:400;color:var(--ink)}
+.def .w{font-family:ui-serif,"New York",Georgia,serif;font-size:44px;line-height:1;font-weight:400;color:var(--ink)}
 .def .pr{margin-left:12px;font-size:16px;color:var(--muted)}
 .def .pos{display:block;margin:12px 0 8px;font-size:14px;font-style:italic;color:var(--faint)}
 .def p{margin:0;font-size:17px;line-height:1.6;color:var(--ink)}
@@ -130,7 +129,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .sign{display:flex;align-items:flex-start;gap:14px;margin-top:28px}
 .sign svg{margin-top:4px;width:28px;height:28px;fill:#6E98B2;flex:none}
 .sign span small{display:block;margin-top:4px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;color:var(--muted)}
-.sign span{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:24px;color:var(--ink)}
+.sign span{font-family:ui-serif,"New York",Georgia,serif;font-size:24px;color:var(--ink)}
 @media (max-width:600px){.story{padding:48px 24px 16px}.part{grid-template-columns:1fr;gap:12px;padding:32px 0}
  .part p{font-size:17px}.part p.big{font-size:24px}.def{padding:22px 22px}.def .w{font-size:38px}}
 /* mac: the transition page, one column like a blog post (headings in the text, no left labels) */
@@ -153,7 +152,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
 .ly1{--lc:var(--l1)}.ly2{--lc:var(--l2)}.ly3{--lc:var(--l3)}.ly4{--lc:var(--l4)}
 .ly .gl{width:56px;height:56px;color:var(--gc,var(--gl-a))}.ly .gl svg{width:100%;height:100%;display:block}
 .ly3,.ly4{--gc:var(--gl-b)}
-.ly b{display:block;font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-weight:400;font-size:22px;line-height:1.2}
+.ly b{display:block;font-family:ui-serif,"New York",Georgia,serif;font-weight:400;font-size:22px;line-height:1.2}
 .ly.is-firn b{font-weight:600}
 .ly div span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--ink)}
 .layers figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
@@ -175,7 +174,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:380;text-align:ce
  header{padding:22px 24px 6px} header img{height:30px} nav.top{gap:20px;font-size:14px}
  .hero{padding:40px 24px 0}.hero .c{gap:18px}
  .eyebrow{font-size:14px}
- .hero h1{font-size:46px;line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
+ .hero h1{font-size:min(46px,calc((100vw - 48px) / 7.4));line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
  .stage{margin-top:28px;padding:40px 16px 48px}
  .feats{padding:64px 24px 16px}h2{font-size:30px;margin-bottom:28px}
  .statement{margin-top:56px;padding:0 16px}.statement .box{padding:44px 24px}.statement h2{font-size:34px;margin-bottom:28px}
@@ -252,7 +251,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
 }
 /* Smallest phones: at 46px, the bold "made for Mac." (300px) is wider than
    the 287px text area at 320px. 44px keeps it inside the margins. */
-@media (max-width:339px){.hero h1{font-size:44px}}
 /* iPhone status bar: Safari paints the strip behind the clock with one flat
    colour taken from the page background (the page itself starts below it).
    On phones the sky's top edge is a little bluer than --sky-top, because the
