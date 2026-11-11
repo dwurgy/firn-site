@@ -173,7 +173,10 @@ Google or any other third party.
 ### Logo and icons
 
 Use only the files in `assets/`. They're final; never redraw or re-type the
-logo. `firn-lockup.svg` is the header logo (about 34px tall). Favicons are in
+logo. The wordmark is Gooper Condensed Medium (Very Cool Studio), delivered
+only as outlined SVGs; never add the font files to this repo, because the
+license doesn't allow sharing them. `firn-lockup.svg` (5353 × 2595.2) is the
+header logo (about 34px tall, `width="70" height="34"`). Favicons are in
 `assets/favicon/`.
 
 Tab favicon = bare flake (glacier-deep, lighter on dark). Home-screen icons
