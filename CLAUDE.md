@@ -50,8 +50,7 @@ unless David changes it.
   Graph / Twitter card), light in both modes. v7 (2026-11-11) is v6
   redrawn with the Gooper Condensed logo and a Gooper Deck headline ("A calm
   browser, made for Mac."), rendered from `design/share-preview/og.html`;
-  used by every page except About, Release notes, and Tip jar, which still
-  use v5 ("for everyone"). Keep it
+  used by every page (v5 and v6 stay in assets for old shared links). Keep it
   a PNG, don't recompress it, and keep it small (about 300 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
   the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v7.png`.
@@ -416,7 +415,7 @@ landscape (the footer links sit high above the home indicator). iOS text autosiz
   focus ring (frost), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  a `firn-share-preview` image (v5 or v7, see above).
+  the `firn-share-preview-v7.png` image (see above).
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Project layout

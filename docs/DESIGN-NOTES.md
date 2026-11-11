@@ -226,5 +226,5 @@ _Moved word for word from CLAUDE.md ("The design is decided"). The rule is kept 
 - **v7 (2026-11-11):** v6 redrawn after the new Gooper Condensed logo and
   Gooper Deck headlines: same words, layout, sky, sun, and snow. Built in
   HTML (`design/share-preview/`) and screenshotted, since Claude Design's
-  v6 had the old logo and serif. About, Release notes, and Tip jar still
-  use v5.
+  v6 had the old logo and serif. Every page uses v7 (About, Release
+  notes, and Tip jar moved from v5 the same day).
