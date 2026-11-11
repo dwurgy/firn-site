@@ -1,4 +1,5 @@
-@font-face{font-family:'Fraunces';src:url(assets/fonts/fraunces.woff2) format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:"Gooper Deck";src:local("GooperDeck-Regular"),url(https://fonts.firnbrowser.com/GooperDeck-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Gooper Deck";src:local("GooperDeck-SemiBold"),url(https://fonts.firnbrowser.com/GooperDeck-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
 :root{color-scheme:light dark;
 --frame:#E9E3DA;--page:#FBFAF8;--ink:#241F1B;--muted:#5E564E;--faint:#9D9389;--line:rgba(60,40,20,.10);
 --btn:#241F1B;--btn-ink:#FBFAF8;--field:#FFFFFF;--field-line:rgba(60,40,20,.12);
@@ -44,7 +45,7 @@
 --grain-op:.5;--grain-blend:soft-light;--logo-l:none;--logo-d:block;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-.serif{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-optical-sizing:auto}
+.serif{font-family:"Gooper Deck",Georgia,serif}
 a{color:var(--ink)}
 :focus-visible{outline:3px solid var(--frost);outline-offset:2px;border-radius:10px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

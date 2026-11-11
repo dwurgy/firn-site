@@ -165,6 +165,28 @@ password or any other secret in this repo.
   preview addresses keep working. An enabled Bulk Redirect rule uses that
   list. This is done in the dashboard rather than in code so that static
   files don't count against the Functions request allowance.
+- **Fonts (added 2026-11-11):** the headline font, Gooper Deck, is licensed
+  and can't be in this public repo, so it lives in an R2 bucket.
+  - **Bucket:** R2 `firn-fonts` (location Automatic, Standard storage),
+    holding only `GooperDeck-Regular.woff2` and `GooperDeck-SemiBold.woff2`
+    (from the "WOFF" folder of David's Gooper font download). Nothing else
+    goes in it: whatever is there can be downloaded by anyone.
+  - **Custom domain:** `fonts.firnbrowser.com`, added in the bucket's
+    Settings → Custom Domains (Cloudflare made the DNS record). The public
+    `r2.dev` development address stays off.
+  - **CORS policy** (bucket Settings → CORS Policy), so browsers let the
+    site use the fonts:
+    ```json
+    [{"AllowedOrigins": ["https://firnbrowser.com", "https://www.firnbrowser.com"],
+      "AllowedMethods": ["GET"], "AllowedHeaders": [], "MaxAgeSeconds": 86400}]
+    ```
+    To check a branch preview, add its address for a while (e.g.
+    `https://gooper-deck.firn-site-e8s.pages.dev`), then take it out again.
+  - **Cache:** on the firnbrowser.com zone, Rules → Response Header Transform
+    Rule "Fonts: cache for a year": when Hostname equals
+    `fonts.firnbrowser.com`, set static `Cache-Control: public,
+    max-age=31536000, immutable`. Because of this, a changed font gets a new
+    file name (and new URLs in `site.css` and the preloads).
 
 ## About page
 

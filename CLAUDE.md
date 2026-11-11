@@ -139,7 +139,7 @@ Dark    page #2B2826 · ink #F5F1EC · muted #D4CDC5 · faint #958D85
         frame #3A3734 · sky top #2E2F31 · frost rgba(160,196,214,.45)
 Space colours (feature dots): Sage #8FAE8B, Sand #C9A27E,
         Lagoon #6FA3A0, Glacier #7F9CB0, Lilac #8E8FB8
-Type    Headlines (.serif): ui-serif, "New York", Georgia, serif;
+Type    Headlines (.serif): "Gooper Deck", Georgia, serif;
         weight 400, emphasis 600.
         Everything else: system-ui, -apple-system, 'Segoe UI', sans-serif.
 ```
@@ -163,9 +163,17 @@ the grain turns a faint near-black, and the header logo swaps to
 
 ### Fonts
 
-Headlines use New York, Apple's serif, from the visitor's own device
-(`ui-serif`); other systems get Georgia. The site loads no font files: don't
-add any, and never call Google Fonts or any other third party.
+Headlines (everything `.serif`, plus About's quote, definition word,
+signature and diagram labels) use Gooper Deck: 400, emphasis 600, never
+heavier. It's licensed and can't be shared, so **the font files must never
+be committed** (`.gitignore` blocks `*.woff2`, `*.woff`, `*.otf`, `*.ttf`).
+They load from `https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
+`-SemiBold.woff2`, the `firn-fonts` R2 bucket on David's Cloudflare account
+(setup: `docs/DESIGN-NOTES.md`, "Cloudflare setup"): `@font-face` at the top
+of `site.css` (`font-display: swap`), both preloaded with `crossorigin` in
+every page's `<head>`. The fallback is Georgia. A changed font gets a new
+file name (browsers keep these for a year). Never call Google Fonts or any
+other third party.
 
 ### Logo and icons
 
@@ -190,7 +198,8 @@ edges to survive Android's circle crop.
 Firn's promise is privacy, so the website keeps it too:
 
 - No third-party scripts, fonts, trackers, embeds or analytics. Everything
-  loads from firnbrowser.com.
+  loads from firnbrowser.com (the headline fonts from fonts.firnbrowser.com,
+  David's own domain, so still nothing from a third party).
 - Visitor counts, if any, only via Cloudflare Web Analytics (cookieless).
   Ask David before turning it on.
 - No cookies.
@@ -225,6 +234,8 @@ Never put a password or any other secret in this repo.
   address, `firn-site-e8s.pages.dev`, redirects to firnbrowser.com with a Bulk
   Redirect in the dashboard, not in code, so static files don't count against
   the Functions request allowance.
+- **Fonts:** R2 bucket `firn-fonts` on fonts.firnbrowser.com, with a CORS
+  rule and a one-year cache (details in `docs/DESIGN-NOTES.md`).
 - The email sign-up's database, secret and rate-limiting rule were removed
   from the dashboard.
 
