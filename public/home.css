@@ -1,0 +1,32 @@
+/* Home page only: the "Sunrise" design (design/firn-sunrise/SUNRISE-BRIEF.md).
+   Loaded after site.css on index.html, so these rules win. Other pages
+   keep First light.
+
+   Sky: one long sunrise over the whole page, blue hour at the top to a
+   pale warm morning at the bottom (dark mode: blue hour all the way down).
+   Plain gradients only, no filter, no mask, no opacity, so scrolling stays
+   cheap. The stops are the mockup's, in px from the top of the page. */
+.sunsky{position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(180deg,#1C2130 0px,#252C3E 520px,#343E57 1000px,#556079 1420px,#8D8C9E 1760px,#CDB8B4 1960px,#EAD3C5 2200px,#F4E5DA 2700px,#F7F0E8 3200px,#F6F3EE 3800px)}
+/* Two soft apricot glows mid-page (alpha baked into the colours, not
+   element opacity). */
+.sunsky .wg{position:absolute;display:block;border-radius:50%}
+.sunsky .wg1{left:50%;top:1500px;width:1400px;height:900px;margin-left:-700px;background:radial-gradient(closest-side,rgba(242,196,160,.55),rgba(242,196,160,0))}
+.sunsky .wg2{left:8%;top:1900px;width:700px;height:600px;background:radial-gradient(closest-side,rgba(236,206,186,.45),rgba(236,206,186,0))}
+@media (prefers-color-scheme:dark){
+ .sunsky{background:linear-gradient(180deg,#1A1F2D 0px,#212839 700px,#283043 1500px,#2E3548 2300px,#34394B 3100px,#373A48 4000px,#383733 4800px)}
+ .sunsky .wg1{background:radial-gradient(closest-side,rgba(242,196,160,.099),rgba(242,196,160,0))}
+ .sunsky .wg2{background:radial-gradient(closest-side,rgba(236,206,186,.081),rgba(236,206,186,0))}
+}
+
+/* Grain: a plain 256px repeating image under the content (never a live
+   SVG filter), about 45% strong. Warm specks in light, pale in dark. */
+.sheet::after{background:url(assets/grain-warm.png) 0 0/256px 256px repeat;opacity:.45;mix-blend-mode:normal}
+@media (prefers-color-scheme:dark){.sheet::after{background-image:url(assets/grain-light.png);opacity:.45}}
+
+/* The page starts dark, so overscroll at the top and the iPhone status
+   bar show blue hour too (theme-color in index.html matches). */
+html,body{background:#1C2130}
+@media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
+@media (max-width:600px){html,body{background:#1C2130}}
+@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#1A1F2D}}

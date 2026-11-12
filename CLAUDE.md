@@ -71,6 +71,17 @@ it untrue.
   Twitter text, alt text, and release notes. (Two items take no comma:
   "mail and calendar".)
 
+### Home page: "Sunrise" (being built, 2026-11)
+
+The home page is being rebuilt as **Sunrise**, one long scroll that is one
+sunrise: `design/firn-sunrise/SUNRISE-BRIEF.md` (the brief and its nine
+steps) and `sunrise-mockup.dc.html` (reference only). Its styles live in
+`public/home.css` (home only, loaded after `site.css`); other pages keep
+First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
+two `.wg` warm glows) and the grain (`.sheet::after`, the tiled
+`assets/grain-warm.png`, dark `grain-light.png`, 45%). Home's theme-color
+and top background are blue hour (#1C2130 light, #1A1F2D dark).
+
 ### First light: the idea (so new parts fit)
 
 Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
@@ -381,26 +392,9 @@ picture gets a new file name (v5, …); update the HTML, its size and the alt
 text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
 
 **Home features:** under "All the good ideas. None of the homework.", four
-rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones):
-the feature's dot, title and description (the design's copy, as written) on
-one side and a screenshot on the other (60% of the content width, sides
-switching each row; on phones the text sits above it). **For now these are
-still screenshots** (since 2026-10-27): `<picture class="clip">`, light and
-dark like the hero, `firn-spaces-v1`, `firn-basecamp-v1` (a 16:10 crop of
-the hero's top-left), `firn-lookout-v1`, `firn-split-view-v1` (720 wide,
-`@2x` 1440), `loading="lazy"`, alt text says what each shows. `loops.js` is
-not linked from home until loops return; the old loops are still in the
-repo, described here. The
-videos are silent 1440×900 H.264 recordings:
-`public/assets/screens/firn-spaces.mp4`, `firn-basecamp.mp4`,
-`firn-lookout.mp4` and `firn-split-view.mp4`, each with a first-frame
-poster (`…-poster.webp`). Markup: `<video class="clip" muted loop
-playsinline preload="none" width="1440" height="900" poster="…"
-aria-label="…">` with an mp4 `<source>`; no controls; the hero screenshot's
-corners and shadow, no backdrop blur. `loops.js` (home only, `defer`) plays a
-video only while at least half of it is on screen and never with
-`prefers-reduced-motion` (then only the poster shows). Each aria-label says
-what happens in its clip. (Details: `docs/DESIGN-NOTES.md`, "Home features".)
+rows of still screenshots (`<picture class="clip">`, `firn-spaces-v1`, …),
+until the Sunrise try-it window replaces them (step 3). The old feature
+videos and `loops.js` were deleted on 2026-11-12.
 
 **iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): on phones (600px
 and narrower) `html`/`body` and the phone-only theme-color tags use #DDE3E7
@@ -427,12 +421,12 @@ landscape (the footer links sit high above the home indicator). iOS text autosiz
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
-`loops.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+`home.css`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
 **Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
-`edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
+`edges.js?v=N` (home also `home.css?v=N`): when you change one of those
 files, raise its `N` on every page that links it, so browsers fetch the new
 copy. `public/_headers` also tells browsers to check for a newer CSS or JS
 file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
