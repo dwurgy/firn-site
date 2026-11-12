@@ -78,8 +78,8 @@ sunrise: `design/firn-sunrise/SUNRISE-BRIEF.md` (the brief and its nine
 steps) and `sunrise-mockup.dc.html` (reference only). Its styles live in
 `public/home.css` (home only, loaded after `site.css`); other pages keep
 First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
-two `.wg` warm glows) and the grain (`.sheet::after`, the tiled
-`assets/grain-warm.png`, dark `grain-light.png`, 45%). Home's theme-color
+two `.wg` warm glows); no page grain on home (dig down moved all texture
+into the snow). Home's theme-color
 and top background are blue hour (#1C2130 light, #1A1F2D dark).
 Step 2: header and hero always light text on the dark top (on-dark logo,
 `.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
@@ -94,17 +94,20 @@ and color" (spaces lost icons in the app, 2026-10-26).
 Step 4: `section.arc` (card and three mappings, checked against the app's
 `ArcImport.swift` and File menu), "Less, on purpose." open on the sky (no
 box), `section.maker` and the finale `section.fin` (#download).
-Step 5: `.sunrise` (five snow layers as a static SVG, edges baked in,
-`assets/snow-specks.png` texture; the sun and warm band follow `--r`, set
-from scroll by `home.js`, risen without JS or with reduced motion; dark: sun
-stays behind the snow), the "Why it's called Firn." card, and `footer.ice`
-(home's footer, in the deepest layer; keeps `nav.social` for `edges.js`).
+Step 5, rebuilt as **dig down** (`design/firn-sunrise/DIG-DOWN-PLAN.md`,
+2026-11-12): under the screenshot `.sunrise` (sun rises over the surface;
+`--r` from scroll in `home.js`, risen without JS or with reduced motion;
+dark: a cap behind the snow), then `div.lay.l1`–`.l4` (why Firn + Arc, Less
+on purpose, maker, finale) and `footer.ice.lay.l5` (keeps `nav.social` for
+`edges.js`), each one layer deeper. Edges, crests and shadows are generated
+by `tools/make-snow-edges.py`; the grain tiles `assets/snow-fresh.webp` and
+`snow-packed.webp` by `tools/make-snow-tiles.py` (both in
+`design/firn-sunrise/`, run from the repo root with `python3 -I`). Photos are
+allowed here only as snow texture (the "no stock photos" exception).
 Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
 on `<html>`). The footer uses the on-dark lockup in both modes (the light
 lockup's flake is the same blue as the Personal ice).
-**Next: "dig down"** (approved 2026-11-12, not built yet): read
-`design/firn-sunrise/DIG-DOWN-PLAN.md` first. It replaces step 5's snow and
-drops the page grain.
+**Next:** step 6 (the drift, probably dropped: ask David), then 7 to 9.
 
 ### First light: the idea (so new parts fit)
 

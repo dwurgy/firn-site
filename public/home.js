@@ -206,8 +206,8 @@
   render();
 })();
 
-// The finale sunrise: as the snow scrolls into view the sun rises about
-// 300px and the warm band brightens (home.css reads --r, 0 to 1). Scroll is
+// The sunrise over the snow's surface (dig down): as it scrolls into view
+// the sun rises about 300px and the warm band brightens (home.css reads --r, 0 to 1). Scroll is
 // only listened to while the snow is on screen, so there's no work at idle
 // or elsewhere on the page. With reduced motion it stays risen (CSS default).
 (function () {

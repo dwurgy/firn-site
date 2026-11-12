@@ -9,8 +9,13 @@ and tactile. I want people to want to touch it."
 
 - Steps 1 to 5 of the brief are built and pushed (branch
   `claude/zealous-bardeen-k0odq3`, last commit "Home, Sunrise step 5").
-- Step 5 as built (snow SVG at the bottom, specks, footer in the ice) is
-  replaced by this plan. Nothing from this plan is built yet.
+- **Built 2026-11-12** (commit "Home, dig down"). Differences from the
+  plan: one white-only tile per material (alpha carries the grain), so
+  there are no separate dark tiles: dark mode lays a veil of the layer's
+  own colour over the grain instead (`--veil`). Total about 83 KB. The
+  layer-1 shadow is left out (it would fall on the sky); the surface gets
+  a warm wash where the sun rises. Still to do: photo source links and
+  licences in `docs/DESIGN-NOTES.md` (ask David).
 
 ## Changes to the brief
 

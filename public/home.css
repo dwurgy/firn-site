@@ -19,10 +19,9 @@
  .sunsky .wg2{background:radial-gradient(closest-side,rgba(236,206,186,.081),rgba(236,206,186,0))}
 }
 
-/* Grain: a plain 256px repeating image under the content (never a live
-   SVG filter), about 45% strong. Warm specks in light, pale in dark. */
-.sheet::after{background:url(assets/grain-warm.png) 0 0/256px 256px repeat;opacity:.45;mix-blend-mode:normal}
-@media (prefers-color-scheme:dark){.sheet::after{background-image:url(assets/grain-light.png);opacity:.45}}
+/* No page grain on home: the sky is a clean gradient and all texture
+   lives in the snow (dig down).*/
+.sheet::after{display:none}
 
 /* The page starts dark, so overscroll at the top and the iPhone status
    bar show blue hour too (theme-color in index.html matches). */
@@ -226,14 +225,18 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
  .fin .get{margin-top:24px}
 }
 
-/* Step 5: the snow cross-section, the sunrise, and the footer in the ice.
-   Five glacier layers tinted by the try-it window's space (home.js sets
-   data-space on <html>; the sky never changes). The hand-cut edges are
-   baked into the paths in index.html and the specks are a plain tiled
-   image (assets/snow-specks.png), so nothing is filtered while you scroll.
-   The sun and the warm band move with --r (0 to 1), which home.js sets
-   from scroll; without JS or with reduced motion it stays 1 (risen). */
-:root{--s1:#DCE5EB;--s2:#C3D3DE;--s3:#A6BFCF;--s4:#8AABC0;--s5:#6E98B2}
+/* Dig down (design/firn-sunrise/DIG-DOWN-PLAN.md): below the screenshot the
+   sun rises over the snow's surface, then each section sits one layer
+   deeper: 1 fresh snow (why Firn, Arc), 2 settled (Less, on purpose),
+   3 firn (who's making it), 4 deep firn (the finale), 5 glacier ice (the
+   footer). Layer colours follow the try-it window's space (home.js sets
+   data-space on <html>; the sky never changes).
+   Everything here is static: plain backgrounds, a fixed clip-path per
+   layer (its hand-cut top edge) and static SVG strips for the sunlit crest
+   and the shadow each edge casts, all written by
+   design/firn-sunrise/tools/make-snow-edges.py. No filters, masks, blend
+   modes or opacity groups. The only scroll work is the sunrise's --r. */
+:root{--s1:#DCE5EB;--s2:#C3D3DE;--s3:#A6BFCF;--s4:#8AABC0;--s5:#6E98B2;--ea:64px;--ea1:96px}
 html[data-space="1"]{--s1:#E0E8DE;--s2:#CBD9C8;--s3:#B5CAB2;--s4:#A1BC9D;--s5:#8FAE8B}
 html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C9A27E}
 @media (prefers-color-scheme:dark){
@@ -241,33 +244,103 @@ html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C
  html[data-space="1"]{--s1:#62725E;--s2:#586453;--s3:#4F584A;--s4:#474E42;--s5:#3F433A}
  html[data-space="2"]{--s1:#826B56;--s2:#725F4E;--s3:#645446;--s4:#574A3F;--s5:#4B4038}
 }
-.sunrise{--r:1;position:relative;z-index:1;height:620px}
-.sunrise .band,.sunrise .halo{position:absolute;left:0;right:0;opacity:calc(.36 + .64 * var(--r));will-change:opacity;pointer-events:none}
-.sunrise .band{top:40px;height:260px;background:linear-gradient(180deg,rgba(242,190,150,0),rgba(242,190,150,.7))}
-.sunrise .halo{top:-260px;height:620px;background:radial-gradient(closest-side,rgba(242,196,160,.7),rgba(242,196,160,0))}
-.sunrise .disc{position:absolute;left:62%;top:0;width:150px;height:150px;margin-left:-75px;border-radius:50%;
- background:radial-gradient(circle at 50% 42%,#FCE6CF 0%,#F6C49A 55%,#EFA978 100%);
- box-shadow:0 0 60px 20px rgba(242,170,120,.55),0 0 160px 80px rgba(242,196,160,.45);
- transform:translateY(calc(250px - 300px * var(--r)));will-change:transform}
-.snowx{position:absolute;left:0;top:60px;width:100%;height:560px;display:block}
-.snowx .l1{fill:var(--s1)}.snowx .l2{fill:var(--s2)}.snowx .l3{fill:var(--s3)}.snowx .l4{fill:var(--s4)}.snowx .l5{fill:var(--s5)}
-.snowx path{transition:fill .6s}
-.snowx .sp{fill:url(#specks);fill-opacity:.8;transition:none}
-.sunrise .why{position:absolute;left:0;right:0;top:260px;max-width:1240px;margin:0 auto;padding:0 32px;box-sizing:border-box}
-.why .wc{max-width:420px;background:rgba(251,250,248,.72);border-radius:14px;padding:20px 24px;box-shadow:0 1px 2px rgba(60,40,20,.08)}
-.why .wc p{margin:8px 0 0;font-size:14px;line-height:21px;color:var(--muted)}
+@media (max-width:600px){:root{--ea:36px;--ea1:56px}}
+
+/* The sunrise, on the sky just above the surface. The sun and the warm
+   band move with --r (0 to 1), which home.js sets from scroll; without JS
+   or with reduced motion it stays 1 (risen). The disc sits in the surface's
+   lowest dip, so the snow hides it until it rises. */
+.sunrise{--r:1;position:relative;z-index:1;height:300px;pointer-events:none}
+.sunrise .band,.sunrise .halo{position:absolute;left:0;right:0;opacity:calc(.36 + .64 * var(--r));will-change:opacity}
+.sunrise .band{bottom:0;height:300px;background:linear-gradient(180deg,rgba(244,196,156,0),rgba(240,170,128,.5))}
+.sunrise .halo{bottom:-200px;height:720px;background:radial-gradient(closest-side at 62% 50%,rgba(244,184,140,.55),rgba(246,200,160,0))}
+.sunrise .disc,.sunrise .glow{position:absolute;left:62%;transform:translateY(calc(300px - 300px * var(--r)));will-change:transform}
+.sunrise .disc{bottom:-44px;width:150px;height:150px;margin-left:-75px;border-radius:50%;
+ background:radial-gradient(circle at 50% 40%,#FFF0DA 0%,#FAC690 36%,#F29A5C 80%,#EA8A50 100%)}
+/* The glow is its own soft gradient, not a box-shadow (a big shadow
+   showed a square edge in dark mode). */
+.sunrise .glow{bottom:-244px;width:550px;height:550px;margin-left:-275px;border-radius:50%;
+ background:radial-gradient(closest-side,rgba(244,160,104,.7),rgba(246,180,136,.32) 40%,rgba(246,200,160,0))}
+
+/* The layers. Each overlaps the one above by its edge height and is cut
+   along its top (clip-path below). Background, top to bottom: brighter at
+   the crest, deeper lower down, a veil of the layer's own colour (softens
+   the grain in dark mode), the snow grain, then the layer colour pushed a
+   little darker so the grain's white crystals bring it back up. */
+.lay{--s:var(--s1);--tex:url(assets/snow-fresh.webp);--veil:0%;--deep:rgba(14,32,50,.13);--lift:rgba(255,255,255,.2);
+ position:relative;z-index:2;margin-top:calc(-1 * var(--ea));padding:calc(var(--ea) + 72px) 0 120px;
+ background-color:var(--s);background-color:color-mix(in srgb,var(--s) 80%,#26394B);
+ background-image:linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex);
+ background-size:auto,auto,auto,256px 256px;transition:background-color .6s}
+.l1{--ea:var(--ea1);--s:var(--s1)}
+.l2{--s:var(--s2);--muted:#3A332D}
+.l3{--s:var(--s3);--tex:url(assets/snow-packed.webp);--muted:#2F2925;--deep:rgba(14,32,50,.16)}
+.l4{--s:var(--s4);--tex:url(assets/snow-packed.webp);--muted:#2A2521;--deep:rgba(14,32,50,.18)}
+.l5{--s:var(--s5);--tex:url(assets/snow-packed.webp);--deep:rgba(14,32,50,.2)}
+/* The surface catches the sunrise: a warm wash where the sun comes up. */
+.l1{background-image:radial-gradient(70% 420px at 62% 0,rgba(255,206,160,.42),rgba(255,206,160,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex);
+ background-size:auto,auto,auto,auto,256px 256px}
+/* Crest: the lit lip along the top edge. Shadow: the next layer's edge,
+   cast on this one just above where it overlaps. */
+.lay .crest,.lay .sh{position:absolute;left:0;width:100%;display:block;pointer-events:none}
+.lay .crest{top:0;height:calc(var(--ea) * 1.6)}
+.lay .crest .lip{fill:rgba(255,255,255,.06)}
+.lay .crest .rim{fill:none;stroke:rgba(255,255,255,.85);stroke-width:3;vector-effect:non-scaling-stroke}
+.l1 .crest .lip{fill:rgba(255,236,214,.1)}
+.l1 .crest .rim{stroke:rgba(255,240,222,.95);stroke-width:4}
+.lay .sh{bottom:0;height:calc(var(--ea) * 1.6);fill:rgba(16,34,52,.032)}
+@media (prefers-color-scheme:dark){
+ .lay{--veil:42%;--lift:rgba(255,255,255,.07);--deep:rgba(4,8,14,.2);--muted:#E8E2DB;background-color:var(--s);background-color:color-mix(in srgb,var(--s) 90%,#0B121B)}
+ .l3,.l4,.l5{--deep:rgba(4,8,14,.24)}
+ /* Settled snow is the lightest layer behind open text: a touch deeper, and
+    its small text nearly white (4.5:1 or more in every space). */
+ .l2{--muted:#F3EEE8;background-color:color-mix(in srgb,var(--s) 84%,#0B121B)}
+ .l1{background-image:radial-gradient(70% 380px at 62% 0,rgba(242,170,120,.14),rgba(242,170,120,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex)}
+ .lay .crest .lip{fill:rgba(220,234,246,.04)}
+ .lay .crest .rim{stroke:rgba(214,230,244,.38)}
+ .l1 .crest .lip{fill:rgba(255,214,180,.05)}
+ .l1 .crest .rim{stroke:rgba(255,222,196,.5)}
+ .lay .sh{fill:rgba(2,6,12,.06)}
+ /* Blue hour: the sun never clears the snow, only a cap and a faint glow. */
+ .sunrise .disc,.sunrise .glow{transform:translateY(78px)}
+ .sunrise .band{background:linear-gradient(180deg,rgba(242,190,150,0),rgba(242,190,150,.2))}
+ .sunrise .halo{background:radial-gradient(closest-side at 62% 50%,rgba(242,196,160,.2),rgba(242,196,160,0))}
+ .sunrise .glow{background:radial-gradient(closest-side,rgba(242,170,120,.3),rgba(242,170,120,.1) 45%,rgba(242,170,120,0))}
+}
+@media (prefers-reduced-motion:reduce){.lay{transition:none}}
+/* edges:start (written by make-snow-edges.py) */
+.l1{clip-path:polygon(0 100%,0% calc(var(--ea)*0.379),1.2% calc(var(--ea)*0.406),2.29% calc(var(--ea)*0.45),3.23% calc(var(--ea)*0.475),4.11% calc(var(--ea)*0.469),4.95% calc(var(--ea)*0.477),5.68% calc(var(--ea)*0.507),6.41% calc(var(--ea)*0.535),7.08% calc(var(--ea)*0.548),7.71% calc(var(--ea)*0.579),8.33% calc(var(--ea)*0.619),8.96% calc(var(--ea)*0.677),9.58% calc(var(--ea)*0.712),10.26% calc(var(--ea)*0.718),10.99% calc(var(--ea)*0.71),11.72% calc(var(--ea)*0.746),12.55% calc(var(--ea)*0.746),13.44% calc(var(--ea)*0.735),14.38% calc(var(--ea)*0.748),15.47% calc(var(--ea)*0.781),16.67% calc(var(--ea)*0.794),17.86% calc(var(--ea)*0.834),18.96% calc(var(--ea)*0.828),19.9% calc(var(--ea)*0.785),20.78% calc(var(--ea)*0.783),21.61% calc(var(--ea)*0.802),22.34% calc(var(--ea)*0.791),23.07% calc(var(--ea)*0.766),23.75% calc(var(--ea)*0.774),24.38% calc(var(--ea)*0.796),25% calc(var(--ea)*0.774),25.62% calc(var(--ea)*0.731),26.25% calc(var(--ea)*0.692),26.93% calc(var(--ea)*0.671),27.66% calc(var(--ea)*0.649),28.39% calc(var(--ea)*0.622),29.22% calc(var(--ea)*0.57),30.1% calc(var(--ea)*0.574),31.04% calc(var(--ea)*0.596),32.14% calc(var(--ea)*0.551),33.33% calc(var(--ea)*0.553),34.53% calc(var(--ea)*0.544),35.62% calc(var(--ea)*0.505),36.56% calc(var(--ea)*0.535),37.45% calc(var(--ea)*0.568),38.28% calc(var(--ea)*0.606),39.01% calc(var(--ea)*0.626),39.74% calc(var(--ea)*0.693),40.42% calc(var(--ea)*0.733),41.04% calc(var(--ea)*0.753),41.67% calc(var(--ea)*0.764),42.29% calc(var(--ea)*0.778),42.92% calc(var(--ea)*0.806),43.59% calc(var(--ea)*0.837),44.32% calc(var(--ea)*0.843),45.05% calc(var(--ea)*0.865),45.89% calc(var(--ea)*0.918),46.77% calc(var(--ea)*0.951),47.71% calc(var(--ea)*0.94),48.8% calc(var(--ea)*0.936),50% calc(var(--ea)*0.901),51.2% calc(var(--ea)*0.862),52.29% calc(var(--ea)*0.869),53.23% calc(var(--ea)*0.89),54.11% calc(var(--ea)*0.877),54.95% calc(var(--ea)*0.897),55.68% calc(var(--ea)*0.914),56.41% calc(var(--ea)*0.901),57.08% calc(var(--ea)*0.88),57.71% calc(var(--ea)*0.88),58.33% calc(var(--ea)*0.884),58.96% calc(var(--ea)*0.908),59.58% calc(var(--ea)*0.901),60.26% calc(var(--ea)*0.914),60.99% calc(var(--ea)*0.938),61.72% calc(var(--ea)*0.983),62.55% calc(var(--ea)*1),63.44% calc(var(--ea)*0.989),64.38% calc(var(--ea)*0.993),65.47% calc(var(--ea)*0.966),66.67% calc(var(--ea)*0.942),67.86% calc(var(--ea)*0.95),68.96% calc(var(--ea)*0.944),69.9% calc(var(--ea)*0.893),70.78% calc(var(--ea)*0.864),71.61% calc(var(--ea)*0.828),72.34% calc(var(--ea)*0.72),73.07% calc(var(--ea)*0.649),73.75% calc(var(--ea)*0.585),74.38% calc(var(--ea)*0.546),75% calc(var(--ea)*0.49),75.62% calc(var(--ea)*0.415),76.25% calc(var(--ea)*0.387),76.93% calc(var(--ea)*0.363),77.66% calc(var(--ea)*0.333),78.39% calc(var(--ea)*0.275),79.22% calc(var(--ea)*0.215),80.1% calc(var(--ea)*0.189),81.04% calc(var(--ea)*0.157),82.14% calc(var(--ea)*0.121),83.33% calc(var(--ea)*0.174),84.53% calc(var(--ea)*0.191),85.62% calc(var(--ea)*0.176),86.56% calc(var(--ea)*0.193),87.45% calc(var(--ea)*0.151),88.28% calc(var(--ea)*0.114),89.01% calc(var(--ea)*0.097),89.74% calc(var(--ea)*0.11),90.42% calc(var(--ea)*0.097),91.04% calc(var(--ea)*0.093),91.67% calc(var(--ea)*0.071),92.29% calc(var(--ea)*0.082),92.92% calc(var(--ea)*0.101),93.59% calc(var(--ea)*0.064),94.32% calc(var(--ea)*0.034),95.05% calc(var(--ea)*0),95.89% calc(var(--ea)*0.026),96.77% calc(var(--ea)*0.015),97.71% calc(var(--ea)*0.017),98.8% calc(var(--ea)*0.05),100% calc(var(--ea)*0.101),100% 100%)}
+.l2{clip-path:polygon(0 100%,0% calc(var(--ea)*0.389),1.2% calc(var(--ea)*0.409),2.29% calc(var(--ea)*0.436),3.23% calc(var(--ea)*0.399),4.11% calc(var(--ea)*0.385),4.95% calc(var(--ea)*0.379),5.68% calc(var(--ea)*0.383),6.41% calc(var(--ea)*0.364),7.08% calc(var(--ea)*0.372),7.71% calc(var(--ea)*0.401),8.33% calc(var(--ea)*0.418),8.96% calc(var(--ea)*0.426),9.58% calc(var(--ea)*0.436),10.26% calc(var(--ea)*0.422),10.99% calc(var(--ea)*0.451),11.72% calc(var(--ea)*0.453),12.55% calc(var(--ea)*0.407),13.44% calc(var(--ea)*0.43),14.38% calc(var(--ea)*0.477),15.47% calc(var(--ea)*0.5),16.67% calc(var(--ea)*0.535),17.86% calc(var(--ea)*0.568),18.96% calc(var(--ea)*0.535),19.9% calc(var(--ea)*0.543),20.78% calc(var(--ea)*0.588),21.61% calc(var(--ea)*0.603),22.34% calc(var(--ea)*0.619),23.07% calc(var(--ea)*0.671),23.75% calc(var(--ea)*0.733),24.38% calc(var(--ea)*0.776),25% calc(var(--ea)*0.778),25.62% calc(var(--ea)*0.79),26.25% calc(var(--ea)*0.829),26.93% calc(var(--ea)*0.856),27.66% calc(var(--ea)*0.844),28.39% calc(var(--ea)*0.85),29.22% calc(var(--ea)*0.875),30.1% calc(var(--ea)*0.922),31.04% calc(var(--ea)*0.94),32.14% calc(var(--ea)*0.975),33.33% calc(var(--ea)*1),34.53% calc(var(--ea)*0.946),35.62% calc(var(--ea)*0.949),36.56% calc(var(--ea)*0.957),37.45% calc(var(--ea)*0.916),38.28% calc(var(--ea)*0.922),39.01% calc(var(--ea)*0.914),39.74% calc(var(--ea)*0.895),40.42% calc(var(--ea)*0.835),41.04% calc(var(--ea)*0.774),41.67% calc(var(--ea)*0.732),42.29% calc(var(--ea)*0.675),42.92% calc(var(--ea)*0.607),43.59% calc(var(--ea)*0.541),44.32% calc(var(--ea)*0.486),45.05% calc(var(--ea)*0.486),45.89% calc(var(--ea)*0.467),46.77% calc(var(--ea)*0.42),47.71% calc(var(--ea)*0.389),48.8% calc(var(--ea)*0.375),50% calc(var(--ea)*0.3),51.2% calc(var(--ea)*0.313),52.29% calc(var(--ea)*0.321),53.23% calc(var(--ea)*0.331),54.11% calc(var(--ea)*0.375),54.95% calc(var(--ea)*0.403),55.68% calc(var(--ea)*0.407),56.41% calc(var(--ea)*0.379),57.08% calc(var(--ea)*0.383),57.71% calc(var(--ea)*0.412),58.33% calc(var(--ea)*0.414),58.96% calc(var(--ea)*0.401),59.58% calc(var(--ea)*0.42),60.26% calc(var(--ea)*0.453),60.99% calc(var(--ea)*0.496),61.72% calc(var(--ea)*0.504),62.55% calc(var(--ea)*0.481),63.44% calc(var(--ea)*0.482),64.38% calc(var(--ea)*0.451),65.47% calc(var(--ea)*0.409),66.67% calc(var(--ea)*0.401),67.86% calc(var(--ea)*0.42),68.96% calc(var(--ea)*0.412),69.9% calc(var(--ea)*0.418),70.78% calc(var(--ea)*0.422),71.61% calc(var(--ea)*0.389),72.34% calc(var(--ea)*0.377),73.07% calc(var(--ea)*0.397),73.75% calc(var(--ea)*0.414),74.38% calc(var(--ea)*0.436),75% calc(var(--ea)*0.453),75.62% calc(var(--ea)*0.471),76.25% calc(var(--ea)*0.518),76.93% calc(var(--ea)*0.551),77.66% calc(var(--ea)*0.56),78.39% calc(var(--ea)*0.545),79.22% calc(var(--ea)*0.566),80.1% calc(var(--ea)*0.58),81.04% calc(var(--ea)*0.535),82.14% calc(var(--ea)*0.56),83.33% calc(var(--ea)*0.593),84.53% calc(var(--ea)*0.56),85.62% calc(var(--ea)*0.558),86.56% calc(var(--ea)*0.5),87.45% calc(var(--ea)*0.426),88.28% calc(var(--ea)*0.403),89.01% calc(var(--ea)*0.385),89.74% calc(var(--ea)*0.327),90.42% calc(var(--ea)*0.3),91.04% calc(var(--ea)*0.263),91.67% calc(var(--ea)*0.243),92.29% calc(var(--ea)*0.222),92.92% calc(var(--ea)*0.183),93.59% calc(var(--ea)*0.113),94.32% calc(var(--ea)*0.072),95.05% calc(var(--ea)*0.058),95.89% calc(var(--ea)*0.037),96.77% calc(var(--ea)*0),97.71% calc(var(--ea)*0.025),98.8% calc(var(--ea)*0.072),100% calc(var(--ea)*0.039),100% 100%)}
+.l3{clip-path:polygon(0 100%,0% calc(var(--ea)*0.663),1.2% calc(var(--ea)*0.649),2.29% calc(var(--ea)*0.587),3.23% calc(var(--ea)*0.594),4.11% calc(var(--ea)*0.619),4.95% calc(var(--ea)*0.61),5.68% calc(var(--ea)*0.624),6.41% calc(var(--ea)*0.652),7.08% calc(var(--ea)*0.682),7.71% calc(var(--ea)*0.678),8.33% calc(var(--ea)*0.664),8.96% calc(var(--ea)*0.666),9.58% calc(var(--ea)*0.684),10.26% calc(var(--ea)*0.692),10.99% calc(var(--ea)*0.692),11.72% calc(var(--ea)*0.706),12.55% calc(var(--ea)*0.753),13.44% calc(var(--ea)*0.797),14.38% calc(var(--ea)*0.801),15.47% calc(var(--ea)*0.811),16.67% calc(var(--ea)*0.804),17.86% calc(var(--ea)*0.762),18.96% calc(var(--ea)*0.783),19.9% calc(var(--ea)*0.79),20.78% calc(var(--ea)*0.781),21.61% calc(var(--ea)*0.785),22.34% calc(var(--ea)*0.799),23.07% calc(var(--ea)*0.79),23.75% calc(var(--ea)*0.759),24.38% calc(var(--ea)*0.731),25% calc(var(--ea)*0.729),25.62% calc(var(--ea)*0.741),26.25% calc(var(--ea)*0.745),26.93% calc(var(--ea)*0.738),27.66% calc(var(--ea)*0.759),28.39% calc(var(--ea)*0.806),29.22% calc(var(--ea)*0.82),30.1% calc(var(--ea)*0.797),31.04% calc(var(--ea)*0.809),32.14% calc(var(--ea)*0.825),33.33% calc(var(--ea)*0.787),34.53% calc(var(--ea)*0.85),35.62% calc(var(--ea)*0.872),36.56% calc(var(--ea)*0.874),37.45% calc(var(--ea)*0.9),38.28% calc(var(--ea)*0.9),39.01% calc(var(--ea)*0.871),39.74% calc(var(--ea)*0.862),40.42% calc(var(--ea)*0.864),41.04% calc(var(--ea)*0.886),41.67% calc(var(--ea)*0.876),42.29% calc(var(--ea)*0.883),42.92% calc(var(--ea)*0.89),43.59% calc(var(--ea)*0.921),44.32% calc(var(--ea)*0.941),45.05% calc(var(--ea)*0.939),45.89% calc(var(--ea)*0.913),46.77% calc(var(--ea)*0.932),47.71% calc(var(--ea)*0.928),48.8% calc(var(--ea)*0.9),50% calc(var(--ea)*0.958),51.2% calc(var(--ea)*0.991),52.29% calc(var(--ea)*0.977),53.23% calc(var(--ea)*1),54.11% calc(var(--ea)*0.991),54.95% calc(var(--ea)*0.932),55.68% calc(var(--ea)*0.923),56.41% calc(var(--ea)*0.935),57.08% calc(var(--ea)*0.92),57.71% calc(var(--ea)*0.911),58.33% calc(var(--ea)*0.9),58.96% calc(var(--ea)*0.886),59.58% calc(var(--ea)*0.885),60.26% calc(var(--ea)*0.872),60.99% calc(var(--ea)*0.818),61.72% calc(var(--ea)*0.767),62.55% calc(var(--ea)*0.752),63.44% calc(var(--ea)*0.734),64.38% calc(var(--ea)*0.691),65.47% calc(var(--ea)*0.734),66.67% calc(var(--ea)*0.745),67.86% calc(var(--ea)*0.736),68.96% calc(var(--ea)*0.741),69.9% calc(var(--ea)*0.731),70.78% calc(var(--ea)*0.733),71.61% calc(var(--ea)*0.778),72.34% calc(var(--ea)*0.811),73.07% calc(var(--ea)*0.832),73.75% calc(var(--ea)*0.857),74.38% calc(var(--ea)*0.89),75% calc(var(--ea)*0.927),75.62% calc(var(--ea)*0.937),76.25% calc(var(--ea)*0.916),76.93% calc(var(--ea)*0.906),77.66% calc(var(--ea)*0.928),78.39% calc(var(--ea)*0.937),79.22% calc(var(--ea)*0.939),80.1% calc(var(--ea)*0.93),81.04% calc(var(--ea)*0.965),82.14% calc(var(--ea)*0.976),83.33% calc(var(--ea)*0.937),84.53% calc(var(--ea)*0.927),85.62% calc(var(--ea)*0.857),86.56% calc(var(--ea)*0.829),87.45% calc(var(--ea)*0.806),88.28% calc(var(--ea)*0.787),89.01% calc(var(--ea)*0.722),89.74% calc(var(--ea)*0.68),90.42% calc(var(--ea)*0.631),91.04% calc(var(--ea)*0.57),91.67% calc(var(--ea)*0.467),92.29% calc(var(--ea)*0.393),92.92% calc(var(--ea)*0.316),93.59% calc(var(--ea)*0.276),94.32% calc(var(--ea)*0.219),95.05% calc(var(--ea)*0.168),95.89% calc(var(--ea)*0.131),96.77% calc(var(--ea)*0.124),97.71% calc(var(--ea)*0.091),98.8% calc(var(--ea)*0.03),100% calc(var(--ea)*0),100% 100%)}
+.l4{clip-path:polygon(0 100%,0% calc(var(--ea)*0.304),1.2% calc(var(--ea)*0.293),2.29% calc(var(--ea)*0.242),3.23% calc(var(--ea)*0.273),4.11% calc(var(--ea)*0.281),4.95% calc(var(--ea)*0.311),5.68% calc(var(--ea)*0.375),6.41% calc(var(--ea)*0.459),7.08% calc(var(--ea)*0.487),7.71% calc(var(--ea)*0.513),8.33% calc(var(--ea)*0.541),8.96% calc(var(--ea)*0.605),9.58% calc(var(--ea)*0.645),10.26% calc(var(--ea)*0.63),10.99% calc(var(--ea)*0.617),11.72% calc(var(--ea)*0.635),12.55% calc(var(--ea)*0.673),13.44% calc(var(--ea)*0.684),14.38% calc(var(--ea)*0.681),15.47% calc(var(--ea)*0.724),16.67% calc(var(--ea)*0.704),17.86% calc(var(--ea)*0.635),18.96% calc(var(--ea)*0.645),19.9% calc(var(--ea)*0.617),20.78% calc(var(--ea)*0.622),21.61% calc(var(--ea)*0.694),22.34% calc(var(--ea)*0.73),23.07% calc(var(--ea)*0.745),23.75% calc(var(--ea)*0.763),24.38% calc(var(--ea)*0.786),25% calc(var(--ea)*0.824),25.62% calc(var(--ea)*0.821),26.25% calc(var(--ea)*0.806),26.93% calc(var(--ea)*0.821),27.66% calc(var(--ea)*0.852),28.39% calc(var(--ea)*0.906),29.22% calc(var(--ea)*0.944),30.1% calc(var(--ea)*0.959),31.04% calc(var(--ea)*1),32.14% calc(var(--ea)*0.972),33.33% calc(var(--ea)*0.901),34.53% calc(var(--ea)*0.898),35.62% calc(var(--ea)*0.832),36.56% calc(var(--ea)*0.806),37.45% calc(var(--ea)*0.806),38.28% calc(var(--ea)*0.755),39.01% calc(var(--ea)*0.661),39.74% calc(var(--ea)*0.584),40.42% calc(var(--ea)*0.536),41.04% calc(var(--ea)*0.441),41.67% calc(var(--ea)*0.339),42.29% calc(var(--ea)*0.255),42.92% calc(var(--ea)*0.24),43.59% calc(var(--ea)*0.224),44.32% calc(var(--ea)*0.168),45.05% calc(var(--ea)*0.14),45.89% calc(var(--ea)*0.099),46.77% calc(var(--ea)*0.099),47.71% calc(var(--ea)*0.059),48.8% calc(var(--ea)*0),50% calc(var(--ea)*0.008),51.2% calc(var(--ea)*0.036),52.29% calc(var(--ea)*0.051),53.23% calc(var(--ea)*0.12),54.11% calc(var(--ea)*0.097),54.95% calc(var(--ea)*0.071),55.68% calc(var(--ea)*0.102),56.41% calc(var(--ea)*0.151),57.08% calc(var(--ea)*0.161),57.71% calc(var(--ea)*0.166),58.33% calc(var(--ea)*0.242),58.96% calc(var(--ea)*0.327),59.58% calc(var(--ea)*0.38),60.26% calc(var(--ea)*0.423),60.99% calc(var(--ea)*0.449),61.72% calc(var(--ea)*0.5),62.55% calc(var(--ea)*0.564),63.44% calc(var(--ea)*0.551),64.38% calc(var(--ea)*0.551),65.47% calc(var(--ea)*0.62),66.67% calc(var(--ea)*0.661),67.86% calc(var(--ea)*0.707),68.96% calc(var(--ea)*0.745),69.9% calc(var(--ea)*0.691),70.78% calc(var(--ea)*0.671),71.61% calc(var(--ea)*0.666),72.34% calc(var(--ea)*0.633),73.07% calc(var(--ea)*0.615),73.75% calc(var(--ea)*0.602),74.38% calc(var(--ea)*0.643),75% calc(var(--ea)*0.635),75.62% calc(var(--ea)*0.635),76.25% calc(var(--ea)*0.589),76.93% calc(var(--ea)*0.569),77.66% calc(var(--ea)*0.551),78.39% calc(var(--ea)*0.531),79.22% calc(var(--ea)*0.474),80.1% calc(var(--ea)*0.439),81.04% calc(var(--ea)*0.492),82.14% calc(var(--ea)*0.503),83.33% calc(var(--ea)*0.528),84.53% calc(var(--ea)*0.579),85.62% calc(var(--ea)*0.538),86.56% calc(var(--ea)*0.538),87.45% calc(var(--ea)*0.574),88.28% calc(var(--ea)*0.569),89.01% calc(var(--ea)*0.574),89.74% calc(var(--ea)*0.594),90.42% calc(var(--ea)*0.638),91.04% calc(var(--ea)*0.628),91.67% calc(var(--ea)*0.589),92.29% calc(var(--ea)*0.564),92.92% calc(var(--ea)*0.561),93.59% calc(var(--ea)*0.541),94.32% calc(var(--ea)*0.495),95.05% calc(var(--ea)*0.454),95.89% calc(var(--ea)*0.457),96.77% calc(var(--ea)*0.503),97.71% calc(var(--ea)*0.485),98.8% calc(var(--ea)*0.462),100% calc(var(--ea)*0.462),100% 100%)}
+.l5{clip-path:polygon(0 100%,0% calc(var(--ea)*0.818),1.2% calc(var(--ea)*0.799),2.29% calc(var(--ea)*0.772),3.23% calc(var(--ea)*0.813),4.11% calc(var(--ea)*0.872),4.95% calc(var(--ea)*0.87),5.68% calc(var(--ea)*0.848),6.41% calc(var(--ea)*0.87),7.08% calc(var(--ea)*0.883),7.71% calc(var(--ea)*0.872),8.33% calc(var(--ea)*0.856),8.96% calc(var(--ea)*0.867),9.58% calc(var(--ea)*0.899),10.26% calc(var(--ea)*0.935),10.99% calc(var(--ea)*0.946),11.72% calc(var(--ea)*0.951),12.55% calc(var(--ea)*0.978),13.44% calc(var(--ea)*1),14.38% calc(var(--ea)*0.935),15.47% calc(var(--ea)*0.902),16.67% calc(var(--ea)*0.897),17.86% calc(var(--ea)*0.845),18.96% calc(var(--ea)*0.899),19.9% calc(var(--ea)*0.908),20.78% calc(var(--ea)*0.861),21.61% calc(var(--ea)*0.823),22.34% calc(var(--ea)*0.848),23.07% calc(var(--ea)*0.807),23.75% calc(var(--ea)*0.769),24.38% calc(var(--ea)*0.753),25% calc(var(--ea)*0.785),25.62% calc(var(--ea)*0.837),26.25% calc(var(--ea)*0.851),26.93% calc(var(--ea)*0.861),27.66% calc(var(--ea)*0.872),28.39% calc(var(--ea)*0.913),29.22% calc(var(--ea)*0.918),30.1% calc(var(--ea)*0.859),31.04% calc(var(--ea)*0.861),32.14% calc(var(--ea)*0.891),33.33% calc(var(--ea)*0.861),34.53% calc(var(--ea)*0.921),35.62% calc(var(--ea)*0.91),36.56% calc(var(--ea)*0.821),37.45% calc(var(--ea)*0.75),38.28% calc(var(--ea)*0.704),39.01% calc(var(--ea)*0.59),39.74% calc(var(--ea)*0.527),40.42% calc(var(--ea)*0.454),41.04% calc(var(--ea)*0.435),41.67% calc(var(--ea)*0.394),42.29% calc(var(--ea)*0.334),42.92% calc(var(--ea)*0.264),43.59% calc(var(--ea)*0.212),44.32% calc(var(--ea)*0.163),45.05% calc(var(--ea)*0.079),45.89% calc(var(--ea)*0.003),46.77% calc(var(--ea)*0),47.71% calc(var(--ea)*0.011),48.8% calc(var(--ea)*0.027),50% calc(var(--ea)*0.082),51.2% calc(var(--ea)*0.101),52.29% calc(var(--ea)*0.065),53.23% calc(var(--ea)*0.063),54.11% calc(var(--ea)*0.071),54.95% calc(var(--ea)*0.087),55.68% calc(var(--ea)*0.117),56.41% calc(var(--ea)*0.193),57.08% calc(var(--ea)*0.25),57.71% calc(var(--ea)*0.264),58.33% calc(var(--ea)*0.25),58.96% calc(var(--ea)*0.296),59.58% calc(var(--ea)*0.342),60.26% calc(var(--ea)*0.351),60.99% calc(var(--ea)*0.329),61.72% calc(var(--ea)*0.329),62.55% calc(var(--ea)*0.38),63.44% calc(var(--ea)*0.454),64.38% calc(var(--ea)*0.47),65.47% calc(var(--ea)*0.522),66.67% calc(var(--ea)*0.53),67.86% calc(var(--ea)*0.505),68.96% calc(var(--ea)*0.53),69.9% calc(var(--ea)*0.549),70.78% calc(var(--ea)*0.522),71.61% calc(var(--ea)*0.576),72.34% calc(var(--ea)*0.617),73.07% calc(var(--ea)*0.584),73.75% calc(var(--ea)*0.538),74.38% calc(var(--ea)*0.492),75% calc(var(--ea)*0.481),75.62% calc(var(--ea)*0.459),76.25% calc(var(--ea)*0.405),76.93% calc(var(--ea)*0.342),77.66% calc(var(--ea)*0.351),78.39% calc(var(--ea)*0.383),79.22% calc(var(--ea)*0.38),80.1% calc(var(--ea)*0.323),81.04% calc(var(--ea)*0.334),82.14% calc(var(--ea)*0.323),83.33% calc(var(--ea)*0.245),84.53% calc(var(--ea)*0.277),85.62% calc(var(--ea)*0.302),86.56% calc(var(--ea)*0.318),87.45% calc(var(--ea)*0.402),88.28% calc(var(--ea)*0.438),89.01% calc(var(--ea)*0.424),89.74% calc(var(--ea)*0.408),90.42% calc(var(--ea)*0.427),91.04% calc(var(--ea)*0.44),91.67% calc(var(--ea)*0.44),92.29% calc(var(--ea)*0.438),92.92% calc(var(--ea)*0.457),93.59% calc(var(--ea)*0.489),94.32% calc(var(--ea)*0.541),95.05% calc(var(--ea)*0.535),95.89% calc(var(--ea)*0.5),96.77% calc(var(--ea)*0.497),97.71% calc(var(--ea)*0.467),98.8% calc(var(--ea)*0.367),100% calc(var(--ea)*0.394),100% 100%)}
+/* edges:end */
+
+/* What sits in the layers. */
+.why{max-width:1240px;margin:0 auto;padding:0 32px}
+.why .wc{max-width:420px;background:rgba(251,250,248,.74);border-radius:14px;padding:20px 24px;box-shadow:0 1px 2px rgba(60,40,20,.08),0 8px 24px rgba(30,50,70,.08)}
+.why .wc p{margin:8px 0 0;font-size:14px;line-height:21px;color:#5E564E}
 .why .wc .serif{margin:0;font-size:20px;line-height:26px;color:var(--ink)}
 .why .wc b{font-weight:600}
+.lay .arc{padding-top:72px}
+.lay .statement{margin-top:0;padding-top:0}
+.lay .maker,.lay .fin{padding-top:0}
+.lay .fin{padding-bottom:0}
+.maker .in{border-top:0;padding-top:0}
+.l3 .maker .tx{color:#2A2521}
 @media (prefers-color-scheme:dark){
- /* Blue hour: the sun never clears the snow, only a faint glow. */
- .sunrise .disc{transform:translateY(250px)}
- .sunrise .band{background:linear-gradient(180deg,rgba(242,190,150,0),rgba(242,190,150,.22))}
- .sunrise .halo{background:radial-gradient(closest-side,rgba(242,196,160,.22),rgba(242,196,160,0))}
- .snowx .sp{fill-opacity:.45}
- .why .wc{background:rgba(43,40,38,.72);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+ .why .wc{background:rgba(43,40,38,.74);box-shadow:0 1px 2px rgba(0,0,0,.2),0 8px 24px rgba(0,0,0,.18)}
+ .why .wc p{color:#D4CDC5}
+ .l3 .maker .tx{color:#E8E2DB}
 }
-/* Footer in the deepest ice layer (replaces the dawn footer on home). */
-.ice{position:relative;z-index:2;margin-top:-2px;padding:32px 32px 40px;background:var(--s5);color:#241F1B;transition:background-color .6s}
+@media (max-width:600px){
+ .lay{padding:calc(var(--ea) + 48px) 0 88px}
+ .why{padding:0 16px}
+ .lay .arc{padding-top:48px}
+}
+
+/* Footer in the deepest layer, glacier ice (replaces the dawn footer on home). */
+.ice{padding:calc(var(--ea) + 40px) 32px 40px;color:#241F1B}
 .ice .in{max-width:1240px;margin:0 auto}
 .ice .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.6fr);gap:40px 32px}
 .ice nav,.ice .built{display:flex;flex-direction:column;align-items:flex-start;gap:12px;font-size:15px;line-height:22px}
@@ -276,28 +349,23 @@ html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C
 .ice .built p{margin:0}
 .ice a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .2s}
 .ice a:hover{text-decoration-color:currentColor}
-.ice svg{width:15px;height:15px;fill:currentColor;flex:none}
+.ice nav svg{width:15px;height:15px;fill:currentColor;flex:none}
 .ice .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(36,31,27,.2);font-size:14px}
 .ice .legal p{margin:0}
 .ice .legal a{display:inline;text-decoration-color:rgba(36,31,27,.4)}
 .ice .legal a:hover{text-decoration-color:currentColor}
 .ice .legal img{height:40px;width:auto;margin:-8px 0 -8px -8px}
-html.at-end,html.at-end body{background:var(--s5)}
+html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 80%,#26394B)}
 @media (prefers-color-scheme:dark){
+ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 90%,#0B121B)}
  .ice{color:#F5F1EC}
  .ice .legal{border-top-color:rgba(245,241,236,.2)}
  .ice .legal a{text-decoration-color:rgba(245,241,236,.4)}
 }
 @media (max-width:900px){.ice .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){
- .sunrise{height:520px}
- .sunrise .disc{transform:translateY(calc(280px - 250px * var(--r)))}
- .snowx{top:40px;height:480px}
- .sunrise .why{top:232px;padding:0 16px}
- .ice{padding:32px 16px max(40px,env(safe-area-inset-bottom))}
+ .ice{padding:calc(var(--ea) + 32px) 16px max(40px,env(safe-area-inset-bottom))}
  .ice .cols{gap:32px 16px}
  .ice .legal{flex-direction:column;text-align:center;margin-top:36px}
  .ice .legal img{margin:-8px 0}
 }
-@media (prefers-reduced-motion:reduce){.snowx path,.ice,.ice a{transition:none}}
-@media (max-width:600px) and (prefers-color-scheme:dark){.sunrise .disc{transform:translateY(280px)}}
