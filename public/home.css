@@ -30,3 +30,35 @@ html,body{background:#1C2130}
 @media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
 @media (max-width:600px){html,body{background:#1C2130}}
 @media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
+
+/* Header and hero on the blue-hour top (step 2): light text in both modes,
+   the on-dark logo, and a small light Download pill. Contrast on #1C2130:
+   #F5F1EC 15:1, #D4CDC5 11:1, #B9B2AA 8:1. */
+.logo-l{display:none}.logo-d{display:block}
+header nav.top{margin-left:auto}
+.hdl{flex:none;padding:9px 16px;border-radius:999px;background:#F5F1EC;color:#2B2826;text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
+.hdl:hover{opacity:.88}
+@media (max-width:600px){.hdl{display:none}}
+/* The header's own links (not the glass menu cards, which keep ink). */
+@media (min-width:601px){html:not(.float-menu) nav.top a{color:#D4CDC5} html:not(.float-menu) nav.top a:hover{color:#F5F1EC}}
+@media (max-width:600px) and (scripting:none){nav.top a{color:#D4CDC5}}
+/* Phone menu button: light lines while it sits on the dark top. */
+@media (max-width:600px){html:not(.float-menu) .menu-btn{color:#F5F1EC}}
+
+.hero{padding-top:104px;padding-bottom:96px;color:#F5F1EC}
+.hero .fl{fill:#9DB7C8}
+.eyebrow{font-size:13px;color:#F5F1EC;background:rgba(245,241,236,.1);border:1px solid rgba(245,241,236,.18);padding:6px 14px;border-radius:999px}
+.hero .lede{color:#D4CDC5}
+.get{margin-top:16px;gap:0}
+.get .row{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:center;align-items:center}
+.hero .btn{background:#F5F1EC;color:#2B2826;border-radius:999px;font-weight:600;padding:0 24px}
+.hero .btn:hover{opacity:.9}
+.try{font-size:15px;color:#D4CDC5;text-decoration:none}
+.try:hover{color:#F5F1EC;text-decoration:underline;text-underline-offset:3px}
+.get .dl-note{margin-top:20px;font-size:13px;color:#B9B2AA}
+.get .dl-mobile{color:#F5F1EC;max-width:320px}
+.get .dl-mobile.soon{margin-top:8px;font-size:14px;color:#D4CDC5}
+@media (max-width:600px){
+ .hero{padding-top:56px;padding-bottom:64px}
+ .get .row{margin-bottom:24px}
+}

@@ -81,6 +81,10 @@ First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
 two `.wg` warm glows) and the grain (`.sheet::after`, the tiled
 `assets/grain-warm.png`, dark `grain-light.png`, 45%). Home's theme-color
 and top background are blue hour (#1C2130 light, #1A1F2D dark).
+Step 2: header and hero always light text on the dark top (on-dark logo,
+`.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
+small print adds "Signed and notarized by Apple.", checked in the app's
+`scripts/release.sh`); phones get two `.dl-mobile` lines instead.
 
 ### First light: the idea (so new parts fit)
 
