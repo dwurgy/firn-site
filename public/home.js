@@ -267,33 +267,48 @@
   });
 })();
 
-// The sky leans toward you (Sunrise step 7): the two warm glows drift a
-// little toward the mouse (up to about 40px, the smaller one a bit more, so
-// they part like light at different depths) and settle back when it leaves
-// the sky. Eased with requestAnimationFrame that stops once they're still:
-// nothing runs at idle. Transform only. Mouse only, off with reduced motion.
-// The pointer position is used here only, never stored or sent.
+// The sky leans toward you (Sunrise step 7): a soft warm light trails the
+// mouse over the sky (it fades in when the mouse is above the snow and out
+// when it leaves), and the two big warm glows drift toward it (up to 90px
+// and 120px, so they part like light at different depths). Eased with
+// requestAnimationFrame that stops once everything is still: nothing runs
+// at idle. Transform and one fading opacity only. Mouse only, off with
+// reduced motion. The pointer position is used here only, never stored or sent.
 (function () {
   var sky = document.querySelector('.sunsky'), sun = document.querySelector('.sunrise');
   if (!sky || !sun || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var gs = [{ el: sky.querySelector('.wg1'), max: 40 }, { el: sky.querySelector('.wg2'), max: 56 }]
+  var lamp = document.createElement('i');
+  lamp.className = 'wg wg3'; sky.appendChild(lamp);
+  var gs = [{ el: sky.querySelector('.wg1'), max: 90 }, { el: sky.querySelector('.wg2'), max: 120 }]
     .filter(function (g) { return g.el; });
   gs.forEach(function (g) { g.x = g.y = g.tx = g.ty = 0; });
-  var running = false;
+  var L = { x: 0, y: 0, tx: 0, ty: 0, placed: false }, running = false;
+  function ease(o, k) {
+    o.x += (o.tx - o.x) * k; o.y += (o.ty - o.y) * k;
+    if (Math.abs(o.tx - o.x) < 0.1 && Math.abs(o.ty - o.y) < 0.1) { o.x = o.tx; o.y = o.ty; return false; }
+    return true;
+  }
   function tick() {
     var moving = false;
     gs.forEach(function (g) {
-      g.x += (g.tx - g.x) * 0.06; g.y += (g.ty - g.y) * 0.06;
-      if (Math.abs(g.tx - g.x) < 0.1 && Math.abs(g.ty - g.y) < 0.1) { g.x = g.tx; g.y = g.ty; }
-      else moving = true;
+      if (ease(g, 0.06)) moving = true;
       g.el.style.transform = 'translate3d(' + g.x.toFixed(2) + 'px,' + g.y.toFixed(2) + 'px,0)';
     });
+    if (ease(L, 0.12)) moving = true;
+    lamp.style.transform = 'translate3d(' + L.x.toFixed(1) + 'px,' + L.y.toFixed(1) + 'px,0)';
     running = moving;
     if (moving) requestAnimationFrame(tick);
   }
   function aim(e) {
     var inSky = e && e.pointerType === 'mouse' && e.clientY < sun.getBoundingClientRect().bottom;
+    lamp.classList.toggle('on', !!inSky);
+    if (!inSky) L.placed = false;
+    if (inSky) {
+      var s = sky.getBoundingClientRect();
+      L.tx = e.clientX - s.left; L.ty = e.clientY - s.top;
+      if (!L.placed) { L.x = L.tx; L.y = L.ty; L.placed = true; }   // appear under the mouse, no swoop
+    }
     gs.forEach(function (g) {
       if (!inSky) { g.tx = g.ty = 0; return; }
       var b = g.el.getBoundingClientRect();

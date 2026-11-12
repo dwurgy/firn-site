@@ -384,3 +384,12 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
  25%{opacity:calc(var(--ga) * var(--gk,1));transform:rotate(calc(var(--gr) + 15deg)) scale(1)}
  100%{opacity:0;transform:rotate(calc(var(--gr) + 45deg)) scale(.3)}}
 @media (prefers-color-scheme:dark){.glints{--gk:.75}}
+
+/* The sky leans toward you (step 7): a soft warm light that trails the
+   mouse over the sky, made by home.js. Plain gradient, moved by transform;
+   only its own opacity fades (no children, so no see-through group). */
+.sunsky .wg3{left:0;top:0;width:760px;height:760px;margin:-380px 0 0 -380px;opacity:0;transition:opacity .8s ease;
+ background:radial-gradient(closest-side,rgba(246,200,162,.2),rgba(246,200,162,.07) 55%,rgba(246,200,162,0))}
+.sunsky .wg3.on{opacity:1}
+@media (prefers-color-scheme:dark){
+ .sunsky .wg3{background:radial-gradient(closest-side,rgba(246,200,162,.14),rgba(246,200,162,.05) 55%,rgba(246,200,162,0))}}
