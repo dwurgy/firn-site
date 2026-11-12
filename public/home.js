@@ -229,3 +229,40 @@
     else { window.removeEventListener('scroll', onScroll); onScroll(); }
   }).observe(el);
 })();
+
+// Sun glints (Sunrise step 7): moving the mouse over the snow's surface
+// lights a few tiny sparkles near it, like low sun on fresh snow. Only in
+// the band above the text (no glint sits on text), more of them near the
+// sun. Mouse only (fine pointer that can hover), off with reduced motion.
+// Each glint is a CSS animation that removes itself: nothing runs when the
+// mouse is still. The pointer position is used here only, never stored or sent.
+(function () {
+  var l1 = document.querySelector('.lay.l1');
+  if (!l1 || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box = document.createElement('div');
+  box.className = 'glints'; box.setAttribute('aria-hidden', 'true');
+  l1.insertBefore(box, l1.firstChild);
+  var lx = null, ly = 0, alive = 0;
+  l1.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    var b = l1.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+    var band = parseFloat(getComputedStyle(l1).paddingTop) - 16;
+    if (y > band + 40) { lx = null; return; }
+    if (lx !== null && Math.hypot(x - lx, y - ly) < 18) return;
+    lx = x; ly = y;
+    var near = 1 - Math.min(1, Math.abs(x / b.width - 0.62) / 0.5);
+    var n = Math.random() < 0.35 + 0.5 * near ? 2 : 1;
+    for (var i = 0; i < n && alive < 24; i++) {
+      var gx = x + (Math.random() - 0.5) * 70, gy = y + (Math.random() - 0.5) * 50;
+      if (gy > band || gy < 4) continue;
+      var g = document.createElement('i');
+      var s = 8 + Math.random() * 8 + 6 * near;
+      g.style.cssText = 'left:' + gx.toFixed(1) + 'px;top:' + gy.toFixed(1) + 'px;--gs:' + s.toFixed(1) +
+        'px;--gd:' + (900 + Math.random() * 600 | 0) + 'ms;--ga:' + (0.55 + 0.45 * near).toFixed(2) +
+        ';--gr:' + (Math.random() * 40 - 20 | 0) + 'deg';
+      g.addEventListener('animationend', function () { this.remove(); alive--; });
+      box.appendChild(g); alive++;
+    }
+  });
+})();
