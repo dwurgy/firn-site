@@ -107,7 +107,7 @@ allowed here only as snow texture (the "no stock photos" exception).
 Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
 on `<html>`). The footer uses the on-dark lockup in both modes (the light
 lockup's flake is the same blue as the Personal ice).
-**Next:** step 6 (the drift, probably dropped: ask David), then 7 to 9.
+**Next:** step 7 (mouse effects); step 6, the drift, is dropped (David, 2026-11-12).
 
 ### First light: the idea (so new parts fit)
 

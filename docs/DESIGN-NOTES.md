@@ -238,3 +238,12 @@ _Moved word for word from CLAUDE.md ("The design is decided"). The rule is kept 
   HTML (`design/share-preview/`) and screenshotted, since Claude Design's
   v6 had the old logo and serif. Every page uses v7 (About, Release
   notes, and Tip jar moved from v5 the same day).
+
+## Snow texture photos
+
+The home page's snow grain (`assets/snow-fresh.webp`, `snow-packed.webp`)
+is made from two photos in `design/firn-sunrise/photos/`:
+`sugary-sunlit.jpg` and `wind-packed.jpg`. David got all the photos there
+from Unsplash or Pexels (2026-11-12). Both licences allow free use and
+changes with no credit required, so no attribution is shown; exact links
+weren't kept. Only the processed tiles are published (`tools/make-snow-tiles.py`).

@@ -14,8 +14,8 @@ and tactile. I want people to want to touch it."
   there are no separate dark tiles: dark mode lays a veil of the layer's
   own colour over the grain instead (`--veil`). Total about 83 KB. The
   layer-1 shadow is left out (it would fall on the sky); the surface gets
-  a warm wash where the sun rises. Still to do: photo source links and
-  licences in `docs/DESIGN-NOTES.md` (ask David).
+  a warm wash where the sun rises. Photo sources: see `docs/DESIGN-NOTES.md`,
+  "Snow texture photos". Step 6 (the drift) is dropped.
 
 ## Changes to the brief
 
