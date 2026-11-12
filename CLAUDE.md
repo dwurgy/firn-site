@@ -94,6 +94,14 @@ and color" (spaces lost icons in the app, 2026-10-26).
 Step 4: `section.arc` (card and three mappings, checked against the app's
 `ArcImport.swift` and File menu), "Less, on purpose." open on the sky (no
 box), `section.maker` and the finale `section.fin` (#download).
+Step 5: `.sunrise` (five snow layers as a static SVG, edges baked in,
+`assets/snow-specks.png` texture; the sun and warm band follow `--r`, set
+from scroll by `home.js`, risen without JS or with reduced motion; dark: sun
+stays behind the snow), the "Why it's called Firn." card, and `footer.ice`
+(home's footer, in the deepest layer; keeps `nav.social` for `edges.js`).
+Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
+on `<html>`). The footer uses the on-dark lockup in both modes (the light
+lockup's flake is the same blue as the Personal ice).
 
 ### First light: the idea (so new parts fit)
 
@@ -295,7 +303,7 @@ Wider screens keep the links in the header; once it scrolls out of view the same
 glass circle appears top-right (in line with the column) and opens a small glass
 card of the links and social logos (end of `site.css`).
 
-**Footer (every page):** the dawn section (sun and snow), always at the
+**Footer (every page but home, which has `footer.ice`):** the dawn section (sun and snow), always at the
 bottom of the page, with plain link columns (no glass) on the sunrise just
 above the snow, so the flakes drawn in the snow's top edge never sit on
 text: **Firn** (About, Release notes, Privacy), **Community** (`nav.social`:

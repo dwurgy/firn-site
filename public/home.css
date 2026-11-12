@@ -225,3 +225,79 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
  .fin h2{font-size:34px}
  .fin .get{margin-top:24px}
 }
+
+/* Step 5: the snow cross-section, the sunrise, and the footer in the ice.
+   Five glacier layers tinted by the try-it window's space (home.js sets
+   data-space on <html>; the sky never changes). The hand-cut edges are
+   baked into the paths in index.html and the specks are a plain tiled
+   image (assets/snow-specks.png), so nothing is filtered while you scroll.
+   The sun and the warm band move with --r (0 to 1), which home.js sets
+   from scroll; without JS or with reduced motion it stays 1 (risen). */
+:root{--s1:#DCE5EB;--s2:#C3D3DE;--s3:#A6BFCF;--s4:#8AABC0;--s5:#6E98B2}
+html[data-space="1"]{--s1:#E0E8DE;--s2:#CBD9C8;--s3:#B5CAB2;--s4:#A1BC9D;--s5:#8FAE8B}
+html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C9A27E}
+@media (prefers-color-scheme:dark){
+ :root{--s1:#536777;--s2:#4A5B69;--s3:#42505C;--s4:#3B4350;--s5:#34353A}
+ html[data-space="1"]{--s1:#62725E;--s2:#586453;--s3:#4F584A;--s4:#474E42;--s5:#3F433A}
+ html[data-space="2"]{--s1:#826B56;--s2:#725F4E;--s3:#645446;--s4:#574A3F;--s5:#4B4038}
+}
+.sunrise{--r:1;position:relative;z-index:1;height:620px}
+.sunrise .band,.sunrise .halo{position:absolute;left:0;right:0;opacity:calc(.36 + .64 * var(--r));will-change:opacity;pointer-events:none}
+.sunrise .band{top:40px;height:260px;background:linear-gradient(180deg,rgba(242,190,150,0),rgba(242,190,150,.7))}
+.sunrise .halo{top:-260px;height:620px;background:radial-gradient(closest-side,rgba(242,196,160,.7),rgba(242,196,160,0))}
+.sunrise .disc{position:absolute;left:62%;top:0;width:150px;height:150px;margin-left:-75px;border-radius:50%;
+ background:radial-gradient(circle at 50% 42%,#FCE6CF 0%,#F6C49A 55%,#EFA978 100%);
+ box-shadow:0 0 60px 20px rgba(242,170,120,.55),0 0 160px 80px rgba(242,196,160,.45);
+ transform:translateY(calc(250px - 300px * var(--r)));will-change:transform}
+.snowx{position:absolute;left:0;top:60px;width:100%;height:560px;display:block}
+.snowx .l1{fill:var(--s1)}.snowx .l2{fill:var(--s2)}.snowx .l3{fill:var(--s3)}.snowx .l4{fill:var(--s4)}.snowx .l5{fill:var(--s5)}
+.snowx path{transition:fill .6s}
+.snowx .sp{fill:url(#specks);fill-opacity:.8;transition:none}
+.sunrise .why{position:absolute;left:0;right:0;top:260px;max-width:1240px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.why .wc{max-width:420px;background:rgba(251,250,248,.72);border-radius:14px;padding:20px 24px;box-shadow:0 1px 2px rgba(60,40,20,.08)}
+.why .wc p{margin:8px 0 0;font-size:14px;line-height:21px;color:var(--muted)}
+.why .wc .serif{margin:0;font-size:20px;line-height:26px;color:var(--ink)}
+.why .wc b{font-weight:600}
+@media (prefers-color-scheme:dark){
+ /* Blue hour: the sun never clears the snow, only a faint glow. */
+ .sunrise .disc{transform:translateY(250px)}
+ .sunrise .band{background:linear-gradient(180deg,rgba(242,190,150,0),rgba(242,190,150,.22))}
+ .sunrise .halo{background:radial-gradient(closest-side,rgba(242,196,160,.22),rgba(242,196,160,0))}
+ .snowx .sp{fill-opacity:.45}
+ .why .wc{background:rgba(43,40,38,.72);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+}
+/* Footer in the deepest ice layer (replaces the dawn footer on home). */
+.ice{position:relative;z-index:2;margin-top:-2px;padding:32px 32px 40px;background:var(--s5);color:#241F1B;transition:background-color .6s}
+.ice .in{max-width:1240px;margin:0 auto}
+.ice .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.6fr);gap:40px 32px}
+.ice nav,.ice .built{display:flex;flex-direction:column;align-items:flex-start;gap:12px;font-size:15px;line-height:22px}
+.ice .fh{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ice .built .fh{margin:0}
+.ice .built p{margin:0}
+.ice a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .2s}
+.ice a:hover{text-decoration-color:currentColor}
+.ice svg{width:15px;height:15px;fill:currentColor;flex:none}
+.ice .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(36,31,27,.2);font-size:14px}
+.ice .legal p{margin:0}
+.ice .legal a{display:inline;text-decoration-color:rgba(36,31,27,.4)}
+.ice .legal a:hover{text-decoration-color:currentColor}
+.ice .legal img{height:40px;width:auto;margin:-8px 0 -8px -8px}
+html.at-end,html.at-end body{background:var(--s5)}
+@media (prefers-color-scheme:dark){
+ .ice{color:#F5F1EC}
+ .ice .legal{border-top-color:rgba(245,241,236,.2)}
+ .ice .legal a{text-decoration-color:rgba(245,241,236,.4)}
+}
+@media (max-width:900px){.ice .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+ .sunrise{height:520px}
+ .sunrise .disc{transform:translateY(calc(280px - 250px * var(--r)))}
+ .snowx{top:40px;height:480px}
+ .sunrise .why{top:232px;padding:0 16px}
+ .ice{padding:32px 16px max(40px,env(safe-area-inset-bottom))}
+ .ice .cols{gap:32px 16px}
+ .ice .legal{flex-direction:column;text-align:center;margin-top:36px}
+ .ice .legal img{margin:-8px 0}
+}
+@media (prefers-reduced-motion:reduce){.snowx path,.ice,.ice a{transition:none}}
+@media (max-width:600px) and (prefers-color-scheme:dark){.sunrise .disc{transform:translateY(280px)}}

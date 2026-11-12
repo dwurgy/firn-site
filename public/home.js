@@ -131,6 +131,8 @@
   function render(focusKey) {
     var a = document.activeElement, key = focusKey || (a && win.contains(a) ? a.getAttribute('data-k') : null);
     win.style.setProperty('--sc', D[st.space].color);
+    // The finale snow and the footer ice take this space's colours (home.css).
+    if (document.documentElement.getAttribute('data-space') !== String(st.space)) document.documentElement.setAttribute('data-space', st.space);
     win.innerHTML = '<div class="side">' + sidebar() + '</div><div class="area">' + area() + '</div>';
     if (key) { var f = win.querySelector('[data-k="' + key + '"]'); if (f) f.focus(); }
     var tc = document.querySelectorAll('.tc');
@@ -202,4 +204,28 @@
 
   document.documentElement.classList.add('try-ready');
   render();
+})();
+
+// The finale sunrise: as the snow scrolls into view the sun rises about
+// 300px and the warm band brightens (home.css reads --r, 0 to 1). Scroll is
+// only listened to while the snow is on screen, so there's no work at idle
+// or elsewhere on the page. With reduced motion it stays risen (CSS default).
+(function () {
+  var el = document.querySelector('.sunrise');
+  if (!el || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var queued = false, last = -1;
+  function update() {
+    queued = false;
+    var b = el.getBoundingClientRect(), vh = window.innerHeight;
+    var r = Math.max(0, Math.min(1, (vh - b.top) / (b.height * 0.85)));
+    r = Math.round(r * 200) / 200;
+    if (r !== last) { last = r; el.style.setProperty('--r', r); }
+  }
+  function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  update();
+  new IntersectionObserver(function (es) {
+    if (es[0].isIntersecting) { window.addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
+    else { window.removeEventListener('scroll', onScroll); onScroll(); }
+  }).observe(el);
 })();
