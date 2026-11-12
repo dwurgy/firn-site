@@ -85,6 +85,12 @@ Step 2: header and hero always light text on the dark top (on-dark logo,
 `.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
 small print adds "Signed and notarized by Apple.", checked in the app's
 `scripts/release.sh`); phones get two `.dl-mobile` lines instead.
+Step 3: `section.tryit` (#try): the try-it window `#win`, drawn by
+`public/home.js` (three made-up spaces, Basecamp, a group, Lookout, split
+view with a draggable gap; sidebar tinted by `--sc`, matched to the app's
+`docs/screenshots`), four `.tc` tour cards, then the real screenshot
+(`.stage`). Without JS only the screenshot shows. Spaces card says "tabs
+and color" (spaces lost icons in the app, 2026-10-26).
 
 ### First light: the idea (so new parts fit)
 
@@ -395,10 +401,8 @@ Peak website with a tent in a grassy field at dusk on the right." A new
 picture gets a new file name (v5, …); update the HTML, its size and the alt
 text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
 
-**Home features:** under "All the good ideas. None of the homework.", four
-rows of still screenshots (`<picture class="clip">`, `firn-spaces-v1`, …),
-until the Sunrise try-it window replaces them (step 3). The old feature
-videos and `loops.js` were deleted on 2026-11-12.
+**Home features:** replaced by the try-it window and tour cards (Sunrise
+step 3, 2026-11-12); the old videos, `loops.js` and feature stills are gone.
 
 **iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): on phones (600px
 and narrower) `html`/`body` and the phone-only theme-color tags use #DDE3E7
@@ -425,12 +429,12 @@ landscape (the footer links sit high above the home indicator). iOS text autosiz
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
-`home.css`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+`home.css`, `home.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
 **Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
-`edges.js?v=N` (home also `home.css?v=N`): when you change one of those
+`edges.js?v=N` (home also `home.css?v=N` and `home.js?v=N`): when you change one of those
 files, raise its `N` on every page that links it, so browsers fetch the new
 copy. `public/_headers` also tells browsers to check for a newer CSS or JS
 file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
