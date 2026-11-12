@@ -393,3 +393,17 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
 .sunsky .wg3.on{opacity:1}
 @media (prefers-color-scheme:dark){
  .sunsky .wg3{background:radial-gradient(closest-side,rgba(246,200,162,.11),rgba(246,200,162,.04) 55%,rgba(246,200,162,0))}}
+
+/* Frost breath (step 7): home.js adds .breath to the footer ice and soft
+   puffs of fog where the mouse moves, under the text. Plain gradients,
+   transform and opacity only; each one clears and is removed. */
+.ice .in{position:relative;z-index:1}
+.breath{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.breath i{position:absolute;width:var(--bs);height:var(--bs);margin:calc(var(--bs) / -2) 0 0 calc(var(--bs) / -2);
+ opacity:0;animation:breath var(--bd) ease-out forwards;
+ background:radial-gradient(closest-side,rgba(255,255,255,.34),rgba(240,248,255,.16) 55%,rgba(240,248,255,0))}
+@keyframes breath{
+ 0%{opacity:0;transform:scale(.55)}
+ 15%{opacity:var(--bk,1);transform:scale(.95)}
+ 100%{opacity:0;transform:scale(1.3)}}
+@media (prefers-color-scheme:dark){.breath{--bk:.55}}

@@ -322,3 +322,32 @@
   document.addEventListener('pointermove', aim, { passive: true });
   document.documentElement.addEventListener('pointerleave', function () { aim(null); });
 })();
+
+// Frost breath (Sunrise step 7): moving the mouse over the footer ice
+// fogs it softly where the mouse goes, like breath on cold glass, and the
+// fog clears again in a few seconds. Under the text, never over it. Mouse
+// only (fine pointer that can hover), off with reduced motion. Each puff is
+// a CSS animation that removes itself: nothing runs when the mouse is still.
+// The pointer position is used here only, never stored or sent.
+(function () {
+  var ice = document.querySelector('footer.ice');
+  if (!ice || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box = document.createElement('div');
+  box.className = 'breath'; box.setAttribute('aria-hidden', 'true');
+  ice.insertBefore(box, ice.firstChild);
+  var lx = null, ly = 0, alive = 0;
+  ice.addEventListener('pointerleave', function () { lx = null; });
+  ice.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse' || alive >= 16) return;
+    var b = ice.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+    if (lx !== null && Math.hypot(x - lx, y - ly) < 36) return;
+    lx = x; ly = y;
+    var p = document.createElement('i'), s = 110 + Math.random() * 60;
+    p.style.cssText = 'left:' + (x + (Math.random() - 0.5) * 16).toFixed(1) + 'px;top:' +
+      (y + (Math.random() - 0.5) * 16).toFixed(1) + 'px;--bs:' + s.toFixed(0) + 'px;--bd:' +
+      (2600 + Math.random() * 1200 | 0) + 'ms';
+    p.addEventListener('animationend', function () { this.remove(); alive--; });
+    box.appendChild(p); alive++;
+  });
+})();
