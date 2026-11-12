@@ -102,6 +102,9 @@ stays behind the snow), the "Why it's called Firn." card, and `footer.ice`
 Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
 on `<html>`). The footer uses the on-dark lockup in both modes (the light
 lockup's flake is the same blue as the Personal ice).
+**Next: "dig down"** (approved 2026-11-12, not built yet): read
+`design/firn-sunrise/DIG-DOWN-PLAN.md` first. It replaces step 5's snow and
+drops the page grain.
 
 ### First light: the idea (so new parts fit)
 
