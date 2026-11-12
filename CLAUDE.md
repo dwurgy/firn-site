@@ -91,6 +91,9 @@ view with a draggable gap; sidebar tinted by `--sc`, matched to the app's
 `docs/screenshots`), four `.tc` tour cards, then the real screenshot
 (`.stage`). Without JS only the screenshot shows. Spaces card says "tabs
 and color" (spaces lost icons in the app, 2026-10-26).
+Step 4: `section.arc` (card and three mappings, checked against the app's
+`ArcImport.swift` and File menu), "Less, on purpose." open on the sky (no
+box), `section.maker` and the finale `section.fin` (#download).
 
 ### First light: the idea (so new parts fit)
 

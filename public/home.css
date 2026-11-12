@@ -175,3 +175,53 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
  .dot{width:24px;height:24px}
  .stage{padding-top:56px}
 }
+
+/* Arc, Less on purpose, Who's making it, and the finale (step 4). These sit
+   on the light morning sky (dark mode: still blue hour), so they use the
+   site's ink and muted colours, which flip in dark mode. */
+.arc,.maker,.fin{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:160px 32px 0}
+.arc .card{display:flex;flex-wrap:wrap;align-items:center;gap:40px 56px;padding:48px;border-radius:20px;background:rgba(251,250,248,.88);box-shadow:0 10px 40px rgba(40,28,16,.12)}
+.arc .tx{flex:1 1 340px;min-width:0}
+.arc h2{margin:0;text-align:left;font-size:40px;line-height:1.15;font-weight:400}
+.arc h2 .em,.fin h2 .em{font-weight:600}
+.arc p{margin:16px 0 0;font-size:16px;line-height:1.56;color:var(--muted)}
+.arc p+p{margin-top:12px}
+.map{flex:1 1 300px;min-width:0;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.map li{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:#FBFAF8;border:1px solid #EFEBE5;font-size:15px}
+.map span{color:var(--muted)}.map i{font-style:normal;color:var(--faint)}.map b{font-weight:600}
+@media (prefers-color-scheme:dark){
+ .arc .card{background:rgba(43,40,38,.88);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+ .map li{background:rgba(255,250,245,.05);border-color:rgba(255,250,245,.1)}
+}
+/* "Less, on purpose." keeps its words; it now sits open on the sky. */
+.statement{margin-top:0;padding-top:160px}
+.statement .box{background:none;padding:0;border-radius:0;overflow:visible}
+.statement .wm{display:none}
+.statement h2{margin-bottom:48px}
+.lg{gap:40px 64px}
+.lg h3{font-weight:600}
+.lg p{font-size:15px}
+.maker .in{display:flex;flex-wrap:wrap;gap:24px 64px;padding-top:40px;border-top:1px solid rgba(36,31,27,.14)}
+.maker h2{flex:1 1 200px;margin:0;text-align:left;font:600 15px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif}
+.maker .tx{flex:999 1 520px;min-width:0;font-size:18px;line-height:1.6;color:#3A332D}
+.maker p{margin:0}.maker p+p{margin-top:16px}
+.maker a{color:inherit;text-underline-offset:3px}
+.maker .more{display:inline-block;margin-top:20px;font-size:15px;font-weight:600;color:var(--ink)}
+@media (prefers-color-scheme:dark){.maker .in{border-top-color:rgba(245,241,236,.16)}.maker .tx{color:#D4CDC5}}
+.fin{padding-top:180px;padding-bottom:120px;text-align:center}
+.fin h2{margin:0;font-size:48px;line-height:1.15;font-weight:400}
+.fin .get{margin-top:32px;gap:18px}
+.fin .btn{border-radius:999px;font-weight:600;padding:0 24px}
+.fin .btn:hover{opacity:.88}
+.fin .get .dl-note{margin-top:0;font-size:13px;color:var(--muted)}
+.fin .get .dl-mobile{color:var(--ink)}
+@media (max-width:600px){
+ .arc,.maker,.fin{padding:96px 16px 0}
+ .arc .card{padding:28px 22px;gap:28px}
+ .arc h2{font-size:30px}
+ .statement{padding-top:96px}
+ .maker .tx{font-size:17px}
+ .fin{padding-top:112px;padding-bottom:80px}
+ .fin h2{font-size:34px}
+ .fin .get{margin-top:24px}
+}
