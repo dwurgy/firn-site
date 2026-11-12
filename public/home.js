@@ -257,9 +257,9 @@
       var gx = x + (Math.random() - 0.5) * 70, gy = y + (Math.random() - 0.5) * 50;
       if (gy > band || gy < 4) continue;
       var g = document.createElement('i');
-      var s = 8 + Math.random() * 8 + 6 * near;
+      var s = 10 + Math.random() * 8 + 6 * near;
       g.style.cssText = 'left:' + gx.toFixed(1) + 'px;top:' + gy.toFixed(1) + 'px;--gs:' + s.toFixed(1) +
-        'px;--gd:' + (900 + Math.random() * 600 | 0) + 'ms;--ga:' + (0.55 + 0.45 * near).toFixed(2) +
+        'px;--gd:' + (900 + Math.random() * 600 | 0) + 'ms;--ga:' + (0.75 + 0.25 * near).toFixed(2) +
         ';--gr:' + (Math.random() * 40 - 20 | 0) + 'deg';
       g.addEventListener('animationend', function () { this.remove(); alive--; });
       box.appendChild(g); alive++;

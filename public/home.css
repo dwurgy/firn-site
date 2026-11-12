@@ -375,12 +375,12 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
 .glints{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .glints i{position:absolute;width:var(--gs);height:var(--gs);margin:calc(var(--gs) / -2) 0 0 calc(var(--gs) / -2);
  opacity:0;animation:glint var(--gd) ease-out forwards}
-.glints i::before,.glints i::after{content:"";position:absolute;left:50%;top:0;width:1.5px;height:100%;margin-left:-.75px;
+.glints i::before,.glints i::after{content:"";position:absolute;left:50%;top:0;width:2px;height:100%;margin-left:-1px;
  border-radius:1px;background:linear-gradient(rgba(255,250,240,0),#FFFBF4 50%,rgba(255,250,240,0))}
 .glints i::after{transform:rotate(90deg)}
-.glints i{background:radial-gradient(closest-side,#FFFFFF,rgba(255,236,210,.7) 30%,rgba(255,236,210,0))}
+.glints i{background:radial-gradient(closest-side,#FFFFFF,rgba(255,236,210,.85) 35%,rgba(255,236,210,0))}
 @keyframes glint{
  0%{opacity:0;transform:rotate(var(--gr)) scale(.2)}
  25%{opacity:calc(var(--ga) * var(--gk,1));transform:rotate(calc(var(--gr) + 15deg)) scale(1)}
  100%{opacity:0;transform:rotate(calc(var(--gr) + 45deg)) scale(.3)}}
-@media (prefers-color-scheme:dark){.glints{--gk:.6}}
+@media (prefers-color-scheme:dark){.glints{--gk:.75}}
