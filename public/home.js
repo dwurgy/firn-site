@@ -266,3 +266,44 @@
     }
   });
 })();
+
+// The sky leans toward you (Sunrise step 7): the two warm glows drift a
+// little toward the mouse (up to about 40px, the smaller one a bit more, so
+// they part like light at different depths) and settle back when it leaves
+// the sky. Eased with requestAnimationFrame that stops once they're still:
+// nothing runs at idle. Transform only. Mouse only, off with reduced motion.
+// The pointer position is used here only, never stored or sent.
+(function () {
+  var sky = document.querySelector('.sunsky'), sun = document.querySelector('.sunrise');
+  if (!sky || !sun || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var gs = [{ el: sky.querySelector('.wg1'), max: 40 }, { el: sky.querySelector('.wg2'), max: 56 }]
+    .filter(function (g) { return g.el; });
+  gs.forEach(function (g) { g.x = g.y = g.tx = g.ty = 0; });
+  var running = false;
+  function tick() {
+    var moving = false;
+    gs.forEach(function (g) {
+      g.x += (g.tx - g.x) * 0.06; g.y += (g.ty - g.y) * 0.06;
+      if (Math.abs(g.tx - g.x) < 0.1 && Math.abs(g.ty - g.y) < 0.1) { g.x = g.tx; g.y = g.ty; }
+      else moving = true;
+      g.el.style.transform = 'translate3d(' + g.x.toFixed(2) + 'px,' + g.y.toFixed(2) + 'px,0)';
+    });
+    running = moving;
+    if (moving) requestAnimationFrame(tick);
+  }
+  function aim(e) {
+    var inSky = e && e.pointerType === 'mouse' && e.clientY < sun.getBoundingClientRect().bottom;
+    gs.forEach(function (g) {
+      if (!inSky) { g.tx = g.ty = 0; return; }
+      var b = g.el.getBoundingClientRect();
+      var dx = (e.clientX - (b.left + b.width / 2)) / (b.width / 2);
+      var dy = (e.clientY - (b.top + b.height / 2)) / (b.height / 2);
+      var d = Math.hypot(dx, dy), k = d > 1 ? 1 / d : 1;   // full lean at the glow's edge and beyond
+      g.tx = dx * k * g.max; g.ty = dy * k * g.max * 0.6;
+    });
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  document.addEventListener('pointermove', aim, { passive: true });
+  document.documentElement.addEventListener('pointerleave', function () { aim(null); });
+})();
