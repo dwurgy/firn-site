@@ -187,6 +187,16 @@ password or any other secret in this repo.
     `fonts.firnbrowser.com`, set static `Cache-Control: public,
     max-age=31536000, immutable`. Because of this, a changed font gets a new
     file name (and new URLs in `site.css` and the preloads).
+- **Web Analytics (added 2026-11):** Analytics & Logs → Web Analytics, site
+  firnbrowser.com, one-click (automatic) setup. Cloudflare injects
+  `https://static.cloudflareinsights.com/beacon.min.js` into every page at the
+  edge, so it isn't in this repo. Per Cloudflare's docs it sets no cookies or
+  storage, doesn't fingerprint, and discards the IP address. The Privacy
+  page's "What this website collects" describes it; if this is turned off or
+  changed, update that section.
+- **Email Address Obfuscation:** keep off (Security → Settings, filter
+  "Client-side abuse"). It adds a script and shows "[email protected]"
+  without JavaScript.
 
 ## About page
 

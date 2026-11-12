@@ -198,12 +198,15 @@ edges to survive Android's circle crop.
 
 Firn's promise is privacy, so the website keeps it too:
 
-- No third-party scripts, fonts, trackers, embeds or analytics. Everything
-  loads from firnbrowser.com (the headline fonts from fonts.firnbrowser.com,
-  David's own domain, so still nothing from a third party).
-- Visitor counts, if any, only via Cloudflare Web Analytics (cookieless).
-  Ask David before turning it on.
-- No cookies.
+- Cloudflare Web Analytics is ON (one-click setup in the dashboard, since
+  2026-11): Cloudflare injects `beacon.min.js` from
+  static.cloudflareinsights.com. Cookieless, no storage, no fingerprinting.
+  It's the only third-party script; the Privacy page's "What this website
+  collects" says what it records. Keep that section true if the setup changes.
+- Anything else third-party (scripts, fonts, trackers, embeds, analytics)
+  needs David's OK first. Everything else loads from firnbrowser.com (the
+  headline fonts from fonts.firnbrowser.com, David's own domain).
+- No cookies of our own.
 - No forms that collect anything. (Until Firn came out the home page had an
   email sign-up, stored only on David's Cloudflare account. It was removed;
   David exported the list to send the one promised email.)
@@ -237,6 +240,8 @@ Never put a password or any other secret in this repo.
   the Functions request allowance.
 - **Fonts:** R2 bucket `firn-fonts` on fonts.firnbrowser.com, with a CORS
   rule and a one-year cache (details in `docs/DESIGN-NOTES.md`).
+- **Web Analytics:** on for firnbrowser.com, one-click setup (Cloudflare adds
+  the beacon at the edge; it's not in this repo).
 - The email sign-up's database, secret and rate-limiting rule were removed
   from the dashboard.
 
@@ -324,7 +329,7 @@ Threads accounts: @firnbrowser (major releases; also the footer logo) and
 David's @dwurgy (day to day). Reddit is gone (it points to Discord now).
 
 **Privacy:** from `docs/privacy-page.md` in `dwurgy/firn`, checked against
-the app's code, plus a "This website" section. Every line must be literally
+the app's code, plus a "What this website collects" section. Every line must be literally
 true. When the app starts sending something new (e.g. passwords syncing via
 iCloud Keychain once the iOS app ships), update this page first.
 
