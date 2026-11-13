@@ -9,7 +9,6 @@
 --shadow-win:0 2px 8px rgba(40,28,16,.14),0 18px 48px rgba(40,28,16,.22);
 --shadow-field:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.07);
 --sky-cool:rgba(157,183,200,.30);--sky-warm:rgba(242,196,160,.42);--sky-warm2:rgba(236,206,186,.30);--sky-top:#F4F6F7;
---light-1:#9DB7C8;--light-2:#F0CBA8;--light-3:#B9CDB5;--light-4:#E2CBB3;--light-op:.5;
 --glass:rgba(251,250,248,.58);--glass-edge:rgba(255,255,255,.65);--glass-shadow:0 1px 2px rgba(40,60,80,.08),0 8px 24px rgba(40,60,80,.12);
 --win-glass:rgba(233,227,218,.62);--tile:rgba(255,255,255,.5);--tile-on:rgba(255,255,255,.78);
 --panel:linear-gradient(160deg,#EEF2F4,#F6EEE6);--wm-op:.10;
@@ -23,7 +22,6 @@
 --shadow-win:0 2px 8px rgba(0,0,0,.3),0 18px 48px rgba(0,0,0,.4);
 --shadow-field:0 1px 2px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.18);
 --sky-cool:rgba(110,152,178,.22);--sky-warm:rgba(214,146,104,.16);--sky-warm2:rgba(160,120,110,.10);--sky-top:#2E2F31;
---light-1:#4E6E84;--light-2:#7A5A48;--light-3:#4F6250;--light-4:#5B5070;--light-op:.55;
 --glass:rgba(43,40,38,.55);--glass-edge:rgba(255,250,245,.10);--glass-shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.3);
 --win-glass:rgba(58,55,52,.62);--tile:rgba(255,250,245,.08);--tile-on:rgba(255,250,245,.14);
 --panel:linear-gradient(160deg,rgba(110,152,178,.10),rgba(214,146,104,.07));--wm-op:.10;
@@ -73,10 +71,8 @@ nav.top a.home{display:none} /* Home shows only inside the menus (phone menu and
 .lede{margin:0;font-size:19px;line-height:1.55;color:var(--muted)}
 /* stage: window on colour light */
 .stage{position:relative;margin-top:72px;padding:64px 32px 72px}
-.light{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--light-op);pointer-events:none}
 /* features */
 h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:center}
-.feats{position:relative;z-index:2;max-width:1040px;width:100%;margin:0 auto;padding:96px 32px 24px}
 /* statement */
 .statement{position:relative;z-index:2;max-width:1040px;width:100%;margin:96px auto 0;padding:0 32px}
 .statement .box{position:relative;overflow:hidden;border-radius:20px;background:var(--panel);padding:72px 64px}
@@ -181,7 +177,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
  .eyebrow{font-size:14px}
  .hero h1{font-size:min(46px,calc((100vw - 48px) / 7.4));line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
  .stage{margin-top:28px;padding:40px 16px 48px}
- .feats{padding:64px 24px 16px}h2{font-size:30px;margin-bottom:28px}
+ h2{font-size:30px;margin-bottom:28px}
  .statement{margin-top:56px;padding:0 16px}.statement .box{padding:44px 24px}.statement h2{font-size:34px;margin-bottom:28px}
  .statement .wm{width:280px;height:280px;right:-80px;top:-60px}
  .lg{grid-template-columns:1fr;gap:24px}
@@ -194,7 +190,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
  .dawn .sun{width:760px;height:380px;bottom:-40px}
  .hero .fl{display:none}
  .sky{height:820px}.sky.short{height:560px}
- .light{width:240px !important;height:190px !important;filter:blur(44px)}
 }
 
 /* Live-site additions (not in the design files) */
@@ -208,26 +203,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
    width/height in the HTML keep its space while it loads. */
 .shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
 .shot img{display:block;width:100%;height:auto}
-/* Home features: four rows, the text (dot, title, description) on one side
-   and a screenshot of the feature on the other (60% of the width; light or
-   dark to match the visitor), switching sides each row. Framed like the
-   hero screenshot: rounded corners and the same soft warm shadow, no
-   backdrop blur. (.clip also fits a looping <video>, for when loops return.)
-   On phones the text sits above a full-width screenshot. */
-.tour{display:grid;gap:96px}
-.feat{display:grid;grid-template-columns:minmax(0,1fr) 60%;gap:56px;align-items:center}
-.feat:nth-child(even){grid-template-columns:60% minmax(0,1fr)}
-.feat:nth-child(even) .txt{order:2}
-.feat em{display:block;width:10px;height:10px;border-radius:99px;margin-bottom:18px}
-.feat h3{margin:0 0 8px;font-size:22px;font-weight:600}.feat p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
-.clip{display:block;width:100%;height:auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win);background:var(--frame)}
-.clip img{display:block;width:100%;height:auto}
-@media (max-width:600px){
- .tour{gap:56px}
- .feat,.feat:nth-child(even){grid-template-columns:1fr;gap:20px}
- .feat:nth-child(even) .txt{order:0}
- .feat h3{font-size:19px}.feat p{font-size:16px}
-}
 /* Smooth scrolling. The design window's live backdrop blur, combined with
    the full-page grain blending on top of it, made the browser redo a large
    blur and blend on every scroll frame (about 20 fps over the haze). So
@@ -268,22 +243,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    below the page (behind its toolbar) continues the snow. */
 html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
-/* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
-   light behind the window was four big filter: blur(70px) patches, which
-   Gecko redoes on every scroll frame; a soft SVG mask in their place was
-   still slow there. Now each patch is a plain radial gradient (--g), the
-   cheapest thing to draw: its colour (--c, set inline in index.html) fading
-   out along the same curve as the old blur (measured, within 6% of it),
-   with the light's strength (--o) built into the colours, so nothing needs
-   a separate see-through layer. The gradient reaches 175px past the patch
-   (110px on phones), where the blur had faded out. */
-.light{filter:none;opacity:1;--o:var(--light-op)}
-.light::before{content:"";position:absolute;inset:-175px;background:var(--g)}
-.stage .light:nth-child(1){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(99.3% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(97.6% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(93.7% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(86.4% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(75.1% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(60.4% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(44.2% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(28.8% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(16.3% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(7.9% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(3.1% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.9% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(2){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(99.6% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(99.4% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(98.1% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(95% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(89.2% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(80.2% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(67.6% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(52.9% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(37.8% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(24.2% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(13.6% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(6.6% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2.6% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.8% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(3){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(99.7% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(98.8% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(96.4% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(91.3% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(82.9% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(70.8% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(56.1% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(40.4% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(26% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(14.7% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(7.1% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2.8% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.8% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(4){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(96.1% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(94.8% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(91.1% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(84.9% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(76% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(64.6% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(51.8% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(38.7% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(26.6% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(16.6% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(9.3% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(4.6% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(1.9% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.6% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-@media (max-width:600px){.light::before{inset:-110px}.stage .light:nth-child(n){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(96.9% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(95.6% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(92.4% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(86.5% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(78% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(66.8% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(53.9% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(40.4% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(27.9% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(17.5% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(9.8% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(4.8% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.6% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}}
 /* Smooth scrolling in Firefox-based browsers, part 2. The grain blended
    (mix-blend-mode) over the whole page, which Gecko redoes on every scroll
    frame. Now it's a plain see-through texture, no blending. Light mode:

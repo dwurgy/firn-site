@@ -114,8 +114,8 @@ frost breath on the footer ice (`.breath`). Step 6, the drift, is dropped.
 Step 8a/8b done: text haloes for contrast; home focus ring is solid frost (#CFE3EF on dark, #16304A on light snow; `home.css`), and the try-it window announces changes to screen readers (`home.js`, `announce`).
 Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screenshot lazy, home header has only the on-dark logo. Phone scroll smooth at 4× slowdown. Open: on 1440px in headless Chrome the snow layers' `clip-path` edges drop frames (no GPU there); fix only if it stutters on a real Mac.
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
-**Next, not done until (David, 2026-11-13):** tidy away the old website's
-leftovers; remove the About page; overhaul Privacy, Support, and the other
+**Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
+leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); remove the About page; overhaul Privacy, Support, and the other
 inner pages to match Sunrise; then a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
@@ -168,9 +168,7 @@ Rules (the investigation, numbers and history are in `docs/DESIGN-NOTES.md`,
 - No large `backdrop-filter` panels. Small glass pieces (menu, cards) are
   fine. The window (the screenshot) has none.
 - No large `filter: blur()`, image masks, or see-through groups on anything
-  that scrolls; use plain gradients or images. Each `.light` is a plain radial
-  gradient (`--g`, `closest-side`; its colour `--c` is set inline in
-  `index.html`) with no filter and no opacity.
+  that scrolls; use plain gradients or images.
 - No `mix-blend-mode` on anything big, and no full-page blended layer above
   blurred pieces. The grain is a plain see-through texture under the content
   (`.sheet::after{z-index:0}`, at the end of `public/site.css`).
