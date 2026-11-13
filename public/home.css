@@ -260,8 +260,12 @@ html[data-space="1"]{--s1:#E0E8DE;--s2:#CBD9C8;--s3:#B5CAB2;--s4:#A1BC9D;--s5:#8
 html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C9A27E}
 @media (prefers-color-scheme:dark){
  :root{--s1:#536777;--s2:#4A5B69;--s3:#42505C;--s4:#3B4350;--s5:#34353A}
- html[data-space="1"]{--s1:#62725E;--s2:#586453;--s3:#4F584A;--s4:#474E42;--s5:#3F433A}
- html[data-space="2"]{--s1:#826B56;--s2:#725F4E;--s3:#645446;--s4:#574A3F;--s5:#4B4038}
+ /* Blue-hour snow in every space, only the light on it shifts: Personal's
+    colours with the hue turned a little (OKLCH, same lightness and chroma),
+    Work 30% toward its sage (cool teal), Kitchen 20% toward its sand by way
+    of rose (alpenglow). Full turns read as green or brown ground. */
+ html[data-space="1"]{--s1:#4D6A70;--s2:#455E63;--s3:#3D5257;--s4:#35454D;--s5:#32363A}
+ html[data-space="2"]{--s1:#5F6379;--s2:#55576A;--s3:#4B4D5D;--s4:#44404E;--s5:#373439}
 }
 @media (max-width:600px){:root{--ea:36px;--ea1:56px}}
 
