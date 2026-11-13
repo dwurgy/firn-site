@@ -43,7 +43,7 @@
       link: 'Something worth a glance', s1: '#E9E3DA', s2: '#F4F1EC', c1: '#D9D0C4', c2: '#C7BBAC', letter: t[1], fav: t[2] };
   }
 
-  var st = { space: 0, active: 2, lookout: false, split: false, frac: 0.5, open: [true, true, true], extra: [[], [], []], tour: -1 };
+  var st = { space: 0, active: 2, lookout: false, split: false, frac: 0.5, open: [true, true, true], extra: [[], [], []], tour: -1, hidden: false, peek: false };
   var phone = window.matchMedia('(max-width: 600px)');
 
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -87,7 +87,8 @@
 
   function sidebar() {
     var s = D[st.space], tabs = tabsOf(st.space), n = tabs.length, cur = pageAt(st.active), h = '';
-    h += '<div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="ic sb">' + ICON.side + '</span><span class="ic bk">' + ICON.back + '</span><span class="ic fw">' + ICON.fwd + '</span></div>';
+    var sbl = st.hidden ? 'Keep sidebar open' : 'Hide sidebar';
+    h += '<div class="bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><button type="button" class="ic sb" data-act="side" data-k="sb" aria-label="' + sbl + '" title="' + sbl + '"' + (phone.matches ? ' disabled' : '') + '>' + ICON.side + '</button><span class="ic bk" aria-hidden="true">' + ICON.back + '</span><span class="ic fw" aria-hidden="true">' + ICON.fwd + '</span></div>';
     h += '<div class="addr"><span>' + esc(cur.domain) + '</span><span class="ic" aria-hidden="true">' + ICON.reload + '</span></div>';
     h += '<div class="bc" role="group" aria-label="Basecamp">';
     s.tiles.forEach(function (t, k) {
@@ -136,12 +137,19 @@
     return h;
   }
 
+  // The window keeps its sidebar and page elements, so hiding the sidebar can slide.
+  win.innerHTML = '<button type="button" class="edge" data-act="peek" data-k="edge" aria-label="Show sidebar"></button><div class="side"></div><div class="area"></div>';
+  var side = win.querySelector('.side'), areaEl = win.querySelector('.area');
+
   function render(focusKey) {
     var a = document.activeElement, key = focusKey || (a && win.contains(a) ? a.getAttribute('data-k') : null);
     win.style.setProperty('--sc', D[st.space].color);
     // The finale snow and the footer ice take this space's colours (home.css).
     if (document.documentElement.getAttribute('data-space') !== String(st.space)) document.documentElement.setAttribute('data-space', st.space);
-    win.innerHTML = '<div class="side">' + sidebar() + '</div><div class="area">' + area() + '</div>';
+    win.classList.toggle('hid', st.hidden);
+    win.classList.toggle('peek', st.hidden && st.peek);
+    side.innerHTML = sidebar();
+    areaEl.innerHTML = area();
     if (key) { var f = win.querySelector('[data-k="' + key + '"]'); if (f) f.focus(); }
     var tc = document.querySelectorAll('.tc');
     for (var i = 0; i < tc.length; i++) {
@@ -157,6 +165,11 @@
     if (name === 'tab') { st.active = i; st.lookout = false; if (i >= n) { st.split = false; st.tour = 1; } }
     else if (name === 'space') { st.space = i; st.active = GROUPED; st.lookout = false; st.split = false; st.tour = 0; }
     else if (name === 'fold') st.open[st.space] = !st.open[st.space];
+    else if (name === 'side') {
+      st.hidden = !st.hidden; st.peek = false; near = false; clearTimeout(peekT);
+      render(st.hidden ? 'edge' : 'sb'); return;
+    }
+    else if (name === 'peek') { setPeek(true, 'sb'); return; }
     else if (name === 'look') { st.lookout = true; st.tour = 2; render('keep'); return; }
     else if (name === 'close') { st.lookout = false; render('look'); return; }
     else if (name === 'keep') {
@@ -169,6 +182,8 @@
   }
 
   win.addEventListener('click', function (e) {
+    // A tap on the page tucks a peeking sidebar away (touch has no pointer to move off it).
+    if (st.peek && !e.target.closest('.side, .edge')) { st.peek = false; near = false; render(); }
     var b = e.target.closest('[data-act]');
     if (b && win.contains(b)) act(b.getAttribute('data-act'), +b.getAttribute('data-i'));
   });
@@ -195,10 +210,33 @@
     g.addEventListener('pointermove', move); g.addEventListener('pointerup', up); g.addEventListener('pointercancel', up);
   });
 
+  // A hidden sidebar peeks, like in the app: the pointer at the window's left
+  // edge (8px) brings it out as a floating card, and it tucks away 150ms
+  // after the pointer moves off it (a second after leaving the window).
+  // Keyboard and touch use the edge strip (data-act="peek") instead.
+  var near = false, peekT = null;
+  function setPeek(v, focusKey) { clearTimeout(peekT); if (st.peek !== v) { st.peek = v; render(focusKey); } else if (focusKey) render(focusKey); }
+  function setNear(n, delay) {
+    if (n === near) return;
+    near = n; clearTimeout(peekT);
+    if (n) { setPeek(true); return; }
+    peekT = setTimeout(function () { if (!near && !side.querySelector(':focus-visible')) setPeek(false); }, delay);
+  }
+  win.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse' || !st.hidden) return;
+    var x = e.clientX - win.getBoundingClientRect().left;
+    setNear(x <= (st.peek ? 4 + side.offsetWidth + 16 : 8), 150);
+  });
+  win.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && st.hidden) setNear(false, 1000); });
+  win.addEventListener('focusout', function (e) {
+    if (st.peek && !near && !(e.relatedTarget && side.contains(e.relatedTarget))) setPeek(false);
+  });
+
   // Tour cards: each one does its thing in the window.
   document.querySelectorAll('.tc').forEach(function (c) {
     c.addEventListener('click', function () {
       var t = c.getAttribute('data-tour'), n = tabsOf(st.space).length;
+      if (t === 'space' || t === 'basecamp') st.hidden = st.peek = false; // these show the sidebar
       if (t === 'space') { act('space', (st.space + 1) % D.length); return; }
       if (t === 'basecamp') { st.active = n + ((st.active >= n ? st.active - n + 1 : 0) % D[st.space].tiles.length); st.lookout = false; st.split = false; st.tour = 1; }
       else if (t === 'lookout') { st.lookout = !st.lookout; st.tour = 2; }
@@ -207,8 +245,8 @@
     });
   });
 
-  // Phones have no split view.
-  phone.addEventListener('change', function () { if (phone.matches && st.split) { st.split = false; render(); } });
+  // Phones have no split view and no hidden sidebar (it sits above the page).
+  phone.addEventListener('change', function () { if (phone.matches) { st.split = st.hidden = st.peek = false; } render(); });
 
   document.documentElement.classList.add('try-ready');
   render();
