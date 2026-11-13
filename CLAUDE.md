@@ -43,16 +43,16 @@ unless David changes it.
   below (no pixel differs by more than 9/255, which is invisible).
   The one planned difference: on home, the design's sketched window is
   now a real screenshot of Firn (see "Home screenshot").
-- `public/assets/firn-share-preview-v8.png`: the 1200×630 link preview (Open
-  Graph / Twitter card), the same in both modes. v8 (2026-11-13) is in the
-  Sunrise style: blue-hour sky, on-dark logo, light Gooper Deck headline
+- `public/assets/firn-share-preview-v9.png`: the 1200×630 link preview (Open
+  Graph / Twitter card), the same in both modes. v9 (2026-11-13) is in the
+  Sunrise style: light mode's first-light sky (#36415D top), on-dark logo, light Gooper Deck headline
   ("A calm browser, made for Mac."), the sun peeking over home's top snow layer (`.l1`);
-  rendered from `design/share-preview/og.html`; used by every page (v5–v7
+  rendered from `design/share-preview/og.html`; used by every page (v5–v8
   stay in assets for old shared links). Keep it a PNG, don't recompress it,
   and keep it small (about 370 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
-  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v8.png`.
-  When it changes, use a new file name (v9, …) so apps fetch the new
+  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v9.png`.
+  When it changes, use a new file name (v10, …) so apps fetch the new
   picture. (More: `docs/DESIGN-NOTES.md`, "Link preview image".)
 
 **Copy is final**, as written in the design files (including the line break
@@ -409,7 +409,7 @@ text autosizing is off (`-webkit-text-size-adjust: 100%`).
   focus ring (solid frost, #16304A or #CFE3EF), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  the `firn-share-preview-v8.png` image (see above).
+  the `firn-share-preview-v9.png` image (see above).
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Project layout

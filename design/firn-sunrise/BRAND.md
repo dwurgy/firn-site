@@ -47,8 +47,7 @@ For a single screen, compress it: dark at the top, then the last stops
 The link preview (`design/share-preview/og.html`) does exactly this at 630px.
 
 Top-of-screen colour (status bar, theme-color, window background behind the
-sky): `#36415D` light, `#1A1F2D` dark. (The link preview still uses the
-older, darker `#1C2130` top.)
+sky): `#36415D` light, `#1A1F2D` dark.
 
 **Text on the dark sky** is always light, in both modes: `#F5F1EC` (15:1),
 muted `#D4CDC5` (11:1), small print `#B9B2AA` (8:1). Logo: the on-dark lockup.
