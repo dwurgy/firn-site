@@ -370,6 +370,8 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 }
 
 /* Footer in the deepest layer, glacier ice (replaces the dawn footer on home). */
+/* Small text on snow and ice: a subtle halo so it reads on the grain. */
+.ice,.fin .get .dl-note,.fin .get .dl-mobile{text-shadow:0 0 8px rgba(225,236,244,.55),0 0 2px rgba(225,236,244,.4)}
 .ice{padding:calc(var(--ea) + 40px) 32px 40px;color:#241F1B}
 .ice .in{max-width:1240px;margin:0 auto}
 .ice .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.6fr);gap:40px 32px}
@@ -381,7 +383,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 .ice a:hover{text-decoration-color:currentColor}
 .ice nav svg{width:15px;height:15px;fill:currentColor;flex:none}
 .ice .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(36,31,27,.2);font-size:14px}
-.ice .legal p{margin:0;text-shadow:0 0 8px rgba(225,236,244,.55),0 0 2px rgba(225,236,244,.4)}
+.ice .legal p{margin:0}
 .ice .legal a{display:inline;text-decoration-color:rgba(36,31,27,.4)}
 .ice .legal a:hover{text-decoration-color:currentColor}
 .ice .legal img{height:40px;width:auto;margin:-8px 0 -8px -8px}
@@ -389,7 +391,8 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
 @media (prefers-color-scheme:dark){
  html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 90%,#0B121B)}
  .ice{color:#F5F1EC}
- .ice .legal p{text-shadow:none}
+ .ice{text-shadow:0 0 10px rgba(11,18,27,.45),0 0 2px rgba(11,18,27,.35)}
+ .fin .get .dl-note,.fin .get .dl-mobile{text-shadow:0 0 10px rgba(11,18,27,.45),0 0 2px rgba(11,18,27,.35)}
  /* Haloes: light text on snow keeps a soft dusk shadow so it reads on the grain. */
  .l2 .statement p,.l3 .maker .tx{text-shadow:0 0 10px rgba(11,18,27,.45),0 0 2px rgba(11,18,27,.35)}
  .ice .legal{border-top-color:rgba(245,241,236,.2)}
