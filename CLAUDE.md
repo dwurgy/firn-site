@@ -106,7 +106,7 @@ by `tools/make-snow-edges.py`; the grain tiles `assets/snow-fresh.webp` and
 `design/firn-sunrise/`, run from the repo root with `python3 -I`). Photos are
 allowed here only as snow texture (the "no stock photos" exception).
 Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
-on `<html>`; in dark, only a slight hue turn of Personal's blue). The footer uses the on-dark lockup in both modes (the light
+on `<html>`; both modes only turn Personal's hue a little). The footer uses the on-dark lockup in both modes (the light
 lockup's flake is the same blue as the Personal ice).
 Step 7, mouse effects (`home.js`, end; mouse only, off with reduced motion): sun
 glints on `.l1`, the sky leans toward the cursor with a trailing light (`.wg3`),

@@ -256,14 +256,15 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
    design/firn-sunrise/tools/make-snow-edges.py. No filters, masks, blend
    modes or opacity groups. The only scroll work is the sunrise's --r. */
 :root{--s1:#DCE5EB;--s2:#C3D3DE;--s3:#A6BFCF;--s4:#8AABC0;--s5:#6E98B2;--ea:64px;--ea1:96px}
-html[data-space="1"]{--s1:#E0E8DE;--s2:#CBD9C8;--s3:#B5CAB2;--s4:#A1BC9D;--s5:#8FAE8B}
-html[data-space="2"]{--s1:#F0E6DC;--s2:#E5D4C3;--s3:#DAC1A9;--s4:#D1B193;--s5:#C9A27E}
+/* The same snow in every space, only the light on it shifts: Personal's
+   colours with the hue turned a little (OKLCH, same lightness and chroma),
+   Work 30% toward its sage (glacier teal), Kitchen 20% toward its sand by
+   way of rose. Full turns read as green or brown ground. Dark does the same. */
+html[data-space="1"]{--s1:#DAE6E8;--s2:#C0D5D8;--s3:#A1C2C6;--s4:#83AFB5;--s5:#649DA4}
+html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8690B7}
 @media (prefers-color-scheme:dark){
  :root{--s1:#536777;--s2:#4A5B69;--s3:#42505C;--s4:#3B4350;--s5:#34353A}
- /* Blue-hour snow in every space, only the light on it shifts: Personal's
-    colours with the hue turned a little (OKLCH, same lightness and chroma),
-    Work 30% toward its sage (cool teal), Kitchen 20% toward its sand by way
-    of rose (alpenglow). Full turns read as green or brown ground. */
+ /* Blue-hour snow, the same turns as above. */
  html[data-space="1"]{--s1:#4D6A70;--s2:#455E63;--s3:#3D5257;--s4:#35454D;--s5:#32363A}
  html[data-space="2"]{--s1:#5F6379;--s2:#55576A;--s3:#4B4D5D;--s4:#44404E;--s5:#373439}
 }
