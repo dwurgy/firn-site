@@ -73,7 +73,7 @@ it untrue.
 
 The home page is being rebuilt as **Sunrise**, one long scroll that is one
 sunrise: `design/firn-sunrise/SUNRISE-BRIEF.md` (the brief and its nine
-steps) and `sunrise-mockup.dc.html` (reference only). Its styles live in
+steps) and `sunrise-mockup.dc.html` (reference only). **Brand sheet:** `design/firn-sunrise/BRAND.md` (colours, sky, sun, snow, type, logo, motion; for the app and Claude Design). Update it when the look changes. Its styles live in
 `public/home.css` (home only, loaded after `site.css`); other pages keep
 First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
 two `.wg` warm glows); no page grain on home (dig down moved all texture
