@@ -1,0 +1,93 @@
+/* Inner pages (Support, …): the "business corner" of Sunrise. Loaded after
+   site.css. Home is the cabin window; these are the desk inside:
+   a blue-hour band at the top (header and page title, light text, same as
+   home's top), plain paper for the content (no sky, glows or grain), and
+   home's glacier-ice footer under one snow edge. The edge is a static SVG
+   (paper above the line, the lit rim on it), not a clip-path. */
+
+/* No First light scenery. */
+.sky,.sheet::after{display:none}
+
+/* The page starts dark, so overscroll at the top and the iPhone status bar
+   show blue hour too (theme-color in the page matches). */
+html,body{background:#1C2130}
+@media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
+@media (max-width:600px){html,body{background:#1C2130}}
+@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
+
+/* Band: header and page title on blue hour, full width. Each draws its own
+   piece of the band (::before, behind its content), so the markup stays
+   header, then main with the title. */
+:root{--band:#1C2130}
+@media (prefers-color-scheme:dark){:root{--band:#1A1F2D}}
+header::before,.intro::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:-1;background:var(--band)}
+header::before{top:-1px}
+/* A faint warm horizon along the band's bottom edge, the sun still below it. */
+.intro::before{background:radial-gradient(60% 140px at 62% 100%,rgba(242,196,160,.16),rgba(242,196,160,0)),var(--band)}
+@media (prefers-color-scheme:dark){.intro::before{background:radial-gradient(60% 140px at 62% 100%,rgba(242,170,120,.1),rgba(242,170,120,0)),var(--band)}}
+.intro{padding-bottom:64px;color:#F5F1EC}
+.intro p{color:#D4CDC5}
+@media (max-width:600px){.intro{padding-bottom:44px}}
+
+/* Header on the band: same as home.css (on-dark logo, light links, pill). */
+.logo-l{display:none}.logo-d{display:block}
+header nav.top{margin-left:auto}
+.hdl{flex:none;padding:9px 16px;border-radius:999px;background:#F5F1EC;color:#2B2826;text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
+.hdl:hover{opacity:.88}
+@media (max-width:600px){.hdl{display:none}}
+@media (min-width:601px){html:not(.float-menu) nav.top a{color:#D4CDC5} html:not(.float-menu) nav.top a:hover,html:not(.float-menu) nav.top a[aria-current]{color:#F5F1EC}}
+@media (max-width:600px) and (scripting:none){nav.top a{color:#D4CDC5} nav.top a[aria-current]{color:#F5F1EC}}
+@media (max-width:600px){html:not(.float-menu) .menu-btn{color:#F5F1EC}}
+/* Focus ring on the band: solid frost, as on home's dark top. */
+header :focus-visible{outline-color:#CFE3EF}
+
+/* Paper: the content column, a little more room before the footer. */
+main{padding-bottom:96px}
+@media (max-width:600px){main{padding-bottom:64px}}
+
+/* Footer: glacier ice, the same markup and look as home's last layer. */
+:root{--s5:#6E98B2;--ea:64px}
+@media (prefers-color-scheme:dark){:root{--s5:#34353A}}
+@media (max-width:600px){:root{--ea:36px}}
+.ice{position:relative;margin-top:auto;padding:calc(var(--ea) + 40px) 32px 40px;color:#241F1B;
+ background-color:var(--s5);background-color:color-mix(in srgb,var(--s5) 80%,#26394B);
+ background-image:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,rgba(14,32,50,.2)),url(assets/snow-packed.webp);
+ background-size:auto,auto,256px 256px}
+.ice .edge{position:absolute;left:0;top:0;width:100%;height:calc(var(--ea) * 1.6);display:block;pointer-events:none}
+.ice .edge path{fill:var(--page)}
+.ice .edge polyline{fill:none;stroke:rgba(255,255,255,.85);stroke-width:3;vector-effect:non-scaling-stroke}
+.ice .in{position:relative;max-width:1240px;margin:0 auto}
+.ice .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.6fr);gap:40px 32px}
+.ice nav,.ice .built{display:flex;flex-direction:column;align-items:flex-start;gap:12px;font-size:15px;line-height:22px}
+.ice .fh{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ice .built .fh{margin:0}
+.ice .built p{margin:0}
+.ice a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .2s}
+.ice a:hover{text-decoration-color:currentColor}
+.ice nav svg{width:15px;height:15px;fill:currentColor;flex:none}
+.ice .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(36,31,27,.2);font-size:14px}
+.ice .legal p{margin:0;text-shadow:0 0 8px rgba(225,236,244,.55),0 0 2px rgba(225,236,244,.4)}
+.ice .legal a{display:inline;text-decoration-color:rgba(36,31,27,.4)}
+.ice .legal a:hover{text-decoration-color:currentColor}
+.ice .legal img{height:40px;width:auto;margin:-8px 0 -8px -8px}
+.ice :focus-visible{outline-color:#16304A}
+html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 80%,#26394B)}
+@media (prefers-color-scheme:dark){
+ .ice{background-color:var(--s5);background-color:color-mix(in srgb,var(--s5) 90%,#0B121B);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,rgba(4,8,14,.24)),linear-gradient(color-mix(in srgb,var(--s5) 42%,transparent),color-mix(in srgb,var(--s5) 42%,transparent)),url(assets/snow-packed.webp);
+  background-size:auto,auto,auto,256px 256px}
+ .ice .edge polyline{stroke:rgba(214,230,244,.38)}
+ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 90%,#0B121B)}
+ .ice{color:#F5F1EC}
+ .ice .legal p{text-shadow:none}
+ .ice .legal{border-top-color:rgba(245,241,236,.2)}
+ .ice .legal a{text-decoration-color:rgba(245,241,236,.4)}
+ .ice :focus-visible{outline-color:#CFE3EF}
+}
+@media (max-width:900px){.ice .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+ .ice{padding:calc(var(--ea) + 32px) 16px max(40px,env(safe-area-inset-bottom))}
+ .ice .cols{gap:32px 16px}
+ .ice .legal{flex-direction:column;text-align:center;margin-top:36px}
+ .ice .legal img{margin:-8px 0}
+}
