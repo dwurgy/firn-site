@@ -113,7 +113,7 @@ Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screens
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
 leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, a blue-hour band for header and title, plain paper with no sky or grain, home's ice footer under one SVG snow edge; done on Support, next the other five, then remove unused First light sky, dawn, and grain CSS); then a top-to-bottom pass to unify the site.
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on Support, next the other five, then remove unused First light sky, dawn, and grain CSS); then a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
 

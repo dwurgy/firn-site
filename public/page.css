@@ -1,45 +1,16 @@
 /* Inner pages (Support, …): the "business corner" of Sunrise. Loaded after
    site.css. Home is the cabin window; these are the desk inside:
-   a blue-hour band at the top (header and page title, light text, same as
-   home's top), plain paper for the content (no sky, glows or grain), and
+   plain paper with the full-colour logo up top (no sky, glows or grain), and
    home's glacier-ice footer under one snow edge. The edge is a static SVG
    (paper above the line, the lit rim on it), not a clip-path. */
 
 /* No First light scenery. */
 .sky,.sheet::after{display:none}
 
-/* The page starts dark, so overscroll at the top and the iPhone status bar
-   show blue hour too (theme-color in the page matches). */
-html,body{background:#1C2130}
-@media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
-@media (max-width:600px){html,body{background:#1C2130}}
-@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
-
-/* Band: header and page title on blue hour, full width. Each draws its own
-   piece of the band (::before, behind its content), so the markup stays
-   header, then main with the title. */
-:root{--band:#1C2130}
-@media (prefers-color-scheme:dark){:root{--band:#1A1F2D}}
-header::before,.intro::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:-1;background:var(--band)}
-header::before{top:-1px}
-/* A faint warm horizon along the band's bottom edge, the sun still below it. */
-.intro::before{background:radial-gradient(60% 140px at 62% 100%,rgba(242,196,160,.16),rgba(242,196,160,0)),var(--band)}
-@media (prefers-color-scheme:dark){.intro::before{background:radial-gradient(60% 140px at 62% 100%,rgba(242,170,120,.1),rgba(242,170,120,0)),var(--band)}}
-.intro{padding-bottom:64px;color:#F5F1EC}
-.intro p{color:#D4CDC5}
-@media (max-width:600px){.intro{padding-bottom:44px}}
-
-/* Header on the band: same as home.css (on-dark logo, light links, pill). */
-.logo-l{display:none}.logo-d{display:block}
-header nav.top{margin-left:auto}
-.hdl{flex:none;padding:9px 16px;border-radius:999px;background:#F5F1EC;color:#2B2826;text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
-.hdl:hover{opacity:.88}
-@media (max-width:600px){.hdl{display:none}}
-@media (min-width:601px){html:not(.float-menu) nav.top a{color:#D4CDC5} html:not(.float-menu) nav.top a:hover,html:not(.float-menu) nav.top a[aria-current]{color:#F5F1EC}}
-@media (max-width:600px) and (scripting:none){nav.top a{color:#D4CDC5} nav.top a[aria-current]{color:#F5F1EC}}
-@media (max-width:600px){html:not(.float-menu) .menu-btn{color:#F5F1EC}}
-/* Focus ring on the band: solid frost, as on home's dark top. */
-header :focus-visible{outline-color:#CFE3EF}
+/* Paper all the way: overscroll at the top and the iPhone status bar match
+   the page (theme-color in the page matches). The header is First light's:
+   the full-colour lockup in light mode, the on-dark one in dark. */
+html,body{background:var(--page)}
 
 /* Paper: the content column, a little more room before the footer. */
 main{padding-bottom:96px}
