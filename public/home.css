@@ -7,7 +7,7 @@
    Plain gradients only, no filter, no mask, no opacity, so scrolling stays
    cheap. The stops are the mockup's, in px from the top of the page. */
 .sunsky{position:absolute;inset:0;pointer-events:none;
- background:linear-gradient(180deg,#1C2130 0px,#252C3E 520px,#343E57 1000px,#556079 1420px,#8D8C9E 1760px,#CDB8B4 1960px,#EAD3C5 2200px,#F4E5DA 2700px,#F7F0E8 3200px,#F6F3EE 3800px)}
+ background:linear-gradient(180deg,#36415D 0px,#3E4966 560px,#4C5774 1000px,#69728E 1420px,#9894A6 1760px,#CDB8B4 1960px,#EAD3C5 2200px,#F4E5DA 2700px,#F7F0E8 3200px,#F6F3EE 3800px)}
 /* Two soft apricot glows mid-page (alpha baked into the colours, not
    element opacity). */
 .sunsky .wg{position:absolute;display:block;border-radius:50%}
@@ -21,12 +21,13 @@
 
 /* The page starts dark, so overscroll at the top and the iPhone status
    bar show blue hour too (theme-color in index.html matches). */
-html,body{background:#1C2130}
+html,body{background:#36415D}
 @media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
 
 /* Header and hero on the blue-hour top (step 2): light text in both modes,
    the on-dark logo, and a small light Download pill. Contrast on #1C2130:
-   #F5F1EC 15:1, #D4CDC5 11:1, #B9B2AA 8:1. */
+   #F5F1EC 15:1, #D4CDC5 11:1, #B9B2AA 8:1. Light mode starts lighter
+   (#36415D, first light): there the small print uses #D4CDC5 (5.6:1). */
 .logo-l{display:none}.logo-d{display:block}
 header nav.top{margin-left:auto}
 .hdl{flex:none;padding:9px 16px;border-radius:999px;background:#F5F1EC;color:#2B2826;text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
@@ -49,6 +50,7 @@ header nav.top{margin-left:auto}
 .try{font-size:15px;color:#D4CDC5;text-decoration:none}
 .try:hover{color:#F5F1EC;text-decoration:underline;text-underline-offset:3px}
 .get .dl-note{margin-top:20px;font-size:13px;color:#B9B2AA}
+@media (prefers-color-scheme:light){.get .dl-note{color:#D4CDC5}}
 .get .dl-mobile{color:#F5F1EC;max-width:320px}
 .get .dl-mobile.soon{margin-top:8px;font-size:14px;color:#D4CDC5}
 @media (max-width:600px){
