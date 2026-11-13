@@ -52,7 +52,6 @@ header nav.top{margin-left:auto}
 .get .dl-note{margin-top:20px;font-size:13px;color:#B9B2AA}
 @media (prefers-color-scheme:light){.get .dl-note{color:#D4CDC5}}
 .get .dl-mobile{color:#F5F1EC;max-width:320px}
-.get .dl-mobile.soon{margin-top:8px;font-size:14px;color:#D4CDC5}
 @media (max-width:600px){
  .hero{padding-top:56px;padding-bottom:64px}
  .get .row{margin-bottom:24px}

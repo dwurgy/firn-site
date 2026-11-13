@@ -343,7 +343,7 @@ true. When the app starts sending something new (e.g. passwords syncing via
 iCloud Keychain once the iOS app ships), update this page first.
 
 **Copy notes (home):**
-- Eyebrow: "Firn 1.0 is here".
+- Eyebrow: "Coming soon to iPhone and iPad" (was "Firn 1.0 is here" until 2026-11-13; the phone-only "on the way" line went with it).
 - Subhead: "Vertical tabs, spaces, and split view, without the learning
   curve.<br> Your data stays on your device." (the line break is
   intentional and hidden on phones).
