@@ -113,7 +113,7 @@ Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screens
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
 leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site (~~A: CLAUDE.md notes match the live site~~ done; ~~B: Download pill in inner headers~~ done (`.hdl`, ink on paper, `page.css`); C: check focus rings, links, and dark mode on inner pages vs home, and drop `site.css`'s phone #DDE3E7 and `.at-end` rules, now overridden by `page.css`/`home.css`).
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site (~~A: CLAUDE.md notes match the live site~~ done; ~~B: Download pill in inner headers~~ done (`.hdl`, ink on paper, `page.css`); ~~C: focus rings and leftover phone/`.at-end` backgrounds~~ done: inner pages use home's solid frost ring, #16304A light / #CFE3EF dark, `page.css`).
 
 ### The idea (so new parts fit)
 
@@ -404,7 +404,7 @@ text autosizing is off (`-webkit-text-size-adjust: 100%`).
   On phones the home screenshot is cropped to its left part rather than
   shrunk until it's unreadable.
 - Accessible: visible
-  focus ring (frost), good contrast, alt text on the logo, `aria-current`
+  focus ring (solid frost, #16304A or #CFE3EF), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
   the `firn-share-preview-v7.png` image (see above).

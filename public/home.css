@@ -23,8 +23,6 @@
    bar show blue hour too (theme-color in index.html matches). */
 html,body{background:#1C2130}
 @media (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
-@media (max-width:600px){html,body{background:#1C2130}}
-@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#1A1F2D}}
 
 /* Header and hero on the blue-hour top (step 2): light text in both modes,
    the on-dark logo, and a small light Download pill. Contrast on #1C2130:

@@ -10,6 +10,10 @@
    the page (theme-color in the page matches). The header is First light's:
    the full-colour lockup in light mode, the on-dark one in dark. */
 html,body{background:var(--page)}
+/* Focus ring: site.css's see-through frost barely shows on paper, so inner
+   pages use home's solid frost: deep on light paper, pale on dark. */
+:focus-visible{outline-color:#16304A}
+@media (prefers-color-scheme:dark){:focus-visible{outline-color:#CFE3EF}}
 
 /* Paper: the content column, a little more room before the footer. */
 main{padding-bottom:96px}
