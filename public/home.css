@@ -224,11 +224,10 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
 .lg h3{font-weight:600}
 .lg p{font-size:15px}
 .maker .in{display:flex;flex-wrap:wrap;gap:24px 64px;padding-top:40px;border-top:1px solid rgba(36,31,27,.14)}
-.maker h2{flex:1 1 200px;margin:0;text-align:left;font:600 15px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif}
+.maker h2{flex:1 1 200px;margin:0;text-align:left;font-size:24px;line-height:1.2;font-weight:400}
 .maker .tx{flex:999 1 520px;min-width:0;font-size:18px;line-height:1.6;color:#3A332D}
 .maker p{margin:0}.maker p+p{margin-top:16px}
 .maker a{color:inherit;text-underline-offset:3px}
-.maker .more{display:inline-block;margin-top:20px;font-size:15px;font-weight:600;color:var(--ink)}
 @media (prefers-color-scheme:dark){.maker .in{border-top-color:rgba(245,241,236,.16)}.maker .tx{color:#D4CDC5}}
 .fin{padding-top:180px;padding-bottom:120px;text-align:center}
 .fin h2{margin:0;font-size:48px;line-height:1.15;font-weight:400}
