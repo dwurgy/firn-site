@@ -52,7 +52,7 @@
     var s = D[st.space], tabs = tabsOf(st.space);
     return i < tabs.length ? tabs[i] : tilePage(s.tiles[i - tabs.length], s);
   }
-  function fav(p) { return '<span class="fav" style="background:' + (p.fav || p.c2) + '">' + esc((p.letter || p.site).charAt(0)) + '</span>'; }
+  function fav(p) { return '<span class="fav" aria-hidden="true" style="background:' + (p.fav || p.c2) + '">' + esc((p.letter || p.site).charAt(0)) + '</span>'; }
   // The split view partner: a neighbouring tab in the same place (the group,
   // or the loose tabs under it), so the pair sits together like in the app.
   function partner() {
@@ -140,6 +140,21 @@
   // The window keeps its sidebar and page elements, so hiding the sidebar can slide.
   win.innerHTML = '<button type="button" class="edge" data-act="peek" data-k="edge" aria-label="Show sidebar"></button><div class="side"></div><div class="area"></div>';
   var side = win.querySelector('.side'), areaEl = win.querySelector('.area');
+  // Screen readers hear what changed, since a tour card keeps the focus.
+  var say = document.createElement('p'); say.className = 'sr-only'; say.setAttribute('aria-live', 'polite');
+  win.parentNode.insertBefore(say, win.nextSibling);
+  var was = null;
+  function announce() {
+    var cur = pageAt(st.active), now = { space: st.space, page: cur.title, look: st.lookout, split: st.split }, m = [];
+    if (was) {
+      if (now.space !== was.space) m.push(D[st.space].name + ' space.');
+      if (now.split !== was.split) m.push(st.split ? 'Split view: ' + cur.title + ' and ' + tabsOf(st.space)[partner()].title + '.' : 'Split view off.');
+      else if (now.page !== was.page && now.space === was.space) m.push('Showing ' + cur.title + '.');
+      if (now.look !== was.look) m.push(st.lookout ? 'Lookout open: ' + cur.link + '.' : 'Lookout closed.');
+      if (m.length) say.textContent = m.join(' ');
+    }
+    was = now;
+  }
 
   function render(focusKey) {
     var a = document.activeElement, key = focusKey || (a && win.contains(a) ? a.getAttribute('data-k') : null);
@@ -158,6 +173,7 @@
     }
     var sa = document.querySelector('.tc-split .ta'); if (sa) sa.textContent = st.split ? 'Back to one →' : 'Split it →';
     var dot = document.querySelector('.tc em'); if (dot) dot.style.background = D[st.space].color;
+    announce();
   }
 
   function act(name, i) {

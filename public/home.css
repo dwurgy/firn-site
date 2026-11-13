@@ -161,7 +161,16 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
 .lo-pg{padding:8px 40px 32px}
 .lo-pg .ln{display:block;height:10px;margin-top:12px;border-radius:99px;background:#EFEBE5}
 .lo-pg p+.ln{margin-top:24px}
-.win :focus-visible{outline:3px solid rgba(130,168,190,.8);outline-offset:-1px;border-radius:8px}
+.win :focus-visible{outline:3px solid #16304A;outline-offset:-1px;border-radius:8px}
+/* Focus ring: the site's see-through frost vanishes on the sky and snow, so
+   home uses solid frost: pale on the dark sky (and everywhere in dark mode),
+   deep on the pale morning sky and the light snow. */
+:focus-visible{outline-color:#CFE3EF}
+@media (prefers-color-scheme:light){
+ .lay :focus-visible,.ice :focus-visible{outline-color:#16304A}
+}
+@media (prefers-color-scheme:dark){.win :focus-visible{outline-color:#CFE3EF}.win .pg :focus-visible{outline-color:#16304A}}
+@media (prefers-color-scheme:light) and (max-width:1000px){.tours :focus-visible{outline-color:#16304A}}
 /* Tour cards. */
 .tours{max-width:1120px;margin:24px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;text-align:left}
 .tc{display:flex;flex-direction:column;gap:6px;padding:20px 22px;border:0;border-radius:14px;font:inherit;text-align:left;cursor:pointer;background:rgba(251,250,248,.9);box-shadow:0 6px 20px rgba(10,12,20,.18);color:#5E564E;transition:box-shadow .2s}
