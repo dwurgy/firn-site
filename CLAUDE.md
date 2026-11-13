@@ -113,7 +113,7 @@ Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screens
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
 leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on Support, next the other five, then remove unused First light sky, dawn, and grain CSS); then a top-to-bottom pass to unify the site.
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; next: remove the now-unused First light sky, dawn, and grain CSS from `site.css`); then a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
 
@@ -312,18 +312,14 @@ Wider screens keep the links in the header; once it scrolls out of view the same
 glass circle appears top-right (in line with the column) and opens a small glass
 card of the links and social logos (end of `site.css`).
 
-**Footer (every page but home, which has `footer.ice`):** the dawn section (sun and snow), always at the
-bottom of the page, with plain link columns (no glass) on the sunrise just
-above the snow, so the flakes drawn in the snow's top edge never sit on
-text: **Firn** (Release notes, Privacy), **Community** (`nav.social`:
-GitHub, Discord `discord.gg/rZsVbT7794` (the David Wurgler Apps server),
-Threads, each an inline Simple Icons SVG (CC0) plus its name; `edges.js`
-copies these into the menu, logos only) and **Support** (Support, FAQ, Email,
-Tip jar). The Firn flake (`firn-mark.svg`) sits on the
-right on wide screens, hidden on phones. Under a thin line: "Firn · A
-<a>David Wurgler</a> app · © 2026" (links to davidwurgler.com, David's
-portfolio) and "Free and open source, MPL-2.0". Styles: "Footer" at the end
-of `site.css`. Same markup on every page (links start with `/`).
+**Footer (every page):** `footer.ice`, home's glacier-ice footer. Home has it as
+snow layer `.l5` (`home.css`); inner pages copy the same markup with one static
+SVG snow edge (`.edge`, `page.css`). Columns: **Firn** (Release notes, Privacy),
+**Community** (`nav.social`: GitHub, Discord `discord.gg/rZsVbT7794`, Threads,
+inline Simple Icons SVGs (CC0); `edges.js` copies them into the menu),
+**Support** (Support, FAQ, Email, Tip jar) and **Built with**; under a line the
+on-dark lockup and "Firn · A <a>David Wurgler</a> app · © 2026" (davidwurgler.com).
+A footer change goes in `index.html` and every inner page (links start with `/`).
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
 Routing. Linked as "Email" in the footer, on the Support page and as "Say hello" in the Tip jar
