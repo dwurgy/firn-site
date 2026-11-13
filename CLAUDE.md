@@ -113,46 +113,28 @@ Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screens
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
 leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site.
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site (~~A: CLAUDE.md notes match the live site~~ done; B: Download pill in inner headers? ask David; C: check focus rings, links, and dark mode on inner pages vs home, and drop `site.css`'s phone #DDE3E7 and `.at-end` rules, now overridden by `page.css`/`home.css`).
 
-### First light: the idea (so new parts fit)
+### The idea (so new parts fit)
 
 Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
-hand. Cool glacier light high up, warm sunrise low.
+hand. Home is the cabin window (Sunrise, above); inner pages are the desk
+inside (`page.css`, "business corner").
 
-- **Edge to edge.** No frame around the page any more: the page colour runs
-  to the window edges.
-- **Sky glow.** Each page starts with a soft morning sky (`.sky`): cool
-  glacier blue at the top, warm peach and rose glows lower down, fading out
-  as you scroll. Inner pages use a shorter sky (`.sky.short`).
-- **Paper grain.** A faint warm noise texture (`.sheet::after`, an inline
-  SVG filter, no image file). On the live site it sits on the scenery (sky,
-  glows, snow) under the content, not on top of everything; see "Keep
-  scrolling smooth" below.
+- **Inner pages:** plain paper (`--page`) edge to edge, no sky, glows, or
+  grain; First light header (full-colour lockup, on-dark in dark mode);
+  home's glacier-ice footer under one static SVG snow edge.
 - **Frosted glass.** The menu card and circle, the support cards and the
-  release-note badges are semi-clear panels with a soft edge. The menu and
-  cards use a real `backdrop-filter` blur. Where a browser can't blur, the
-  semi-opaque background alone still reads fine.
-- **Screenshot on colour light.** On the home page, blurred patches of
-  glacier, sunrise, sage and lilac light (`.light`) sit behind a real
-  screenshot of Firn (`.shot`, see "Home screenshot" below), where the
-  design had a sketched, frosted window.
-- **Sunrise snow footer ("dawn").** Every page ends in the snow layers with
-  the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
-  the "clear" version (`firn-snow-layers-clear.svg`, dark:
-  `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. The footer links sit on the sunrise just above the snow (see
-  "Footer" below).
-- **Drifting flakes.** A few faint Firn flakes float in the home hero
-  (`.fl`). They're hidden below 1000px wide, where they would land on text.
-  No crystal or flake may sit on text.
-- **Blue is for branding only.** Logo, snow, flakes, glows. Buttons, links
+  release-note badges are semi-clear panels; the menu and cards use a small
+  `backdrop-filter` blur.
+- **Drifting flakes.** A few faint Firn flakes in the home hero (`.fl`),
+  hidden below 1000px wide. No flake may sit on text.
+- **Blue is for branding only.** Logo, snow, ice, flakes, glows. Buttons, links
   and text stay in warm neutrals. The main button is ink with page-white text.
-- **Calm.** Generous space; motion is only small 200ms hover/focus
-  transitions, switched off for `prefers-reduced-motion`, and (when they
-  return) the home feature videos, which play only while on screen and
-  never with reduced motion (see "Home features"). No carousels,
-  pop-ups, cookie banners, chat widgets or stock photos.
+- **Calm.** Generous space; small 200ms hover/focus transitions and home's
+  scroll and mouse effects, all off for `prefers-reduced-motion`. No
+  carousels, pop-ups, cookie banners, chat widgets or stock photos (snow
+  texture excepted).
 
 ### Keep scrolling smooth
 
@@ -195,10 +177,9 @@ inside the side margins on small phones.
 ### Dark mode: "blue hour"
 
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
-way Firn follows the OS. No toggle. Same layout and copy; the sky turns to a
-dim blue-hour glow, glass darkens, the sun is a low ember behind dark snow,
-the grain turns a faint near-black, and the header logo swaps to
-`firn-lockup-on-dark.svg`. theme-color: #F4F6F7 light, #2E2F31 dark.
+way Firn follows the OS. No toggle. Same layout and copy; glass and ice darken
+and the header logo swaps to `firn-lockup-on-dark.svg`. theme-color: inner
+pages #FBFAF8 light, #2B2826 dark (the paper); home #1C2130 / #1A1F2D.
 
 ### Fonts
 
@@ -384,13 +365,12 @@ the Windows code.
 `raw.githubusercontent.com/dwurgy/firn/main/appcast.xml`, where installed
 copies of Firn check for updates. No copy of the feed lives on the site.
 
-**Phone (max-width: 600px):** the design's phone block at the end of
-`site.css`: tighter header and hero, h1 up to 46px, features stacked (text above video) and single-column
-statement, footer columns side by side and the bottom line centred. The home screenshot is cropped rather
-than shrunk (see below).
+**Phone (max-width: 600px):** phone blocks in `site.css`, `home.css` and
+`page.css`: tighter header and hero, h1 up to 46px, footer columns two by two
+and the bottom line centred. The home screenshot is cropped rather than
+shrunk (see below).
 
-**Home screenshot:** under the hero, in the design's window spot (max
-1040px wide, on the colour light), a real screenshot of Firn on a Mac,
+**Home screenshot:** under the try-it window (max 1040px wide), a real screenshot of Firn on a Mac,
 cropped 2px inside the window's edge, in light and dark:
 `public/assets/screens/firn-hero-v4-light.webp` / `-dark.webp` (1440×898)
 and `@2x` (2080 wide), in a `<picture class="shot">` (a dark `<source
@@ -408,14 +388,14 @@ text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
 **Home features:** replaced by the try-it window and tour cards (Sunrise
 step 3, 2026-11-12); the old videos, `loops.js` and feature stills are gone.
 
-**iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): on phones (600px
-and narrower) `html`/`body` and the phone-only theme-color tags use #DDE3E7
-light / #383D42 dark (wider screens: the sky's top colour, #F4F6F7 /
-#2E2F31), the same on every page. `edges.js` (on every page) adds `.at-end`
-to `<html>` near the end of a scrolled page, and `site.css` then switches the
-page background to #6B94AD light / #536573 dark. Every page has
-`viewport-fit=cover`; the header adds `env(safe-area-inset-top)` and keeps clear of the notch in
-landscape (the footer links sit high above the home indicator). iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
+**iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): `html`/`body`
+match the page top (inner pages: paper, `page.css`; home: blue hour,
+`home.css`), as do the theme-color tags. `edges.js` (on every page) adds
+`.at-end` to `<html>` near the end of a scrolled page, and the background
+then turns to the footer's ice (`html.at-end`, same rule in `page.css` and
+`home.css`). Every page has `viewport-fit=cover`; the header adds
+`env(safe-area-inset-top)` and keeps clear of the notch in landscape. iOS
+text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 ## Must-haves
 
