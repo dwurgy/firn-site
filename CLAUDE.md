@@ -478,7 +478,7 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
   - **Keep searching out of this conversation.** For broad questions ("where is X used", "which pages link Y"), use the Explore agent. Don't spawn agents for anything else (each starts cold).
   - **Plan before multi-page work.** Say the plan in a few lines and wait for my OK.
   - **One task per conversation, small steps.** A long conversation is re-read on every message, so its cost grows with every reply.
-  - **Checkpoints.** When a step works and is committed, say so and tell me which fits: "/clear" (next task is unrelated) or "/compact" (same work continues). You can't run these yourself, so tell me. Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
+  - **Checkpoints.** When a step works and is committed, say so and say it's a good moment to /clear. Never suggest /compact: David always clears. Keep the "Next" list under Sunrise current (done items struck, next one first) so a fresh conversation can pick up from "Go". Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
   - **Short replies.** After a change: what changed, where, and how to check it, in a few lines. Don't recap the diff, repeat my request back, or paste whole files. Use Edit for changes, not rewriting a file.
   - **Quiet output.** Pipe long command output through tail or grep.
   - **Stuck rule.** After two failed attempts at the same fix, stop. Say what's known, what's been ruled out, and whether a fresh session or Opus would help. Don't try a third time.
