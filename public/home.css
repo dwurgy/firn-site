@@ -300,7 +300,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 .l2{--s:var(--s2);--muted:#3A332D}
 .l3{--s:var(--s3);--tex:url(assets/snow-packed.webp);--muted:#2F2925;--deep:rgba(14,32,50,.16)}
 .l4{--s:var(--s4);--tex:url(assets/snow-packed.webp);--muted:#2A2521;--deep:rgba(14,32,50,.18)}
-.l5{--s:var(--s5);--tex:url(assets/snow-packed.webp);--deep:rgba(14,32,50,.1)}
+.l5{--s:var(--s5);--tex:url(assets/snow-packed.webp);--deep:rgba(14,32,50,.2)}
 /* The surface catches the sunrise: a warm wash where the sun comes up. */
 .l1{background-image:radial-gradient(70% 420px at 62% 0,rgba(255,206,160,.42),rgba(255,206,160,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex);
  background-size:auto,auto,auto,auto,256px 256px}
@@ -318,7 +318,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
  .l3,.l4,.l5{--deep:rgba(4,8,14,.24)}
  /* Settled snow is the lightest layer behind open text: a touch deeper, and
     its small text nearly white (4.5:1 or more in every space). */
- .l2{--muted:#F3EEE8;background-color:color-mix(in srgb,var(--s) 80%,#0B121B)}
+ .l2{--muted:#F3EEE8;background-color:color-mix(in srgb,var(--s) 84%,#0B121B)}
  .l1{background-image:radial-gradient(70% 380px at 62% 0,rgba(242,170,120,.14),rgba(242,170,120,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex)}
  .lay .crest .lip{fill:rgba(220,234,246,.04)}
  .lay .crest .rim{stroke:rgba(214,230,244,.38)}
@@ -375,7 +375,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 .ice a:hover{text-decoration-color:currentColor}
 .ice nav svg{width:15px;height:15px;fill:currentColor;flex:none}
 .ice .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(36,31,27,.2);font-size:14px}
-.ice .legal p{margin:0}
+.ice .legal p{margin:0;text-shadow:0 0 8px rgba(225,236,244,.55),0 0 2px rgba(225,236,244,.4)}
 .ice .legal a{display:inline;text-decoration-color:rgba(36,31,27,.4)}
 .ice .legal a:hover{text-decoration-color:currentColor}
 .ice .legal img{height:40px;width:auto;margin:-8px 0 -8px -8px}
@@ -383,6 +383,9 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
 @media (prefers-color-scheme:dark){
  html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,var(--s5) 90%,#0B121B)}
  .ice{color:#F5F1EC}
+ .ice .legal p{text-shadow:none}
+ /* Haloes: light text on snow keeps a soft dusk shadow so it reads on the grain. */
+ .l2 .statement p,.l3 .maker .tx{text-shadow:0 0 10px rgba(11,18,27,.45),0 0 2px rgba(11,18,27,.35)}
  .ice .legal{border-top-color:rgba(245,241,236,.2)}
  .ice .legal a{text-decoration-color:rgba(245,241,236,.4)}
 }
