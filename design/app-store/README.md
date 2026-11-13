@@ -1,9 +1,9 @@
 # App Store header art
 
-`header.html` draws Firn's App Store header in the Sunrise style: the link
+`header.html` draws Firn's App Store header (iPhone app) in the Sunrise style: the link
 preview's scene (`design/share-preview/og.html`) with light mode's
-first-light sky, stretched to any size. `shot.js` renders the two sizes Apple
-accepts, 5244×2950 and 3840×1646 (PNG).
+first-light sky, stretched to any size. `shot.js` renders it at 3840×1646 (PNG), the
+size of Apple's two that crops best; the line is "A calm browser."
 
 To rebuild: copy `header.html` and `shot.js` into a scratch folder with
 `firn-lockup-on-dark.svg`, `firn-mark.svg` and `snow-fresh.webp` from
