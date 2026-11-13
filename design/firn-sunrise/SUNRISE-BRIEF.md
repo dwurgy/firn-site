@@ -100,7 +100,7 @@ David wants this to feel even more believable, tactile, and textured than the mo
 3. The try-it window and tour cards (matching the real app), plus the real screenshot below it.
 4. Arc section, Who's making it, and the finale's copy and layout.
 5. Snow: the finale cross-section, footer in the ice layer, Space-tinted colours, and the sunrise on scroll.
-6. The drift.
+6. ~~The drift.~~ Dropped (2026-11-12): with dig down the page is already snow.
 7. Mouse effects: snow-edge hollows, grain clearing, and footprints.
 8. Phone and dark-mode pass, reduced motion, accessibility, and performance check.
 9. Creative pass: propose the tactile upgrades, then build the one David picks.

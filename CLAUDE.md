@@ -10,7 +10,7 @@ Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
 1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), Mac only, a
 fresh start that brings nothing over from the old Firn. The site is a home
 page that says what Firn is, shows what it looks like and has the download
-button, plus About, release notes, support, privacy, and `/mac` (the farewell to
+button, plus release notes, support, privacy, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
 **Reasons and history** behind the rules below (the scroll-performance
@@ -31,11 +31,8 @@ unless David changes it.
   assets they use, a short `README.md`, and `shots/` with every page at
   1440px and 393px in light and dark. It's the source of truth for layout,
   sizes, spacing, colours and copy.
-- `design/about/`: the About page, designed later in the same style:
-  `about.html`, its CSS (`about.css-snippet.css`, added to `site.css` just
-  before the dawn section) and `reference/` shots at 1440px and 393px in
-  light and dark. The live page matches them, apart from the phone footer
-  links (see "Footer" below).
+- `design/about/`: the old About page's design (the page was removed
+  2026-11-13; kept for reference only).
 - The live site is built from it: `public/site.css` is the design's
   `site.css` (minus its `.theme-dark` block, which only exists for the
   design tool) plus a few live-site additions at the end. The live pages
@@ -46,15 +43,16 @@ unless David changes it.
   below (no pixel differs by more than 9/255, which is invisible).
   The one planned difference: on home, the design's sketched window is
   now a real screenshot of Firn (see "Home screenshot").
-- `public/assets/firn-share-preview-v7.png`: the 1200×630 link preview (Open
-  Graph / Twitter card), light in both modes. v7 (2026-11-11) is v6
-  redrawn with the Gooper Condensed logo and a Gooper Deck headline ("A calm
-  browser, made for Mac."), rendered from `design/share-preview/og.html`;
-  used by every page (v5 and v6 stay in assets for old shared links). Keep it
-  a PNG, don't recompress it, and keep it small (about 300 KB; WhatsApp skips
+- `public/assets/firn-share-preview-v8.png`: the 1200×630 link preview (Open
+  Graph / Twitter card), the same in both modes. v8 (2026-11-13) is in the
+  Sunrise style: blue-hour sky, on-dark logo, light Gooper Deck headline
+  ("A calm browser, made for Mac."), the sun peeking over home's top snow layer (`.l1`);
+  rendered from `design/share-preview/og.html`; used by every page (v5–v7
+  stay in assets for old shared links). Keep it a PNG, don't recompress it,
+  and keep it small (about 370 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
-  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v7.png`.
-  When it changes, use a new file name (v8, …) so apps fetch the new
+  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v8.png`.
+  When it changes, use a new file name (v9, …) so apps fetch the new
   picture. (More: `docs/DESIGN-NOTES.md`, "Link preview image".)
 
 **Copy is final**, as written in the design files (including the line break
@@ -71,47 +69,73 @@ it untrue.
   Twitter text, alt text, and release notes. (Two items take no comma:
   "mail and calendar".)
 
-### First light: the idea (so new parts fit)
+### Home page: "Sunrise" (being built, 2026-11)
+
+The home page is being rebuilt as **Sunrise**, one long scroll that is one
+sunrise: `design/firn-sunrise/SUNRISE-BRIEF.md` (the brief and its nine
+steps) and `sunrise-mockup.dc.html` (reference only). Its styles live in
+`public/home.css` (home only, loaded after `site.css`); other pages keep
+First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
+two `.wg` warm glows); no page grain on home (dig down moved all texture
+into the snow). Home's theme-color
+and top background are blue hour (#1C2130 light, #1A1F2D dark).
+Step 2: header and hero always light text on the dark top (on-dark logo,
+`.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
+small print adds "Signed and notarized by Apple.", checked in the app's
+`scripts/release.sh`); phones get two `.dl-mobile` lines instead.
+Step 3: `section.tryit` (#try): the try-it window `#win`, drawn by
+`public/home.js` (three made-up spaces, Basecamp, a group, Lookout, split
+view with a draggable gap; sidebar tinted by `--sc`, matched to the app's
+`docs/screenshots`), four `.tc` tour cards, then the real screenshot
+(`.stage`). Without JS only the screenshot shows. Spaces card says "tabs
+and color" (spaces lost icons in the app, 2026-10-26). The sidebar button hides the
+sidebar and the left edge peeks it, as in the app (`BrowserWindow.swift`); off on phones.
+Step 4: `section.arc` (card and three mappings, checked against the app's
+`ArcImport.swift` and File menu), "Less, on purpose." open on the sky (no
+box), `section.maker` and the finale `section.fin` (#download).
+Step 5, rebuilt as **dig down** (`design/firn-sunrise/DIG-DOWN-PLAN.md`,
+2026-11-12): under the screenshot `.sunrise` (sun rises over the surface;
+`--r` from scroll in `home.js`, risen without JS or with reduced motion;
+dark: a cap behind the snow), then `div.lay.l1`–`.l4` (why Firn + Arc, Less
+on purpose, maker, finale) and `footer.ice.lay.l5` (keeps `nav.social` for
+`edges.js`), each one layer deeper. Edges, crests and shadows are generated
+by `tools/make-snow-edges.py`; the grain tiles `assets/snow-fresh.webp` and
+`snow-packed.webp` by `tools/make-snow-tiles.py` (both in
+`design/firn-sunrise/`, run from the repo root with `python3 -I`). Photos are
+allowed here only as snow texture (the "no stock photos" exception).
+Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
+on `<html>`; both modes only turn Personal's hue a little). The footer uses the on-dark lockup in both modes (the light
+lockup's flake is the same blue as the Personal ice).
+Step 7, mouse effects (`home.js`, end; mouse only, off with reduced motion): sun
+glints on `.l1`, the sky leans toward the cursor with a trailing light (`.wg3`),
+frost breath on the footer ice (`.breath`). Step 6, the drift, is dropped.
+Step 8a/8b done: text haloes for contrast; home focus ring is solid frost (#CFE3EF on dark, #16304A on light snow; `home.css`), and the try-it window announces changes to screen readers (`home.js`, `announce`).
+Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screenshot lazy, home header has only the on-dark logo. Phone scroll smooth at 4× slowdown. Open: on 1440px in headless Chrome the snow layers' `clip-path` edges drop frames (no GPU there); fix only if it stutters on a real Mac.
+Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
+**Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
+leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site (~~A: CLAUDE.md notes match the live site~~ done; ~~B: Download pill in inner headers~~ done (`.hdl`, ink on paper, `page.css`); ~~C: focus rings and leftover phone/`.at-end` backgrounds~~ done: inner pages use home's solid frost ring, #16304A light / #CFE3EF dark, and text links underlined 3px below like home's, `page.css`). Next list empty: ask David.
+
+### The idea (so new parts fit)
 
 Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
-hand. Cool glacier light high up, warm sunrise low.
+hand. Home is the cabin window (Sunrise, above); inner pages are the desk
+inside (`page.css`, "business corner").
 
-- **Edge to edge.** No frame around the page any more: the page colour runs
-  to the window edges.
-- **Sky glow.** Each page starts with a soft morning sky (`.sky`): cool
-  glacier blue at the top, warm peach and rose glows lower down, fading out
-  as you scroll. Inner pages use a shorter sky (`.sky.short`).
-- **Paper grain.** A faint warm noise texture (`.sheet::after`, an inline
-  SVG filter, no image file). On the live site it sits on the scenery (sky,
-  glows, snow) under the content, not on top of everything; see "Keep
-  scrolling smooth" below.
+- **Inner pages:** plain paper (`--page`) edge to edge, no sky, glows, or
+  grain; First light header (full-colour lockup, on-dark in dark mode);
+  home's glacier-ice footer under one static SVG snow edge.
 - **Frosted glass.** The menu card and circle, the support cards and the
-  release-note badges are semi-clear panels with a soft edge. The menu and
-  cards use a real `backdrop-filter` blur. Where a browser can't blur, the
-  semi-opaque background alone still reads fine.
-- **Screenshot on colour light.** On the home page, blurred patches of
-  glacier, sunrise, sage and lilac light (`.light`) sit behind a real
-  screenshot of Firn (`.shot`, see "Home screenshot" below), where the
-  design had a sketched, frosted window.
-- **Sunrise snow footer ("dawn").** Every page ends in the snow layers with
-  the sun rising behind them (`.dawn`, `.sun`, `.snow`). The snow art is
-  the "clear" version (`firn-snow-layers-clear.svg`, dark:
-  `firn-snow-layers-dark-clear.svg`), without its own sky, so the glow shows
-  through. The footer links sit on the sunrise just above the snow (see
-  "Footer" below).
-- **Drifting flakes.** A few faint Firn flakes float in the home hero
-  (`.fl`). They're hidden below 1000px wide, where they would land on text.
-  No crystal or flake may sit on text.
-- **Blue is for branding only.** Logo, snow, flakes, glows. Buttons, links
+  release-note badges are semi-clear panels; the menu and cards use a small
+  `backdrop-filter` blur.
+- **Drifting flakes.** A few faint Firn flakes in the home hero (`.fl`),
+  hidden below 1000px wide. No flake may sit on text.
+- **Blue is for branding only.** Logo, snow, ice, flakes, glows. Buttons, links
   and text stay in warm neutrals. The main button is ink with page-white text.
-- **Calm.** Generous space; motion is only small 200ms hover/focus
-  transitions, switched off for `prefers-reduced-motion`, and (when they
-  return) the home feature videos, which play only while on screen and
-  never with reduced motion (see "Home features"). Besides those, the
-  footer sun rises once on first view (about 2s, `transform` and `opacity`
-  only, off with reduced motion; `edges.js`, see "Footer sunrise" in
-  `docs/DESIGN-NOTES.md`). No carousels,
-  pop-ups, cookie banners, chat widgets or stock photos.
+- **Calm.** Generous space; small 200ms hover/focus transitions and home's
+  scroll and mouse effects, all off for `prefers-reduced-motion`. No
+  carousels, pop-ups, cookie banners, chat widgets or stock photos (snow
+  texture excepted).
 
 ### Keep scrolling smooth
 
@@ -121,12 +145,9 @@ Rules (the investigation, numbers and history are in `docs/DESIGN-NOTES.md`,
 - No large `backdrop-filter` panels. Small glass pieces (menu, cards) are
   fine. The window (the screenshot) has none.
 - No large `filter: blur()`, image masks, or see-through groups on anything
-  that scrolls; use plain gradients or images. Each `.light` is a plain radial
-  gradient (`--g`, `closest-side`; its colour `--c` is set inline in
-  `index.html`) with no filter and no opacity.
+  that scrolls; use plain gradients or images.
 - No `mix-blend-mode` on anything big, and no full-page blended layer above
-  blurred pieces. The grain is a plain see-through texture under the content
-  (`.sheet::after{z-index:0}`, at the end of `public/site.css`).
+  blurred pieces.
 
 ### Colours and type
 
@@ -157,15 +178,13 @@ inside the side margins on small phones.
 ### Dark mode: "blue hour"
 
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
-way Firn follows the OS. No toggle. Same layout and copy; the sky turns to a
-dim blue-hour glow, glass darkens, the sun is a low ember behind dark snow,
-the grain turns a faint near-black, and the header logo swaps to
-`firn-lockup-on-dark.svg`. theme-color: #F4F6F7 light, #2E2F31 dark.
+way Firn follows the OS. No toggle. Same layout and copy; glass and ice darken
+and the header logo swaps to `firn-lockup-on-dark.svg`. theme-color: inner
+pages #FBFAF8 light, #2B2826 dark (the paper); home #1C2130 / #1A1F2D.
 
 ### Fonts
 
-Headlines (everything `.serif`, plus About's quote, definition word,
-signature and diagram labels) use Gooper Deck: 400, emphasis 600, never
+Headlines (everything `.serif`, plus `/mac`'s signature) use Gooper Deck: 400, emphasis 600, never
 heavier. It's licensed and can't be shared, so **the font files must never
 be committed** (`.gitignore` blocks `*.woff2`, `*.woff`, `*.otf`, `*.ttf`).
 They load from `https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
@@ -247,16 +266,17 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
-**Header (every page):** logo on the left; "About", "Release notes",
+**Header (every page):** logo on the left; "Release notes",
 "Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
 A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
 (phone menu and floating card), never in the header row; bold on home.
+Every page also has the `.hdl` Download pill at the end of the header row (hidden on phones; home: light on the dark top, `home.css`; inner: ink, `page.css`).
 Also menu-only: FAQ and Privacy (`a.more`, smaller and muted under a line)
 and, on wide screens only, a "Download for Mac" ink button (`a.dl`, same
 link as home); "Menu extras" at the end of `site.css`.
@@ -271,18 +291,14 @@ Wider screens keep the links in the header; once it scrolls out of view the same
 glass circle appears top-right (in line with the column) and opens a small glass
 card of the links and social logos (end of `site.css`).
 
-**Footer (every page):** the dawn section (sun and snow), always at the
-bottom of the page, with plain link columns (no glass) on the sunrise just
-above the snow, so the flakes drawn in the snow's top edge never sit on
-text: **Firn** (About, Release notes, Privacy), **Community** (`nav.social`:
-GitHub, Discord `discord.gg/rZsVbT7794` (the David Wurgler Apps server),
-Threads, each an inline Simple Icons SVG (CC0) plus its name; `edges.js`
-copies these into the menu, logos only) and **Support** (Support, FAQ, Email,
-Tip jar). The Firn flake (`firn-mark.svg`) sits on the
-right on wide screens, hidden on phones. Under a thin line: "Firn · A
-<a>David Wurgler</a> app · © 2026" (links to davidwurgler.com, David's
-portfolio) and "Free and open source, MPL-2.0". Styles: "Footer" at the end
-of `site.css`. Same markup on every page (links start with `/`).
+**Footer (every page):** `footer.ice`, home's glacier-ice footer. Home has it as
+snow layer `.l5` (`home.css`); inner pages copy the same markup with one static
+SVG snow edge (`.edge`, `page.css`). Columns: **Firn** (Release notes, Privacy),
+**Community** (`nav.social`: GitHub, Discord `discord.gg/rZsVbT7794`, Threads,
+inline Simple Icons SVGs (CC0); `edges.js` copies them into the menu),
+**Support** (Support, FAQ, Email, Tip jar) and **Built with**; under a line the
+on-dark lockup and "Firn · A <a>David Wurgler</a> app · © 2026" (davidwurgler.com).
+A footer change goes in `index.html` and every inner page (links start with `/`).
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
 Routing. Linked as "Email" in the footer, on the Support page and as "Say hello" in the Tip jar
@@ -292,14 +308,6 @@ off (it adds a script and breaks the link without JavaScript).
 **When links get too many:** on wide screens the header has room for a few
 more links; on phones they go in the menu panel. A new social account gets a
 line in the Community column; keep the columns short (four or five links).
-
-**About:** the story in `<article class="part">` blocks (heading on the
-left, text on the right; stacked on phones), with the frosted definition
-card `.def`, the promise list `.promises`, and under the `.def` card in "The
-word" the snow-to-ice layers diagram (`<figure class="layers">`, bands
-`.ly1`–`.ly4`; colours `--l1`–`--l4`, `--gl-a` and `--gl-b` at the top of
-`site.css`; details in `docs/DESIGN-NOTES.md`, "About page"). The copy is
-David's; use it as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
@@ -359,18 +367,17 @@ the Windows code.
 `raw.githubusercontent.com/dwurgy/firn/main/appcast.xml`, where installed
 copies of Firn check for updates. No copy of the feed lives on the site.
 
-**Phone (max-width: 600px):** the design's phone block at the end of
-`site.css`: tighter header and hero, h1 up to 46px, features stacked (text above video) and single-column
-statement, footer columns side by side and the bottom line centred. The home screenshot is cropped rather
-than shrunk (see below).
+**Phone (max-width: 600px):** phone blocks in `site.css`, `home.css` and
+`page.css`: tighter header and hero, h1 up to 46px, footer columns two by two
+and the bottom line centred. The home screenshot is cropped rather than
+shrunk (see below).
 
-**Home screenshot:** under the hero, in the design's window spot (max
-1040px wide, on the colour light), a real screenshot of Firn on a Mac,
+**Home screenshot:** under the try-it window (max 1040px wide), a real screenshot of Firn on a Mac,
 cropped 2px inside the window's edge, in light and dark:
 `public/assets/screens/firn-hero-v4-light.webp` / `-dark.webp` (1440×898)
 and `@2x` (2080 wide), in a `<picture class="shot">` (a dark `<source
 media="(prefers-color-scheme: dark)">`, `srcset` 1x and 2x) with
-`width`/`height` set (1440×898) and `loading="eager"`. CSS: 12px corners,
+`width`/`height` set (1440×898) and `loading="lazy"` (it sits two screens down under the try-it window). CSS: 12px corners,
 `overflow: hidden`, `--shadow-win`, no backdrop blur. Source PNGs:
 `design/screens-2026-10-26/` (window at 112,76, 2880×1800). On phones it shows only the top-left part in a 4:3 frame (the image
 drawn 2.25× the frame's width, `object-fit: cover`,
@@ -380,36 +387,17 @@ Peak website with a tent in a grassy field at dusk on the right." A new
 picture gets a new file name (v5, …); update the HTML, its size and the alt
 text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
 
-**Home features:** under "All the good ideas. None of the homework.", four
-rows (Spaces, Basecamp, Lookout, Split view), 96px apart (56px on phones):
-the feature's dot, title and description (the design's copy, as written) on
-one side and a screenshot on the other (60% of the content width, sides
-switching each row; on phones the text sits above it). **For now these are
-still screenshots** (since 2026-10-27): `<picture class="clip">`, light and
-dark like the hero, `firn-spaces-v1`, `firn-basecamp-v1` (a 16:10 crop of
-the hero's top-left), `firn-lookout-v1`, `firn-split-view-v1` (720 wide,
-`@2x` 1440), `loading="lazy"`, alt text says what each shows. `loops.js` is
-not linked from home until loops return; the old loops are still in the
-repo, described here. The
-videos are silent 1440×900 H.264 recordings:
-`public/assets/screens/firn-spaces.mp4`, `firn-basecamp.mp4`,
-`firn-lookout.mp4` and `firn-split-view.mp4`, each with a first-frame
-poster (`…-poster.webp`). Markup: `<video class="clip" muted loop
-playsinline preload="none" width="1440" height="900" poster="…"
-aria-label="…">` with an mp4 `<source>`; no controls; the hero screenshot's
-corners and shadow, no backdrop blur. `loops.js` (home only, `defer`) plays a
-video only while at least half of it is on screen and never with
-`prefers-reduced-motion` (then only the poster shows). Each aria-label says
-what happens in its clip. (Details: `docs/DESIGN-NOTES.md`, "Home features".)
+**Home features:** replaced by the try-it window and tour cards (Sunrise
+step 3, 2026-11-12); the old videos, `loops.js` and feature stills are gone.
 
-**iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): on phones (600px
-and narrower) `html`/`body` and the phone-only theme-color tags use #DDE3E7
-light / #383D42 dark (wider screens: the sky's top colour, #F4F6F7 /
-#2E2F31), the same on every page. `edges.js` (on every page) adds `.at-end`
-to `<html>` near the end of a scrolled page, and `site.css` then switches the
-page background to #6B94AD light / #536573 dark. Every page has
-`viewport-fit=cover`; the header adds `env(safe-area-inset-top)` and keeps clear of the notch in
-landscape (the footer links sit high above the home indicator). iOS text autosizing is off (`-webkit-text-size-adjust: 100%`).
+**iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): `html`/`body`
+match the page top (inner pages: paper, `page.css`; home: blue hour,
+`home.css`), as do the theme-color tags. `edges.js` (on every page) adds
+`.at-end` to `<html>` near the end of a scrolled page, and the background
+then turns to the footer's ice (`html.at-end`, same rule in `page.css` and
+`home.css`). Every page has `viewport-fit=cover`; the header adds
+`env(safe-area-inset-top)` and keeps clear of the notch in landscape. iOS
+text autosizing is off (`-webkit-text-size-adjust: 100%`).
 
 ## Must-haves
 
@@ -417,22 +405,22 @@ landscape (the footer links sit high above the home indicator). iOS text autosiz
   On phones the home screenshot is cropped to its left part rather than
   shrunk until it's unreadable.
 - Accessible: visible
-  focus ring (frost), good contrast, alt text on the logo, `aria-current`
+  focus ring (solid frost, #16304A or #CFE3EF), good contrast, alt text on the logo, `aria-current`
   on the current page, decorative pieces `aria-hidden`.
 - Page title, description, Open Graph and Twitter tags on every page, using
-  the `firn-share-preview-v7.png` image (see above).
+  the `firn-share-preview-v8.png` image (see above).
 - Fast: no build step; no JavaScript needed for the look.
 
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the five pages, `site.css`, `edges.js`,
-`loops.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+`home.css`, `home.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
 **Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
 **Old copies in browsers:** every page links `site.css?v=N` and
-`edges.js?v=N` (home also `loops.js?v=N`): when you change one of those
+`edges.js?v=N` (home also `home.css?v=N` and `home.js?v=N`): when you change one of those
 files, raise its `N` on every page that links it, so browsers fetch the new
 copy. `public/_headers` also tells browsers to check for a newer CSS or JS
 file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
@@ -452,7 +440,7 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
   - **Keep searching out of this conversation.** For broad questions ("where is X used", "which pages link Y"), use the Explore agent. Don't spawn agents for anything else (each starts cold).
   - **Plan before multi-page work.** Say the plan in a few lines and wait for my OK.
   - **One task per conversation, small steps.** A long conversation is re-read on every message, so its cost grows with every reply.
-  - **Checkpoints.** When a step works and is committed, say so and tell me which fits: "/clear" (next task is unrelated) or "/compact" (same work continues). You can't run these yourself, so tell me. Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
+  - **Checkpoints.** When a step works and is committed, say so and say it's a good moment to /clear. Never suggest /compact: David always clears. Keep the "Next" list under Sunrise current (done items struck, next one first) so a fresh conversation can pick up from "Go". Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
   - **Short replies.** After a change: what changed, where, and how to check it, in a few lines. Don't recap the diff, repeat my request back, or paste whole files. Use Edit for changes, not rewriting a file.
   - **Quiet output.** Pipe long command output through tail or grep.
   - **Stuck rule.** After two failed attempts at the same fix, stop. Say what's known, what's been ruled out, and whether a fresh session or Opus would help. Don't try a third time.

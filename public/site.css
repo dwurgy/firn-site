@@ -8,28 +8,22 @@
 --shadow-page:0 1px 3px rgba(60,40,20,.14),0 6px 20px rgba(60,40,20,.2);
 --shadow-win:0 2px 8px rgba(40,28,16,.14),0 18px 48px rgba(40,28,16,.22);
 --shadow-field:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.07);
---sky-cool:rgba(157,183,200,.30);--sky-warm:rgba(242,196,160,.42);--sky-warm2:rgba(236,206,186,.30);--sky-top:#F4F6F7;
---light-1:#9DB7C8;--light-2:#F0CBA8;--light-3:#B9CDB5;--light-4:#E2CBB3;--light-op:.5;
+--sky-top:#F4F6F7;
 --glass:rgba(251,250,248,.58);--glass-edge:rgba(255,255,255,.65);--glass-shadow:0 1px 2px rgba(40,60,80,.08),0 8px 24px rgba(40,60,80,.12);
 --win-glass:rgba(233,227,218,.62);--tile:rgba(255,255,255,.5);--tile-on:rgba(255,255,255,.78);
 --panel:linear-gradient(160deg,#EEF2F4,#F6EEE6);--wm-op:.10;
---sun:rgba(244,194,152,.62);--sun-mid:rgba(244,194,152,.22);
---snow:url(assets/firn-snow-layers-clear.svg);--flake:#7F9CB0;--flake-op:1;
---grain-op:.13;--grain-blend:multiply;--l1:#E6EDF1;--l2:#CCDAE3;--l3:#A6BFCF;--l4:#86A9BF;--gl-a:#6E98B2;--gl-b:#FBFAF8;--logo-l:block;--logo-d:none}
+--flake:#7F9CB0;--logo-l:block;--logo-d:none}
 @media (prefers-color-scheme:dark){:root{--frame:#3A3734;--page:#2B2826;--ink:#F5F1EC;--muted:#D4CDC5;--faint:#958D85;--line:rgba(255,250,245,.09);
 --btn:#F5F1EC;--btn-ink:#2B2826;--field:rgba(255,250,245,.08);--field-line:rgba(255,250,245,.12);
 --frost:rgba(160,196,214,.45);--dot-glacier:#8FB0C6;
 --shadow-page:0 1px 3px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.35);
 --shadow-win:0 2px 8px rgba(0,0,0,.3),0 18px 48px rgba(0,0,0,.4);
 --shadow-field:0 1px 2px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.18);
---sky-cool:rgba(110,152,178,.22);--sky-warm:rgba(214,146,104,.16);--sky-warm2:rgba(160,120,110,.10);--sky-top:#2E2F31;
---light-1:#4E6E84;--light-2:#7A5A48;--light-3:#4F6250;--light-4:#5B5070;--light-op:.55;
+--sky-top:#2E2F31;
 --glass:rgba(43,40,38,.55);--glass-edge:rgba(255,250,245,.10);--glass-shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.3);
 --win-glass:rgba(58,55,52,.62);--tile:rgba(255,250,245,.08);--tile-on:rgba(255,250,245,.14);
 --panel:linear-gradient(160deg,rgba(110,152,178,.10),rgba(214,146,104,.07));--wm-op:.10;
---sun:rgba(214,140,96,.30);--sun-mid:rgba(214,140,96,.10);
---snow:url(assets/firn-snow-layers-dark-clear.svg);--flake:#7F9CB0;--flake-op:.6;
---grain-op:.5;--grain-blend:soft-light;--l1:#3A3F46;--l2:#414B55;--l3:#495865;--l4:#536777;--gl-a:#8FB0C6;--gl-b:#DCE5EB;--logo-l:none;--logo-d:block;}}
+--flake:#7F9CB0;--logo-l:none;--logo-d:block;}}
 /* Headlines: Gooper Deck (licensed; the files must never be committed).
    Served from fonts.firnbrowser.com, an R2 bucket on David's Cloudflare
    account; see docs/DESIGN-NOTES.md, "Cloudflare setup". */
@@ -45,15 +39,6 @@ h1,h2{text-wrap:balance}
 /* frame + sheet */
 .frame{background:var(--page);color:var(--ink);min-height:100vh}
 .sheet{position:relative;background:var(--page);overflow:hidden;min-height:100vh;display:flex;flex-direction:column}
-.sheet::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .28 0 0 0 0 .2 0 0 0 0 .13 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");opacity:var(--grain-op);mix-blend-mode:var(--grain-blend);z-index:5}
-/* sky (morning glow) */
-.sky{position:absolute;left:0;right:0;top:0;height:1250px;pointer-events:none;
- background:radial-gradient(900px 420px at 50% -10%,var(--sky-cool),transparent 70%),
-  radial-gradient(760px 520px at 84% 70%,var(--sky-warm),transparent 68%),
-  radial-gradient(620px 420px at 12% 58%,var(--sky-warm2),transparent 70%),
-  linear-gradient(var(--sky-top),transparent 420px);
- -webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
-.sky.short{height:760px}
 /* drifting flakes */
 .fl{position:absolute;pointer-events:none;fill:var(--flake);z-index:1}
 /* header */
@@ -73,10 +58,8 @@ nav.top a.home{display:none} /* Home shows only inside the menus (phone menu and
 .lede{margin:0;font-size:19px;line-height:1.55;color:var(--muted)}
 /* stage: window on colour light */
 .stage{position:relative;margin-top:72px;padding:64px 32px 72px}
-.light{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--light-op);pointer-events:none}
 /* features */
 h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:center}
-.feats{position:relative;z-index:2;max-width:1040px;width:100%;margin:0 auto;padding:96px 32px 24px}
 /* statement */
 .statement{position:relative;z-index:2;max-width:1040px;width:100%;margin:96px auto 0;padding:0 32px}
 .statement .box{position:relative;overflow:hidden;border-radius:20px;background:var(--panel);padding:72px 64px}
@@ -113,20 +96,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
 .other li{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:18px 4px;border-top:1px solid var(--line);font-size:16px}
 .other li:last-child{border-bottom:1px solid var(--line)}
 .other li span{color:var(--muted);font-size:15px;text-align:right}
-/* about */
-.story{position:relative;z-index:2;max-width:880px;width:100%;margin:0 auto;padding:72px 32px 24px}
-.part{display:grid;grid-template-columns:180px 1fr;gap:32px;padding:40px 0;border-top:1px solid var(--line)}
-.part:first-child{border-top:0;padding-top:0}
-.part>h2{margin:4px 0 0;text-align:left;font-size:15px;line-height:1.5;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:600;color:var(--ink)}
-.part p{margin:0 0 18px;font-size:18px;line-height:1.65;color:var(--muted)}
-.part p:last-child{margin-bottom:0}
-.part p.big{font-family:"Gooper Deck",Georgia,serif;font-size:28px;line-height:1.3;font-weight:400;color:var(--ink);text-wrap:balance}
-.def{margin:0 0 24px;border-radius:14px;padding:28px 30px;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.def .w{font-family:"Gooper Deck",Georgia,serif;font-size:44px;line-height:1;font-weight:400;color:var(--ink)}
-.def .pr{margin-left:12px;font-size:16px;color:var(--muted)}
-.def .pos{display:block;margin:12px 0 8px;font-size:14px;font-style:italic;color:var(--faint)}
-.def p{margin:0;font-size:17px;line-height:1.6;color:var(--ink)}
-.def small{display:block;margin-top:12px;font-size:14px;color:var(--muted)}
+/* promise list and signature (used by /mac) */
 .promises{list-style:none;margin:0;padding:0}
 .promises li{padding:14px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.55;color:var(--muted)}
 .promises li:first-child{border-top:0;padding-top:0}
@@ -135,8 +105,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
 .sign svg{margin-top:4px;width:28px;height:28px;fill:#6E98B2;flex:none}
 .sign span small{display:block;margin-top:4px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;color:var(--muted)}
 .sign span{font-family:"Gooper Deck",Georgia,serif;font-size:24px;color:var(--ink)}
-@media (max-width:600px){.story{padding:48px 24px 16px}.part{grid-template-columns:1fr;gap:12px;padding:32px 0}
- .part p{font-size:17px}.part p.big{font-size:24px}.def{padding:22px 22px}.def .w{font-size:38px}}
 /* mac: the transition page, one column like a blog post (headings in the text, no left labels) */
 .post{position:relative;z-index:2;max-width:680px;width:100%;margin:0 auto;padding:48px 32px 24px}
 .post p{margin:0 0 16px;font-size:17px;line-height:1.6;color:var(--muted)}
@@ -148,31 +116,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
 .post p strong{color:var(--ink);font-weight:600}
 .post code{font:15px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink)}
 @media (max-width:600px){.post .list{font-size:16px}}
-/* about: snow-to-ice layers in "The word" (design/about) */
-.layers{margin:0 0 28px}
-.layers ol{list-style:none;margin:0;padding:0;border-radius:14px;overflow:hidden}
-.ly{position:relative;display:grid;grid-template-columns:56px 1fr;align-items:center;gap:20px;padding:22px 28px;color:var(--ink)}
-.ly .wv{position:absolute;left:0;top:-15px;width:100%;height:16px;fill:var(--lc)}
-.ly{background:var(--lc)}
-.ly1{--lc:var(--l1)}.ly2{--lc:var(--l2)}.ly3{--lc:var(--l3)}.ly4{--lc:var(--l4)}
-.ly .gl{width:56px;height:56px;color:var(--gc,var(--gl-a))}.ly .gl svg{width:100%;height:100%;display:block}
-.ly3,.ly4{--gc:var(--gl-b)}
-.ly b{display:block;font-family:"Gooper Deck",Georgia,serif;font-weight:400;font-size:22px;line-height:1.2}
-.ly.is-firn b{font-weight:600}
-.ly div span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--ink)}
-.layers figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
-@media (max-width:600px){.ly{grid-template-columns:44px 1fr;gap:16px;padding:20px 20px}.ly .gl{width:44px;height:44px}.ly b{font-size:20px}}
-/* dawn: sunrise behind the snow, footer links on it (see "Footer" at the end) */
-.dawn{position:relative;margin-top:auto;padding-top:40px;height:600px;overflow:hidden;flex:none}
-.dawn .sun{position:absolute;left:50%;bottom:-50px;width:1500px;height:540px;transform:translateX(-50%);pointer-events:none;
- background:radial-gradient(closest-side,var(--sun),var(--sun-mid) 50%,transparent)}
-/* one-time sunrise: edges.js adds .sun-wait (low, dim, no transition), then .sun-rise on first view;
-   without JS or with reduced motion neither class is set and the sun stays in its finished spot */
-.dawn.sun-wait .sun{transform:translate(-50%,20%);opacity:.7}
-/* light mode: a peach sun on a pale page barely changes, so it starts lower and fainter */
-@media (prefers-color-scheme:light){.dawn.sun-wait .sun{transform:translate(-50%,35%);opacity:.35}}
-@media (prefers-reduced-motion:no-preference){.dawn.sun-rise .sun{transition:transform 2s cubic-bezier(.33,1,.68,1),opacity 2s cubic-bezier(.33,1,.68,1)}}
-.dawn .snow{position:absolute;left:0;right:0;bottom:0;height:clamp(240px,20vw,288px);background:var(--snow) center bottom/max(100%,1100px) auto no-repeat}
 @media (prefers-reduced-motion:no-preference){.btn,nav.top a{transition:opacity .2s cubic-bezier(.33,1,.68,1),color .2s}}
 /* phones */
 @media (max-width:600px){
@@ -181,7 +124,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
  .eyebrow{font-size:14px}
  .hero h1{font-size:min(46px,calc((100vw - 48px) / 7.4));line-height:1.02}.lede{font-size:17px;line-height:1.5}.lede br{display:none}
  .stage{margin-top:28px;padding:40px 16px 48px}
- .feats{padding:64px 24px 16px}h2{font-size:30px;margin-bottom:28px}
+ h2{font-size:30px;margin-bottom:28px}
  .statement{margin-top:56px;padding:0 16px}.statement .box{padding:44px 24px}.statement h2{font-size:34px;margin-bottom:28px}
  .statement .wm{width:280px;height:280px;right:-80px;top:-60px}
  .lg{grid-template-columns:1fr;gap:24px}
@@ -190,11 +133,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
  .where,.other{padding-left:24px;padding-right:24px}.where{padding-top:64px}.other{padding-top:56px}
  .where h2,.other h2{font-size:28px}.cards{grid-template-columns:1fr}
  .other li{flex-direction:column;gap:4px}.other li span{text-align:left}
- .dawn{height:420px}
- .dawn .sun{width:760px;height:380px;bottom:-40px}
  .hero .fl{display:none}
- .sky{height:820px}.sky.short{height:560px}
- .light{width:240px !important;height:190px !important;filter:blur(44px)}
 }
 
 /* Live-site additions (not in the design files) */
@@ -208,34 +147,8 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
    width/height in the HTML keep its space while it loads. */
 .shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
 .shot img{display:block;width:100%;height:auto}
-/* Home features: four rows, the text (dot, title, description) on one side
-   and a screenshot of the feature on the other (60% of the width; light or
-   dark to match the visitor), switching sides each row. Framed like the
-   hero screenshot: rounded corners and the same soft warm shadow, no
-   backdrop blur. (.clip also fits a looping <video>, for when loops return.)
-   On phones the text sits above a full-width screenshot. */
-.tour{display:grid;gap:96px}
-.feat{display:grid;grid-template-columns:minmax(0,1fr) 60%;gap:56px;align-items:center}
-.feat:nth-child(even){grid-template-columns:60% minmax(0,1fr)}
-.feat:nth-child(even) .txt{order:2}
-.feat em{display:block;width:10px;height:10px;border-radius:99px;margin-bottom:18px}
-.feat h3{margin:0 0 8px;font-size:22px;font-weight:600}.feat p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
-.clip{display:block;width:100%;height:auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win);background:var(--frame)}
-.clip img{display:block;width:100%;height:auto}
-@media (max-width:600px){
- .tour{gap:56px}
- .feat,.feat:nth-child(even){grid-template-columns:1fr;gap:20px}
- .feat:nth-child(even) .txt{order:0}
- .feat h3{font-size:19px}.feat p{font-size:16px}
-}
-/* Smooth scrolling. The design window's live backdrop blur, combined with
-   the full-page grain blending on top of it, made the browser redo a large
-   blur and blend on every scroll frame (about 20 fps over the haze). So
-   the screenshot has no backdrop blur, and the grain sits under the
-   content (sky, glows, snow) instead of on top of everything (visually
-   within 8/255 of the design at every pixel). The footer pills and
-   support cards keep their real frosted blur. */
-.sheet::after{z-index:0}
+/* Smooth scrolling: the screenshot has no backdrop blur (a large live blur
+   redid itself on every scroll frame; see docs/DESIGN-NOTES.md). */
 /* iPhone: the page runs under the status bar (viewport-fit=cover). Safari
    tints the status-bar strip from the page background, so it's the sky's
    top colour; the header and footer pills keep clear of the status bar,
@@ -256,44 +169,8 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
 }
 /* Smallest phones: at 46px, the bold "made for Mac." (300px) is wider than
    the 287px text area at 320px. 44px keeps it inside the margins. */
-/* iPhone status bar: Safari paints the strip behind the clock with one flat
-   colour taken from the page background (the page itself starts below it).
-   On phones the sky's top edge is a little bluer than --sky-top, because the
-   cool glow is strongest there, so the strip uses that measured colour
-   instead; then strip and sky meet without a visible line. */
-@media (max-width:600px){html,body{background:#DDE3E7}}
-@media (max-width:600px) and (prefers-color-scheme:dark){html,body{background:#383D42}}
-/* Bottom strip: near the end of a page edges.js adds .at-end, and the page
-   background becomes the snow's deepest colour, so the strip Safari shows
-   below the page (behind its toolbar) continues the snow. */
-html.at-end,html.at-end body{background:#6B94AD}
-@media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
-/* Smooth scrolling in Firefox-based browsers (Firefox, Zen). The colour
-   light behind the window was four big filter: blur(70px) patches, which
-   Gecko redoes on every scroll frame; a soft SVG mask in their place was
-   still slow there. Now each patch is a plain radial gradient (--g), the
-   cheapest thing to draw: its colour (--c, set inline in index.html) fading
-   out along the same curve as the old blur (measured, within 6% of it),
-   with the light's strength (--o) built into the colours, so nothing needs
-   a separate see-through layer. The gradient reaches 175px past the patch
-   (110px on phones), where the blur had faded out. */
-.light{filter:none;opacity:1;--o:var(--light-op)}
-.light::before{content:"";position:absolute;inset:-175px;background:var(--g)}
-.stage .light:nth-child(1){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(99.3% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(97.6% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(93.7% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(86.4% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(75.1% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(60.4% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(44.2% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(28.8% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(16.3% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(7.9% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(3.1% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.9% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(2){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(99.6% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(99.4% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(98.1% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(95% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(89.2% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(80.2% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(67.6% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(52.9% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(37.8% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(24.2% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(13.6% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(6.6% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2.6% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.8% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(3){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(100% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(99.7% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(98.8% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(96.4% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(91.3% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(82.9% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(70.8% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(56.1% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(40.4% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(26% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(14.7% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(7.1% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2.8% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.8% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-.stage .light:nth-child(4){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(96.1% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(94.8% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(91.1% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(84.9% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(76% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(64.6% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(51.8% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(38.7% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(26.6% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(16.6% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(9.3% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(4.6% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(1.9% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.6% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}
-@media (max-width:600px){.light::before{inset:-110px}.stage .light:nth-child(n){--g:radial-gradient(closest-side,color-mix(in srgb,var(--c) calc(96.9% * var(--o)),transparent) 0%,color-mix(in srgb,var(--c) calc(95.6% * var(--o)),transparent) 7.14%,color-mix(in srgb,var(--c) calc(92.4% * var(--o)),transparent) 14.29%,color-mix(in srgb,var(--c) calc(86.5% * var(--o)),transparent) 21.43%,color-mix(in srgb,var(--c) calc(78% * var(--o)),transparent) 28.57%,color-mix(in srgb,var(--c) calc(66.8% * var(--o)),transparent) 35.71%,color-mix(in srgb,var(--c) calc(53.9% * var(--o)),transparent) 42.86%,color-mix(in srgb,var(--c) calc(40.4% * var(--o)),transparent) 50%,color-mix(in srgb,var(--c) calc(27.9% * var(--o)),transparent) 57.14%,color-mix(in srgb,var(--c) calc(17.5% * var(--o)),transparent) 64.29%,color-mix(in srgb,var(--c) calc(9.8% * var(--o)),transparent) 71.43%,color-mix(in srgb,var(--c) calc(4.8% * var(--o)),transparent) 78.57%,color-mix(in srgb,var(--c) calc(2% * var(--o)),transparent) 85.71%,color-mix(in srgb,var(--c) calc(0.6% * var(--o)),transparent) 92.86%,color-mix(in srgb,var(--c) calc(0% * var(--o)),transparent) 100%)}}
-/* Smooth scrolling in Firefox-based browsers, part 2. The grain blended
-   (mix-blend-mode) over the whole page, which Gecko redoes on every scroll
-   frame. Now it's a plain see-through texture, no blending. Light mode:
-   the same grain at the same strength, within 5/255 of the multiply blend.
-   Dark mode: the soft-light blend barely showed (within 3/255 of no grain
-   at all); a faint near-black grain at .15 matches it within 4/255. */
-.sheet::after{mix-blend-mode:normal}
-@media (prefers-color-scheme:dark){.sheet::after{opacity:.15;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .06 0 0 0 0 .03 0 0 0 0 .01 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}}
 /* Release notes: the bold lead-in of each list item ("Spaces", "Basecamp")
-   in ink, like the About page's promise list. */
+   in ink, like the promise list on /mac. */
 .entry li strong{color:var(--ink);font-weight:600}
 /* Each release note has its own address (release-notes#0.5.0): the version
    name links to it, in ink like the text around it, underlined on hover.
@@ -389,37 +266,7 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
 .badge+.badge{margin-left:6px}
-/* Footer (2026-11-09): the three pills became link columns on the snow
-   (Firn, Community, Support) with a line under them, "Firn · A David
-   Wurgler app · © 2026" and the licence. No glass. It sits on the sunrise
-   just above the snow, so no drawn flake lands on text and the dark snow
-   bands never sit behind it. */
-.foot{position:absolute;left:0;right:0;bottom:calc(clamp(240px,20vw,288px) + 12px);z-index:3;max-width:1040px;margin:0 auto;
- padding:0 max(32px,env(safe-area-inset-right)) 0 max(32px,env(safe-area-inset-left));font-size:14px;color:var(--muted)}
-.foot .cols{display:grid;grid-template-columns:repeat(3,minmax(0,180px));gap:24px}
-.foot nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.foot .fh{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
-.foot a{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s}
-.foot a:hover{color:var(--ink)}
-.foot svg{width:15px;height:15px;fill:currentColor;flex:none}
-.foot .legal{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
-.foot .legal p{margin:0;font-size:13px}
 .menu-social span,.menu-social .fh{display:none}
-@media (max-width:600px){
- .dawn{height:520px}
- .foot{bottom:252px;padding:0 max(24px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));font-size:13px}
- .foot .cols{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:16px}
- .foot nav{gap:9px}
- .foot .legal{flex-direction:column;align-items:center;text-align:center;margin-top:22px;padding-top:14px}
-}
-@media (prefers-reduced-motion:reduce){.foot a{transition:none}}
-.foot .legal a{display:inline;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
-.foot .legal a:hover{text-decoration-color:currentColor}
-/* The Firn flake on the right of the footer columns (wide screens only). */
-.foot .cols{grid-template-columns:repeat(3,minmax(0,180px)) 1fr}
-.foot .mark{justify-self:end;width:64px;height:64px}
-@media (prefers-color-scheme:dark){.foot .mark{opacity:.75}}
-@media (max-width:600px){.foot .cols{grid-template-columns:repeat(3,auto)}.foot .mark{display:none}}
 /* Menu extras (2026-11-09): FAQ and Privacy (a.more) show only inside the
    menus, smaller and muted under a thin line; "Download for Mac" (a.dl) shows
    only in the wide-screen floating card, as a small ink button (no download
