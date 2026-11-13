@@ -14,21 +14,24 @@
       pages: [
         P(['Cabin weekend: packing list', 'notes.cabinweekend.page', 'Cabin Weekend', 'Lists   Trips', 'Saturday', 'What to pack for the cabin', 'Wool socks, the good coffee, the pour-over, and one book you’ll actually finish. Chains for the car, just in case.', 'Road conditions over the pass', '#E8DED3', '#F3EEE8', '#CDBBA6', '#B39E86']),
         P(['Pour-over, slowly', 'morningcup.blog', 'Morning Cup', 'Brewing   Beans', 'Brewing', 'Pour-over, slowly', 'Thirty grams, half a liter of water just off the boil, and four minutes you don’t spend looking at your phone.', 'Choosing a hand grinder', '#EADCCF', '#F6EFE8', '#D5BBA3', '#BE9C80']),
-        P(['Snow report', 'slowsnow.news', 'Slow Snow', 'Reports   Maps   About', 'This morning', 'Fourteen inches, and still settling', 'A quiet storm overnight. The new snow is light on top and already packing down below, the slow start of next year’s firn.', 'How snow turns into firn', '#D9E3EA', '#EEF2F4', '#C6D5DF', '#AFC4D2'])
+        P(['Snow report', 'slowsnow.news', 'Slow Snow', 'Reports   Maps   About', 'This morning', 'Fourteen inches, and still settling', 'A quiet storm overnight. The new snow is light on top and already packing down below, the slow start of next year’s firn.', 'How snow turns into firn', '#D9E3EA', '#EEF2F4', '#C6D5DF', '#AFC4D2']),
+        P(['Sunrise times this week', 'almanac.slowsnow.news', 'Slow Snow', 'Reports   Maps   About', 'Almanac', 'A little later every morning', 'The sun comes up about a minute later each day this month. Coffee first, then the window.', 'Sunset times', '#E9DDD6', '#F6F0EC', '#D8C0B4', '#C2A293'])
       ] },
     { name: 'Work', color: '#8FAE8B', group: 'Planning',
       tiles: [['Inbox', 'I', '#8FAE8B'], ['Calendar', 'C', '#B07F6A'], ['Docs', 'D', '#6FA3A0'], ['Chat', 'T', '#8E8FB8']],
       pages: [
         P(['Q1 roadmap', 'docs.northpine.work', 'Northpine Docs', 'Docs   Shared', 'Planning', 'Q1: three things, not twelve', 'Ship the small fixes first. Then the one big thing. Then take a breath before the next one.', 'Last quarter’s notes', '#DDE6DA', '#F0F3EE', '#C3D3BF', '#A9BFA4']),
         P(['Design review: settings', 'docs.northpine.work', 'Northpine Docs', 'Docs   Shared', 'Review', 'The new settings, reviewed', 'Shorter menus and plainer words. Two choices where there used to be five.', 'Before and after', '#E2E5EE', '#F1F2F6', '#C8CBDD', '#ADB0CB']),
-        P(['Thursday standup', 'team.northpine.work', 'Northpine Team', 'Standups   People', 'Thursday', 'Standup, Thursday', 'Yesterday: fixed the export bug. Today: the onboarding copy. Blocked: nothing, for once.', 'Open tickets', '#DCE9E7', '#EFF5F4', '#BCD6D3', '#9DC1BE'])
+        P(['Thursday standup', 'team.northpine.work', 'Northpine Team', 'Standups   People', 'Thursday', 'Standup, Thursday', 'Yesterday: fixed the export bug. Today: the onboarding copy. Blocked: nothing, for once.', 'Open tickets', '#DCE9E7', '#EFF5F4', '#BCD6D3', '#9DC1BE']),
+        P(['Hiring: product designer', 'team.northpine.work', 'Northpine Team', 'Standups   People', 'People', 'We’re hiring a designer', 'Someone who likes fewer buttons. Remote, four days a week, and nobody pings you after six.', 'How we work', '#E7E1EC', '#F4F1F6', '#D0C6DB', '#B6A9C6'])
       ] },
     { name: 'Kitchen', color: '#C9A27E', group: 'Weekend cooking',
       tiles: [['Recipes', 'R', '#C9A27E'], ['Market', 'M', '#8FAE8B'], ['Notes', 'N', '#7F9CB0'], ['Timer', 'T', '#B07F6A']],
       pages: [
         P(['Sourdough, slowly', 'thepatientloaf.com', 'The Patient Loaf', 'Bread   Starters', 'Bread', 'Sourdough, slowly', 'Feed the starter tonight, mix in the morning, and let the dough take its time. It knows what it’s doing.', 'Shaping a round loaf', '#EFE2D3', '#F7F1EA', '#DCC3A8', '#C8A784']),
         P(['One-pot cabin chili', 'thepatientloaf.com', 'The Patient Loaf', 'Bread   Starters', 'Dinner', 'One-pot cabin chili', 'Two kinds of beans, one pot, and the cornbread from the back of the cookbook while it simmers.', 'Cornbread from scratch', '#F0DDD3', '#F8EFEA', '#DDBBA8', '#C69A84']),
-        P(['Shopping list', 'notes.cabinweekend.page', 'Cabin Weekend', 'Lists   Trips', 'Saturday', 'Shopping list', 'Flour, butter, onions, and the good salt. Coffee, obviously.', 'What’s in season', '#E6E7D8', '#F3F3EC', '#CBCDB0', '#B1B493'])
+        P(['Shopping list', 'notes.cabinweekend.page', 'Cabin Weekend', 'Lists   Trips', 'Saturday', 'Shopping list', 'Flour, butter, onions, and the good salt. Coffee, obviously.', 'What’s in season', '#E6E7D8', '#F3F3EC', '#CBCDB0', '#B1B493']),
+        P(['Cast iron care', 'thepatientloaf.com', 'The Patient Loaf', 'Bread   Starters', 'Kitchen', 'Looking after cast iron', 'Rinse it hot, dry it on the stove, and wipe on a thin coat of oil. That’s the whole secret.', 'Seasoning a new pan', '#E4DDD8', '#F2EEEB', '#C9BCB3', '#AE9D92'])
       ] }
   ];
   var GROUPED = 2; // the first two tabs of each space sit in its group
@@ -50,10 +53,15 @@
     return i < tabs.length ? tabs[i] : tilePage(s.tiles[i - tabs.length], s);
   }
   function fav(p) { return '<span class="fav" style="background:' + (p.fav || p.c2) + '">' + esc((p.letter || p.site).charAt(0)) + '</span>'; }
-  function partner() { var n = tabsOf(st.space).length; return (st.active + 1) % n; }
+  // The split view partner: a neighbouring tab in the same place (the group,
+  // or the loose tabs under it), so the pair sits together like in the app.
+  function partner() {
+    var n = tabsOf(st.space).length, a = st.active, lo = a < GROUPED ? 0 : GROUPED, hi = a < GROUPED ? GROUPED : n;
+    return a + 1 < hi ? a + 1 : a - 1 >= lo ? a - 1 : (a + 1) % n;
+  }
 
   var ICON = {
-    side: '<svg viewBox="0 0 16 16" width="15" height="15"><rect x="1.5" y="2.5" width="13" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6 3v10" stroke="currentColor" stroke-width="1.3"/></svg>',
+    side: '<svg viewBox="0 0 16 16" width="17" height="17"><rect x="1.5" y="2.5" width="13" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6 3v10" stroke="currentColor" stroke-width="1.3"/></svg>',
     back: '<svg viewBox="0 0 16 16" width="14" height="14"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     fwd: '<svg viewBox="0 0 16 16" width="14" height="14"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     reload: '<svg viewBox="0 0 16 16" width="13" height="13"><path d="M13 8a5 5 0 1 1-1.6-3.7M13 2.5v3h-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -79,7 +87,7 @@
 
   function sidebar() {
     var s = D[st.space], tabs = tabsOf(st.space), n = tabs.length, cur = pageAt(st.active), h = '';
-    h += '<div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="ic sb">' + ICON.side + '</span><span class="ic bk">' + ICON.back + '</span><span class="ic">' + ICON.fwd + '</span></div>';
+    h += '<div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="ic sb">' + ICON.side + '</span><span class="ic bk">' + ICON.back + '</span><span class="ic fw">' + ICON.fwd + '</span></div>';
     h += '<div class="addr"><span>' + esc(cur.domain) + '</span><span class="ic" aria-hidden="true">' + ICON.reload + '</span></div>';
     h += '<div class="bc" role="group" aria-label="Basecamp">';
     s.tiles.forEach(function (t, k) {
@@ -93,9 +101,9 @@
     h += '</div>';
     for (var k = GROUPED; k < n; k++) h += tabRow(tabs, k);
     h += '<div class="new" aria-hidden="true">' + ICON.plus + 'New tab</div></div>';
-    h += '<div class="sfoot"><span class="ic arc" aria-hidden="true">' + ICON.archive + '</span><div class="spc"><span class="sn">' + s.name + '</span><span class="dots">';
+    h += '<div class="sfoot"><span class="ic ar" aria-hidden="true">' + ICON.archive + '</span><div class="spc"><span class="sn">' + s.name + '</span><span class="dots">';
     D.forEach(function (d, i) {
-      h += '<button type="button" class="dot' + (i === st.space ? ' on' : '') + '" data-act="space" data-i="' + i + '" data-k="dot' + i + '" aria-label="Switch to the ' + d.name + ' space"' + (i === st.space ? ' aria-current="true"' : '') + '><i style="background:' + d.color + '"></i></button>';
+      h += '<button type="button" class="dot' + (i === st.space ? ' on' : '') + '" data-act="space" data-i="' + i + '" data-k="dot' + i + '" aria-label="Switch to the ' + d.name + ' space"' + (i === st.space ? ' aria-current="true"' : '') + '><i></i></button>';
     });
     return h + '</span></div></div>';
   }
