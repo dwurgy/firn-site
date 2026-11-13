@@ -81,7 +81,7 @@ html:not(.try-ready) .tryit .sub,html:not(.try-ready) .win,html:not(.try-ready) 
  background:#D9DCD4;background:var(--side);border-radius:14px;box-shadow:0 0 0 .5px rgba(0,0,0,.25),0 2px 6px rgba(10,12,20,.25),0 30px 80px rgba(10,12,20,.45);overflow:hidden;transition:--pl .2s ease}
 /* The page's left edge, registered so it slides when the sidebar hides. */
 @property --pl{syntax:'<length>';inherits:true;initial-value:268px}
-@media (prefers-color-scheme:dark){.win{--side:color-mix(in srgb,var(--sc) 26%,#2B2826);--tx:#F3EFE9;--mu:#BDB5AC;--well:rgba(255,250,245,.07);--card:rgba(255,250,245,.07);--edge:rgba(255,250,245,.1);--sel:rgba(255,250,245,.14);--dim:#6E6B63;--name:color-mix(in srgb,var(--sc) 75%,#F5F1EC);background:#454942;background:var(--side);box-shadow:0 0 0 .5px rgba(255,255,255,.14),0 2px 6px rgba(0,0,0,.3),0 30px 80px rgba(0,0,0,.5)}}
+@media (prefers-color-scheme:dark){.win{--side:color-mix(in srgb,var(--sc) 26%,#2B2826);--tx:#F3EFE9;--mu:#D0C9C1;--well:rgba(255,250,245,.07);--card:rgba(255,250,245,.07);--edge:rgba(255,250,245,.1);--sel:rgba(255,250,245,.14);--dim:#6E6B63;--name:color-mix(in srgb,var(--sc) 55%,#F5F1EC);background:#454942;background:var(--side);box-shadow:0 0 0 .5px rgba(255,255,255,.14),0 2px 6px rgba(0,0,0,.3),0 30px 80px rgba(0,0,0,.5)}}
 :where(.win) button{font:inherit;color:inherit;border:0;background:none;padding:0;margin:0;cursor:pointer}
 .win .ic{display:inline-flex;align-items:center;justify-content:center;color:var(--mu)}
 .side{position:absolute;z-index:2;top:0;bottom:0;left:0;width:var(--sw);display:flex;flex-direction:column;padding:0 8px;min-height:0;transition:transform .2s ease}
@@ -300,7 +300,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 .l2{--s:var(--s2);--muted:#3A332D}
 .l3{--s:var(--s3);--tex:url(assets/snow-packed.webp);--muted:#2F2925;--deep:rgba(14,32,50,.16)}
 .l4{--s:var(--s4);--tex:url(assets/snow-packed.webp);--muted:#2A2521;--deep:rgba(14,32,50,.18)}
-.l5{--s:var(--s5);--tex:url(assets/snow-packed.webp);--deep:rgba(14,32,50,.2)}
+.l5{--s:var(--s5);--tex:url(assets/snow-packed.webp);--deep:rgba(14,32,50,.1)}
 /* The surface catches the sunrise: a warm wash where the sun comes up. */
 .l1{background-image:radial-gradient(70% 420px at 62% 0,rgba(255,206,160,.42),rgba(255,206,160,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex);
  background-size:auto,auto,auto,auto,256px 256px}
@@ -318,7 +318,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
  .l3,.l4,.l5{--deep:rgba(4,8,14,.24)}
  /* Settled snow is the lightest layer behind open text: a touch deeper, and
     its small text nearly white (4.5:1 or more in every space). */
- .l2{--muted:#F3EEE8;background-color:color-mix(in srgb,var(--s) 84%,#0B121B)}
+ .l2{--muted:#F3EEE8;background-color:color-mix(in srgb,var(--s) 80%,#0B121B)}
  .l1{background-image:radial-gradient(70% 380px at 62% 0,rgba(242,170,120,.14),rgba(242,170,120,0)),linear-gradient(180deg,var(--lift),rgba(255,255,255,0) 280px),linear-gradient(180deg,rgba(14,32,50,0) 30%,var(--deep)),linear-gradient(color-mix(in srgb,var(--s) var(--veil),transparent),color-mix(in srgb,var(--s) var(--veil),transparent)),var(--tex)}
  .lay .crest .lip{fill:rgba(220,234,246,.04)}
  .lay .crest .rim{stroke:rgba(214,230,244,.38)}
@@ -355,7 +355,7 @@ html[data-space="2"]{--s1:#E1E3EC;--s2:#CCD0E0;--s3:#B3BAD2;--s4:#9CA4C4;--s5:#8
 @media (prefers-color-scheme:dark){
  .why .wc{background:rgba(43,40,38,.74);box-shadow:0 1px 2px rgba(0,0,0,.2),0 8px 24px rgba(0,0,0,.18)}
  .why .wc p{color:#D4CDC5}
- .l3 .maker .tx{color:#E8E2DB}
+ .l3 .maker .tx{color:#F3EEE8}
 }
 @media (max-width:600px){
  .lay{padding:calc(var(--ea) + 48px) 0 88px}
