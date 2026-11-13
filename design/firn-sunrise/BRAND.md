@@ -36,18 +36,19 @@ hand. Quiet, cold air, warm light coming up.
 The sky is one plain vertical gradient. On home it runs over the whole page
 (px from the top):
 
-- **Light:** `#1C2130` 0 → `#252C3E` 520 → `#343E57` 1000 → `#556079` 1420 →
-  `#8D8C9E` 1760 → `#CDB8B4` 1960 → `#EAD3C5` 2200 → `#F4E5DA` 2700 →
+- **Light:** first light, one stage later than dark: `#36415D` 0 → `#3E4966` 560 →
+  `#4C5774` 1000 → `#69728E` 1420 → `#9894A6` 1760 → `#CDB8B4` 1960 → `#EAD3C5` 2200 → `#F4E5DA` 2700 →
   `#F7F0E8` 3200 → `#F6F3EE` 3800
 - **Dark:** stays blue hour all the way: `#1A1F2D` → `#212839` → `#283043` →
   `#2E3548` → `#34394B` → `#373A48` → `#383733`
 
 For a single screen, compress it: dark at the top, then the last stops
-(`#556079` → `#8D8C9E` → `#CDB8B4` → `#EAD3C5`) packed just above the snow.
+(`#69728E` → `#9894A6` → `#CDB8B4` → `#EAD3C5`) packed just above the snow.
 The link preview (`design/share-preview/og.html`) does exactly this at 630px.
 
 Top-of-screen colour (status bar, theme-color, window background behind the
-sky): `#1C2130` light, `#1A1F2D` dark.
+sky): `#36415D` light, `#1A1F2D` dark. (The link preview still uses the
+older, darker `#1C2130` top.)
 
 **Text on the dark sky** is always light, in both modes: `#F5F1EC` (15:1),
 muted `#D4CDC5` (11:1), small print `#B9B2AA` (8:1). Logo: the on-dark lockup.

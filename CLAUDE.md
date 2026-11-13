@@ -78,7 +78,8 @@ steps) and `sunrise-mockup.dc.html` (reference only). **Brand sheet:** `design/f
 First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
 two `.wg` warm glows); no page grain on home (dig down moved all texture
 into the snow). Home's theme-color
-and top background are blue hour (#1C2130 light, #1A1F2D dark).
+and top background: first light #36415D in light mode (lighter than dark
+mode's blue hour #1A1F2D, 2026-11-13; small print #D4CDC5 there for contrast).
 Step 2: header and hero always light text on the dark top (on-dark logo,
 `.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
 small print adds "Signed and notarized by Apple.", checked in the app's
@@ -180,7 +181,7 @@ inside the side margins on small phones.
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
 way Firn follows the OS. No toggle. Same layout and copy; glass and ice darken
 and the header logo swaps to `firn-lockup-on-dark.svg`. theme-color: inner
-pages #FBFAF8 light, #2B2826 dark (the paper); home #1C2130 / #1A1F2D.
+pages #FBFAF8 light, #2B2826 dark (the paper); home #36415D / #1A1F2D.
 
 ### Fonts
 
