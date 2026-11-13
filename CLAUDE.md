@@ -113,7 +113,7 @@ Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screens
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
 leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; next: remove the now-unused First light sky, dawn, and grain CSS from `site.css`); then a top-to-bottom pass to unify the site.
+inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
 
@@ -151,10 +151,7 @@ hand. Cool glacier light high up, warm sunrise low.
 - **Calm.** Generous space; motion is only small 200ms hover/focus
   transitions, switched off for `prefers-reduced-motion`, and (when they
   return) the home feature videos, which play only while on screen and
-  never with reduced motion (see "Home features"). Besides those, the
-  footer sun rises once on first view (about 2s, `transform` and `opacity`
-  only, off with reduced motion; `edges.js`, see "Footer sunrise" in
-  `docs/DESIGN-NOTES.md`). No carousels,
+  never with reduced motion (see "Home features"). No carousels,
   pop-ups, cookie banners, chat widgets or stock photos.
 
 ### Keep scrolling smooth
@@ -167,8 +164,7 @@ Rules (the investigation, numbers and history are in `docs/DESIGN-NOTES.md`,
 - No large `filter: blur()`, image masks, or see-through groups on anything
   that scrolls; use plain gradients or images.
 - No `mix-blend-mode` on anything big, and no full-page blended layer above
-  blurred pieces. The grain is a plain see-through texture under the content
-  (`.sheet::after{z-index:0}`, at the end of `public/site.css`).
+  blurred pieces.
 
 ### Colours and type
 

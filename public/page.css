@@ -5,7 +5,6 @@
    (paper above the line, the lit rim on it), not a clip-path. */
 
 /* No First light scenery. */
-.sky,.sheet::after{display:none}
 
 /* Paper all the way: overscroll at the top and the iPhone status bar match
    the page (theme-color in the page matches). The header is First light's:

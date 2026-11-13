@@ -8,26 +8,22 @@
 --shadow-page:0 1px 3px rgba(60,40,20,.14),0 6px 20px rgba(60,40,20,.2);
 --shadow-win:0 2px 8px rgba(40,28,16,.14),0 18px 48px rgba(40,28,16,.22);
 --shadow-field:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.07);
---sky-cool:rgba(157,183,200,.30);--sky-warm:rgba(242,196,160,.42);--sky-warm2:rgba(236,206,186,.30);--sky-top:#F4F6F7;
+--sky-top:#F4F6F7;
 --glass:rgba(251,250,248,.58);--glass-edge:rgba(255,255,255,.65);--glass-shadow:0 1px 2px rgba(40,60,80,.08),0 8px 24px rgba(40,60,80,.12);
 --win-glass:rgba(233,227,218,.62);--tile:rgba(255,255,255,.5);--tile-on:rgba(255,255,255,.78);
 --panel:linear-gradient(160deg,#EEF2F4,#F6EEE6);--wm-op:.10;
---sun:rgba(244,194,152,.62);--sun-mid:rgba(244,194,152,.22);
---snow:url(assets/firn-snow-layers-clear.svg);--flake:#7F9CB0;--flake-op:1;
---grain-op:.13;--grain-blend:multiply;--logo-l:block;--logo-d:none}
+--flake:#7F9CB0;--logo-l:block;--logo-d:none}
 @media (prefers-color-scheme:dark){:root{--frame:#3A3734;--page:#2B2826;--ink:#F5F1EC;--muted:#D4CDC5;--faint:#958D85;--line:rgba(255,250,245,.09);
 --btn:#F5F1EC;--btn-ink:#2B2826;--field:rgba(255,250,245,.08);--field-line:rgba(255,250,245,.12);
 --frost:rgba(160,196,214,.45);--dot-glacier:#8FB0C6;
 --shadow-page:0 1px 3px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.35);
 --shadow-win:0 2px 8px rgba(0,0,0,.3),0 18px 48px rgba(0,0,0,.4);
 --shadow-field:0 1px 2px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.18);
---sky-cool:rgba(110,152,178,.22);--sky-warm:rgba(214,146,104,.16);--sky-warm2:rgba(160,120,110,.10);--sky-top:#2E2F31;
+--sky-top:#2E2F31;
 --glass:rgba(43,40,38,.55);--glass-edge:rgba(255,250,245,.10);--glass-shadow:0 1px 2px rgba(0,0,0,.25),0 8px 24px rgba(0,0,0,.3);
 --win-glass:rgba(58,55,52,.62);--tile:rgba(255,250,245,.08);--tile-on:rgba(255,250,245,.14);
 --panel:linear-gradient(160deg,rgba(110,152,178,.10),rgba(214,146,104,.07));--wm-op:.10;
---sun:rgba(214,140,96,.30);--sun-mid:rgba(214,140,96,.10);
---snow:url(assets/firn-snow-layers-dark-clear.svg);--flake:#7F9CB0;--flake-op:.6;
---grain-op:.5;--grain-blend:soft-light;--logo-l:none;--logo-d:block;}}
+--flake:#7F9CB0;--logo-l:none;--logo-d:block;}}
 /* Headlines: Gooper Deck (licensed; the files must never be committed).
    Served from fonts.firnbrowser.com, an R2 bucket on David's Cloudflare
    account; see docs/DESIGN-NOTES.md, "Cloudflare setup". */
@@ -43,15 +39,6 @@ h1,h2{text-wrap:balance}
 /* frame + sheet */
 .frame{background:var(--page);color:var(--ink);min-height:100vh}
 .sheet{position:relative;background:var(--page);overflow:hidden;min-height:100vh;display:flex;flex-direction:column}
-.sheet::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .28 0 0 0 0 .2 0 0 0 0 .13 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");opacity:var(--grain-op);mix-blend-mode:var(--grain-blend);z-index:5}
-/* sky (morning glow) */
-.sky{position:absolute;left:0;right:0;top:0;height:1250px;pointer-events:none;
- background:radial-gradient(900px 420px at 50% -10%,var(--sky-cool),transparent 70%),
-  radial-gradient(760px 520px at 84% 70%,var(--sky-warm),transparent 68%),
-  radial-gradient(620px 420px at 12% 58%,var(--sky-warm2),transparent 70%),
-  linear-gradient(var(--sky-top),transparent 420px);
- -webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
-.sky.short{height:760px}
 /* drifting flakes */
 .fl{position:absolute;pointer-events:none;fill:var(--flake);z-index:1}
 /* header */
@@ -129,17 +116,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
 .post p strong{color:var(--ink);font-weight:600}
 .post code{font:15px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink)}
 @media (max-width:600px){.post .list{font-size:16px}}
-/* dawn: sunrise behind the snow, footer links on it (see "Footer" at the end) */
-.dawn{position:relative;margin-top:auto;padding-top:40px;height:600px;overflow:hidden;flex:none}
-.dawn .sun{position:absolute;left:50%;bottom:-50px;width:1500px;height:540px;transform:translateX(-50%);pointer-events:none;
- background:radial-gradient(closest-side,var(--sun),var(--sun-mid) 50%,transparent)}
-/* one-time sunrise: edges.js adds .sun-wait (low, dim, no transition), then .sun-rise on first view;
-   without JS or with reduced motion neither class is set and the sun stays in its finished spot */
-.dawn.sun-wait .sun{transform:translate(-50%,20%);opacity:.7}
-/* light mode: a peach sun on a pale page barely changes, so it starts lower and fainter */
-@media (prefers-color-scheme:light){.dawn.sun-wait .sun{transform:translate(-50%,35%);opacity:.35}}
-@media (prefers-reduced-motion:no-preference){.dawn.sun-rise .sun{transition:transform 2s cubic-bezier(.33,1,.68,1),opacity 2s cubic-bezier(.33,1,.68,1)}}
-.dawn .snow{position:absolute;left:0;right:0;bottom:0;height:clamp(240px,20vw,288px);background:var(--snow) center bottom/max(100%,1100px) auto no-repeat}
 @media (prefers-reduced-motion:no-preference){.btn,nav.top a{transition:opacity .2s cubic-bezier(.33,1,.68,1),color .2s}}
 /* phones */
 @media (max-width:600px){
@@ -157,10 +133,7 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
  .where,.other{padding-left:24px;padding-right:24px}.where{padding-top:64px}.other{padding-top:56px}
  .where h2,.other h2{font-size:28px}.cards{grid-template-columns:1fr}
  .other li{flex-direction:column;gap:4px}.other li span{text-align:left}
- .dawn{height:420px}
- .dawn .sun{width:760px;height:380px;bottom:-40px}
  .hero .fl{display:none}
- .sky{height:820px}.sky.short{height:560px}
 }
 
 /* Live-site additions (not in the design files) */
@@ -174,14 +147,8 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
    width/height in the HTML keep its space while it loads. */
 .shot{position:relative;z-index:2;display:block;max-width:1040px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-win)}
 .shot img{display:block;width:100%;height:auto}
-/* Smooth scrolling. The design window's live backdrop blur, combined with
-   the full-page grain blending on top of it, made the browser redo a large
-   blur and blend on every scroll frame (about 20 fps over the haze). So
-   the screenshot has no backdrop blur, and the grain sits under the
-   content (sky, glows, snow) instead of on top of everything (visually
-   within 8/255 of the design at every pixel). The footer pills and
-   support cards keep their real frosted blur. */
-.sheet::after{z-index:0}
+/* Smooth scrolling: the screenshot has no backdrop blur (a large live blur
+   redid itself on every scroll frame; see docs/DESIGN-NOTES.md). */
 /* iPhone: the page runs under the status bar (viewport-fit=cover). Safari
    tints the status-bar strip from the page background, so it's the sky's
    top colour; the header and footer pills keep clear of the status bar,
@@ -214,14 +181,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    below the page (behind its toolbar) continues the snow. */
 html.at-end,html.at-end body{background:#6B94AD}
 @media (prefers-color-scheme:dark){html.at-end,html.at-end body{background:#536573}}
-/* Smooth scrolling in Firefox-based browsers, part 2. The grain blended
-   (mix-blend-mode) over the whole page, which Gecko redoes on every scroll
-   frame. Now it's a plain see-through texture, no blending. Light mode:
-   the same grain at the same strength, within 5/255 of the multiply blend.
-   Dark mode: the soft-light blend barely showed (within 3/255 of no grain
-   at all); a faint near-black grain at .15 matches it within 4/255. */
-.sheet::after{mix-blend-mode:normal}
-@media (prefers-color-scheme:dark){.sheet::after{opacity:.15;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .06 0 0 0 0 .03 0 0 0 0 .01 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}}
 /* Release notes: the bold lead-in of each list item ("Spaces", "Basecamp")
    in ink, like the promise list on /mac. */
 .entry li strong{color:var(--ink);font-weight:600}
@@ -319,37 +278,7 @@ html.at-end,html.at-end body{background:#6B94AD}
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
 .badge+.badge{margin-left:6px}
-/* Footer (2026-11-09): the three pills became link columns on the snow
-   (Firn, Community, Support) with a line under them, "Firn · A David
-   Wurgler app · © 2026" and the licence. No glass. It sits on the sunrise
-   just above the snow, so no drawn flake lands on text and the dark snow
-   bands never sit behind it. */
-.foot{position:absolute;left:0;right:0;bottom:calc(clamp(240px,20vw,288px) + 12px);z-index:3;max-width:1040px;margin:0 auto;
- padding:0 max(32px,env(safe-area-inset-right)) 0 max(32px,env(safe-area-inset-left));font-size:14px;color:var(--muted)}
-.foot .cols{display:grid;grid-template-columns:repeat(3,minmax(0,180px));gap:24px}
-.foot nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.foot .fh{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
-.foot a{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s}
-.foot a:hover{color:var(--ink)}
-.foot svg{width:15px;height:15px;fill:currentColor;flex:none}
-.foot .legal{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
-.foot .legal p{margin:0;font-size:13px}
 .menu-social span,.menu-social .fh{display:none}
-@media (max-width:600px){
- .dawn{height:520px}
- .foot{bottom:252px;padding:0 max(24px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));font-size:13px}
- .foot .cols{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:16px}
- .foot nav{gap:9px}
- .foot .legal{flex-direction:column;align-items:center;text-align:center;margin-top:22px;padding-top:14px}
-}
-@media (prefers-reduced-motion:reduce){.foot a{transition:none}}
-.foot .legal a{display:inline;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
-.foot .legal a:hover{text-decoration-color:currentColor}
-/* The Firn flake on the right of the footer columns (wide screens only). */
-.foot .cols{grid-template-columns:repeat(3,minmax(0,180px)) 1fr}
-.foot .mark{justify-self:end;width:64px;height:64px}
-@media (prefers-color-scheme:dark){.foot .mark{opacity:.75}}
-@media (max-width:600px){.foot .cols{grid-template-columns:repeat(3,auto)}.foot .mark{display:none}}
 /* Menu extras (2026-11-09): FAQ and Privacy (a.more) show only inside the
    menus, smaller and muted under a thin line; "Download for Mac" (a.dl) shows
    only in the wide-screen floating card, as a small ink button (no download

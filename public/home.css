@@ -19,10 +19,6 @@
  .sunsky .wg2{background:radial-gradient(closest-side,rgba(236,206,186,.081),rgba(236,206,186,0))}
 }
 
-/* No page grain on home: the sky is a clean gradient and all texture
-   lives in the snow (dig down).*/
-.sheet::after{display:none}
-
 /* The page starts dark, so overscroll at the top and the iPhone status
    bar show blue hour too (theme-color in index.html matches). */
 html,body{background:#1C2130}
