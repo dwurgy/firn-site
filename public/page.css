@@ -61,3 +61,10 @@ html.at-end,html.at-end body{background:var(--s5);background:color-mix(in srgb,v
  .ice .legal{flex-direction:column;text-align:center;margin-top:36px}
  .ice .legal img{margin:-8px 0}
 }
+
+/* Header Download pill, like home's (.hdl in home.css) but ink on paper
+   (light on dark in dark mode). Hidden on phones; the menu keeps "Download for Mac". */
+header nav.top{margin-left:auto}
+.hdl{flex:none;padding:9px 16px;border-radius:999px;background:var(--ink);color:var(--page);text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
+.hdl:hover{opacity:.88}
+@media (max-width:600px){.hdl{display:none}}
