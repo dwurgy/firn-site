@@ -82,7 +82,7 @@ and top background: first light #36415D in light mode (lighter than dark
 mode's blue hour #1A1F2D, 2026-11-13; small print #D4CDC5 there for contrast).
 Step 2: header and hero always light text on the dark top (on-dark logo,
 `.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
-small print adds "Signed and notarized by Apple.", checked in the app's
+small print adds "Notarized by Apple." (signing is ours, implied), checked in the app's
 `scripts/release.sh`); phones get two `.dl-mobile` lines instead.
 Step 3: `section.tryit` (#try): the try-it window `#win`, drawn by
 `public/home.js` (three made-up spaces, Basecamp, a group, Lookout, split
