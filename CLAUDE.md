@@ -112,7 +112,8 @@ Step 7, mouse effects (`home.js`, end; mouse only, off with reduced motion): sun
 glints on `.l1`, the sky leans toward the cursor with a trailing light (`.wg3`),
 frost breath on the footer ice (`.breath`). Step 6, the drift, is dropped.
 Step 8a/8b done: text haloes for contrast; home focus ring is solid frost (#CFE3EF on dark, #16304A on light snow; `home.css`), and the try-it window announces changes to screen readers (`home.js`, `announce`).
-**Next:** step 8c (speed pass: phone scrolling, image and texture sizes).
+Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screenshot lazy, home header has only the on-dark logo. Phone scroll smooth at 4× slowdown. Open: on 1440px in headless Chrome the snow layers' `clip-path` edges drop frames (no GPU there); fix only if it stutters on a real Mac.
+**Next:** step 9 (creative pass).
 **Then, not done until (David, 2026-11-13):** tidy away the old website's
 leftovers; remove the About page; overhaul Privacy, Support, and the other
 inner pages to match Sunrise; then a top-to-bottom pass to unify the site.
@@ -416,7 +417,7 @@ cropped 2px inside the window's edge, in light and dark:
 `public/assets/screens/firn-hero-v4-light.webp` / `-dark.webp` (1440×898)
 and `@2x` (2080 wide), in a `<picture class="shot">` (a dark `<source
 media="(prefers-color-scheme: dark)">`, `srcset` 1x and 2x) with
-`width`/`height` set (1440×898) and `loading="eager"`. CSS: 12px corners,
+`width`/`height` set (1440×898) and `loading="lazy"` (it sits two screens down under the try-it window). CSS: 12px corners,
 `overflow: hidden`, `--shadow-win`, no backdrop blur. Source PNGs:
 `design/screens-2026-10-26/` (window at 112,76, 2880×1800). On phones it shows only the top-left part in a 4:3 frame (the image
 drawn 2.25× the frame's width, `object-fit: cover`,
