@@ -45,9 +45,9 @@ const c=document.querySelector('.c');c.style.width=W+'px';c.style.height=H+'px';
 document.querySelector('.scene').style.transform='scale('+k+')';
 const st=[[0,'#36415D'],[160,'#3E4966'],[290,'#4C5774'],[370,'#69728E'],[420,'#9894A6'],[460,'#CDB8B4'],[500,'#EAD3C5'],[560,'#F4E5DA']];
 c.style.background='linear-gradient(180deg,'+st.map(([y,col])=>col+' '+(H-(630-y)*k).toFixed(1)+'px').join(',')+')';
-const sky=H-190*k, t=Math.min(k, sky/300);          // text scale: fits the sky
+const sky=H-190*k, t=.85*Math.min(k, sky/300);      // text scale: fits the sky
 const logo=document.querySelector('.logo');logo.style.height=(80*t)+'px';
 const h1=document.querySelector('h1');h1.style.fontSize=(46*t)+'px';h1.style.marginTop=(26*t)+'px';
-const tx=document.querySelector('.txt');tx.style.top=(sky*0.47-tx.offsetHeight/2)+'px';
+const tx=document.querySelector('.txt');tx.style.top=(sky*0.62-tx.offsetHeight/2)+'px';   // low enough to clear the App Store tab bar on iPad landscape
 for(const f of document.querySelectorAll('.f')){f.style.left=(+f.dataset.x*W)+'px';f.style.top=(+f.dataset.y*sky)+'px';f.style.width=(+f.dataset.w*t)+'px'}
 </script></body></html>
