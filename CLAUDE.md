@@ -10,7 +10,7 @@ Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
 1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), Mac only, a
 fresh start that brings nothing over from the old Firn. The site is a home
 page that says what Firn is, shows what it looks like and has the download
-button, plus About, release notes, support, privacy, and `/mac` (the farewell to
+button, plus release notes, support, privacy, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
 **Reasons and history** behind the rules below (the scroll-performance
@@ -31,11 +31,8 @@ unless David changes it.
   assets they use, a short `README.md`, and `shots/` with every page at
   1440px and 393px in light and dark. It's the source of truth for layout,
   sizes, spacing, colours and copy.
-- `design/about/`: the About page, designed later in the same style:
-  `about.html`, its CSS (`about.css-snippet.css`, added to `site.css` just
-  before the dawn section) and `reference/` shots at 1440px and 393px in
-  light and dark. The live page matches them, apart from the phone footer
-  links (see "Footer" below).
+- `design/about/`: the old About page's design (the page was removed
+  2026-11-13; kept for reference only).
 - The live site is built from it: `public/site.css` is the design's
   `site.css` (minus its `.theme-dark` block, which only exists for the
   design tool) plus a few live-site additions at the end. The live pages
@@ -115,7 +112,7 @@ Step 8a/8b done: text haloes for contrast; home focus ring is solid frost (#CFE3
 Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screenshot lazy, home header has only the on-dark logo. Phone scroll smooth at 4× slowdown. Open: on 1440px in headless Chrome the snow layers' `clip-path` edges drop frames (no GPU there); fix only if it stutters on a real Mac.
 Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
 **Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
-leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); remove the About page; overhaul Privacy, Support, and the other
+leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
 inner pages to match Sunrise; then a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
@@ -209,8 +206,7 @@ the grain turns a faint near-black, and the header logo swaps to
 
 ### Fonts
 
-Headlines (everything `.serif`, plus About's quote, definition word,
-signature and diagram labels) use Gooper Deck: 400, emphasis 600, never
+Headlines (everything `.serif`, plus `/mac`'s signature) use Gooper Deck: 400, emphasis 600, never
 heavier. It's licensed and can't be shared, so **the font files must never
 be committed** (`.gitignore` blocks `*.woff2`, `*.woff`, `*.otf`, `*.ttf`).
 They load from `https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
@@ -292,13 +288,13 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/about`, `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
 serves them without `.html`; links use the clean addresses.
 
-**Header (every page):** logo on the left; "About", "Release notes",
+**Header (every page):** logo on the left; "Release notes",
 "Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
 A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
 (phone menu and floating card), never in the header row; bold on home.
@@ -319,7 +315,7 @@ card of the links and social logos (end of `site.css`).
 **Footer (every page but home, which has `footer.ice`):** the dawn section (sun and snow), always at the
 bottom of the page, with plain link columns (no glass) on the sunrise just
 above the snow, so the flakes drawn in the snow's top edge never sit on
-text: **Firn** (About, Release notes, Privacy), **Community** (`nav.social`:
+text: **Firn** (Release notes, Privacy), **Community** (`nav.social`:
 GitHub, Discord `discord.gg/rZsVbT7794` (the David Wurgler Apps server),
 Threads, each an inline Simple Icons SVG (CC0) plus its name; `edges.js`
 copies these into the menu, logos only) and **Support** (Support, FAQ, Email,
@@ -337,14 +333,6 @@ off (it adds a script and breaks the link without JavaScript).
 **When links get too many:** on wide screens the header has room for a few
 more links; on phones they go in the menu panel. A new social account gets a
 line in the Community column; keep the columns short (four or five links).
-
-**About:** the story in `<article class="part">` blocks (heading on the
-left, text on the right; stacked on phones), with the frosted definition
-card `.def`, the promise list `.promises`, and under the `.def` card in "The
-word" the snow-to-ice layers diagram (`<figure class="layers">`, bands
-`.ly1`–`.ly4`; colours `--l1`–`--l4`, `--gl-a` and `--gl-b` at the top of
-`site.css`; details in `docs/DESIGN-NOTES.md`, "About page"). The copy is
-David's; use it as written.
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the

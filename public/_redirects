@@ -4,3 +4,6 @@
 # a copy of it and never needs touching when a new version comes out.
 /appcast.xml https://raw.githubusercontent.com/dwurgy/firn/main/appcast.xml 302
 
+
+# The About page was removed (2026-11-13); old links land on "Who’s making it" on home.
+/about /#maker 301
