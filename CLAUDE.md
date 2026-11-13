@@ -46,10 +46,10 @@ unless David changes it.
 - `public/assets/firn-share-preview-v8.png`: the 1200×630 link preview (Open
   Graph / Twitter card), the same in both modes. v8 (2026-11-13) is in the
   Sunrise style: blue-hour sky, on-dark logo, light Gooper Deck headline
-  ("A calm browser, made for Mac."), the sun rising behind one snow edge with packed-snow ice, as on the inner pages' footer;
+  ("A calm browser, made for Mac."), the sun peeking over home's top snow layer (`.l1`);
   rendered from `design/share-preview/og.html`; used by every page (v5–v7
   stay in assets for old shared links). Keep it a PNG, don't recompress it,
-  and keep it small (about 330 KB; WhatsApp skips
+  and keep it small (about 370 KB; WhatsApp skips
   images over about 600 KB). Each page's `og:image` and `twitter:image` use
   the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v8.png`.
   When it changes, use a new file name (v9, …) so apps fetch the new
