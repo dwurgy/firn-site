@@ -112,6 +112,9 @@ Step 7, mouse effects (`home.js`, end; mouse only, off with reduced motion): sun
 glints on `.l1`, the sky leans toward the cursor with a trailing light (`.wg3`),
 frost breath on the footer ice (`.breath`). Step 6, the drift, is dropped.
 **Next:** step 8 (phone, dark, reduced-motion, accessibility, performance pass).
+**Then, not done until (David, 2026-11-13):** tidy away the old website's
+leftovers; remove the About page; overhaul Privacy, Support, and the other
+inner pages to match Sunrise; then a top-to-bottom pass to unify the site.
 
 ### First light: the idea (so new parts fit)
 
