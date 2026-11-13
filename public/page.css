@@ -14,6 +14,8 @@ html,body{background:var(--page)}
    pages use home's solid frost: deep on light paper, pale on dark. */
 :focus-visible{outline-color:#16304A}
 @media (prefers-color-scheme:dark){:focus-visible{outline-color:#CFE3EF}}
+/* Links in the text: underline 3px below, like home's. */
+main a{text-underline-offset:3px}
 
 /* Paper: the content column, a little more room before the footer. */
 main{padding-bottom:96px}
