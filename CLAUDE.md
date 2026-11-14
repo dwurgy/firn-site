@@ -13,6 +13,8 @@ page that says what Firn is, shows what it looks like and has the download
 button, plus release notes, support, privacy, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
+**App facts** for copy (what syncs, what Firn sends, what is coming): `docs/FIRN-FACTS.md`, checked against the app 2026-11-14. Read it before changing Privacy, FAQ, or feature copy.
+
 **Reasons and history** behind the rules below (the scroll-performance
 investigation, the iPhone strip, the home screenshot and videos, why `?v=N`
 exists, the Cloudflare setup, the link preview, the Windows note) are in
