@@ -76,3 +76,12 @@ header nav.top{margin-left:auto}
 .hdl{flex:none;padding:9px 16px;border-radius:999px;background:var(--ink);color:var(--page);text-decoration:none;font-size:14px;font-weight:600;line-height:1.2}
 .hdl:hover{opacity:.88}
 @media (max-width:600px){.hdl{display:none}}
+
+/* Press kit (/press): fact sheet rows (label left, value right; stacked on
+   phones) and the round headshot beside "Who's making it". */
+.post .facts{margin:0 0 16px;padding:0;list-style:none;font-size:17px;line-height:1.55;color:var(--ink)}
+.post .facts li{position:relative;padding:10px 0 10px 136px;border-top:1px solid var(--frame)}
+.post .facts li:last-child{border-bottom:1px solid var(--frame)}
+.post .facts span{position:absolute;left:0;color:var(--muted)}
+.post .headshot{float:right;width:160px;height:160px;margin:4px 0 16px 28px;border-radius:50%;object-fit:cover}
+@media (max-width:600px){.post .facts{font-size:16px}.post .facts li{padding-left:0}.post .facts span{position:static;display:block;font-size:14px}.post .headshot{float:none;display:block;width:128px;height:128px;margin:0 0 20px}}
