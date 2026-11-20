@@ -76,7 +76,6 @@ h2{margin:0 0 48px;font-size:40px;line-height:1.15;font-weight:400;text-align:ce
 .entry:first-child{border-top:0;padding-top:0}
 .meta{font-size:14px;color:var(--muted);line-height:1.6}
 .meta strong{display:block;font-weight:600;color:var(--ink);font-size:15px}
-.badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-edge);font-size:12px;color:var(--muted)}
 .entry h2{text-align:left;margin:0 0 12px;font-size:30px;line-height:1.15}
 .entry p{margin:0 0 20px;font-size:17px;line-height:1.6;color:var(--muted)}
 .entry h3{margin:24px 0 8px;font-size:13px;font-weight:600}
@@ -265,7 +264,6 @@ header{padding-top:calc(28px + env(safe-area-inset-top));padding-left:max(32px,e
    current page stays ink and bold). Only with a mouse; touch keeps them ink. */
 @media (hover:hover) and (max-width:600px) and (scripting:enabled){nav.top>a{color:var(--muted)} nav.top>a:hover,nav.top>a[aria-current]{color:var(--ink)}}
 @media (hover:hover) and (min-width:601px) and (scripting:enabled){.float-menu nav.top>a{color:var(--muted)} .float-menu nav.top>a:hover,.float-menu nav.top>a[aria-current]{color:var(--ink)}}
-.badge+.badge{margin-left:6px}
 .menu-social span,.menu-social .fh{display:none}
 /* Menu extras (2026-11-09): FAQ and Privacy (a.more) show only inside the
    menus, smaller and muted under a thin line; "Download for Mac" (a.dl) shows
