@@ -269,7 +269,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), `/press` (press kit, linked from the footer's Firn column: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 24 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), `/press` (press kit, linked from the footer's Firn column: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
