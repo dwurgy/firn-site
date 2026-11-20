@@ -269,7 +269,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages, header and download
 
-**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email, GitHub Issues, Discord; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), `/press` (press kit, linked from the footer's Firn column: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email or GitHub Issues only, no Discord or Reddit since 2026-11-20; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), `/press` (press kit, linked from the footer's Firn column: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare
@@ -297,7 +297,7 @@ card of the links and social logos (end of `site.css`).
 **Footer (every page):** `footer.ice`, home's glacier-ice footer. Home has it as
 snow layer `.l5` (`home.css`); inner pages copy the same markup with one static
 SVG snow edge (`.edge`, `page.css`). Columns: **Firn** (Release notes, Press kit, Privacy),
-**Community** (`nav.social`: GitHub, Discord `discord.gg/rZsVbT7794`, Threads,
+**Community** (`nav.social`: GitHub, Threads,
 inline Simple Icons SVGs (CC0); `edges.js` copies them into the menu),
 **Support** (Support, FAQ, Email, Tip jar) and **Built with**; under a line the
 on-dark lockup and "Firn · A <a>David Wurgler</a> app · © 2026" (davidwurgler.com).
@@ -337,7 +337,7 @@ lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
 "No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com). It lists both
 Threads accounts: @firnbrowser (major releases; also the footer logo) and
-David's @dwurgy (day to day). Reddit is gone (it points to Discord now).
+David's @dwurgy (day to day). Reddit and Discord are gone (2026-11-20): feedback is GitHub Issues and email.
 
 **Privacy:** from `docs/privacy-page.md` in `dwurgy/firn`, checked against
 the app's code, plus a "What this website collects" section. Every line must be literally
