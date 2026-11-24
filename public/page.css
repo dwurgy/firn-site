@@ -85,3 +85,16 @@ header nav.top{margin-left:auto}
 .post .facts span{position:absolute;left:0;color:var(--muted)}
 .post .headshot{float:right;width:160px;height:160px;margin:4px 0 16px 28px;border-radius:50%;object-fit:cover}
 @media (max-width:600px){.post .facts{font-size:16px}.post .facts li{padding-left:0}.post .facts span{position:static;display:block;font-size:14px}.post .headshot{float:none;display:block;width:128px;height:128px;margin:0 0 20px}}
+/* Release notes: platform filter (All, Mac, iPhone and iPad). The pills and
+   the empty note start hidden and the page's script shows them, so without
+   JavaScript every entry shows. Entries carry data-for="mac" or "iphone".
+   Only an entry after a shown one gets the line and space above it. */
+.pf{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px}
+.pf button{font:inherit;font-size:14px;line-height:1;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.pf button:hover{color:var(--ink);border-color:var(--faint)}
+.pf button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink);font-weight:600}
+.notes .none{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
+.notes .entry{border-top:0;padding-top:0}.notes .entry[hidden]{display:none}
+.notes .entry:not([hidden])~.entry{border-top:1px solid var(--line);padding-top:40px}
+@media (max-width:600px){.pf{margin-bottom:32px}.notes .entry:not([hidden])~.entry{padding-top:32px}}
+@media (prefers-reduced-motion:reduce){.pf button{transition:none}}
