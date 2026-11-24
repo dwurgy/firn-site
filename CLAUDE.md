@@ -315,12 +315,13 @@ line in the Community column; keep the columns short (four or five links).
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
 bold first line is the heading, then the paragraph and the list (bold
-lead-ins in ink). The left column has "Firn for Mac 1.0.1" (or iPhone, iPad: the
-platform and version, no badges since 2026-11-20) and the release date. Only 1.0.0 and later are
+lead-ins in ink). The left column has "Firn for Mac 1.0.1" or "Firn for iPhone and iPad 1.0.1" (one
+app, one version number; no badges since 2026-11-20) and the release date. Only 1.0.0 and later are
 listed (the Electron 0.x notes were removed on 2026-11-05). A "### New" (or Better, Fixed) heading in the
 CHANGELOG becomes an `<h3>`. Each entry has its own address: the
-`<article>` has the version as its `id` (Mac: `id="1.0.1"`; other platforms
-add the platform: `id="iphone-1.0.1"`) and the name in the left column links
+`<article>` has the version as its `id` (Mac: `id="1.0.1"`; iPhone and iPad:
+`id="iphone-1.0.1"`) and `data-for="mac"` or `"iphone"` for the filter pills (All, Mac,
+iPhone and iPad; inline script, `?for=iphone` picks one; `page.css`) and the name in the left column links
 to it (ink, underlined on hover), so `firnbrowser.com/release-notes#1.0.1`
 opens the page at that entry. Every release gets an entry, small ones too:
 David likes showing all updates. When David says a new version is out,
