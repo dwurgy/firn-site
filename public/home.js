@@ -27,7 +27,7 @@
   /* --- iPhone or iPad? (iPads say they are Macs, but have a touch screen) --- */
   var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (ios) {
+  if (ios && document.getElementById('get-mac')) {   /* the 404 page has no download */
     var store = APP_STORE_URL.trim();
     document.getElementById('get-mac').hidden = true;
     if (/^https:\/\//.test(store)) {

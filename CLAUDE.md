@@ -60,7 +60,9 @@ Inner pages, agreed plan (David, 2026-11-25: follow the design everywhere,
 one step per commit, each page moves from `site.css` + `page.css` +
 `edges.js` to `inner.css`; copy Tip jar's head, logo, and footer):
 
-1. 404: home with "Nothing here. **Just snow.**" and "Back home".
+1. ~~404: home with "Nothing here. **Just snow.**" and "Back home"~~ done
+   2026-11-25. It shares `home.css` (`.page.lost`) and `home.js` with home:
+   raise their `?v=N` on both pages.
 2. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
    `page.css`, `edges.js`, and rewrite "Inner pages" below.
 

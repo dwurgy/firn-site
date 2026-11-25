@@ -112,6 +112,10 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
   #get-soon { text-align: left; }
 }
 
+/* The 404 page: the same screen with a shorter strip (one line, one link) */
+.page.lost { --lift: calc((var(--pad) + 64px) / 2); }
+@media (max-width: 600px) { .page.lost { --lift: calc((var(--pad) + 57px) / 2); } }
+
 /* The one frosted pill */
 .pill {
   display: inline-block; padding: 14px 24px; border-radius: 999px;
