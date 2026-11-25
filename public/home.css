@@ -20,12 +20,13 @@
   /* lit edge: from the horizon, so along the bottom */
   --lens-rim: inset 0 -3.5px 2px -1px var(--rim-hi), inset 0 2.5px 2px -1px var(--rim-lo);
   --pill-rim: inset 0 -1.5px 1px -0.5px var(--rim-hi), inset 0 1px 1px -0.5px var(--rim-lo);
+  --sky-end: #EBE4DB; /* the sky's bottom edge, horizon included */
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --logo-w: min(104vw, 1560px);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --sky-top: #151A27; --sky-low: #232B3F; --ink: #E9E3DA;
+    --sky-top: #151A27; --sky-low: #232B3F; --sky-end: #232B3F; --ink: #E9E3DA;
     --frosty: rgba(44,53,76,.5);
     --rim-hi: rgba(233,227,218,.6); --rim-lo: rgba(233,227,218,.18);
     --rim-line: rgba(233,227,218,.16); --rim-out: rgba(0,0,0,.3);
@@ -39,6 +40,10 @@
 
 html { background: var(--sky-top); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; }
+/* iPhone Safari colours the strip behind its bottom toolbar from a fixed bar
+   at the bottom edge, so this thin one carries the sky's last colour there. */
+body::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 4px;
+  background-color: var(--sky-end); pointer-events: none; }
 [hidden] { display: none !important; }
 
 .page {
