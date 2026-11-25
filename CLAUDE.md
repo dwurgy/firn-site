@@ -316,7 +316,8 @@ view. Now available for Mac."
 match the page top, as do the theme-color tags. Every page has
 `viewport-fit=cover` and keeps clear of the notch and home bar
 (`env(safe-area-inset-*)`). iOS text autosizing is off
-(`-webkit-text-size-adjust: 100%`).
+(`-webkit-text-size-adjust: 100%`). Home's sky is `100lvh` tall so it runs on
+behind Safari's bottom toolbar; `--tb` lifts the strip above it (`home.css`).
 
 ## Must-haves
 
