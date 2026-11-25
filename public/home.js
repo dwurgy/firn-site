@@ -22,6 +22,10 @@
   var canvas = document.getElementById('snow');
   var strip = document.getElementById('strip');
   var mirror = document.getElementById('mirror');
+  var lensEl = document.getElementById('lens');
+  var sharp = document.getElementById('sharp');
+  var ring = document.getElementById('ring');
+  main.classList.add('live');   /* home.css: the lens moves by transforms only */
   if (!main || !canvas || !strip || !mirror) return;
 
   /* --- iPhone or iPad? (iPads say they are Macs, but have a touch screen) --- */
@@ -85,7 +89,7 @@
       g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return s;
     }
     var sprites = [sprite(0.55), sprite(0.8), sprite(0.98)];
-    var W = 0, H = 0, lift = 0, flakes = [], raf = 0, ro = null;
+    var W = 0, H = 0, lift = 0, R = 0, Z = 1, flakes = [], raf = 0, ro = null;
 
     function make(anywhere) {
       var k = Math.random(); var layer = k < 0.6 ? 0 : k < 0.9 ? 1 : 2;
@@ -103,9 +107,14 @@
     }
     /* Where the lens rests: on the name */
     function rest() { var L = logo(); return { x: L.x + L.w * 0.585, y: H / 2 - lift }; }
+    /* Move the lens: the window and the ring slide to it, and the sharp page
+       inside slides the other way, magnified about the lens's centre */
     function place() {
-      main.style.setProperty('--lx', cx.toFixed(1) + 'px');
-      main.style.setProperty('--ly', cy.toFixed(1) + 'px');
+      var at = 'translate3d(' + (cx - R).toFixed(2) + 'px,' + (cy - R).toFixed(2) + 'px,0)';
+      lensEl.style.transform = at;
+      ring.style.transform = at;
+      sharp.style.transform = 'translate3d(' + (R - Z * cx).toFixed(2) + 'px,' +
+        (R - Z * cy).toFixed(2) + 'px,0) scale(' + Z + ')';
     }
     function draw(t) {
       ctx.clearRect(0, 0, W, H);
@@ -123,15 +132,19 @@
       lift = (h - strip.offsetTop - tuckTop()) / 2;
       tuckScroll();
       main.style.setProperty('--lift', lift.toFixed(1) + 'px');
+      R = ring.offsetWidth / 2;
+      Z = parseFloat(getComputedStyle(main).getPropertyValue('--z')) || 1;
       if (w !== W || h !== H) {
         W = w; H = h;
+        sharp.style.width = W + 'px'; sharp.style.height = H + 'px';
         var dpr = W * H > 2000000 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         var n = Math.min(160, Math.round(W * H / 16000 * DENSITY));
         flakes = []; for (var i = 0; i < n; i++) flakes.push(make(true));
       }
-      if (still || cx === null) { var r0 = rest(); cx = r0.x; cy = r0.y; vx = vy = 0; place(); }
+      if (still || cx === null) { var r0 = rest(); cx = r0.x; cy = r0.y; vx = vy = 0; }
+      place();
       if (still) draw(0);
     }
     function lens(now, dt) {
