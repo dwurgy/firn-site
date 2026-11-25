@@ -88,6 +88,16 @@ html.tuck .page { --top: 64px; --bot: 64px; }
   -webkit-mask-image: radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly), #000 99%, transparent 100%);
           mask-image: radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly), #000 99%, transparent 100%);
 }
+.lens { position: absolute; inset: 0; pointer-events: none; }
+/* With JavaScript (.live), the lens is a round window that slides, and the
+   sharp page inside it slides the other way. Only transforms change while it
+   moves, so the browser just slides pictures it already drew: no repainting,
+   no layout, and no style checks on the rest of the page (home.js). */
+.page.live .lens { inset: auto; left: 0; top: 0; width: calc(var(--r) * 2); height: calc(var(--r) * 2);
+  border-radius: 50%; overflow: hidden; will-change: transform; }
+.page.live .sharp { inset: auto; left: 0; top: 0; transform-origin: 0 0; will-change: transform;
+  -webkit-mask-image: none; mask-image: none; }
+.page.live .ring { left: 0; top: 0; will-change: transform; }
 .mirror { position: absolute; inset: 0; box-sizing: border-box; padding: var(--pad-box);
   display: flex; flex-direction: column; justify-content: flex-end; }
 

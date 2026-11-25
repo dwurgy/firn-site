@@ -32,8 +32,8 @@
 
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="home.css?v=32">
-<script src="home.js?v=15" defer></script>
+<link rel="stylesheet" href="home.css?v=33">
+<script src="home.js?v=16" defer></script>
 </head>
 <body>
 <main class="page" id="page">
@@ -75,16 +75,18 @@
 </div>
 
 <!-- The same page in focus; only the part under the lens shows -->
-<div class="sharp">
+<div class="lens" id="lens">
+<div class="sharp" id="sharp">
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="assets/firn-lockup-on-dark.svg">
 <img class="logo" src="assets/firn-lockup.svg" alt="Firn" width="5353" height="2595">
 </picture>
 <div class="mirror" id="mirror" aria-hidden="true" inert></div>
 </div>
+</div>
 
 <canvas class="snow" id="snow" aria-hidden="true"></canvas>
-<div class="ring" aria-hidden="true"><i></i></div>
+<div class="ring" id="ring" aria-hidden="true"><i></i></div>
 
 </main>
 </body>
