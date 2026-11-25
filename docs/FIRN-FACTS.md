@@ -4,6 +4,8 @@
 
 # Firn: facts for firnbrowser.com
 
+**Newer (2026-11-25, from David, straight from the app's code):** the Privacy page's sync, history, iPhone and iPad, summaries, tips, feedback, and crash-report text is newer than this file and wins where they differ. In short: sync is off by default and sends only spaces, open tabs' addresses and titles, and tabs sent to another device, encrypted on the device; groups, Basecamp, history, settings, sign-ins, and passwords don't sync. Apple may share crash reports if the person opted in to share analytics with developers.
+
 These are checked against Firn's code and its plans (2026-11-14). Every claim on the site must stay literally true. Where something is planned rather than built, the site describes it as coming, without a version number or date. Use the serial comma everywhere.
 
 ## Ground rules for wording
@@ -30,19 +32,9 @@ Every space is its own browser, with its own sign-ins, cookies, site data, histo
 
 **Two switches, nothing more.** "Sync with iCloud", and "Passwords" just under it. Passwords can be turned off on its own, for people who use another password manager.
 
-**What syncs:**
-- Spaces: name, color, order, and whether a space is separate or shared
-- Groups and the tabs in them
-- History from the last 30 days (each device keeps its own full year)
-- Saved passwords, through iCloud Keychain, if the Passwords switch is on
-- Your other devices' open tabs, which you can find in the command bar under "On your Mac", "On your iPhone", or "On your iPad". They never appear in the sidebar, and only while sync is on.
+**What syncs** (2026-11-25): spaces, your open tabs' addresses and titles, and any tab you send to another device. Turning sync off asks iCloud to remove that device's list of open tabs.
 
-**What never syncs:**
-- Sign-ins, cookies, and site data. A separate space starts signed out on a new device.
-- Basecamp
-- Loose tabs as a list (each device keeps its own, as in Arc)
-- Settings
-- Page pictures, downloads, and a tab's back history
+**What doesn't sync** (2026-11-25): groups, Basecamp, history, settings, sign-ins, and passwords.
 
 **Where it goes:** only your own private iCloud (CloudKit's private database and iCloud Keychain). Never to Firn or any server of ours, and never a shared or public database.
 
