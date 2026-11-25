@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Firn: Link preview, blurred, dark</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,100&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 1200px; height: 630px; box-sizing: border-box; overflow: hidden; background: linear-gradient(180deg, #151A27, #232B3F); color: #E9E3DA; font-family: 'Fraunces', ui-serif, Georgia, serif; font-variation-settings: 'SOFT' 100">
+<img src="/_blob/496d69a1add44227891bb3a27f4531ad" alt="Firn" style="position: absolute; left: -56px; top: -38px; width: 1250px; height: auto; filter: blur(17px); opacity: 0.85">
+<p style="position: absolute; left: 64px; bottom: 56px; margin: 0; font-size: 38px; line-height: 1.15; font-weight: 300">A calm browser <span style="font-weight: 500">for Mac, iPhone, and iPad.</span></p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":630}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
