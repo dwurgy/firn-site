@@ -1,202 +1,164 @@
 # Project Brief: firnbrowser.com
 
-The website for **Firn**, a calm, minimalist desktop browser (the app lives in
+The website for **Firn**, a calm, minimalist browser (the app lives in
 the separate `dwurgy/firn` repo). Built by David with Claude. David is not a
 professional developer: explain decisions in plain language, keep changes
 small, and stop after each step so he can look at it.
 
 Firn came out as an Electron app (0.1.0 on October 8, 2026, for macOS and
 Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
-1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), Mac only, a
-fresh start that brings nothing over from the old Firn. The site is a home
-page that says what Firn is, shows what it looks like and has the download
-button, plus release notes, support, privacy, and `/mac` (the farewell to
+1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), a fresh
+start that brings nothing over from the old Firn. An iPhone and iPad app is
+on the way (not on the App Store yet). The site is a one-screen home page
+(the logo, the lens, one line, one Download pill), plus release notes,
+support, FAQ, privacy, tip jar, press kit, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
 **App facts** for copy (what syncs, what Firn sends, what is coming): `docs/FIRN-FACTS.md`, checked against the app 2026-11-14. Read it before changing Privacy, FAQ, or feature copy.
 
-**Reasons and history** behind the rules below (the scroll-performance
-investigation, the iPhone strip, the home screenshot and videos, why `?v=N`
-exists, the Cloudflare setup, the link preview, the Windows note) are in
-`docs/DESIGN-NOTES.md`. It is not loaded automatically: read it only when
-you change one of those things.
+**Reasons and history** from the First light and Sunrise days (scroll
+performance, the iPhone strip, why `?v=N` exists, the Cloudflare setup, the
+link preview, the Windows note) are in `docs/DESIGN-NOTES.md`. It is not
+loaded automatically: read it only when you change one of those things.
 
 ---
 
 ## The design is decided: follow it
 
-The current design is **First light**, made in Claude Design. It is final
-unless David changes it.
+The current design is **Frost** (approved 2026-11-24, made in Claude
+Design). It replaces First light and Sunrise. It is final unless David
+changes it.
 
-- `design/first-light/`: the finished design. `index.html`,
-  `release-notes.html` and `support.html` with one shared `site.css`, the
-  assets they use, a short `README.md`, and `shots/` with every page at
-  1440px and 393px in light and dark. It's the source of truth for layout,
-  sizes, spacing, colours and copy.
-- `design/about/`: the old About page's design (the page was removed
-  2026-11-13; kept for reference only).
-- The live site is built from it: `public/site.css` is the design's
-  `site.css` (minus its `.theme-dark` block, which only exists for the
-  design tool) plus a few live-site additions at the end. The live pages
-  use the design's markup with the real head (favicons, Open Graph), clean
-  links and, on home, a link to `/mac` in place of the design's email
-  sign-up (later the download buttons; see "Download"). At 1440px and 393px they render
-  the same as the design files, apart from the scroll-performance changes
-  below (no pixel differs by more than 9/255, which is invisible).
-  The one planned difference: on home, the design's sketched window is
-  now a real screenshot of Firn (see "Home screenshot").
-- `public/assets/firn-share-preview-v9.png`: the 1200×630 link preview (Open
-  Graph / Twitter card), the same in both modes. v9 (2026-11-13) is in the
-  Sunrise style: light mode's first-light sky (#36415D top), on-dark logo, light Gooper Deck headline
-  ("A calm browser, made for Mac."), the sun peeking over home's top snow layer (`.l1`);
-  rendered from `design/share-preview/og.html`; used by every page (v5–v8
-  stay in assets for old shared links). Keep it a PNG, don't recompress it,
-  and keep it small (about 370 KB; WhatsApp skips
-  images over about 600 KB). Each page's `og:image` and `twitter:image` use
-  the full URL, e.g. `https://firnbrowser.com/assets/firn-share-preview-v9.png`.
-  When it changes, use a new file name (v10, …) so apps fetch the new
-  picture. (More: `docs/DESIGN-NOTES.md`, "Link preview image".)
+- `design/frost/` is the source of truth for layout, sizes, spacing,
+  colours, copy, and the lens and snow behaviour. Read `README.md` first,
+  then `BRAND.md` (every value written out).
+- `design/frost/pages/*.dc.html` are exports from the design tool:
+  reference, never shipped. The README says how to read them. Rewrite their
+  scripts as plain JavaScript and keep the numbers.
+- **Three substitutions** when building from them: Gooper Deck for Fraunces
+  (Fraunces 300 → Gooper Deck 400, Fraunces 500 → 600); the real logo files
+  in `public/assets/` for the `/_blob/…` images; clean relative links for
+  the full `https://firnbrowser.com/…` ones.
+- **Replaced, reference only, don't build from them:** `design/first-light/`,
+  `design/firn-sunrise/` (Sunrise and dig down), `design/about/`.
 
-**Copy is final**, as written in the design files (including the line break
-in the home subhead). Don't rewrite headlines or reword claims. Every privacy
-claim on the site has been checked to be true; changing the wording can make
-it untrue.
+**Where the rebuild stands** (keep this list current; next one first):
+
+1. Home page rebuilt as Frost (`public/index.html`, `home.css`, `home.js`).
+2. Remove home-page files and assets nothing uses any more (list them, ask
+   David before deleting); point `/about` at `/` in `_redirects`.
+3. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
+   kit, `/mac`), the 404, and the link preview (`firn-share-preview-v10.png`
+   is ready in `design/frost/`). Not started: until then they keep the old
+   look described under "Inner pages" below.
+
+**Copy is final**, as written in the design files. Don't rewrite headlines
+or reword claims. Every privacy claim on the site has been checked to be
+true; changing the wording can make it untrue.
 
 ### Voice
 
 - **Serial (Oxford) comma, always.** In a list of three or more, put a
-  comma before the final "and" or "or": "Coming soon to macOS, Windows,
-  and Linux", "Vertical tabs, spaces, and split view". This applies
-  everywhere: page copy, page titles, meta descriptions, Open Graph and
-  Twitter text, alt text, and release notes. (Two items take no comma:
-  "mail and calendar".)
-
-### Home page: "Sunrise" (being built, 2026-11)
-
-The home page is being rebuilt as **Sunrise**, one long scroll that is one
-sunrise: `design/firn-sunrise/SUNRISE-BRIEF.md` (the brief and its nine
-steps) and `sunrise-mockup.dc.html` (reference only). **Brand sheet:** `design/firn-sunrise/BRAND.md` (colours, sky, sun, snow, type, logo, motion; for the app and Claude Design). Update it when the look changes. Its styles live in
-`public/home.css` (home only, loaded after `site.css`); other pages keep
-First light. Built so far: step 1, the sky (`.sunsky`, one plain gradient,
-two `.wg` warm glows); no page grain on home (dig down moved all texture
-into the snow). Home's theme-color
-and top background: first light #36415D in light mode (lighter than dark
-mode's blue hour #1A1F2D, 2026-11-13; small print #D4CDC5 there for contrast).
-Step 2: header and hero always light text on the dark top (on-dark logo,
-`.hdl` Download pill, pill eyebrow, light `.btn`, `.try` link to `#try`,
-small print adds "Notarized by Apple." (signing is ours, implied), checked in the app's
-`scripts/release.sh`); phones get two `.dl-mobile` lines instead.
-Step 3: `section.tryit` (#try): the try-it window `#win`, drawn by
-`public/home.js` (three made-up spaces, Basecamp, a group, Lookout, split
-view with a draggable gap; sidebar tinted by `--sc`, matched to the app's
-`docs/screenshots`), four `.tc` tour cards, then the real screenshot
-(`.stage`). Without JS only the screenshot shows. Spaces card says "tabs
-and color" (spaces lost icons in the app, 2026-10-26). The sidebar button hides the
-sidebar and the left edge peeks it, as in the app (`BrowserWindow.swift`); off on phones.
-Step 4: `section.arc` (card and three mappings, checked against the app's
-`ArcImport.swift` and File menu), "Less, on purpose." open on the sky (no
-box), `section.maker` and the finale `section.fin` (#download).
-Step 5, rebuilt as **dig down** (`design/firn-sunrise/DIG-DOWN-PLAN.md`,
-2026-11-12): under the screenshot `.sunrise` (sun rises over the surface;
-`--r` from scroll in `home.js`, risen without JS or with reduced motion;
-dark: a cap behind the snow), then `div.lay.l1`–`.l4` (why Firn + Arc, Less
-on purpose, maker, finale) and `footer.ice.lay.l5` (keeps `nav.social` for
-`edges.js`), each one layer deeper. Edges, crests and shadows are generated
-by `tools/make-snow-edges.py`; the grain tiles `assets/snow-fresh.webp` and
-`snow-packed.webp` by `tools/make-snow-tiles.py` (both in
-`design/firn-sunrise/`, run from the repo root with `python3 -I`). Photos are
-allowed here only as snow texture (the "no stock photos" exception).
-Snow and ice colours `--s1`–`--s5` follow the try-it space (`data-space`
-on `<html>`; both modes only turn Personal's hue a little). The footer uses the on-dark lockup in both modes (the light
-lockup's flake is the same blue as the Personal ice).
-Step 7, mouse effects (`home.js`, end; mouse only, off with reduced motion): sun
-glints on `.l1`, the sky leans toward the cursor with a trailing light (`.wg3`),
-frost breath on the footer ice (`.breath`). Step 6, the drift, is dropped.
-Step 8a/8b done: text haloes for contrast; home focus ring is solid frost (#CFE3EF on dark, #16304A on light snow; `home.css`), and the try-it window announces changes to screen readers (`home.js`, `announce`).
-Step 8c done: images already small (tiles 512px, screenshot 43–70 KB); screenshot lazy, home header has only the on-dark logo. Phone scroll smooth at 4× slowdown. Open: on 1440px in headless Chrome the snow layers' `clip-path` edges drop frames (no GPU there); fix only if it stutters on a real Mac.
-Step 9 (creative pass) dropped (David, 2026-11-13): step 7's touches are enough; don't add more effects.
-**Next, not done until (David, 2026-11-13):** ~~tidy away the old website's
-leftovers~~ (done: old feature-row and colour-light CSS, stray root PNGs); ~~remove the About page~~ (done: `/about` 301s to `/#maker`; "More about me" goes to davidwurgler.com); overhaul Privacy, Support, and the other
-inner pages to match Sunrise ("business corner", David 2026-11-13: `public/page.css`, plain paper with no sky, band, or grain, First light header with the full-colour lockup, home's ice footer under one SVG snow edge; done on every inner page incl. `/mac` and 404; ~~remove the unused First light sky, dawn, grain, and old `.foot` CSS~~ done 2026-11-13, plus the footer-sunrise code in `edges.js`); next: a top-to-bottom pass to unify the site (~~A: CLAUDE.md notes match the live site~~ done; ~~B: Download pill in inner headers~~ done (`.hdl`, ink on paper, `page.css`); ~~C: focus rings and leftover phone/`.at-end` backgrounds~~ done: inner pages use home's solid frost ring, #16304A light / #CFE3EF dark, and text links underlined 3px below like home's, `page.css`). Next list empty: ask David.
+  comma before the final "and" or "or": "A calm browser for Mac, iPhone,
+  and iPad." This applies everywhere: page copy, page titles, meta
+  descriptions, Open Graph and Twitter text, alt text, and release notes.
+  (Two items take no comma: "mail and calendar".)
+- **Very few words.** Firn sells the feeling, not the feature list.
 
 ### The idea (so new parts fit)
 
-Sunrise in a snowy cabin near Sisters, Oregon, with a fresh cup of coffee in
-hand. Home is the cabin window (Sunrise, above); inner pages are the desk
-inside (`page.css`, "business corner").
+A frosted window on a snowy morning. Everything outside is soft and out of
+focus, and one clear lens brings it into focus. Quiet, cold air, and a hair
+of warm light low on the horizon. A lot of empty sky.
 
-- **Inner pages:** plain paper (`--page`) edge to edge, no sky, glows, or
-  grain; First light header (full-colour lockup, on-dark in dark mode);
-  home's glacier-ice footer under one static SVG snow edge.
-- **Frosted glass.** The menu card and circle, the support cards and the
-  release-note badges are semi-clear panels; the menu and cards use a small
-  `backdrop-filter` blur.
-- **Drifting flakes.** A few faint Firn flakes in the home hero (`.fl`),
-  hidden below 1000px wide. No flake may sit on text.
-- **Blue is for branding only.** Logo, snow, ice, flakes, glows. Buttons, links
-  and text stay in warm neutrals. The main button is ink with page-white text.
-- **Calm.** Generous space; small 200ms hover/focus transitions and home's
-  scroll and mouse effects, all off for `prefers-reduced-motion`. No
-  carousels, pop-ups, cookie banners, chat widgets or stock photos (snow
-  texture excepted).
+- **One pill per screen** (frosted glass, text in ink). Everything else is a
+  plain underlined text link.
+- **The horizon** (the faint warm band along the bottom) is light mode only.
+- **Snow** is soft round out-of-focus flakes, never snowflake shapes.
+- **Calm.** Everything that moves is off for `prefers-reduced-motion`. No
+  carousels, pop-ups, cookie banners, chat widgets, or stock photos.
 
-### Keep scrolling smooth
+### Home page (Frost)
 
-Rules (the investigation, numbers and history are in `docs/DESIGN-NOTES.md`,
-"Scrolling"):
+One screen, no scrolling: no header, no menu, no footer.
 
-- No large `backdrop-filter` panels. Small glass pieces (menu, cards) are
-  fine. The window (the screenshot) has none.
-- No large `filter: blur()`, image masks, or see-through groups on anything
-  that scrolls; use plain gradients or images.
-- No `mix-blend-mode` on anything big, and no full-page blended layer above
-  blurred pieces.
+- **Markup:** one `<main>`: the blurred logo, the strip at the bottom (left:
+  the tagline as the `<h1>`, "A calm browser **for Mac, iPhone, and iPad.**",
+  and the links Privacy, Release notes, Tip jar; right: the frosted
+  "Download" pill and "Free. Needs macOS 14 or later."), the sharp layer the
+  lens shows, the snow canvas, and the lens ring.
+- **Files:** `home.css` stands alone (its own `@font-face`); home does not
+  load `site.css` or `edges.js`. `home.js` is the design's script in plain
+  JavaScript: the lens follows the pointer slowly and drifts along the name
+  after 5 seconds idle; tap or drag moves it on a phone.
+- **Approved numbers:** magnify 0.35, edge light 0.7, lens speed 0.8, snow
+  density 0.3.
+- **iPhone and iPad:** `home.js` swaps the pill for "Firn is on the Mac
+  today. iPhone and iPad are on the way." When the app is on the App Store,
+  put its link in `APP_STORE_URL` at the top of `home.js`; that shows the
+  design's "Download / On the App Store." pill instead.
+- **JavaScript off:** the blurred logo, the text, the Mac download link, and
+  the lens resting on the name (placed by CSS). No snow.
+- **Reduce Motion:** snow drawn once and still; the lens stays on the name
+  and does not follow the pointer (David, 2026-11-25; stricter than the
+  design).
+- The pointer position is used on the page only: never stored, never sent.
+- theme-color and top background: #D3DBDF light, #151A27 dark.
+
+### Inner pages (old look, until they are rebuilt as Frost)
+
+Still the "business corner" from before Frost: `site.css` + `page.css`,
+plain paper, the First light header (logo, Release notes, Support, Tip jar,
+the `.hdl` Download pill, the phone and floating menus from `edges.js`), and
+the glacier-ice footer (`footer.ice`) with its columns. Don't restyle them
+piecemeal: they get rebuilt from `design/frost/pages/` in one go. Until
+then, a header or footer change goes in every inner page.
+
+### Keep it smooth
+
+- No live blur on anything large that scrolls or moves. Home's blurred logo
+  is a still layer on a page that doesn't scroll.
+- When nothing moves, nothing runs.
+- The only `backdrop-filter` is the small frosted pill.
+- No `mix-blend-mode` on anything big.
 
 ### Colours and type
 
-All colours are CSS variables at the top of `public/site.css`; the
-`prefers-color-scheme: dark` block redefines them for dark mode.
+Frost's values are in `design/frost/BRAND.md` and at the top of
+`public/home.css`. (Inner pages still use the old palette at the top of
+`site.css` until they are rebuilt.)
 
 ```
-Light   page #FBFAF8 · ink #241F1B · muted #5E564E · faint #9D9389
-        frame/sand #E9E3DA · sky top #F4F6F7 · frost rgba(130,168,190,.45)
-Dark    page #2B2826 · ink #F5F1EC · muted #D4CDC5 · faint #958D85
-        frame #3A3734 · sky top #2E2F31 · frost rgba(160,196,214,.45)
-Space colours (feature dots): Sage #8FAE8B, Sand #C9A27E,
-        Lagoon #6FA3A0, Glacier #7F9CB0, Lilac #8E8FB8
-Type    Headlines (.serif): "Gooper Deck", Georgia, serif;
-        weight 400, emphasis 600.
-        Everything else: system-ui, -apple-system, 'Segoe UI', sans-serif.
+Light   sky #D3DBDF → #E9ECEA · ink #241F1B · muted #5E564E
+        horizon rgba(242,196,160,.20) → rgba(236,206,186,.11) at 24% → clear at 58%
+        frosted pill rgba(255,255,255,.5)
+Dark    sky #151A27 → #232B3F · ink #E9E3DA · muted #B9B2AA
+        no horizon · frosted pill rgba(44,53,76,.5)
+Type    Headlines: "Gooper Deck", Georgia, serif; weight 400, emphasis 600.
+        Everything else: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif.
 ```
 
-**Emphasis in headlines is weight, never color: base 400, emphasis 600,
-never heavier; blue and colored text fail contrast against the morning
-sky.** On the home page the headline is
-`A calm browser, <span class="em">made for Mac.</span>`, with
-`.hero h1 .em { font-weight: 600; white-space: nowrap; }`: the period sits
-inside the span, so the phrase always stays on one line. On phones the
-headline is `min(46px, (100vw - 48px) / 7.4)`, so the bold phrase fits
-inside the side margins on small phones.
+**Emphasis in headlines is weight, never colour: base 400, emphasis 600,
+never heavier.**
 
 ### Dark mode: "blue hour"
 
 Follows the visitor's system setting (`prefers-color-scheme: dark`), the same
-way Firn follows the OS. No toggle. Same layout and copy; glass and ice darken
-and the header logo swaps to `firn-lockup-on-dark.svg`. theme-color: inner
-pages #FBFAF8 light, #2B2826 dark (the paper); home #36415D / #1A1F2D.
+way Firn follows the OS. No toggle. Same layout and copy. The logo is always
+cream on dark (`firn-lockup-on-dark.svg`).
 
 ### Fonts
 
-Headlines (everything `.serif`, plus `/mac`'s signature) use Gooper Deck: 400, emphasis 600, never
-heavier. It's licensed and can't be shared, so **the font files must never
-be committed** (`.gitignore` blocks `*.woff2`, `*.woff`, `*.otf`, `*.ttf`).
-They load from `https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
+Headlines use Gooper Deck: 400, emphasis 600, never heavier. It's licensed
+and can't be shared, so **the font files must never be committed**
+(`.gitignore` blocks `*.woff2`, `*.woff`, `*.otf`, `*.ttf`). They load from
+`https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
 `-SemiBold.woff2`, the `firn-fonts` R2 bucket on David's Cloudflare account
 (setup: `docs/DESIGN-NOTES.md`, "Cloudflare setup"): `@font-face` at the top
-of `site.css` (`font-display: swap`), both preloaded with `crossorigin` in
-every page's `<head>`. The fallback is Georgia. A changed font gets a new
-file name (browsers keep these for a year). Never call Google Fonts or any
-other third party.
+of `site.css` and `home.css` (`font-display: swap`), both preloaded with
+`crossorigin` in every page's `<head>`. The fallback is Georgia. A changed
+font gets a new file name (browsers keep these for a year). Never call
+Google Fonts or any other third party.
 
 ### Logo and icons
 
@@ -204,15 +166,23 @@ Use only the files in `assets/`. They're final; never redraw or re-type the
 logo. The wordmark is Gooper Condensed Medium (Very Cool Studio), delivered
 only as outlined SVGs; never add the font files to this repo, because the
 license doesn't allow sharing them. `firn-lockup.svg` (5353 × 2595.2) is the
-header logo (40px tall on wide screens, 30px on phones; the HTML keeps `width="70" height="34"`). Favicons are in
-`assets/favicon/`.
+full-colour lockup; `firn-lockup-on-dark.svg` is the cream one. Favicons are
+in `assets/favicon/`.
 
 Tab favicon = bare flake (glacier-deep, lighter on dark). Home-screen icons
-(180/192/512) = glacier tile.
-The 180 icon is the iPhone home-screen icon (`apple-touch-icon`); 192 and 512
-are listed in `public/site.webmanifest` for Android. They're marked
-`purpose: any` (not maskable), because the flake reaches too close to the
-edges to survive Android's circle crop.
+(180/192/512) = glacier tile. The 180 icon is the iPhone home-screen icon
+(`apple-touch-icon`); 192 and 512 are listed in `public/site.webmanifest`
+for Android, marked `purpose: any` (not maskable), because the flake reaches
+too close to the edges to survive Android's circle crop.
+
+### Link preview
+
+Every page uses `public/assets/firn-share-preview-v9.png` (1200×630, the
+Sunrise-era picture) until the Frost one, v10, is installed (step 3 of the
+list above). Keep it a PNG, don't recompress it, and keep it small
+(WhatsApp skips images over about 600 KB). `og:image` and `twitter:image`
+use the full URL. A new picture gets a new file name so apps fetch it; old
+versions stay in assets for old shared links.
 
 ---
 
@@ -233,6 +203,8 @@ Firn's promise is privacy, so the website keeps it too:
   email sign-up, stored only on David's Cloudflare account. It was removed;
   David exported the list to send the one promised email.)
 - Downloads come straight from Firn's GitHub releases (see "Download").
+- Home's lens uses the pointer position on the page only: never stored or
+  sent.
 
 ---
 
@@ -267,62 +239,40 @@ Never put a password or any other secret in this repo.
 - The email sign-up's database, secret and rate-limiting rule were removed
   from the dashboard.
 
-## Pages, header and download
+## Pages and download
 
-**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email or GitHub Issues only, no Discord or Reddit since 2026-11-20; was the Tip jar's old address until 2026-11-09), `/privacy` and `/faq` (one-column `.post` pages, linked only from the footer; FAQ answers must stay literally true), `/press` (press kit, linked from the footer's Firn column: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email or GitHub Issues only, no Discord or Reddit since 2026-11-20), `/privacy` and `/faq` (one-column `.post` pages; FAQ answers must stay literally true), `/press` (press kit: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
-starts with `/`; `noindex`). Cloudflare
-serves them without `.html`; links use the clean addresses.
+starts with `/`; `noindex`). Cloudflare serves them without `.html`; links
+use the clean addresses.
 
-**Header (every page):** logo on the left; "Release notes",
-"Support" and "Tip jar" on the right, with `aria-current="page"` on the current page.
-A "Home" link (`a.home`, first in `nav.top`) shows only inside the menus
-(phone menu and floating card), never in the header row; bold on home.
-Every page also has the `.hdl` Download pill at the end of the header row (hidden on phones; home: light on the dark top, `home.css`; inner: ink, `page.css`).
-Also menu-only: FAQ and Privacy (`a.more`, smaller and muted under a line)
-and, on wide screens only, a "Download for Mac" ink button (`a.dl`, same
-link as home); "Menu extras" at the end of `site.css`.
-On phones (600px and narrower, with JavaScript) the links hide behind a
-two-line menu button that opens them as a frosted glass card, with the footer's
-social logos copied in below a line (`edges.js` + "Phone menu" at the end of
-`site.css`; without JavaScript the links show as before).
-After 10px of scrolling the button stops top-right and turns into a frosted
-glass circle (`.float-menu` on `<html>`, set by `edges.js`), all the way down;
-an open menu stays open and doesn't move.
-Wider screens keep the links in the header; once it scrolls out of view the same
-glass circle appears top-right (in line with the column) and opens a small glass
-card of the links and social logos (end of `site.css`).
+**Download:** home's "Download" pill links to
+`https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg` (always
+the newest version: never put a version number in it), with "Free. Needs
+macOS 14 or later." under it. iPhone and iPad: see "Home page (Frost)".
+`github.com/dwurgy/firn-legacy` (linked from `/mac`) must be public and hold
+the Windows code.
 
-**Footer (every page):** `footer.ice`, home's glacier-ice footer. Home has it as
-snow layer `.l5` (`home.css`); inner pages copy the same markup with one static
-SVG snow edge (`.edge`, `page.css`). Columns: **Firn** (Release notes, Press kit, Privacy),
-**Community** (`nav.social`: GitHub, Threads,
-inline Simple Icons SVGs (CC0); `edges.js` copies them into the menu),
-**Support** (Support, FAQ, Email, Tip jar) and **Built with**; under a line the
-on-dark lockup and "Firn · A <a>David Wurgler</a> app · © 2026" (davidwurgler.com).
-A footer change goes in `index.html` and every inner page (links start with `/`).
+**Update feed:** `public/_redirects` sends `/appcast.xml` (302) to
+`raw.githubusercontent.com/dwurgy/firn/main/appcast.xml`, where installed
+copies of Firn check for updates. No copy of the feed lives on the site.
 
 **Contact:** hello@firnbrowser.com, forwarded to David by Cloudflare Email
-Routing. Linked as "Email" in the footer, on the Support page and as "Say hello" in the Tip jar
-page's "Other ways to help". Cloudflare's Email Address Obfuscation stays
-off (it adds a script and breaks the link without JavaScript).
-
-**When links get too many:** on wide screens the header has room for a few
-more links; on phones they go in the menu panel. A new social account gets a
-line in the Community column; keep the columns short (four or five links).
+Routing. Cloudflare's Email Address Obfuscation stays off (it adds a script
+and breaks the link without JavaScript).
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
 top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
 bold first line is the heading, then the paragraph and the list (bold
 lead-ins in ink). The left column has "Firn for Mac 1.0.1" or "Firn for iPhone and iPad 1.0.1" (one
-app, one version number; no badges since 2026-11-20) and the release date. Only 1.0.0 and later are
-listed (the Electron 0.x notes were removed on 2026-11-05). A "### New" (or Better, Fixed) heading in the
+app, one version number) and the release date. Only 1.0.0 and later are
+listed. A "### New" (or Better, Fixed) heading in the
 CHANGELOG becomes an `<h3>`. Each entry has its own address: the
 `<article>` has the version as its `id` (Mac: `id="1.0.1"`; iPhone and iPad:
 `id="iphone-1.0.1"`) and `data-for="mac"` or `"iphone"` for the filter pills (All, Mac,
 iPhone and iPad; inline script, `?for=iphone` picks one; `page.css`) and the name in the left column links
-to it (ink, underlined on hover), so `firnbrowser.com/release-notes#1.0.1`
+to it, so `firnbrowser.com/release-notes#1.0.1`
 opens the page at that entry. Every release gets an entry, small ones too:
 David likes showing all updates. When David says a new version is out,
 add it and open the PR right away, without asking first (he asked for
@@ -331,103 +281,55 @@ the block (see the comment in the file), put it at the top and change the
 text, including the version in its `id` and link.
 Also add it to `public/release-notes.xml` (the RSS feed for feed reader apps, linked from the page's head): copy the top `<item>`, change it, and update `lastBuildDate`.
 
-**Tip jar** (`tip-jar.html`; renamed from Support): call it a tip jar and
-tips, never "donate" or "donation". The main (ink) button is "Leave a tip on
-Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it a
-lighter outlined `.btn.alt`, "Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
+**Tip jar** (`tip-jar.html`): call it a tip jar and
+tips, never "donate" or "donation". The main button is "Leave a tip on
+Ko-fi" (`ko-fi.com/dwurgy`, David's tip page for all his apps); under it
+"Sponsor on GitHub" (`github.com/sponsors/dwurgy`).
 "No account needed" is said only for one-time Ko-fi tips (not checked for monthly).
 "Other ways to help" ends with "Say hello" (hello@firnbrowser.com). It lists both
-Threads accounts: @firnbrowser (major releases; also the footer logo) and
-David's @dwurgy (day to day). Reddit and Discord are gone (2026-11-20): feedback is GitHub Issues and email.
+Threads accounts: @firnbrowser (major releases) and
+David's @dwurgy (day to day). Feedback is GitHub Issues and email.
 
 **Privacy:** from `docs/privacy-page.md` in `dwurgy/firn`, checked against
 the app's code, plus a "What this website collects" section. Every line must be literally
 true. When the app starts sending something new (e.g. passwords syncing via
 iCloud Keychain once the iOS app ships), update this page first.
 
-**Copy notes (home):**
-- Eyebrow: "Coming soon to iPhone and iPad" (was "Firn 1.0 is here" until 2026-11-13; the phone-only "on the way" line went with it).
-- Subhead: "Vertical tabs, spaces, and split view, without the learning
-  curve.<br> Your data stays on your device." (the line break is
-  intentional and hidden on phones).
-- "Less, on purpose." cards: "Nothing loud." ends "Ads are blocked from the
-  start, so nothing competes for your attention."; "Nothing collected." starts
-  "No tracking, no telemetry, no account required, and trackers are blocked
-  by default." (added when Firn's ad and tracker blocking shipped; "by
-  default" so it doesn't repeat "from the start" from the card before).
-- Page description (meta, Open Graph, Twitter): "A calm, minimalist browser
-  with vertical tabs, spaces, and split view. Now available for Mac."
-
-**Download:** under the subhead, `.get` holds one ink `.btn`, "Download for
-Mac", linked to
-`https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg` (always
-the newest version: never put a version number in it), and under it
-"Free. Needs macOS 14 or later." Phones (600px and narrower) see "Visit
-firnbrowser.com on your Mac to download it." instead (CSS only, no script).
-`github.com/dwurgy/firn-legacy` (linked from `/mac`) must be public and hold
-the Windows code.
-
-**Update feed:** `public/_redirects` sends `/appcast.xml` (302) to
-`raw.githubusercontent.com/dwurgy/firn/main/appcast.xml`, where installed
-copies of Firn check for updates. No copy of the feed lives on the site.
-
-**Phone (max-width: 600px):** phone blocks in `site.css`, `home.css` and
-`page.css`: tighter header and hero, h1 up to 46px, footer columns two by two
-and the bottom line centred. The home screenshot is cropped rather than
-shrunk (see below).
-
-**Home screenshot:** under the try-it window (max 1040px wide), a real screenshot of Firn on a Mac,
-cropped 2px inside the window's edge, in light and dark:
-`public/assets/screens/firn-hero-v4-light.webp` / `-dark.webp` (1440×898)
-and `@2x` (2080 wide), in a `<picture class="shot">` (a dark `<source
-media="(prefers-color-scheme: dark)">`, `srcset` 1x and 2x) with
-`width`/`height` set (1440×898) and `loading="lazy"` (it sits two screens down under the try-it window). CSS: 12px corners,
-`overflow: hidden`, `--shadow-win`, no backdrop blur. Source PNGs:
-`design/screens-2026-10-26/` (window at 112,76, 2880×1800). On phones it shows only the top-left part in a 4:3 frame (the image
-drawn 2.25× the frame's width, `object-fit: cover`,
-`object-position: left top`). Alt text: "Firn on a Mac: a sidebar with
-Basecamp shortcuts, a Weekend cooking folder, and tabs on the left, the Snow
-Peak website with a tent in a grassy field at dusk on the right." A new
-picture gets a new file name (v5, …); update the HTML, its size and the alt
-text to match. (History and why: `docs/DESIGN-NOTES.md`, "Home screenshot".)
-
-**Home features:** replaced by the try-it window and tour cards (Sunrise
-step 3, 2026-11-12); the old videos, `loops.js` and feature stills are gone.
+**Page description** (meta, Open Graph, Twitter), until the design says
+otherwise: "A calm, minimalist browser with vertical tabs, spaces, and split
+view. Now available for Mac."
 
 **iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): `html`/`body`
-match the page top (inner pages: paper, `page.css`; home: blue hour,
-`home.css`), as do the theme-color tags. `edges.js` (on every page) adds
-`.at-end` to `<html>` near the end of a scrolled page, and the background
-then turns to the footer's ice (`html.at-end`, same rule in `page.css` and
-`home.css`). Every page has `viewport-fit=cover`; the header adds
-`env(safe-area-inset-top)` and keeps clear of the notch in landscape. iOS
-text autosizing is off (`-webkit-text-size-adjust: 100%`).
+match the page top, as do the theme-color tags. Every page has
+`viewport-fit=cover` and keeps clear of the notch and home bar
+(`env(safe-area-inset-*)`). iOS text autosizing is off
+(`-webkit-text-size-adjust: 100%`). Inner pages: `edges.js` adds `.at-end`
+to `<html>` near the end of a scrolled page, and the background turns to the
+footer's ice (`page.css`).
 
 ## Must-haves
 
-- Works and looks right at phone width (see `design/first-light/shots/`).
-  On phones the home screenshot is cropped to its left part rather than
-  shrunk until it's unreadable.
-- Accessible: visible
-  focus ring (solid frost, #16304A or #CFE3EF), good contrast, alt text on the logo, `aria-current`
-  on the current page, decorative pieces `aria-hidden`.
-- Page title, description, Open Graph and Twitter tags on every page, using
-  the `firn-share-preview-v9.png` image (see above).
-- Fast: no build step; no JavaScript needed for the look.
+- Works and looks right at phone width (393px) and at 1440px, in light and
+  dark, matching `design/frost/pages/`.
+- Accessible: visible focus ring, good contrast, alt text on the logo,
+  decorative pieces `aria-hidden`.
+- Page title, description, Open Graph and Twitter tags on every page.
+- Fast: no build step; the page looks right with JavaScript off.
 
 ## Project layout
 
 The published site lives in `public/` (so the assets above are at
-`public/assets/`): the five pages, `site.css`, `edges.js`,
-`home.css`, `home.js`, `site.webmanifest`, `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
+`public/assets/`): the pages, `home.css` and `home.js` (home only),
+`site.css`, `page.css` and `edges.js` (inner pages), `site.webmanifest`,
+`robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
 **Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
 
-**Old copies in browsers:** every page links `site.css?v=N` and
-`edges.js?v=N` (home also `home.css?v=N` and `home.js?v=N`): when you change one of those
-files, raise its `N` on every page that links it, so browsers fetch the new
-copy. `public/_headers` also tells browsers to check for a newer CSS or JS
-file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
+**Old copies in browsers:** every page links its CSS and JS as `file?v=N`:
+when you change one of those files, raise its `N` on every page that links
+it, so browsers fetch the new copy. `public/_headers` also tells browsers to
+check for a newer CSS or JS file on every visit. (Why:
+`docs/DESIGN-NOTES.md`, "Old copies in browsers".)
 
 ## How to work
 
@@ -440,11 +342,11 @@ file on every visit. (Why: `docs/DESIGN-NOTES.md`, "Old copies in browsers".)
 
 - **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
   - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). `public/site.css` is long: read the section you're changing, not the file. Don't re-read a file already read in this conversation unless it changed.
-  - **Images cost the most.** Don't open the design's screenshots (`design/first-light/shots/`, `design/about/reference/`) unless the task is matching the design, and then only the one you need. Look at your own result once per step, not after every small edit.
+  - **Images cost the most.** Don't open old designs' screenshots (`design/first-light/shots/`, `design/about/reference/`). Look at your own result once per step, not after every small edit.
   - **Keep searching out of this conversation.** For broad questions ("where is X used", "which pages link Y"), use the Explore agent. Don't spawn agents for anything else (each starts cold).
   - **Plan before multi-page work.** Say the plan in a few lines and wait for my OK.
   - **One task per conversation, small steps.** A long conversation is re-read on every message, so its cost grows with every reply.
-  - **Checkpoints.** When a step works and is committed, say so and say it's a good moment to /clear. Never suggest /compact: David always clears. Keep the "Next" list under Sunrise current (done items struck, next one first) so a fresh conversation can pick up from "Go". Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
+  - **Checkpoints.** When a step works and is committed, say so and say it's a good moment to /clear. Never suggest /compact: David always clears. Keep the "Where the rebuild stands" list current (done items struck, next one first) so a fresh conversation can pick up from "Go". Before I clear, anything worth keeping must be committed or in CLAUDE.md as a short note, not only in the chat.
   - **Short replies.** After a change: what changed, where, and how to check it, in a few lines. Don't recap the diff, repeat my request back, or paste whole files. Use Edit for changes, not rewriting a file.
   - **Quiet output.** Pipe long command output through tail or grep.
   - **Stuck rule.** After two failed attempts at the same fix, stop. Say what's known, what's been ruled out, and whether a fresh session or Opus would help. Don't try a third time.
