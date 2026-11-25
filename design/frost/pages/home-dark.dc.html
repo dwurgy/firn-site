@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Firn: Lens, dark</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,100&amp;display=swap">
+<style>
+body{margin:0}
+:root{--sky-top:#D3DBDF;--sky-low:#E9ECEA;--ink:#241F1B;--frosty:rgba(255,255,255,.5);--rim-hi:rgba(255,238,220,.98);--rim-lo:rgba(255,255,255,.4);--rim-line:rgba(255,255,255,.35);--glass-shade:rgba(36,31,27,.17);--rim-out:rgba(36,31,27,.09);--glow-1:rgba(242,196,160,.2);--glow-2:rgba(236,206,186,.11);--glow-0:rgba(236,206,186,0);--rim-warm:rgba(242,188,146,.4);--lens-rim:inset 0 -3.5px 2px -1px var(--rim-hi),inset 0 2.5px 2px -1px var(--rim-lo);--pill-rim:inset 0 -1.5px 1px -0.5px var(--rim-hi),inset 0 1px 1px -0.5px var(--rim-lo)}
+:root{--sky-top:#151A27;--sky-low:#232B3F;--ink:#E9E3DA;--frosty:rgba(44,53,76,.5);--rim-hi:rgba(233,227,218,.6);--rim-lo:rgba(233,227,218,.18);--rim-line:rgba(233,227,218,.16);--glass-shade:rgba(0,0,0,.4);--rim-out:rgba(0,0,0,.3);--glow-1:rgba(0,0,0,0);--glow-2:rgba(0,0,0,0);--glow-0:rgba(0,0,0,0);--rim-warm:rgba(0,0,0,0);--lens-rim:inset 3px 3px 2px -1px var(--rim-hi),inset -2px -2px 2px -1px var(--rim-lo);--pill-rim:inset 1.5px 1.5px 1px -0.5px var(--rim-hi),inset -1px -1px 1px -0.5px var(--rim-lo)}
+.firn-sharp{-webkit-mask-image:radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly),#000 99%,transparent 100%);mask-image:radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly),#000 99%,transparent 100%)}
+.firn-page{height:100vh;height:100svh;touch-action:none}
+@media (max-height: 640px){.firn-page{touch-action:pan-y}}
+.firn-get{align-items:flex-end;text-align:right}
+@media (max-width: 600px){.firn-get{align-items:flex-start;text-align:left}}
+a{color:var(--ink)}a:hover{color:var(--ink)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+</style>
+</helmet>
+<main class="firn-page" ref="{{ setMain }}" onPointerMove="{{ move }}" onPointerDown="{{ move }}" style="--z: {{zoom}}; --e: {{edge}}; --lx: 800px; --ly: 410px; --r: clamp(104px, 13vw, 190px); position: relative; min-height: 600px; box-sizing: border-box; padding: clamp(24px, 5vw, 72px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: linear-gradient(0deg, var(--glow-1) 0%, var(--glow-2) 24%, var(--glow-0) 58%), linear-gradient(180deg, var(--sky-top), var(--sky-low)); color: var(--ink); font-family: 'Fraunces', ui-serif, Georgia, serif; font-variation-settings: 'SOFT' 100">
+<div aria-hidden="true" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; filter: blur(calc(min(104vw, 1560px) * 0.0134)); opacity: 0.85">
+<picture>
+<img src="/_blob/496d69a1add44227891bb3a27f4531ad" alt="" style="display: block; width: min(104vw, 1560px); height: auto; transform: translate(-2.5%, calc(var(--lift, 0px) * -1))">
+</picture>
+</div>
+<div data-strip style="position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 48px">
+<div>
+<p style="margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.2; font-weight: 300; text-wrap: balance">A calm browser <span style="font-weight: 500">for Mac, iPhone, and iPad.</span></p>
+<nav aria-label="More about Firn" style="display: flex; flex-wrap: wrap; gap: 0 22px; margin: 4px 0 -12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px">
+<a href="https://firnbrowser.com/privacy" style="display: inline-block; padding: 12px 0; opacity: 0.8; text-decoration-thickness: 1px; text-underline-offset: 4px">Privacy</a>
+<a href="https://firnbrowser.com/release-notes" style="display: inline-block; padding: 12px 0; opacity: 0.8; text-decoration-thickness: 1px; text-underline-offset: 4px">Release notes</a>
+<a href="https://firnbrowser.com/tip-jar" style="display: inline-block; padding: 12px 0; opacity: 0.8; text-decoration-thickness: 1px; text-underline-offset: 4px">Tip jar</a>
+</nav>
+</div>
+<div>
+<sc-if value="{{ showMac }}" hint-placeholder-val="{{ true }}">
+<div class="firn-get" style="display: flex; flex-direction: column; gap: 10px">
+<a href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg" style="display: inline-block; padding: 14px 24px; border-radius: 999px; text-decoration: none; cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; background: var(--frosty); border: 1px solid var(--rim-line); -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%); box-shadow: var(--pill-rim), 0 8px 28px var(--glass-shade)">Download</a>
+<p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.45; opacity: 0.8">Free. Needs macOS 14 or later.</p>
+</div>
+</sc-if>
+<sc-if value="{{ iosLink }}" hint-placeholder-val="{{ false }}">
+<div class="firn-get" style="display: flex; flex-direction: column; gap: 10px">
+<a href="{{ appStore }}" style="display: inline-block; padding: 14px 24px; border-radius: 999px; text-decoration: none; cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; background: var(--frosty); border: 1px solid var(--rim-line); -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%); box-shadow: var(--pill-rim), 0 8px 28px var(--glass-shade)">Download</a>
+<p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.45; opacity: 0.8">On the App Store.</p>
+</div>
+</sc-if>
+<sc-if value="{{ iosSoon }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.45; opacity: 0.8">Firn is on the Mac today.<br>iPhone and iPad are on the way.</p>
+</sc-if>
+</div>
+</div>
+<div class="firn-sharp" style="position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; background: linear-gradient(0deg, var(--glow-1) 0%, var(--glow-2) 24%, var(--glow-0) 58%), linear-gradient(180deg, var(--sky-top), var(--sky-low)); transform-origin: var(--lx) var(--ly); transform: scale(var(--z))">
+<picture>
+<img src="/_blob/496d69a1add44227891bb3a27f4531ad" alt="Firn" style="display: block; width: min(104vw, 1560px); height: auto; transform: translate(-2.5%, calc(var(--lift, 0px) * -1))">
+</picture>
+<div data-mirror aria-hidden="true" inert="" style="position: absolute; inset: 0; box-sizing: border-box; padding: clamp(24px, 5vw, 72px); display: flex; flex-direction: column; justify-content: flex-end"></div>
+</div>
+<canvas data-snow ref="{{ setCanvas }}" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none"></canvas>
+<div data-ring aria-hidden="true" style="position: absolute; left: calc(var(--lx) - var(--r)); top: calc(var(--ly) - var(--r)); width: calc(var(--r) * 2); height: calc(var(--r) * 2); box-sizing: border-box; border-radius: 50%; pointer-events: none; border: 1px solid var(--rim-line); box-shadow: 0 9px 18px -9px var(--rim-warm), 0 0 0 1px var(--rim-out), 0 12px 40px var(--glass-shade)"><div style="position: absolute; inset: 0; border-radius: 50%; opacity: var(--e); box-shadow: var(--lens-rim)"></div></div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"magnify":{"editor":"range","default":0.35,"min":0,"max":1,"step":0.05},"edgeLight":{"editor":"range","default":0.7,"min":0,"max":1,"step":0.05},"lensSpeed":{"editor":"range","default":0.8,"min":0.3,"max":2.5,"step":0.1},"density":{"editor":"range","default":0.3,"min":0,"max":2,"step":0.1},"device":{"editor":"enum","options":["Auto","Mac","iPhone"],"default":"Auto"},"appStoreUrl":{"editor":"text","default":""},"$preview":{"width":1440,"height":820}}'>
+class Component extends DCLogic {
+componentDidMount() { this.start(); }
+componentWillUnmount() { cancelAnimationFrame(this.raf); if (this.ro) this.ro.disconnect(); if (this.mo) this.mo.disconnect(); }
+start() {
+const m = this.main || document.querySelector('main');
+const c = this.canvas || document.querySelector('canvas[data-snow]');
+if (!m || !c) return;
+const strip = m.querySelector('[data-strip]'); const mirror = m.querySelector('[data-mirror]');
+if (strip && mirror) {
+let queued = false;
+const sync = () => { queued = false; mirror.replaceChildren(strip.cloneNode(true)); };
+sync();
+if (window.MutationObserver) { this.mo = new MutationObserver(() => { if (!queued) { queued = true; requestAnimationFrame(sync); } }); this.mo.observe(strip, { subtree: true, childList: true, characterData: true, attributes: true }); }
+}
+const ctx = c.getContext('2d');
+const dark = true;
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rgb = dark ? '233,227,218' : '255,255,255';
+const sprite = (soft) => {
+const s = document.createElement('canvas'); s.width = s.height = 64;
+const g = s.getContext('2d'); const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+gr.addColorStop(0, 'rgba(' + rgb + ',1)'); gr.addColorStop(1 - soft, 'rgba(' + rgb + ',1)'); gr.addColorStop(1, 'rgba(' + rgb + ',0)');
+g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return s;
+};
+const sprites = [sprite(0.55), sprite(0.8), sprite(0.98)];
+let W = 0, H = 0, lift = 0, flakes = [];
+const make = (anywhere) => {
+const k = Math.random(); const layer = k < 0.6 ? 0 : k < 0.9 ? 1 : 2;
+const r = layer === 0 ? 1 + Math.random() * 1.4 : layer === 1 ? 2.5 + Math.random() * 3 : 9 + Math.random() * 16;
+return { layer, r, x: Math.random() * W, y: anywhere ? Math.random() * H : -r * 2,
+v: (layer === 0 ? 9 : layer === 1 ? 18 : 34) * (0.7 + Math.random() * 0.6),
+a: (layer === 0 ? 0.75 : layer === 1 ? 0.5 : 0.2) * (dark ? 0.55 : 1) * (0.6 + Math.random() * 0.4),
+ph: Math.random() * 6.28, f: 0.15 + Math.random() * 0.25, amp: 6 + Math.random() * 14 * (layer + 1) };
+};
+const size = () => {
+W = c.clientWidth; H = c.clientHeight;
+lift = strip ? (H - strip.offsetTop) / 2 : 0; m.style.setProperty('--lift', lift.toFixed(1) + 'px');
+const dpr = W * H > 2000000 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+const n = Math.min(160, Math.round(W * H / 16000 * (this.props.density ?? 0.3)));
+flakes = []; for (let i = 0; i < n; i++) flakes.push(make(true));
+};
+const draw = (t) => {
+ctx.clearRect(0, 0, W, H);
+for (const p of flakes) {
+const x = p.x + Math.sin(t * p.f + p.ph) * p.amp;
+ctx.globalAlpha = p.a; ctx.drawImage(sprites[p.layer], x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+}
+};
+size();
+const logo = () => { const lw = Math.min(W * 1.04, 1560); return { x: (W - lw) / 2 - lw * 0.025, w: lw, h: lw * 2595.2 / 5353 }; };
+const rest = () => { const L = logo(); return { x: L.x + L.w * 0.585, y: H / 2 - lift }; };
+const t0 = performance.now() / 1000; const ph = Math.asin(0.085 / 0.38);
+const r0 = rest(); this.cx = r0.x; this.cy = r0.y; this.vx = 0; this.vy = 0; this.moved = -1e9;
+const lens = (now, dt) => {
+const t = now / 1000 - t0; const L = logo(); let tx = this.tx, ty = this.ty;
+if (now - this.moved > 5000 || tx == null) {
+tx = still ? rest().x : L.x + L.w * (0.5 + 0.38 * Math.sin(t * 0.11 + ph));
+ty = still ? H / 2 - lift : H / 2 - lift + L.h * 0.1 * Math.sin(t * 0.17);
+}
+const max = Math.max(W * 0.13, 120) * (this.props.lensSpeed ?? 0.8);
+let wx = (tx - this.cx) * 2, wy = (ty - this.cy) * 2;
+const wl = Math.hypot(wx, wy); if (wl > max) { wx *= max / wl; wy *= max / wl; }
+const ease = 1 - Math.exp(-dt * 3);
+this.vx += (wx - this.vx) * ease; this.vy += (wy - this.vy) * ease;
+this.cx += this.vx * dt; this.cy += this.vy * dt;
+m.style.setProperty('--lx', this.cx.toFixed(1) + 'px'); m.style.setProperty('--ly', this.cy.toFixed(1) + 'px');
+};
+if (window.ResizeObserver) { this.ro = new ResizeObserver(() => { size(); if (still) draw(0); }); this.ro.observe(c); }
+if (still) draw(0);
+let last = performance.now();
+const tick = (now) => {
+const dt = Math.min(0.05, (now - last) / 1000); last = now;
+lens(now, dt);
+if (!still) {
+for (let i = 0; i < flakes.length; i++) { const p = flakes[i]; p.y += p.v * dt; p.x += 3 * dt; if (p.y - p.r > H) flakes[i] = make(false); }
+draw(now / 1000);
+}
+this.raf = requestAnimationFrame(tick);
+};
+this.raf = requestAnimationFrame(tick);
+}
+renderVals() {
+const pick = this.props.device ?? 'Auto';
+const auto = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const ios = pick === 'iPhone' || (pick === 'Auto' && auto);
+const store = (this.props.appStoreUrl ?? '').trim();
+return {
+showMac: !ios, iosLink: ios && /^https:\/\//.test(store), iosSoon: ios && !/^https:\/\//.test(store), appStore: store,
+setCanvas: (el) => { if (el) this.canvas = el; },
+setMain: (el) => { if (el) this.main = el; },
+zoom: 1 + 0.08 * (this.props.magnify ?? 0.35),
+edge: this.props.edgeLight ?? 0.7,
+move: (e) => {
+const m = this.main || e.currentTarget; const r = m.getBoundingClientRect();
+this.tx = e.clientX - r.left; this.ty = e.clientY - r.top; this.moved = performance.now();
+}
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Firn: Support</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,100&amp;display=swap">
+<style>
+body{margin:0}
+:root{--glow-1:rgba(242,196,160,.2);--glow-2:rgba(236,206,186,.11);--glow-0:rgba(236,206,186,0)}
+@media (prefers-color-scheme: dark){:root{--glow-1:rgba(0,0,0,0);--glow-2:rgba(0,0,0,0);--glow-0:rgba(0,0,0,0)}}
+:root{--sky-top:#D3DBDF;--sky-low:#E9ECEA;--ink:#241F1B}
+@media (prefers-color-scheme: dark){:root{--sky-top:#151A27;--sky-low:#232B3F;--ink:#E9E3DA}}
+a{color:var(--ink)}a:hover{color:var(--ink)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: clamp(24px, 5vw, 72px); display: flex; flex-direction: column; background: linear-gradient(0deg, var(--glow-1) 0px, var(--glow-2) 200px, var(--glow-0) 480px), linear-gradient(180deg, var(--sky-top), var(--sky-low)); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.6">
+<a href="https://firnbrowser.com/" aria-label="Firn, home" style="align-self: flex-start; display: block; margin-left: -8px">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="/_blob/496d69a1add44227891bb3a27f4531ad">
+<img src="/_blob/e3257822c0cdfdb203c0d94f102011b7" alt="Firn" style="display: block; height: clamp(56px, 6vw, 80px); width: auto">
+</picture>
+</a>
+<main style="flex: 1; max-width: 620px; margin: clamp(40px, 7vw, 104px) 0 0 clamp(0px, calc((100vw - 700px) * 0.4), 280px)">
+<h1 style="margin: 0 0 clamp(48px, 6vw, 80px); font-family: 'Fraunces', ui-serif, Georgia, serif; font-variation-settings: 'SOFT' 100; font-size: clamp(40px, 5vw, 64px); line-height: 1.05; font-weight: 300; letter-spacing: -0.01em">Support</h1>
+<div style="display: flex; flex-direction: column; gap: 40px">
+<section>
+<h2 style="margin: 0 0 6px; font-size: 17px; line-height: 1.4; font-weight: 600">Is Firn free?</h2>
+<p style="margin: 0">Yes. It's also open source, so anyone can read the code.</p>
+</section>
+<section>
+<h2 style="margin: 0 0 6px; font-size: 17px; line-height: 1.4; font-weight: 600">What does it run on?</h2>
+<p style="margin: 0">A Mac with macOS 14 or later. [iPhone and iPad requirements]</p>
+</section>
+<section>
+<h2 style="margin: 0 0 6px; font-size: 17px; line-height: 1.4; font-weight: 600">Does Firn track me?</h2>
+<p style="margin: 0">No. There's no telemetry, no account, and no analytics. The few things Firn does send are listed on the <a href="https://firnbrowser.com/privacy" style="text-decoration-thickness: 1px; text-underline-offset: 4px">Privacy</a> page.</p>
+</section>
+<section>
+<h2 style="margin: 0 0 6px; font-size: 17px; line-height: 1.4; font-weight: 600">Can I use extensions?</h2>
+<p style="margin: 0">Not yet. I'm working toward it.</p>
+</section>
+<section>
+<h2 style="margin: 0 0 6px; font-size: 17px; line-height: 1.4; font-weight: 600">Is there a Windows version?</h2>
+<p style="margin: 0">No. The old Windows app still opens, but it gets no updates or security fixes, so please move to an updated browser.</p>
+</section>
+</div>
+<h2 style="margin: clamp(72px, 9vw, 120px) 0 12px; font-family: 'Fraunces', ui-serif, Georgia, serif; font-variation-settings: 'SOFT' 100; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; font-weight: 400">Still stuck?</h2>
+<p style="margin: 0 0 4px">Two ways to reach me. Either one is fine.</p>
+<p style="margin: 0"><a href="mailto:hello@firnbrowser.com" style="display: inline-block; padding: 10px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">hello@firnbrowser.com</a></p>
+<p style="margin: 0"><a href="https://github.com/dwurgy/firn/issues" style="display: inline-block; padding: 10px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">GitHub Issues</a></p>
+</main>
+<footer style="margin: clamp(80px, 10vw, 144px) 0 0 clamp(0px, calc((100vw - 700px) * 0.4), 280px); font-size: 14px">
+<nav aria-label="Firn" style="display: flex; flex-wrap: wrap; gap: 0 22px">
+<a href="https://firnbrowser.com/" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Download</a>
+<a href="https://firnbrowser.com/release-notes" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Release notes</a>
+<a href="https://firnbrowser.com/support" aria-current="page" style="display: inline-block; padding: 12px 0; text-decoration: none; font-weight: 600">Support</a>
+<a href="https://firnbrowser.com/privacy" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Privacy</a>
+<a href="https://firnbrowser.com/tip-jar" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Tip jar</a>
+<a href="https://firnbrowser.com/press" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Press kit</a>
+</nav>
+<p style="margin: 4px 0 0; opacity: 0.72">Firn · A <a href="https://davidwurgler.com" style="text-decoration-thickness: 1px; text-underline-offset: 4px">David Wurgler</a> app · © 2026</p>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

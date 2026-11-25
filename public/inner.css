@@ -1,0 +1,158 @@
+/* Firn inner pages: "Frost". The still sky, the small logo top left, one
+   narrow column set left of centre, and one row of links at the bottom.
+   Built from design/frost/pages/ (values in design/frost/BRAND.md).
+   Nothing here moves. Home has its own file, home.css. */
+
+@font-face { font-family: "Gooper Deck"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://fonts.firnbrowser.com/GooperDeck-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Gooper Deck"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://fonts.firnbrowser.com/GooperDeck-SemiBold.woff2") format("woff2"); }
+
+:root {
+  color-scheme: light dark;
+  --sky-top: #D3DBDF; --sky-low: #E9ECEA; --ink: #241F1B;
+  --tag: rgba(36,31,27,.6); --tag-soft: rgba(36,31,27,.26);
+  --frosty: rgba(255,255,255,.5);
+  --rim-hi: rgba(255,238,220,.98); --rim-lo: rgba(255,255,255,.4);
+  --rim-line: rgba(255,255,255,.35); --glass-shade: rgba(36,31,27,.17);
+  /* the horizon: light mode only */
+  --glow-1: rgba(242,196,160,.2); --glow-2: rgba(236,206,186,.11); --glow-0: rgba(236,206,186,0);
+  --pill-rim: inset 0 -1.5px 1px -0.5px var(--rim-hi), inset 0 1px 1px -0.5px var(--rim-lo);
+  --serif: "Gooper Deck", Georgia, serif;
+  --pad: clamp(24px, 5vw, 72px);
+  /* the column and the footer start here: left of centre on a wide screen */
+  --indent: clamp(0px, calc((100vw - 700px) * 0.4), 280px);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sky-top: #151A27; --sky-low: #232B3F; --ink: #E9E3DA;
+    --tag: rgba(233,227,218,.6); --tag-soft: rgba(233,227,218,.28);
+    --frosty: rgba(44,53,76,.5);
+    --rim-hi: rgba(233,227,218,.6); --rim-lo: rgba(233,227,218,.18);
+    --rim-line: rgba(233,227,218,.16); --glass-shade: rgba(0,0,0,.4);
+    --glow-1: rgba(0,0,0,0); --glow-2: rgba(0,0,0,0); --glow-0: rgba(0,0,0,0);
+    --pill-rim: inset 1.5px 1.5px 1px -0.5px var(--rim-hi), inset -1px -1px 1px -0.5px var(--rim-lo);
+  }
+}
+
+html { background: var(--sky-top); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+
+.page {
+  min-height: 100vh; min-height: 100svh; box-sizing: border-box;
+  padding: max(var(--pad), env(safe-area-inset-top)) max(var(--pad), env(safe-area-inset-right))
+           max(var(--pad), env(safe-area-inset-bottom)) max(var(--pad), env(safe-area-inset-left));
+  display: flex; flex-direction: column;
+  /* on a long page the horizon keeps a fixed height */
+  background: linear-gradient(0deg, var(--glow-1) 0px, var(--glow-2) 200px, var(--glow-0) 480px),
+              linear-gradient(180deg, var(--sky-top), var(--sky-low));
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 17px; line-height: 1.6;
+}
+
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* The small logo: the only header. It links home. */
+.home { align-self: flex-start; display: block; margin-left: -8px; }
+.home img { display: block; height: clamp(56px, 6vw, 80px); width: auto; }
+
+.col { flex: 1; max-width: 620px; margin: clamp(40px, 7vw, 104px) 0 0 var(--indent); }
+
+h1 { margin: 0 0 clamp(48px, 6vw, 80px); font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 64px); line-height: 1.05; font-weight: 400; letter-spacing: -0.01em; }
+h1.tight { margin-bottom: 20px; }
+h2 { margin: clamp(72px, 9vw, 120px) 0 12px; font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 34px); line-height: 1.15; font-weight: 400; }
+p { margin: 0; }
+
+.small { margin-top: 14px; font-size: 14px; opacity: .8; }
+/* a text link on its own line, with room for a thumb */
+.line a { display: inline-block; padding: 10px 0; }
+
+/* The one frosted pill */
+.pill {
+  display: inline-block; margin-top: 32px; padding: 14px 24px; border-radius: 999px;
+  text-decoration: none;
+  background: var(--frosty); border: 1px solid var(--rim-line);
+  -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: var(--pill-rim), 0 8px 28px var(--glass-shade);
+}
+
+footer { margin: clamp(80px, 10vw, 144px) 0 0 var(--indent); font-size: 14px; }
+footer nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+footer nav a { display: inline-block; padding: 12px 0; }
+footer nav a[aria-current] { text-decoration: none; font-weight: 600; }
+footer p { margin-top: 4px; opacity: .72; }
+.line.gap { margin-top: 4px; }
+
+/* Questions and answers (Support) */
+.faq { display: flex; flex-direction: column; gap: 40px; }
+.faq h2 { margin: 0 0 6px; font-family: inherit; font-size: 17px; line-height: 1.4; font-weight: 600; }
+
+/* Release notes: the filter under the headline, a month rail on the left,
+   and each entry as date, headline, tags, then the changelog's words.
+   Without JavaScript the filter stays hidden and every entry shows. */
+.rn { flex: 1; max-width: 830px;
+  margin: clamp(40px, 7vw, 104px) 0 0 clamp(0px, calc((100vw - 900px) * 0.14), 74px); }
+.rn-head { margin: 0 0 clamp(48px, 6vw, 80px) 206px; }
+.rn-head h1 { margin: 0; }
+.filter { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: 20px; font-size: 15px; }
+.filter a { display: inline-block; padding: 10px 0; text-decoration: none; opacity: .72; }
+.filter a[aria-current] { font-weight: 600; opacity: 1; text-decoration: underline;
+  text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.rn-body { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 24px 56px; }
+.rail { flex: 0 0 150px; position: sticky; top: 32px; align-self: flex-start; font-size: 15px; }
+.rail p { margin: 0 0 6px; font-weight: 600; }
+.months { display: flex; flex-direction: column; flex-wrap: wrap; gap: 0 20px; align-items: flex-start; }
+.rail a { display: inline-block; padding: 10px 0; text-decoration: none; opacity: .72; }
+.rail a.on { opacity: 1; }
+.rn main { flex: 999 1 420px; min-width: 0; max-width: 620px; }
+@media (max-width: 760px) {
+  .rn-head { margin-left: 0; }
+  .rail { position: static; flex-basis: 100%; }
+  .months { flex-direction: row; }
+}
+.month, .entry { scroll-margin-top: 32px; }
+.entry { margin: 0 0 clamp(64px, 8vw, 104px); }
+.month:last-child .entry:last-child { margin: 0; }
+.entry .date { font-size: 14px; opacity: .72; }
+.entry h2 { margin: 4px 0 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; font-size: 13px; line-height: 1.3; }
+.tags span, .tags a { padding: 3px 9px; border: 1px solid var(--tag); border-radius: 7px; text-decoration: none; }
+.tags a { border-color: var(--tag-soft); }
+.entry p { margin: 0 0 12px; }
+.entry h3 { margin: 22px 0 8px; font-size: 17px; line-height: 1.4; font-weight: 600; }
+.entry ul { margin: 0; padding-left: 20px; }
+.entry li { margin: 0 0 8px; }
+.entry li:last-child { margin: 0; }
+.entry strong { font-weight: 600; }
+
+/* Long reading pages (Privacy, Press kit, /mac) */
+.lede { margin-bottom: clamp(48px, 6vw, 80px); }
+.post p { margin: 0 0 12px; }
+.post h2 { margin-top: clamp(48px, 6vw, 72px); }
+.post > h2:first-child { margin-top: clamp(72px, 9vw, 120px); }
+.post ul { margin: 0 0 12px; padding-left: 20px; }
+.post li { margin: 0 0 8px; }
+.post strong { font-weight: 600; }
+.post code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; overflow-wrap: anywhere; }
+
+/* Press kit: the fact sheet and the round photo */
+.post .facts { padding: 0; list-style: none; }
+.post .facts li { position: relative; padding-left: 136px; }
+.post .facts span { position: absolute; left: 0; opacity: .72; }
+.headshot { float: right; width: 160px; height: 160px; margin: 4px 0 16px 28px; border-radius: 50%; object-fit: cover; }
+@media (max-width: 600px) {
+  .post .facts li { padding-left: 0; }
+  .post .facts span { position: static; display: block; font-size: 14px; }
+  .headshot { float: none; display: block; width: 128px; height: 128px; margin: 0 0 16px; }
+}
+
+/* /mac: the sign-off */
+.sign { display: flex; align-items: flex-start; gap: 14px; margin-top: 28px; }
+.sign svg { flex: none; width: 28px; height: 28px; margin-top: 4px; fill: currentColor; opacity: .72; }
+.sign span { font-family: var(--serif); font-size: 24px; line-height: 1.3; }
+.sign small { display: block; margin-top: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; opacity: .72; }

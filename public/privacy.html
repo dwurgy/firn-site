@@ -11,51 +11,52 @@
 <meta property="og:url" content="https://firnbrowser.com/privacy">
 <meta property="og:title" content="Privacy · Firn">
 <meta property="og:description" content="What Firn keeps, what it sends, and to whom, in plain words.">
-<meta property="og:image" content="https://firnbrowser.com/assets/firn-share-preview-v9.png">
+<meta property="og:image" content="https://firnbrowser.com/assets/firn-share-preview-v10.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The Firn logo above the words: A calm browser, made for Mac. firnbrowser.com, over snow at sunrise">
+<meta property="og:image:alt" content="The Firn logo, out of focus on a dark blue sky, above the words: A calm browser for Mac, iPhone, and iPad.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy · Firn">
 <meta name="twitter:description" content="What Firn and firnbrowser.com keep, what they send, and to whom, in plain words. Firn has no account and no analytics, and sends nothing about your browsing to me.">
-<meta name="twitter:image" content="https://firnbrowser.com/assets/firn-share-preview-v9.png">
+<meta name="twitter:image" content="https://firnbrowser.com/assets/firn-share-preview-v10.png">
 
 <link rel="icon" href="assets/favicon/favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon/firn-favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon/firn-favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light) and (max-width: 600px)">
-<meta name="theme-color" content="#2B2826" media="(prefers-color-scheme: dark) and (max-width: 600px)">
-<meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#2B2826" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#D3DBDF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151A27" media="(prefers-color-scheme: dark)">
 
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css?v=48">
-<link rel="stylesheet" href="page.css?v=9">
-<script src="edges.js?v=10" defer></script>
+<link rel="stylesheet" href="inner.css?v=4">
 </head>
 <body>
-<div class="frame"><div class="sheet">
-<header><a href="/" aria-label="Firn home"><img class="logo-l" src="assets/firn-lockup.svg" alt="firn" width="70" height="34"><img class="logo-d" src="assets/firn-lockup-on-dark.svg" alt="firn" width="70" height="34"></a>
-<nav class="top" id="menu" aria-label="Pages"><a href="/" class="home">Home</a><a href="/release-notes">Release notes</a><a href="/support">Support</a><a href="/tip-jar">Tip jar</a><a href="/faq" class="more">FAQ</a><a href="/privacy" class="more" aria-current="page">Privacy</a><a href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg" class="dl">Download for Mac</a></nav><button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button><a class="hdl" href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg">Download</a></header>
-<main>
-<section class="intro"><h1 class="serif">Privacy</h1><p>Your browser shouldn't be watching you.</p></section>
+<div class="page">
+<a class="home" href="/" aria-label="Firn, home">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="assets/firn-lockup-on-dark.svg">
+<img src="assets/firn-lockup.svg" alt="Firn" width="165" height="80">
+</picture>
+</a>
+<main class="col">
+<h1 class="tight">Privacy</h1>
+<p class="lede">Your browser shouldn't be watching you.</p>
 <!-- Keep every line here literally true. When Firn starts sending
      something new (for example, saved passwords syncing through iCloud
      Keychain), this page must say so first. -->
-<article class="post">
+<div class="post">
 <p>Firn is a calm browser for the Mac, and privacy is part of that calm. There's no account to make, no analytics, and nothing about your browsing sent to me. What you do in Firn stays on your Mac.</p>
 <p>This page explains exactly what Firn keeps, what it sends, and to whom, in plain words. Firn is open source, so you don't have to take my word for any of it: every line is on <a href="https://github.com/dwurgy/firn">GitHub</a>.</p>
 
-<h2 class="serif">No account, no tracking, no telemetry</h2>
+<h2>No account, no tracking, no telemetry</h2>
 <p>Firn doesn't ask who you are. It doesn't count how often you open it, which buttons you press, or which sites you visit, and it doesn't report crashes or "usage statistics" anywhere.</p>
 
-<h2 class="serif">Every space is its own browser</h2>
+<h2>Every space is its own browser</h2>
 <p>Most browsers keep one pile of cookies and sign-ins and let everything share it. In Firn, each space is truly separate.</p>
 <p>Work and Personal each have their own:</p>
-<ul class="list">
+<ul>
 <li>sign-ins and cookies</li>
 <li>site data, like what a site saves to remember you</li>
 <li>history and recently closed tabs</li>
@@ -64,11 +65,11 @@
 <p><strong>Sharing is your choice.</strong> When you make a new space, you can keep it separate (the default) or have it share sign-ins with one other space. A shared space says so plainly, and you can stop sharing at any time. It then starts fresh, signed out of everything.</p>
 <p><strong>Deleting a space deletes its data.</strong> Its tabs, cookies, sign-ins, and site data are erased from your Mac. If another space shares them, they stay until that space is gone too.</p>
 
-<h2 class="serif">Ads and trackers, blocked</h2>
+<h2>Ads and trackers, blocked</h2>
 <p>Firn blocks ads and trackers from the moment you open it, using the public EasyList and EasyPrivacy lists. The lists are built into the app, so blocking never has to phone home to work.</p>
 <p>If a site breaks, open it and choose <strong>Stop Blocking on</strong> that site in the View menu. That only changes the one site, in the one space.</p>
 
-<h2 class="serif">What Firn sends, and to whom</h2>
+<h2>What Firn sends, and to whom</h2>
 <p>Besides the websites you visit, Firn makes only these requests on its own.</p>
 <p><strong>Site icons.</strong> To show a site's icon in your sidebar, Firn asks that same site for it, without its cookies or your sign-ins, so the request can't be tied to you. The welcome fetches the suggested sites' icons the same way, from those companies' own servers.</p>
 <p><strong>Scam checks.</strong> Firn uses macOS's own Safe Browsing service, the same one Safari uses. It keeps a list of known scam sites on your Mac. When a page might be on that list, it asks Apple using a short code calculated from the address, never the address itself. If the site is a known scam, you'll see a warning instead of the page.</p>
@@ -76,19 +77,19 @@
 <p><strong>Update checks.</strong> Once a day, Firn asks firnbrowser.com whether a new version is out. Only Firn's version number goes along, nothing about your browsing. firnbrowser.com passes the question on to Firn's page on GitHub, where the list of versions lives. A new version downloads from GitHub, and Firn installs it only if it carries Firn's own signature. Firn asks before it starts checking on its own, and you can turn checks off in Settings.</p>
 <p><strong>Nothing else.</strong> No analytics, and nothing about what you do in Firn.</p>
 
-<h2 class="serif">What stays on your Mac</h2>
+<h2>What stays on your Mac</h2>
 <p>Your tabs, spaces, Basecamp, groups, and settings are saved on your Mac so they come back when you reopen Firn. Each space's cookies, sign-ins, and site data are kept on your Mac, separately for each space.</p>
 <p>All of it lives in Firn's own sandbox folder (<code>~/Library/Containers/</code>), where other apps can't reach it. None of it is uploaded anywhere.</p>
 <p><strong>Saved passwords</strong> are kept in your Mac's Keychain, and can only be read while your Mac is unlocked.</p>
 <p>Firn's own logs never record the addresses you visit.</p>
 <p><strong>Tabs that tidy themselves away</strong> are deleted for good 30 days after they're tidied, or as soon as you close them. Firn remembers your last 30 closed tabs so you can bring one back with ⇧⌘T.</p>
 
-<h2 class="serif">Camera and microphone</h2>
+<h2>Camera and microphone</h2>
 <p>A site can only use your camera or microphone after it asks and you click <strong>Allow</strong>. Firn shows which site is asking, and if it's a part of another page, which page it's on. <strong>Don't Allow</strong> is always the default. Only secure (https) sites can ask at all, and a yes lasts only while that tab is open.</p>
 
-<h2 class="serif">Built to keep your data in</h2>
+<h2>Built to keep your data in</h2>
 <p>Firn runs in Apple's App Sandbox, which walls it off from the rest of your Mac. It can only touch what it's given:</p>
-<ul class="list">
+<ul>
 <li>the internet, to load web pages</li>
 <li>files you pick yourself, in an Open or Save window</li>
 <li>your Downloads folder, for downloads</li>
@@ -100,29 +101,32 @@
 <li>Firn's updater, which puts a new version in place</li></ul>
 <p>Nothing else on your Mac is open to it. Every web page is treated as untrusted, and Firn's own helpers inside pages run walled off from the page itself, so a site can't reach into Firn.</p>
 
-<h2 class="serif">What Firn can't promise</h2>
+<h2>What Firn can't promise</h2>
 <p>The sites you visit can still see you visit them, like they would in any browser. Firn blocks the trackers it knows about, but no list catches everything. And when you sign in to a site, that site knows it's you. Firn keeps those sign-ins in their own space; it can't make a site forget you.</p>
 <p>If Firn ever needs to send something new, this page will say so first, in plain words.</p>
 
-<h2 class="serif">What this website collects</h2>
+<h2>What this website collects</h2>
 <p>Cloudflare hosts firnbrowser.com, so like any web host, Cloudflare handles each visit to deliver the page. It also counts visits with Cloudflare Web Analytics, so I can see how many people stop by and which pages they read. A small script loads from Cloudflare (static.cloudflareinsights.com) to do this.</p>
 <p>The script sets no cookies, stores nothing on your device, and doesn't fingerprint you. It records the page you're on, the site that sent you, your country, your browser and operating system, whether you're on a desktop, phone, or tablet, and how fast the page loaded. Cloudflare doesn't keep your IP address for this. Nothing in it identifies you, so I only see totals.</p>
 <p>The fonts load from fonts.firnbrowser.com, my own domain. There are no ads, no other trackers, and no forms.</p>
 <p>The download button takes you to GitHub, where Firn's releases live. Links to Threads, Ko-fi, and GitHub Sponsors take you to those sites, which have their own privacy policies.</p>
 <p>If you email <a href="mailto:hello@firnbrowser.com">hello@firnbrowser.com</a>, Cloudflare forwards it to me, and I read it myself.</p>
 
-<h2 class="serif">Questions</h2>
+<h2>Questions</h2>
 <p>Firn is open source under the Mozilla Public License 2.0. You can read the code, or ask a question, on <a href="https://github.com/dwurgy/firn">GitHub</a>, or email <a href="mailto:hello@firnbrowser.com">hello@firnbrowser.com</a>.</p>
-</article></main>
-<footer class="ice"><svg class="edge" aria-hidden="true" viewBox="0 0 100 1.6" preserveAspectRatio="none"><path d="M0,-1L0,0.818L1.2,0.799L2.29,0.772L3.23,0.813L4.11,0.872L4.95,0.87L5.68,0.848L6.41,0.87L7.08,0.883L7.71,0.872L8.33,0.856L8.96,0.867L9.58,0.899L10.26,0.935L10.99,0.946L11.72,0.951L12.55,0.978L13.44,1L14.38,0.935L15.47,0.902L16.67,0.897L17.86,0.845L18.96,0.899L19.9,0.908L20.78,0.861L21.61,0.823L22.34,0.848L23.07,0.807L23.75,0.769L24.38,0.753L25,0.785L25.62,0.837L26.25,0.851L26.93,0.861L27.66,0.872L28.39,0.913L29.22,0.918L30.1,0.859L31.04,0.861L32.14,0.891L33.33,0.861L34.53,0.921L35.62,0.91L36.56,0.821L37.45,0.75L38.28,0.704L39.01,0.59L39.74,0.527L40.42,0.454L41.04,0.435L41.67,0.394L42.29,0.334L42.92,0.264L43.59,0.212L44.32,0.163L45.05,0.079L45.89,0.003L46.77,0L47.71,0.011L48.8,0.027L50,0.082L51.2,0.101L52.29,0.065L53.23,0.063L54.11,0.071L54.95,0.087L55.68,0.117L56.41,0.193L57.08,0.25L57.71,0.264L58.33,0.25L58.96,0.296L59.58,0.342L60.26,0.351L60.99,0.329L61.72,0.329L62.55,0.38L63.44,0.454L64.38,0.47L65.47,0.522L66.67,0.53L67.86,0.505L68.96,0.53L69.9,0.549L70.78,0.522L71.61,0.576L72.34,0.617L73.07,0.584L73.75,0.538L74.38,0.492L75,0.481L75.62,0.459L76.25,0.405L76.93,0.342L77.66,0.351L78.39,0.383L79.22,0.38L80.1,0.323L81.04,0.334L82.14,0.323L83.33,0.245L84.53,0.277L85.62,0.302L86.56,0.318L87.45,0.402L88.28,0.438L89.01,0.424L89.74,0.408L90.42,0.427L91.04,0.44L91.67,0.44L92.29,0.438L92.92,0.457L93.59,0.489L94.32,0.541L95.05,0.535L95.89,0.5L96.77,0.497L97.71,0.467L98.8,0.367L100,0.394L100,-1Z"/><polyline points="0,0.818 1.2,0.799 2.29,0.772 3.23,0.813 4.11,0.872 4.95,0.87 5.68,0.848 6.41,0.87 7.08,0.883 7.71,0.872 8.33,0.856 8.96,0.867 9.58,0.899 10.26,0.935 10.99,0.946 11.72,0.951 12.55,0.978 13.44,1 14.38,0.935 15.47,0.902 16.67,0.897 17.86,0.845 18.96,0.899 19.9,0.908 20.78,0.861 21.61,0.823 22.34,0.848 23.07,0.807 23.75,0.769 24.38,0.753 25,0.785 25.62,0.837 26.25,0.851 26.93,0.861 27.66,0.872 28.39,0.913 29.22,0.918 30.1,0.859 31.04,0.861 32.14,0.891 33.33,0.861 34.53,0.921 35.62,0.91 36.56,0.821 37.45,0.75 38.28,0.704 39.01,0.59 39.74,0.527 40.42,0.454 41.04,0.435 41.67,0.394 42.29,0.334 42.92,0.264 43.59,0.212 44.32,0.163 45.05,0.079 45.89,0.003 46.77,0 47.71,0.011 48.8,0.027 50,0.082 51.2,0.101 52.29,0.065 53.23,0.063 54.11,0.071 54.95,0.087 55.68,0.117 56.41,0.193 57.08,0.25 57.71,0.264 58.33,0.25 58.96,0.296 59.58,0.342 60.26,0.351 60.99,0.329 61.72,0.329 62.55,0.38 63.44,0.454 64.38,0.47 65.47,0.522 66.67,0.53 67.86,0.505 68.96,0.53 69.9,0.549 70.78,0.522 71.61,0.576 72.34,0.617 73.07,0.584 73.75,0.538 74.38,0.492 75,0.481 75.62,0.459 76.25,0.405 76.93,0.342 77.66,0.351 78.39,0.383 79.22,0.38 80.1,0.323 81.04,0.334 82.14,0.323 83.33,0.245 84.53,0.277 85.62,0.302 86.56,0.318 87.45,0.402 88.28,0.438 89.01,0.424 89.74,0.408 90.42,0.427 91.04,0.44 91.67,0.44 92.29,0.438 92.92,0.457 93.59,0.489 94.32,0.541 95.05,0.535 95.89,0.5 96.77,0.497 97.71,0.467 98.8,0.367 100,0.394"/></svg><div class="in">
-<div class="cols">
-<nav aria-label="Firn"><p class="fh">Firn</p><a href="/release-notes">Release notes</a><a href="/press">Press kit</a><a href="/privacy">Privacy</a></nav>
-<nav class="social" aria-label="Community"><p class="fh">Community</p><a href="https://github.com/dwurgy/firn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a><a href="https://www.threads.com/@firnbrowser"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/></svg><span>Threads</span></a></nav>
-<nav aria-label="Support"><p class="fh">Support</p><a href="/support">Support</a><a href="/faq">FAQ</a><a href="mailto:hello@firnbrowser.com">Email</a><a href="/tip-jar">Tip jar</a></nav>
-<div class="built"><p class="fh">Built with</p><p>Swift, SwiftUI, and WebKit, the engine Safari uses. Free and open source under MPL-2.0.</p></div>
 </div>
-<div class="legal"><img src="/assets/firn-lockup-on-dark.svg" alt="Firn" width="70" height="34"><p>Firn · A <a href="https://davidwurgler.com">David Wurgler</a> app · © 2026</p></div>
-</div></footer>
-</div></div>
+</main>
+<footer>
+<nav aria-label="Firn">
+<a href="/">Download</a>
+<a href="/release-notes">Release notes</a>
+<a href="/support">Support</a>
+<a href="/privacy" aria-current="page">Privacy</a>
+<a href="/tip-jar">Tip jar</a>
+<a href="/press">Press kit</a>
+</nav>
+<p>Firn · A <a href="https://davidwurgler.com">David Wurgler</a> app · © 2026</p>
+</footer>
+</div>
 </body>
 </html>
