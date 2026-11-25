@@ -46,9 +46,9 @@ changes it.
 
 - ~~Home page rebuilt as Frost (`public/index.html`, `home.css`, `home.js`)~~ done 2026-11-25.
 
-1. Remove home-page files and assets nothing uses any more (list them, ask
-   David before deleting); point `/about` at `/` in `_redirects`.
-2. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
+- ~~Unused home files removed~~ done 2026-11-25 (old screenshot, snow-layer SVGs, `snow-fresh.webp`; `/about` now goes to `/`).
+
+1. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
    kit, `/mac`), the 404, and the link preview (`firn-share-preview-v10.png`
    is ready in `design/frost/`). Not started: until then they keep the old
    look described under "Inner pages" below.

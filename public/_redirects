@@ -5,5 +5,5 @@
 /appcast.xml https://raw.githubusercontent.com/dwurgy/firn/main/appcast.xml 302
 
 
-# The About page was removed (2026-11-13); old links land on "Who’s making it" on home.
-/about /#maker 301
+# The About page was removed (2026-11-13); old links land on home.
+/about / 301
