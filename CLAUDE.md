@@ -48,10 +48,22 @@ changes it.
 
 - ~~Unused home files removed~~ done 2026-11-25 (old screenshot, snow-layer SVGs, `snow-fresh.webp`; `/about` now goes to `/`).
 
-1. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
-   kit, `/mac`), the 404, and the link preview (`firn-share-preview-v10.png`
-   is ready in `design/frost/`). Not started: until then they keep the old
-   look described under "Inner pages" below.
+- ~~Inner pages step 1: `public/inner.css` (the shared Frost look) and Tip jar~~ done 2026-11-25.
+
+Inner pages, agreed plan (David, 2026-11-25: follow the design everywhere,
+one step per commit, each page moves from `site.css` + `page.css` +
+`edges.js` to `inner.css`; copy Tip jar's head, logo, and footer):
+
+1. Support, with the design's five questions. `/faq` then redirects to
+   `/support` (`_redirects`, sitemap). Leave out "[iPhone and iPad
+   requirements]" until the app is out. Check "no telemetry, no account, and
+   no analytics" against `docs/FIRN-FACTS.md` first; ask David if it fails.
+2. Release notes: month rail, text filter, date, headline, tags. Keep the
+   `#1.0.1` addresses and `?for=iphone`.
+3. Privacy, Press kit, `/mac`: no design, same pattern, words untouched.
+4. 404: home with "Nothing here. **Just snow.**" and "Back home".
+5. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
+   `page.css`, `edges.js`, and rewrite "Inner pages" below.
 
 **Copy is final**, as written in the design files. Don't rewrite headlines
 or reword claims. Every privacy claim on the site has been checked to be
