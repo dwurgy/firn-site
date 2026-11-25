@@ -87,3 +87,7 @@ footer nav a { display: inline-block; padding: 12px 0; }
 footer nav a[aria-current] { text-decoration: none; font-weight: 600; }
 footer p { margin-top: 4px; opacity: .72; }
 .line.gap { margin-top: 4px; }
+
+/* Questions and answers (Support) */
+.faq { display: flex; flex-direction: column; gap: 40px; }
+.faq h2 { margin: 0 0 6px; font-family: inherit; font-size: 17px; line-height: 1.4; font-weight: 600; }

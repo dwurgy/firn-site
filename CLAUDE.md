@@ -50,19 +50,17 @@ changes it.
 
 - ~~Inner pages step 1: `public/inner.css` (the shared Frost look) and Tip jar~~ done 2026-11-25.
 
+- ~~Support with the FAQ; `/faq` redirects to `/support`~~ done 2026-11-25.
+
 Inner pages, agreed plan (David, 2026-11-25: follow the design everywhere,
 one step per commit, each page moves from `site.css` + `page.css` +
 `edges.js` to `inner.css`; copy Tip jar's head, logo, and footer):
 
-1. Support, with the design's five questions. `/faq` then redirects to
-   `/support` (`_redirects`, sitemap). Leave out "[iPhone and iPad
-   requirements]" until the app is out. Check "no telemetry, no account, and
-   no analytics" against `docs/FIRN-FACTS.md` first; ask David if it fails.
-2. Release notes: month rail, text filter, date, headline, tags. Keep the
+1. Release notes: month rail, text filter, date, headline, tags. Keep the
    `#1.0.1` addresses and `?for=iphone`.
-3. Privacy, Press kit, `/mac`: no design, same pattern, words untouched.
-4. 404: home with "Nothing here. **Just snow.**" and "Back home".
-5. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
+2. Privacy, Press kit, `/mac`: no design, same pattern, words untouched.
+3. 404: home with "Nothing here. **Just snow.**" and "Back home".
+4. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
    `page.css`, `edges.js`, and rewrite "Inner pages" below.
 
 **Copy is final**, as written in the design files. Don't rewrite headlines
@@ -254,7 +252,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages and download
 
-**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (how to report a bug or ask: email or GitHub Issues only, no Discord or Reddit since 2026-11-20), `/privacy` and `/faq` (one-column `.post` pages; FAQ answers must stay literally true), `/press` (press kit: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (five questions, then email or GitHub Issues only, no Discord or Reddit since 2026-11-20; the answers must stay literally true; `/faq` redirects here; add iPhone and iPad requirements to "What does it run on?" when the app is out), `/privacy` (one-column `.post` page), `/press` (press kit: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 25 MB (Cloudflare caps files at 25 MiB; iPhone shots are JPEG to fit), built from `design/screens-2026-10-26`, David's iPhone shots, `assets/` logos and the app repo's icon; its `README.txt` repeats the page text, so change both), and `/mac`
 (one-column `.post` page, not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare serves them without `.html`; links

@@ -7,3 +7,6 @@
 
 # The About page was removed (2026-11-13); old links land on home.
 /about / 301
+
+# The FAQ moved onto the Support page (2026-11-25); old links land there.
+/faq /support 301
