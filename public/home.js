@@ -27,6 +27,20 @@
   /* --- iPhone or iPad? (iPads say they are Macs, but have a touch screen) --- */
   var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  /* --- iPhone Safari: the page gets extra sky above and below (home.css
+         .tuck) and starts scrolled down by the top part, so the sky reaches
+         behind the clock and the home bar like scrolled content. --- */
+  var tuck = /iPhone|iPod/.test(navigator.userAgent);
+  function tuckTop() { return tuck ? parseFloat(getComputedStyle(main).getPropertyValue('--top')) || 0 : 0; }
+  function tuckScroll() { if (tuck) window.scrollTo(0, tuckTop()); }
+  if (tuck) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    document.documentElement.classList.add('tuck');
+    tuckScroll();
+    window.addEventListener('load', tuckScroll);
+    window.addEventListener('pageshow', tuckScroll);
+  }
+
   if (ios && document.getElementById('get-mac')) {   /* the 404 page has no download */
     var store = APP_STORE_URL.trim();
     document.getElementById('get-mac').hidden = true;
@@ -102,8 +116,10 @@
     }
     function size() {
       var w = canvas.clientWidth, h = canvas.clientHeight;
-      /* the logo sits centred in the open space above the strip */
-      lift = (h - strip.offsetTop) / 2;
+      /* the logo sits centred in the open space above the strip (on iPhone,
+         below the extra sky at the top) */
+      lift = (h - strip.offsetTop - tuckTop()) / 2;
+      tuckScroll();
       main.style.setProperty('--lift', lift.toFixed(1) + 'px');
       if (w !== W || h !== H) {
         W = w; H = h;

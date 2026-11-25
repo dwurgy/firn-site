@@ -20,13 +20,12 @@
   /* lit edge: from the horizon, so along the bottom */
   --lens-rim: inset 0 -3.5px 2px -1px var(--rim-hi), inset 0 2.5px 2px -1px var(--rim-lo);
   --pill-rim: inset 0 -1.5px 1px -0.5px var(--rim-hi), inset 0 1px 1px -0.5px var(--rim-lo);
-  --sky-end: #EBE4DB; /* the sky's bottom edge, horizon included */
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --logo-w: min(104vw, 1560px);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --sky-top: #151A27; --sky-low: #232B3F; --sky-end: #232B3F; --ink: #E9E3DA;
+    --sky-top: #151A27; --sky-low: #232B3F; --ink: #E9E3DA;
     --frosty: rgba(44,53,76,.5);
     --rim-hi: rgba(233,227,218,.6); --rim-lo: rgba(233,227,218,.18);
     --rim-line: rgba(233,227,218,.16); --rim-out: rgba(0,0,0,.3);
@@ -40,14 +39,6 @@
 
 html { background: var(--sky-top); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; }
-/* Behind the page, a fixed layer reaches past the screen's top and bottom
-   edges, so iPhone Safari's strips behind the clock and the home bar show
-   sky (its top colour above, its bottom colour below) like scrolled content.
-   The page covers the middle, so nothing else changes. */
-body::before { content: ""; position: fixed; z-index: -1; left: 0; right: 0;
-  top: -200px; height: calc(100vh + 400px); height: calc(100lvh + 400px);
-  background: linear-gradient(180deg, var(--sky-top) 50%, var(--sky-end) 50%);
-  pointer-events: none; }
 [hidden] { display: none !important; }
 
 .page {
@@ -60,11 +51,15 @@ body::before { content: ""; position: fixed; z-index: -1; left: 0; right: 0;
   /* --tb: the band behind a phone browser's bottom toolbar (0 elsewhere). The
      sky runs down behind it and the strip sits just above it. */
   --tb: 0px;
+  /* --top/--bot: extra sky above and below the screen, behind iPhone Safari's
+     clock and home bar. home.js sets them on iPhone and scrolls down --top,
+     so the sky sits there like scrolled content. 0 everywhere else. */
+  --top: 0px; --bot: 0px;
   /* How far the logo sits above centre (half the strip's height). home.js
      measures it; this is the same number for when JavaScript is off. */
   --lift: calc((var(--pad) + 80px + var(--tb)) / 2);
-  --pad-box: max(var(--pad), env(safe-area-inset-top)) max(var(--pad), env(safe-area-inset-right))
-             calc(max(var(--pad), env(safe-area-inset-bottom)) + var(--tb)) max(var(--pad), env(safe-area-inset-left));
+  --pad-box: calc(max(var(--pad), env(safe-area-inset-top)) + var(--top)) max(var(--pad), env(safe-area-inset-right))
+             calc(max(var(--pad), env(safe-area-inset-bottom)) + var(--tb) + var(--bot)) max(var(--pad), env(safe-area-inset-left));
   --sky: linear-gradient(0deg, var(--glow-1) 0%, var(--glow-2) 24%, var(--glow-0) 58%),
          linear-gradient(180deg, var(--sky-top), var(--sky-low));
   position: relative; box-sizing: border-box;
@@ -76,8 +71,10 @@ body::before { content: ""; position: fixed; z-index: -1; left: 0; right: 0;
   font-family: "Gooper Deck", Georgia, serif;
 }
 @supports (height: 100lvh) {
-  .page { --tb: calc(100lvh - 100svh); height: 100lvh; min-height: calc(600px + var(--tb)); }
+  .page { --tb: calc(100lvh - 100svh); height: calc(100lvh + var(--top) + var(--bot));
+    min-height: calc(600px + var(--tb) + var(--top) + var(--bot)); }
 }
+html.tuck .page { --top: 64px; --bot: 64px; }
 @media (max-height: 640px) { .page { touch-action: pan-y; } }
 
 /* The logo: out of focus underneath, sharp inside the lens */
