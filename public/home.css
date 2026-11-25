@@ -1,7 +1,7 @@
 /* Firn home page: "Frost". One screen: the blurred logo, the lens, one line,
    one pill. Built from design/frost/pages/home.dc.html; the values are the
-   design's (see design/frost/BRAND.md). This file stands alone: home does
-   not load site.css. */
+   design's (see design/frost/BRAND.md). This file stands alone. The 404
+   page uses it too. */
 
 @font-face { font-family: "Gooper Deck"; font-weight: 400; font-style: normal; font-display: swap;
   src: url("https://fonts.firnbrowser.com/GooperDeck-Regular.woff2") format("woff2"); }

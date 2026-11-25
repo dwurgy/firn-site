@@ -56,15 +56,9 @@ changes it.
 
 - ~~Privacy, Press kit (with the new 13 MB zip and its text), and `/mac`~~ done 2026-11-25.
 
-Inner pages, agreed plan (David, 2026-11-25: follow the design everywhere,
-one step per commit, each page moves from `site.css` + `page.css` +
-`edges.js` to `inner.css`; copy Tip jar's head, logo, and footer):
+- ~~404 as home with "Nothing here. **Just snow.**"; link preview v10 on every page; `site.css`, `page.css`, and `edges.js` deleted~~ done 2026-11-25.
 
-1. ~~404: home with "Nothing here. **Just snow.**" and "Back home"~~ done
-   2026-11-25. It shares `home.css` (`.page.lost`) and `home.js` with home:
-   raise their `?v=N` on both pages.
-2. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
-   `page.css`, `edges.js`, and rewrite "Inner pages" below.
+The Frost rebuild is finished: nothing is next.
 
 **Copy is final**, as written in the design files. Don't rewrite headlines
 or reword claims. Every privacy claim on the site has been checked to be
@@ -101,8 +95,8 @@ One screen, no scrolling: no header, no menu, no footer.
   and the links Privacy, Release notes, Tip jar; right: the frosted
   "Download" pill and "Free. Needs macOS 14 or later."), the sharp layer the
   lens shows, the snow canvas, and the lens ring.
-- **Files:** `home.css` stands alone (its own `@font-face`); home does not
-  load `site.css` or `edges.js`. `home.js` is the design's script in plain
+- **Files:** `home.css` stands alone (its own `@font-face`); home loads
+  nothing else. `home.js` is the design's script in plain
   JavaScript: the lens follows the pointer slowly and drifts along the name
   after 5 seconds idle; tap or drag moves it on a phone.
 - **Approved numbers:** magnify 0.35, edge light 0.7, lens speed 0.8, snow
@@ -119,14 +113,22 @@ One screen, no scrolling: no header, no menu, no footer.
 - The pointer position is used on the page only: never stored, never sent.
 - theme-color and top background: #D3DBDF light, #151A27 dark.
 
-### Inner pages (old look, until they are rebuilt as Frost)
+### Inner pages (Frost)
 
-Still the "business corner" from before Frost: `site.css` + `page.css`,
-plain paper, the First light header (logo, Release notes, Support, Tip jar,
-the `.hdl` Download pill, the phone and floating menus from `edges.js`), and
-the glacier-ice footer (`footer.ice`) with its columns. Don't restyle them
-piecemeal: they get rebuilt from `design/frost/pages/` in one go. Until
-then, a header or footer change goes in every inner page.
+Every page but home and the 404: Tip jar, Support, Release notes, Privacy,
+Press kit, `/mac`. Built from `design/frost/pages/`.
+
+- **Look:** the still sky, the small logo top left (links home), one narrow
+  column left of centre, and one row of plain links at the bottom (Download,
+  Release notes, Support, Privacy, Tip jar, Press kit; the current page has
+  `aria-current="page"`). No header menu. Nothing moves.
+- **Files:** `inner.css` stands alone (its own `@font-face`). No script,
+  except the small inline filter on Release notes.
+- **New page:** copy Tip jar's head, logo, and footer. A footer change goes
+  in every inner page.
+- **404:** home's screen with "Nothing here. **Just snow.**" and "Back
+  home". It shares `home.css` (`.page.lost`) and `home.js` with home: raise
+  their `?v=N` on both pages.
 
 ### Keep it smooth
 
@@ -139,8 +141,7 @@ then, a header or footer change goes in every inner page.
 ### Colours and type
 
 Frost's values are in `design/frost/BRAND.md` and at the top of
-`public/home.css`. (Inner pages still use the old palette at the top of
-`site.css` until they are rebuilt.)
+`public/home.css` and `public/inner.css`.
 
 ```
 Light   sky #D3DBDF → #E9ECEA · ink #241F1B · muted #5E564E
@@ -169,7 +170,7 @@ and can't be shared, so **the font files must never be committed**
 `https://fonts.firnbrowser.com/GooperDeck-Regular.woff2` and
 `-SemiBold.woff2`, the `firn-fonts` R2 bucket on David's Cloudflare account
 (setup: `docs/DESIGN-NOTES.md`, "Cloudflare setup"): `@font-face` at the top
-of `site.css` and `home.css` (`font-display: swap`), both preloaded with
+of `home.css` and `inner.css` (`font-display: swap`), both preloaded with
 `crossorigin` in every page's `<head>`. The fallback is Georgia. A changed
 font gets a new file name (browsers keep these for a year). Never call
 Google Fonts or any other third party.
@@ -191,9 +192,9 @@ too close to the edges to survive Android's circle crop.
 
 ### Link preview
 
-Every page uses `public/assets/firn-share-preview-v9.png` (1200×630, the
-Sunrise-era picture) until the Frost one, v10, is installed (see the list
-above). Keep it a PNG, don't recompress it, and keep it small
+Every page uses `public/assets/firn-share-preview-v10.png` (1200×630, the
+Frost picture: the cream logo blurred on blue hour, the tagline sharp at the
+bottom left; source `design/frost/link-preview.html`). Keep it a PNG, don't recompress it, and keep it small
 (WhatsApp skips images over about 600 KB). `og:image` and `twitter:image`
 use the full URL. A new picture gets a new file name so apps fetch it; old
 versions stay in assets for old shared links.
@@ -315,9 +316,7 @@ view. Now available for Mac."
 match the page top, as do the theme-color tags. Every page has
 `viewport-fit=cover` and keeps clear of the notch and home bar
 (`env(safe-area-inset-*)`). iOS text autosizing is off
-(`-webkit-text-size-adjust: 100%`). Inner pages: `edges.js` adds `.at-end`
-to `<html>` near the end of a scrolled page, and the background turns to the
-footer's ice (`page.css`).
+(`-webkit-text-size-adjust: 100%`).
 
 ## Must-haves
 
@@ -332,7 +331,7 @@ footer's ice (`page.css`).
 
 The published site lives in `public/` (so the assets above are at
 `public/assets/`): the pages, `home.css` and `home.js` (home only),
-`site.css`, `page.css` and `edges.js` (inner pages), `site.webmanifest`,
+`inner.css` (inner pages), `site.webmanifest`,
 `robots.txt` and `sitemap.xml`. There is no server code. See README.md.
 
 **Search engines:** `/mac` and `404.html` carry `<meta name="robots" content="noindex">`; `robots.txt` blocks nothing (a block would hide that tag); `sitemap.xml` lists every other page. A new page gets a line in `sitemap.xml`.
@@ -353,7 +352,7 @@ check for a newer CSS or JS file on every visit. (Why:
 - **Model:** always Opus. Never suggest switching to Sonnet or ask which model a task needs.
 
 - **Spend David's budget carefully** (Pro plan). The aim is less bloat and less rehashing, never lower quality. Never save budget by skipping these: reading the code before editing it, checking the result at 1440px and 393px in light and dark, the privacy rules (no third-party anything, every claim literally true), the serial comma, or asking David when something is a real fork.
-  - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). `public/site.css` is long: read the section you're changing, not the file. Don't re-read a file already read in this conversation unless it changed.
+  - **Read less.** Find with Grep and Glob, then Read only the part you need (offset and limit). Don't re-read a file already read in this conversation unless it changed.
   - **Images cost the most.** Don't open old designs' screenshots (`design/first-light/shots/`, `design/about/reference/`). Look at your own result once per step, not after every small edit.
   - **Keep searching out of this conversation.** For broad questions ("where is X used", "which pages link Y"), use the Explore agent. Don't spawn agents for anything else (each starts cold).
   - **Plan before multi-page work.** Say the plan in a few lines and wait for my OK.
