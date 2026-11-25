@@ -7,17 +7,15 @@
 <atom:link href="https://firnbrowser.com/release-notes.xml" rel="self" type="application/rss+xml"/>
 <description>What's new in Firn.</description>
 <language>en</language>
-<lastBuildDate>Wed, 25 Nov 2026 18:03:00 +0000</lastBuildDate>
-<!-- HIDDEN until Apple approves the iPhone and iPad app. When it's live: remove this comment's first and last lines, set pubDate and lastBuildDate.
+<lastBuildDate>Wed, 25 Nov 2026 18:35:00 +0000</lastBuildDate>
 <item>
   <title>Firn for iPhone and iPad 1.0.0: Firn, now on iPhone and iPad.</title>
   <link>https://firnbrowser.com/release-notes#iphone-1.0.0</link>
   <guid isPermaLink="true">https://firnbrowser.com/release-notes#iphone-1.0.0</guid>
-  <pubDate>DATE</pubDate>
+  <pubDate>Wed, 25 Nov 2026 18:35:00 +0000</pubDate>
   <description><![CDATA[<h3>New</h3><ul><li><strong>Every space is its own browser,</strong> with its own tabs, sign-ins, and history.</li><li><strong>Basecamp.</strong> Your everyday sites, one tap away.</li><li><strong>Groups.</strong> Drag one tab onto another. They name themselves, on your device.</li><li><strong>One bar.</strong> Search, go to a site, or jump to a tab.</li><li><strong>Reader.</strong> Just the article.</li><li><strong>Summarize.</strong> The article in a few sentences, made on your device.</li><li><strong>Ads and trackers are blocked</strong> from the start.</li><li><strong>iCloud sync</strong> keeps your spaces the same on your devices. It's off until you turn it on in Settings.</li></ul>
 <p>Firn needs iOS 26 or iPadOS 26. Summarize and group names need Apple Intelligence.</p>]]></description>
 </item>
-END HIDDEN -->
 <item>
   <title>Firn for Mac 1.1.1: Stay signed in, and a smoother Reader.</title>
   <link>https://firnbrowser.com/release-notes#1.1.1</link>
