@@ -47,11 +47,12 @@
      something new (for example, saved passwords syncing through iCloud
      Keychain), this page must say so first. -->
 <div class="post">
-<p>Firn is a calm browser for the Mac, and privacy is part of that calm. There's no account to make, no analytics, and nothing about your browsing sent to me. What you do in Firn stays on your Mac.</p>
+<p>Firn is a calm browser for Mac, iPhone, and iPad. What you do in Firn stays on your device, unless you turn on iCloud sync or back up your device. There's no account to make, no analytics, and nothing about your browsing sent to me.</p>
 <p>This page explains exactly what Firn keeps, what it sends, and to whom, in plain words. Firn is open source, so you don't have to take my word for any of it: every line is on <a href="https://github.com/dwurgy/firn">GitHub</a>.</p>
 
 <h2>No account, no tracking, no telemetry</h2>
 <p>Firn doesn't ask who you are. It doesn't count how often you open it, which buttons you press, or which sites you visit, and it doesn't report crashes or "usage statistics" anywhere.</p>
+<p><strong>Crash reports.</strong> Firn sends none. If you've chosen to share analytics with app developers in your device's settings, Apple may share crash reports with me.</p>
 
 <h2>Every space is its own browser</h2>
 <p>Most browsers keep one pile of cookies and sign-ins and let everything share it. In Firn, each space is truly separate.</p>
@@ -74,18 +75,24 @@
 <p><strong>Site icons.</strong> To show a site's icon in your sidebar, Firn asks that same site for it, without its cookies or your sign-ins, so the request can't be tied to you. The welcome fetches the suggested sites' icons the same way, from those companies' own servers.</p>
 <p><strong>Scam checks.</strong> Firn uses macOS's own Safe Browsing service, the same one Safari uses. It keeps a list of known scam sites on your Mac. When a page might be on that list, it asks Apple using a short code calculated from the address, never the address itself. If the site is a known scam, you'll see a warning instead of the page.</p>
 <p><strong>Search suggestions, only if you turn them on.</strong> They're off by default. If you turn them on, your search engine sees what you type in the address bar as you type it, without your cookies or sign-ins. Your searches themselves go to the search engine you choose: Google by default, or Bing, DuckDuckGo, Ecosia, or Yahoo in Settings.</p>
-<p><strong>Update checks.</strong> Once a day, Firn asks firnbrowser.com whether a new version is out. Only Firn's version number goes along, nothing about your browsing. firnbrowser.com passes the question on to Firn's page on GitHub, where the list of versions lives. A new version downloads from GitHub, and Firn installs it only if it carries Firn's own signature. Firn asks before it starts checking on its own, and you can turn checks off in Settings.</p>
+<p><strong>Update checks, on the Mac.</strong> Once a day, Firn asks firnbrowser.com whether a new version is out. Only Firn's version number goes along, nothing about your browsing. firnbrowser.com passes the question on to Firn's page on GitHub, where the list of versions lives. A new version downloads from GitHub, and Firn installs it only if it carries Firn's own signature. Firn asks before it starts checking on its own, and you can turn checks off in Settings. On iPhone and iPad, the App Store handles updates.</p>
+<p><strong>iCloud sync, only if you turn it on.</strong> It's off by default. When it's on, your spaces, your open tabs' addresses and titles, and any tab you send to another device go to your own iCloud. They're encrypted on your device first, so only your devices can read them. Groups, Basecamp, history, settings, sign-ins, and passwords don't sync. Turning sync off asks iCloud to remove that device's list of open tabs.</p>
 <p><strong>Nothing else.</strong> No analytics, and nothing about what you do in Firn.</p>
 
-<h2>What stays on your Mac</h2>
+<h2>What stays on your device</h2>
+<p>History is kept on your device for a year, separately for each space unless spaces share sign-ins. You can clear it any time.</p>
 <p>Your tabs, spaces, Basecamp, groups, and settings are saved on your Mac so they come back when you reopen Firn. Each space's cookies, sign-ins, and site data are kept on your Mac, separately for each space.</p>
-<p>All of it lives in Firn's own sandbox folder (<code>~/Library/Containers/</code>), where other apps can't reach it. None of it is uploaded anywhere.</p>
+<p>All of it lives in Firn's own sandbox folder (<code>~/Library/Containers/</code>), where other apps can't reach it. None of it is uploaded anywhere, unless you turn on iCloud sync.</p>
 <p><strong>Saved passwords</strong> are kept in your Mac's Keychain, and can only be read while your Mac is unlocked.</p>
 <p>Firn's own logs never record the addresses you visit.</p>
 <p><strong>Tabs that tidy themselves away</strong> are deleted for good 30 days after they're tidied, or as soon as you close them. Firn remembers your last 30 closed tabs so you can bring one back with ⇧⌘T.</p>
 
+<h2>On iPhone and iPad</h2>
+<p>Firn also saves a picture of each open page for the tab overview. Pictures are deleted with their tab and left out of backups. Your tabs, history, and settings can be part of your device's own backup, including iCloud Backup if you use it. Downloads are saved in Firn's folder in the Files app. If you save a picture to Photos, iOS asks first, and Firn can only add to your library, never look through it.</p>
+
 <h2>Camera and microphone</h2>
-<p>A site can only use your camera or microphone after it asks and you click <strong>Allow</strong>. Firn shows which site is asking, and if it's a part of another page, which page it's on. <strong>Don't Allow</strong> is always the default. Only secure (https) sites can ask at all, and a yes lasts only while that tab is open.</p>
+<p><strong>On iPhone and iPad,</strong> iOS asks before a site can use either.</p>
+<p><strong>On the Mac,</strong> a site can only use your camera or microphone after it asks and you click <strong>Allow</strong>. Firn shows which site is asking, and if it's a part of another page, which page it's on. <strong>Don't Allow</strong> is always the default. Only secure (https) sites can ask at all, and a yes lasts only while that tab is open.</p>
 
 <h2>Built to keep your data in</h2>
 <p>Firn runs in Apple's App Sandbox, which walls it off from the rest of your Mac. It can only touch what it's given:</p>
@@ -95,11 +102,17 @@
 <li>your Downloads folder, for downloads</li>
 <li>your camera and microphone, only after you allow a site</li>
 <li>printing</li>
+<li>your own iCloud, only if you turn on sync</li>
 <li>macOS's Safe Browsing service, for scam warnings</li>
 <li>its own place in your Keychain, for saved passwords</li>
 <li>Arc's list of spaces and tabs, read only, when you bring them over from Arc</li>
 <li>Firn's updater, which puts a new version in place</li></ul>
 <p>Nothing else on your Mac is open to it. Every web page is treated as untrusted, and Firn's own helpers inside pages run walled off from the page itself, so a site can't reach into Firn.</p>
+
+<h2>Summaries, tips, and feedback</h2>
+<p><strong>Summaries and group names</strong> are made by Apple's on-device model. Nothing is sent anywhere.</p>
+<p><strong>Tips</strong> are handled by Apple. I never see your payment details.</p>
+<p><strong>Feedback</strong> opens a draft in your mail app with Firn's version, your iOS version, and your device model. Nothing is sent until you send it.</p>
 
 <h2>What Firn can't promise</h2>
 <p>The sites you visit can still see you visit them, like they would in any browser. Firn blocks the trackers it knows about, but no list catches everything. And when you sign in to a site, that site knows it's you. Firn keeps those sign-ins in their own space; it can't make a site forget you.</p>
