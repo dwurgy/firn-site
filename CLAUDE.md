@@ -310,7 +310,7 @@ iCloud Keychain once the iOS app ships), update this page first.
 
 **Page description** (meta, Open Graph, Twitter), until the design says
 otherwise: "A calm, minimalist browser with vertical tabs, spaces, and split
-view. Now available for Mac."
+view. Now available for Mac, iPhone, and iPad."
 
 **iPhone details** (why: `docs/DESIGN-NOTES.md`, "iPhone"): `html`/`body`
 match the page top, as do the theme-color tags. Every page has
