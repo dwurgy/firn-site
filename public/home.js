@@ -10,7 +10,7 @@
      address between the quotes (it must start with https://). iPhones and
      iPads then get a "Download" pill that opens it. While it is empty they
      see "Firn is on the Mac today. iPhone and iPad are on the way." */
-  var APP_STORE_URL = '';
+  var APP_STORE_URL = 'https://apps.apple.com/us/app/firn-browser/id6829053602';
 
   /* Approved values (design/frost/README.md). Magnify (0.35) and edge light
      (0.7) live in home.css as --z and --e. */
@@ -47,6 +47,8 @@
     if (/^https:\/\//.test(store)) {
       document.getElementById('app-store-link').href = store;
       document.getElementById('get-ios').hidden = false;
+      if (!/iPhone|iPod/.test(navigator.userAgent))   /* an iPad */
+        document.getElementById('ios-needs').textContent = 'On the App Store. Needs iPadOS 26 or later.';
     } else {
       document.getElementById('get-soon').hidden = false;
     }

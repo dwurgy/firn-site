@@ -8,8 +8,8 @@ small, and stop after each step so he can look at it.
 Firn came out as an Electron app (0.1.0 on October 8, 2026, for macOS and
 Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
 1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), a fresh
-start that brings nothing over from the old Firn. An iPhone and iPad app is
-on the way (not on the App Store yet). The site is a one-screen home page
+start that brings nothing over from the old Firn. The iPhone and iPad app came
+out on the App Store on November 25, 2026. The site is a one-screen home page
 (the logo, the lens, one line, one Download pill), plus release notes,
 support, FAQ, privacy, tip jar, press kit, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
@@ -92,7 +92,8 @@ One screen, no scrolling: no header, no menu, no footer.
 
 - **Markup:** one `<main>`: the blurred logo, the strip at the bottom (left:
   the tagline as the `<h1>`, "A calm browser **for Mac, iPhone, and iPad.**",
-  and the links Privacy, Release notes, Tip jar; right: the frosted
+  and the inner pages' five links in their order (12px apart on phones, so
+  they fit one row at 393px; added 2026-11-25); right: the frosted
   "Download" pill and "Free. Needs macOS 14 or later."), the sharp layer the
   lens shows, the snow canvas, and the lens ring.
 - **Files:** `home.css` stands alone (its own `@font-face`); home loads
@@ -101,10 +102,9 @@ One screen, no scrolling: no header, no menu, no footer.
   after 5 seconds idle; tap or drag moves it on a phone.
 - **Approved numbers:** magnify 0.35, edge light 0.7, lens speed 0.8, snow
   density 0.3.
-- **iPhone and iPad:** `home.js` swaps the pill for "Firn is on the Mac
-  today. iPhone and iPad are on the way." When the app is on the App Store,
-  put its link in `APP_STORE_URL` at the top of `home.js`; that shows the
-  design's "Download / On the App Store." pill instead.
+- **iPhone and iPad:** `APP_STORE_URL` at the top of `home.js` (on the App
+  Store since 2026-11-25) swaps the Mac pill for "Download / On the App
+  Store." on iPhones and iPads.
 - **JavaScript off:** the blurred logo, the text, the Mac download link, and
   the lens resting on the name (placed by CSS). No snow.
 - **Reduce Motion:** snow drawn once and still; the lens stays on the name
@@ -256,7 +256,7 @@ Never put a password or any other secret in this repo.
 
 ## Pages and download
 
-**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (five questions, then email or GitHub Issues only, no Discord or Reddit since 2026-11-20; the answers must stay literally true; `/faq` redirects here; add iPhone and iPad requirements to "What does it run on?" when the app is out), `/privacy`, `/press` (press kit: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 13 MB, which David builds and uploads (Cloudflare caps files at 25 MiB); its `README.txt` repeats the page text, so change both and keep the size on the page right), and `/mac`
+**Pages:** `/` (home), `/release-notes`, `/tip-jar`, `/support` (five questions, then email or GitHub Issues only, no Discord or Reddit since 2026-11-20; the answers must stay literally true; `/faq` redirects here), `/privacy`, `/press` (press kit: fact sheet, David's bio and headshot, and `assets/press/firn-press-kit.zip`, 13 MB, which David builds and uploads (Cloudflare caps files at 25 MiB); its `README.txt` repeats the page text, so change both and keep the size on the page right), and `/mac`
 (not linked from any page), plus `404.html`
 (shown by Cloudflare for any missing address, so every link and file in it
 starts with `/`; `noindex`). Cloudflare serves them without `.html`; links
