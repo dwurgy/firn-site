@@ -81,10 +81,10 @@
 
 <h2>What stays on your device</h2>
 <p>History is kept on your device for a year, separately for each space unless spaces share sign-ins. You can clear it any time.</p>
-<p>Your tabs, spaces, Basecamp, groups, and settings are saved on your Mac so they come back when you reopen Firn. Each space's cookies, sign-ins, and site data are kept on your Mac, separately for each space.</p>
-<p>All of it lives in Firn's own sandbox folder (<code>~/Library/Containers/</code>), where other apps can't reach it. None of it is uploaded anywhere, unless you turn on iCloud sync.</p>
+<p>Your tabs, spaces, Basecamp, groups, and settings are saved on your Mac so they come back when you reopen Firn. Each space's cookies, sign-ins, and site data are kept on your Mac, separately for each space unless spaces share sign-ins.</p>
+<p>All of it lives in Firn's own sandbox folder (<code>~/Library/Containers/</code>), where other apps can't reach it. Firn doesn't upload any of it, unless you turn on iCloud sync. If you back up your Mac, with Time Machine for example, the backup can include it.</p>
 <p><strong>Saved passwords</strong> are kept in your Mac's Keychain, and can only be read while your Mac is unlocked.</p>
-<p><strong>Staying signed in.</strong> Some sites sign you in only until your browser closes. Firn brings your tabs back when you reopen it, so on your Mac it keeps those sign-ins too, for each space on its own. They're encrypted, the key is in your Mac's Keychain, and they're left out of backups and never uploaded. They go when you sign out of the site, when you delete the space, or when the space hasn't been opened for 30 days.</p>
+<p><strong>Staying signed in.</strong> Some sites sign you in only until your browser closes. Firn brings your tabs back when you reopen it, so on your Mac it keeps those sign-ins too, separately for each space unless spaces share sign-ins. They're encrypted, the key is in your Mac's Keychain, and Firn marks them to be left out of backups and never uploads them. They go when you sign out of the site, when you delete the last space that uses them, or when no space that uses them has been opened for 30 days.</p>
 <p>Firn's own logs never record the addresses you visit.</p>
 <p><strong>Tabs that tidy themselves away</strong> are deleted for good 30 days after they're tidied, or as soon as you close them. Firn remembers your last 30 closed tabs so you can bring one back with ⇧⌘T.</p>
 
@@ -105,7 +105,7 @@
 <li>printing</li>
 <li>your own iCloud, only if you turn on sync</li>
 <li>macOS's Safe Browsing service, for scam warnings</li>
-<li>its own place in your Keychain, for saved passwords</li>
+<li>its own place in your Keychain, for saved passwords, the key that protects your sign-ins, and, if you turn on iCloud sync, the key that protects what you sync</li>
 <li>Arc's list of spaces and tabs, read only, when you bring them over from Arc</li>
 <li>Firn's updater, which puts a new version in place</li></ul>
 <p>Nothing else on your Mac is open to it. Every web page is treated as untrusted, and Firn's own helpers inside pages run walled off from the page itself, so a site can't reach into Firn.</p>
