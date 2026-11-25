@@ -44,10 +44,11 @@ changes it.
 
 **Where the rebuild stands** (keep this list current; next one first):
 
-1. Home page rebuilt as Frost (`public/index.html`, `home.css`, `home.js`).
-2. Remove home-page files and assets nothing uses any more (list them, ask
+- ~~Home page rebuilt as Frost (`public/index.html`, `home.css`, `home.js`)~~ done 2026-11-25.
+
+1. Remove home-page files and assets nothing uses any more (list them, ask
    David before deleting); point `/about` at `/` in `_redirects`.
-3. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
+2. Inner pages (Release notes, Support with the FAQ, Privacy, Tip jar, Press
    kit, `/mac`), the 404, and the link preview (`firn-share-preview-v10.png`
    is ready in `design/frost/`). Not started: until then they keep the old
    look described under "Inner pages" below.
@@ -178,8 +179,8 @@ too close to the edges to survive Android's circle crop.
 ### Link preview
 
 Every page uses `public/assets/firn-share-preview-v9.png` (1200×630, the
-Sunrise-era picture) until the Frost one, v10, is installed (step 3 of the
-list above). Keep it a PNG, don't recompress it, and keep it small
+Sunrise-era picture) until the Frost one, v10, is installed (see the list
+above). Keep it a PNG, don't recompress it, and keep it small
 (WhatsApp skips images over about 600 KB). `og:image` and `twitter:image`
 use the full URL. A new picture gets a new file name so apps fetch it; old
 versions stay in assets for old shared links.
