@@ -7,7 +7,7 @@
 <atom:link href="https://firnbrowser.com/release-notes.xml" rel="self" type="application/rss+xml"/>
 <description>What's new in Firn.</description>
 <language>en</language>
-<lastBuildDate>Wed, 25 Nov 2026 17:00:00 +0000</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 18:03:00 +0000</lastBuildDate>
 <!-- HIDDEN until Apple approves the iPhone and iPad app. When it's live: remove this comment's first and last lines, set pubDate and lastBuildDate.
 <item>
   <title>Firn for iPhone and iPad 1.0.0: Firn, now on iPhone and iPad.</title>
@@ -18,6 +18,14 @@
 <p>Firn needs iOS 26 or iPadOS 26. Summarize and group names need Apple Intelligence.</p>]]></description>
 </item>
 END HIDDEN -->
+<item>
+  <title>Firn for Mac 1.1.1: Stay signed in, and a smoother Reader.</title>
+  <link>https://firnbrowser.com/release-notes#1.1.1</link>
+  <guid isPermaLink="true">https://firnbrowser.com/release-notes#1.1.1</guid>
+  <pubDate>Wed, 25 Nov 2026 18:03:00 +0000</pubDate>
+  <description><![CDATA[<h3>Better</h3><ul><li><strong>You stay signed in</strong> when you quit and reopen Firn. Sign-ins meant to end at quit are kept encrypted on your Mac.</li><li><strong>Reader scrolls down</strong> as it opens, and back up as it closes.</li></ul>
+<h3>Fixed</h3><ul><li><strong>A dragged Basecamp tile</strong> no longer leaves a copy behind.</li><li><strong>Tabs under what you're dragging</strong> no longer light up.</li><li><strong>A folding group's tabs</strong> stay inside its card.</li></ul>]]></description>
+</item>
 <item>
   <title>Firn for Mac 1.1.0: A quieter way to read, and groups that name themselves.</title>
   <link>https://firnbrowser.com/release-notes#1.1.0</link>
