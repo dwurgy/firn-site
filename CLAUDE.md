@@ -318,6 +318,9 @@ match the page top, as do the theme-color tags. Every page has
 (`env(safe-area-inset-*)`). iOS text autosizing is off
 (`-webkit-text-size-adjust: 100%`). Home's sky is `100lvh` tall so it runs on
 behind Safari's bottom toolbar; `--tb` lifts the strip above it (`home.css`).
+On iPhone, `home.js` adds `.tuck`: 64px more sky above and below, scrolled
+down 64px, so the sky fills the strips behind the clock and home bar (works,
+checked on David's iPhone 2026-11-25; a fixed layer there did not).
 
 ## Must-haves
 
