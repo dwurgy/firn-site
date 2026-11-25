@@ -135,6 +135,8 @@ Press kit, `/mac`. Built from `design/frost/pages/`.
 - No live blur on anything large that scrolls or moves. Home's blurred logo
   is a still layer on a page that doesn't scroll.
 - When nothing moves, nothing runs.
+- Home's lens moves by transforms only (`.page.live` in `home.css`, `place()`
+  in `home.js`): never move it by setting variables on `<main>` each frame.
 - The only `backdrop-filter` is the small frosted pill.
 - No `mix-blend-mode` on anything big.
 
