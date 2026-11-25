@@ -91,3 +91,41 @@ footer p { margin-top: 4px; opacity: .72; }
 /* Questions and answers (Support) */
 .faq { display: flex; flex-direction: column; gap: 40px; }
 .faq h2 { margin: 0 0 6px; font-family: inherit; font-size: 17px; line-height: 1.4; font-weight: 600; }
+
+/* Release notes: the filter under the headline, a month rail on the left,
+   and each entry as date, headline, tags, then the changelog's words.
+   Without JavaScript the filter stays hidden and every entry shows. */
+.rn { flex: 1; max-width: 830px;
+  margin: clamp(40px, 7vw, 104px) 0 0 clamp(0px, calc((100vw - 900px) * 0.14), 74px); }
+.rn-head { margin: 0 0 clamp(48px, 6vw, 80px) 206px; }
+.rn-head h1 { margin: 0; }
+.filter { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: 20px; font-size: 15px; }
+.filter a { display: inline-block; padding: 10px 0; text-decoration: none; opacity: .72; }
+.filter a[aria-current] { font-weight: 600; opacity: 1; text-decoration: underline;
+  text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.rn-body { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 24px 56px; }
+.rail { flex: 0 0 150px; position: sticky; top: 32px; align-self: flex-start; font-size: 15px; }
+.rail p { margin: 0 0 6px; font-weight: 600; }
+.months { display: flex; flex-direction: column; flex-wrap: wrap; gap: 0 20px; align-items: flex-start; }
+.rail a { display: inline-block; padding: 10px 0; text-decoration: none; opacity: .72; }
+.rail a.on { opacity: 1; }
+.rn main { flex: 999 1 420px; min-width: 0; max-width: 620px; }
+@media (max-width: 760px) {
+  .rn-head { margin-left: 0; }
+  .rail { position: static; flex-basis: 100%; }
+  .months { flex-direction: row; }
+}
+.month, .entry { scroll-margin-top: 32px; }
+.entry { margin: 0 0 clamp(64px, 8vw, 104px); }
+.month:last-child .entry:last-child { margin: 0; }
+.entry .date { font-size: 14px; opacity: .72; }
+.entry h2 { margin: 4px 0 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; font-size: 13px; line-height: 1.3; }
+.tags span, .tags a { padding: 3px 9px; border: 1px solid var(--tag); border-radius: 7px; text-decoration: none; }
+.tags a { border-color: var(--tag-soft); }
+.entry p { margin: 0 0 12px; }
+.entry h3 { margin: 22px 0 8px; font-size: 17px; line-height: 1.4; font-weight: 600; }
+.entry ul { margin: 0; padding-left: 20px; }
+.entry li { margin: 0 0 8px; }
+.entry li:last-child { margin: 0; }
+.entry strong { font-weight: 600; }

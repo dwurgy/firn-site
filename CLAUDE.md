@@ -52,15 +52,15 @@ changes it.
 
 - ~~Support with the FAQ; `/faq` redirects to `/support`~~ done 2026-11-25.
 
+- ~~Release notes (month rail, text filter, date, headline, tags)~~ done 2026-11-25.
+
 Inner pages, agreed plan (David, 2026-11-25: follow the design everywhere,
 one step per commit, each page moves from `site.css` + `page.css` +
 `edges.js` to `inner.css`; copy Tip jar's head, logo, and footer):
 
-1. Release notes: month rail, text filter, date, headline, tags. Keep the
-   `#1.0.1` addresses and `?for=iphone`.
-2. Privacy, Press kit, `/mac`: no design, same pattern, words untouched.
-3. 404: home with "Nothing here. **Just snow.**" and "Back home".
-4. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
+1. Privacy, Press kit, `/mac`: no design, same pattern, words untouched.
+2. 404: home with "Nothing here. **Just snow.**" and "Back home".
+3. Link preview v10 on every page (`design/frost/`), then delete `site.css`,
    `page.css`, `edges.js`, and rewrite "Inner pages" below.
 
 **Copy is final**, as written in the design files. Don't rewrite headlines
@@ -274,22 +274,20 @@ Routing. Cloudflare's Email Address Obfuscation stays off (it adds a script
 and breaks the link without JavaScript).
 
 **Release notes:** entries are `<article class="entry">` blocks, newest on
-top, copied from `CHANGELOG.md` in `dwurgy/firn` in its own words: the
-bold first line is the heading, then the paragraph and the list (bold
-lead-ins in ink). The left column has "Firn for Mac 1.0.1" or "Firn for iPhone and iPad 1.0.1" (one
-app, one version number) and the release date. Only 1.0.0 and later are
-listed. A "### New" (or Better, Fixed) heading in the
-CHANGELOG becomes an `<h3>`. Each entry has its own address: the
-`<article>` has the version as its `id` (Mac: `id="1.0.1"`; iPhone and iPad:
-`id="iphone-1.0.1"`) and `data-for="mac"` or `"iphone"` for the filter pills (All, Mac,
-iPhone and iPad; inline script, `?for=iphone` picks one; `page.css`) and the name in the left column links
-to it, so `firnbrowser.com/release-notes#1.0.1`
-opens the page at that entry. Every release gets an entry, small ones too:
-David likes showing all updates. When David says a new version is out,
-add it and open the PR right away, without asking first (he asked for
-that). To add a version, copy
-the block (see the comment in the file), put it at the top and change the
-text, including the version in its `id` and link.
+top, inside one `<section class="month" id="2026-11">` per month (the month
+rail on the left links to these; a new month gets a section and a rail
+link). Each is copied from `CHANGELOG.md` in `dwurgy/firn` in its own words:
+the date, the bold first line as the `<h2>`, two outline tags (platform,
+then version), then the paragraph and the list (bold lead-ins). One app, one
+version number. Only 1.0.0 and later are listed. A "### New" (or Better,
+Fixed) heading in the CHANGELOG becomes an `<h3>`. Each entry has its own
+address: the `<article>` has the version as its `id` (Mac: `id="1.0.1"`;
+iPhone and iPad: `id="iphone-1.0.1"`), the version tag links to it, and
+`data-for="mac"` or `"iphone"` feeds the text filter (All, Mac, iPhone and
+iPad; inline script, `?for=iphone` picks one; `inner.css`). Every release
+gets an entry, small ones too: David likes showing all updates. When David
+says a new version is out, add it and open the PR right away, without asking
+first (he asked for that). To add a version, follow the comment in the file.
 Also add it to `public/release-notes.xml` (the RSS feed for feed reader apps, linked from the page's head): copy the top `<item>`, change it, and update `lastBuildDate`.
 
 **Tip jar** (`tip-jar.html`): call it a tip jar and
