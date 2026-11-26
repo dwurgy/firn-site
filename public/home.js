@@ -308,21 +308,34 @@
       }
       melt = requestAnimationFrame(step);
     }
-    /* The logo: on a phone the first tap clears the spot there, and a tap
-       while it is clear opens the scroll */
-    var touch = false;
+    /* The logo opens the scroll on a click. On a touch screen it opens the
+       moment the finger lifts (after a tap, a hold, or a drag), clearing
+       from where the finger was. */
+    var touch = false, touched = -1e9, going = false;
+    function go() {
+      if (going || opened) return;
+      going = true; main.classList.add('ready');
+      requestAnimationFrame(function () { going = false; enter(); });
+    }
     function press(e) { touch = e.pointerType === 'touch'; }
+    function release(e) {
+      if (!touch || e.pointerType !== 'touch') return;
+      touch = false; touched = performance.now();
+      if (px !== null) { sx = px; sy = py; }
+      go();
+    }
     function open(e) {
       e.preventDefault();
-      if (opened) return;
-      if (touch && !still && f < 0.8) { touch = false; return; }
-      touch = false;
-      main.classList.add('ready');
-      requestAnimationFrame(enter);
+      /* the click a touch makes after lifting: the lift has already decided */
+      if (performance.now() - touched < 1000) return;
+      go();
     }
+    function noMenu(e) { e.preventDefault(); }
     function back(e) { e.preventDefault(); if (opened) leave(); }
     if (scroll) {
       logoLink.addEventListener('pointerdown', press);
+      logoLink.addEventListener('pointerup', release);
+      logoLink.addEventListener('contextmenu', noMenu);
       logoLink.addEventListener('click', open);
       backHome.addEventListener('click', back);
     }
@@ -357,6 +370,8 @@
       main.removeEventListener('pointerdown', move);
       if (scroll) {
         logoLink.removeEventListener('pointerdown', press);
+        logoLink.removeEventListener('pointerup', release);
+        logoLink.removeEventListener('contextmenu', noMenu);
         logoLink.removeEventListener('click', open);
         backHome.removeEventListener('click', back);
       }

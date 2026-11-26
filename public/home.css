@@ -136,6 +136,7 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
 
 /* The logo link: over the logo, placed by the same numbers as the logo */
 .logo-link { position: absolute; z-index: 2; border-radius: 24px; -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
   left: calc(50% - var(--logo-w) * 0.465); top: calc(50% - var(--lift) - var(--logo-w) * 0.17453);
   width: calc(var(--logo-w) * 0.88); height: calc(var(--logo-w) * 0.34906); }
 .logo-link:focus-visible { outline: 2px solid var(--ink); outline-offset: -8px; }
