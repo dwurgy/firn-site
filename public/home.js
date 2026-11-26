@@ -166,7 +166,7 @@
         flakes = []; for (var i = 0; i < n; i++) flakes.push(make(true));
       }
       if (sx === null) { var fl = flake(); sx = fl.x; sy = fl.y; }
-      if (opened) { spacer.style.height = Math.round(H * 0.72) + 'px'; longsky.style.height = up.scrollHeight + 'px'; }
+      if (opened) { spacer.style.height = Math.round(H * 0.72) + 'px'; fitSky(); }
       else place();
       if (still) draw(0);
     }
@@ -221,10 +221,22 @@
         (y - strip.offsetTop).toFixed(1) + 'px, transparent ' + ci.toFixed(1) + '%, #000 100%)';
       strip.style.webkitMaskImage = m; strip.style.maskImage = m;
     }
+    /* The long sky is as tall as the scroll. --travel is how far it moves. */
+    var skyH = -1, skyTravel = -1;
+    function fitSky() {
+      var h = up.scrollHeight, tr = Math.max(0, h - up.clientHeight);
+      if (h !== skyH) { skyH = h; longsky.style.height = h + 'px'; }
+      if (tr !== skyTravel) { skyTravel = tr; longsky.style.setProperty('--travel', tr + 'px'); }
+    }
+    /* Where the browser can (home.css, "scroll-linked"), the long sky moves
+       with the scroll on its own, off the main thread. Elsewhere this does. */
+    var linked = !!(window.CSS && CSS.supports && CSS.supports('timeline-scope', '--up') &&
+      CSS.supports('animation-timeline', '--up'));
+    if (linked) main.classList.add('linked');
     function onUpScroll() {
       scrolled = performance.now();
-      if (up.scrollHeight !== longsky.offsetHeight) longsky.style.height = up.scrollHeight + 'px';
-      longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
+      fitSky();
+      if (!linked) longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
     }
     /* Open: the spot grows from where it is until the frost is gone (1.2 s,
        ease-out), the sky becomes the long one, and the opener rises */
@@ -234,7 +246,7 @@
       strip.setAttribute('inert', ''); logoLink.setAttribute('inert', '');
       spacer.style.height = Math.round(H * 0.72) + 'px';
       up.scrollTop = 0; up.style.opacity = '';
-      longsky.style.height = up.scrollHeight + 'px';
+      fitSky();
       up.addEventListener('scroll', onUpScroll, { passive: true });
       up.focus({ preventScroll: true });
       /* the sharp logo now lives in the scroll, so it scrolls away natively */
