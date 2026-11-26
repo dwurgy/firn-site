@@ -90,6 +90,8 @@
   var born = performance.now();
   /* Up close: open or not, the running clearing or closing, where it opened */
   var opened = false, melt = 0, openAt = null;
+  /* When the scroll last moved: the snow holds still while it does */
+  var scrolled = -1e9;
 
   function start() {
     var dark = darkMq.matches;
@@ -220,6 +222,7 @@
       strip.style.webkitMaskImage = m; strip.style.maskImage = m;
     }
     function onUpScroll() {
+      scrolled = performance.now();
       if (up.scrollHeight !== longsky.offsetHeight) longsky.style.height = up.scrollHeight + 'px';
       longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
     }
@@ -356,15 +359,20 @@
     /* Reduce Motion: the snow is drawn once, and nothing clears on arrival */
     if (still && !opened) { f = 0; place(); }
     else {
-      var last = performance.now();
+      var last = performance.now(), st = last / 1000;
       var tick = function (now) {
         var dt = Math.min(0.05, (now - last) / 1000); last = now;
         if (!opened) clearing(now, dt);
+        /* While the scroll is moving, the snow holds still and is not redrawn
+           (redrawing it each frame under the scrolling pictures made the
+           scroll stutter); it drifts on 0.2 s after the scroll stops. */
+        if (opened && now - scrolled < 200) { raf = requestAnimationFrame(tick); return; }
+        st += dt;
         for (var i = 0; i < flakes.length; i++) {
           var p = flakes[i]; p.y += p.v * dt; p.x += 3 * dt;
           if (p.y - p.r > H) flakes[i] = make(false);
         }
-        draw(now / 1000);
+        draw(st);
         raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
