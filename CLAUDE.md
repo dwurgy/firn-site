@@ -10,7 +10,7 @@ Windows). The Electron app ended at 0.11.0, and Windows stopped there. Firn
 1.0.0 (October 27, 2026) is the native Mac app (Swift, WebKit), a fresh
 start that brings nothing over from the old Firn. The iPhone and iPad app came
 out on the App Store on November 25, 2026. The site is a one-screen home page
-(the logo, the lens, one line, one Download pill), plus release notes,
+(the logo, the soft spot, one line, one Download pill, and the up-close scroll), plus release notes,
 support, FAQ, privacy, tip jar, press kit, and `/mac` (the farewell to
 Electron and Windows, kept as written but no longer linked).
 
@@ -30,7 +30,7 @@ Design). It replaces First light and Sunrise. It is final unless David
 changes it.
 
 - `design/frost/` is the source of truth for layout, sizes, spacing,
-  colours, copy, and the lens and snow behaviour. Read `README.md` first,
+  colours, copy, and the soft spot, snow, and up-close behaviour. Read `README.md` first,
   then `BRAND.md` (every value written out).
 - `design/frost/pages/*.dc.html` are exports from the design tool:
   reference, never shipped. The README says how to read them. Rewrite their
@@ -61,8 +61,8 @@ changes it.
 The Frost rebuild is finished. Now: **ClearScroll** (the prompt and
 design: `design/frost/pages/clear-scroll.dc.html` and `-phone`).
 
-- **Next: step 4**, clean-up: the lens out of CLAUDE.md (home page section,
-  "The idea", "Keep it smooth", privacy rules) and the design README and BRAND.
+- ~~Step 4: the lens out of CLAUDE.md and the design README and BRAND~~
+  done 2026-11-26. ClearScroll is finished.
 - ~~Steps 2 and 3: the logo opens the scroll; Back home closes it~~ done 2026-11-26.
 - ~~Step 1: the soft spot replaces the lens on home and the 404; blurred logo
   is a ready-made picture; all nine screenshots in `assets/up-close/`~~ done 2026-11-26.
@@ -83,7 +83,7 @@ true; changing the wording can make it untrue.
 ### The idea (so new parts fit)
 
 A frosted window on a snowy morning. Everything outside is soft and out of
-focus, and one clear lens brings it into focus. Quiet, cold air, and a hair
+focus; where you point, the frost clears for a moment. Quiet, cold air, and a hair
 of warm light low on the horizon. A lot of empty sky.
 
 - **One pill per screen** (frosted glass, text in ink). Everything else is a
@@ -97,26 +97,31 @@ of warm light low on the horizon. A lot of empty sky.
 
 One screen, no scrolling: no header, no menu, no footer.
 
-- **Markup:** one `<main>`: the blurred logo, the strip at the bottom (left:
+- **Markup:** one `<main>`: the blurred logo (a link to `#up-close`), the strip at the bottom (left:
   the tagline as the `<h1>`, "A calm browser **for Mac, iPhone, and iPad.**",
   and the inner pages' five links in their order (12px apart on phones, so
   they fit one row at 393px; added 2026-11-25); right: the frosted
-  "Download" pill and "Free. Needs macOS 14 or later."), the sharp layer the
-  lens shows, the snow canvas, and the lens ring.
+  "Download" pill and "Free. Needs macOS 14 or later."), the soft spot
+  (`.spot`, holding the sharp page), and the snow canvas. After `</main>`:
+  the up-close section (`#up-close`, the nine screenshots in
+  `assets/up-close/`, and "Back home").
 - **Files:** `home.css` stands alone (its own `@font-face`); home loads
   nothing else. `home.js` is the design's script in plain
-  JavaScript: the lens follows the pointer slowly and drifts along the name
-  after 5 seconds idle; tap or drag moves it on a phone.
-- **Approved numbers:** magnify 0.35, edge light 0.7, lens speed 0.8, snow
-  density 0.3.
+  JavaScript (`clear-scroll.dc.html`): about a second after arrival the
+  frost clears once over the flake; after that it clears where the pointer
+  is, trails it, and frosts back 1.4 s after it stops. Clicking the logo (on
+  a touch screen, a tap above the strip) opens the up-close scroll over the
+  page; "Back home" closes it.
+- **Approved numbers:** snow density 0.3, linger 1.4 s, spot radius
+  13% of the width (130 to 220 px), soft from 22% out.
 - **iPhone and iPad:** `APP_STORE_URL` at the top of `home.js` (on the App
   Store since 2026-11-25) swaps the Mac pill for "Download / On the App
   Store." on iPhones and iPads.
-- **JavaScript off:** the blurred logo, the text, the Mac download link, and
-  the lens resting on the name (placed by CSS). No snow.
-- **Reduce Motion:** snow drawn once and still; the lens stays on the name
-  and does not follow the pointer (David, 2026-11-25; stricter than the
-  design).
+- **JavaScript off:** the blurred logo, the text, and the Mac download
+  link; no spot, no snow. The up-close section sits below the screen and the
+  logo links to it.
+- **Reduce Motion:** snow drawn once and still; the spot appears where you
+  point and frosts back, with no motion.
 - The pointer position is used on the page only: never stored, never sent.
 - theme-color and top background: #D3DBDF light, #151A27 dark.
 
@@ -142,8 +147,9 @@ Press kit, `/mac`. Built from `design/frost/pages/`.
 - No live blur on anything large that scrolls or moves. Home's blurred logo
   is a still layer on a page that doesn't scroll.
 - When nothing moves, nothing runs.
-- Home's lens moves by transforms only (`.page.live` in `home.css`, `place()`
-  in `home.js`): never move it by setting variables on `<main>` each frame.
+- Home's soft spot moves by transform and opacity only (`.spot` in
+  `home.css`, `place()` and `setSpot()` in `home.js`): never move it by
+  setting variables on `<main>` each frame.
 - The only `backdrop-filter` is the small frosted pill.
 - No `mix-blend-mode` on anything big.
 
@@ -227,8 +233,8 @@ Firn's promise is privacy, so the website keeps it too:
   email sign-up, stored only on David's Cloudflare account. It was removed;
   David exported the list to send the one promised email.)
 - Downloads come straight from Firn's GitHub releases (see "Download").
-- Home's lens uses the pointer position on the page only: never stored or
-  sent.
+- Home's soft spot uses the pointer position on the page only: never stored
+  or sent.
 
 ---
 

@@ -1,16 +1,20 @@
 # Frost: the approved design for firnbrowser.com
 
 Approved 24 Nov 2026. It replaces First light and Sunrise. This folder is the
-source of truth for the redesign: layout, sizes, colours, copy, and the lens
-and snow behaviour.
+source of truth for the redesign: layout, sizes, colours, copy, and the soft
+spot, snow, and up-close behaviour. Since 26 Nov 2026 the home page and the
+404 follow ClearScroll (`clear-scroll.dc.html`); the lens in the older
+home files is replaced on the website.
 
 ## What's here
 
 - `BRAND.md`: the Frost brand sheet, with every value written out.
 - `pages/`: the approved designs, exported from the design canvas.
-  - `home.dc.html`: the home page. Light and dark in one file, following the
-    visitor's system. It holds the working lens, snow, and
-    download-by-device logic.
+  - `clear-scroll.dc.html`, `clear-scroll-phone.dc.html`: the home page as
+    built. The soft spot where the frost clears, snow, the up-close scroll
+    the logo opens, and download-by-device logic.
+  - `home.dc.html`: the home page before ClearScroll, with the lens. Reference
+    for layout and copy only.
   - `home-dark.dc.html`: the same page forced to dark, for reference only.
   - `home-phone.dc.html`: the same page at 390 px wide, for reference only.
   - `404.dc.html`: the home page with "Nothing here. Just snow."
@@ -37,11 +41,11 @@ They come from a design tool. They are reference, not files to ship.
 - `{{ name }}` is a value filled in by `renderVals()` in the script at the
   bottom. `<sc-if value="{{ x }}">` shows its content when `x` is true.
   `ref`, `onPointerMove`, and `onPointerDown` attach the script to elements.
-- The script at the bottom is a class with the real logic (the lens, the
-  snow, telling a phone from a Mac). Rewrite it as plain JavaScript for the
-  live site; keep the numbers.
-- Tweak defaults in `data-props` are the approved values: magnify 0.35,
-  edge light 0.7, lens speed 0.8, snow density 0.3.
+- The script at the bottom is a class with the real logic (the soft spot,
+  the snow, the scroll, telling a phone from a Mac). Rewrite it as plain
+  JavaScript for the live site; keep the numbers.
+- Tweak defaults in `data-props` are the approved values. ClearScroll: clear
+  "Where you point", snow density 0.3.
 
 ## Three substitutions
 
