@@ -58,7 +58,14 @@ changes it.
 
 - ~~404 as home with "Nothing here. **Just snow.**"; link preview v10 on every page; `site.css`, `page.css`, and `edges.js` deleted~~ done 2026-11-25.
 
-The Frost rebuild is finished: nothing is next.
+The Frost rebuild is finished. Now: **ClearScroll** (the prompt and
+design: `design/frost/pages/clear-scroll.dc.html` and `-phone`).
+
+- **Next: step 2**, the click into the scroll (content, footer, phone order).
+  Then step 3, Back home; then step 4, clean-up (the lens out of CLAUDE.md
+  and the design README and BRAND).
+- ~~Step 1: the soft spot replaces the lens on home and the 404; blurred logo
+  is a ready-made picture; all nine screenshots in `assets/up-close/`~~ done 2026-11-26.
 
 **Copy is final**, as written in the design files. Don't rewrite headlines
 or reword claims. Every privacy claim on the site has been checked to be
