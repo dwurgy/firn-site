@@ -46,7 +46,7 @@
          behind the clock and the home bar like scrolled content. --- */
   var tuck = /iPhone|iPod/.test(navigator.userAgent);
   function tuckTop() { return tuck ? parseFloat(getComputedStyle(main).getPropertyValue('--top')) || 0 : 0; }
-  function tuckScroll() { if (tuck) window.scrollTo(0, tuckTop()); }
+  function tuckScroll() { if (tuck && !doc) window.scrollTo(0, tuckTop()); }
   if (tuck) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     document.documentElement.classList.add('tuck');
@@ -90,6 +90,12 @@
   var born = performance.now();
   /* Up close: open or not, the running clearing or closing, where it opened */
   var opened = false, melt = 0, openAt = null;
+  /* On a touch screen the open scroll is the page's own scroll (.doc), so the
+     browser's bars shrink and a tap on the clock goes back to the top */
+  var doc = false, docMq = matchMedia('(hover: none) and (pointer: coarse)');
+  /* How far the scroll has moved, and moving it */
+  function upY() { return doc ? Math.max(0, window.scrollY - tuckTop()) : up.scrollTop; }
+  function setUpY(y) { if (doc) window.scrollTo(0, tuckTop() + y); else up.scrollTop = y; }
   /* When the scroll last moved: the snow holds still while it does */
   var scrolled = -1e9;
   /* Whether Back home was pressed with the keyboard */
@@ -243,16 +249,23 @@
     function onUpScroll() {
       scrolled = performance.now();
       fitSky();
-      if (!linked) longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
+      if (!linked && !doc) longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
     }
     /* Open: the spot grows from where it is until the frost is gone (1.2 s,
        ease-out), the sky becomes the long one, and the opener rises */
     function enter() {
       opened = true;
+      doc = docMq.matches;
+      if (doc) {
+        /* the snow stays on the screen while the page scrolls under it */
+        canvas.style.position = 'fixed'; canvas.style.top = (-tuckTop()) + 'px'; canvas.style.height = H + 'px';
+        main.classList.add('doc');
+      }
       main.classList.add('ready', 'open');
       strip.setAttribute('inert', ''); logoLink.setAttribute('inert', '');
       spacer.style.height = Math.round(H * 0.72) + 'px';
       up.scrollTop = 0; up.style.opacity = '';
+      if (doc) window.scrollTo(0, tuckTop());
       fitSky();
       up.addEventListener('scroll', onUpScroll, { passive: true });
       up.focus({ preventScroll: true });
@@ -292,7 +305,7 @@
     function leave() {
       cancelAnimationFrame(melt); pt = -1e9;
       var at = openAt || { x: W / 2, y: H / 2 };
-      var y0 = up.scrollTop;
+      var y0 = upY();
       function finish() {
         up.removeEventListener('scroll', onUpScroll);
         longsky.style.transform = ''; soft.style.transform = ''; sharpSky.style.transform = '';
@@ -301,6 +314,11 @@
         soft.style.opacity = ''; sharpSky.style.opacity = ''; longsky.style.opacity = ''; up.style.opacity = '';
         upLogo.style.visibility = '';
         main.classList.remove('open'); opened = false; up.scrollTop = 0;
+        if (doc) {
+          main.classList.remove('doc'); doc = false;
+          canvas.style.position = canvas.style.top = canvas.style.height = '';
+          tuckScroll();
+        }
         f = 0; sx = at.x; sy = at.y;
         spot.style.removeProperty('--ci'); spot.style.width = spot.style.height = (CR * 2) + 'px';
         place();
@@ -319,19 +337,22 @@
       function inout(k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
       var t0 = performance.now(), frost = 1500;
       /* the spot takes the sharp logo back from the scroll, in the same place */
-      setSpot(crTop, ciTop, 1, at.x, at.y, y0);
+      /* (on a touch screen the page itself carries the logo up, so the spot
+         follows it down the page instead) */
+      if (doc) setSpot(crTop, ciTop, 1, at.x, at.y + y0, 0); else setSpot(crTop, ciTop, 1, at.x, at.y, y0);
       upLogo.style.visibility = '';
       strip.style.visibility = '';
       function step(now) {
         var t = now - t0;
         var ku = upDur ? Math.min(1, t / upDur) : 1, y = y0 * (1 - inout(ku));
-        if (upDur) { up.scrollTop = y; onUpScroll(); }
+        if (upDur) { setUpY(y); onUpScroll(); }
         up.style.opacity = (1 - Math.min(1, t / Math.max(400, upDur * 0.8))).toFixed(3);
         var kf = Math.max(0, Math.min(1, (t - upDur * 0.6) / frost)), e = inout(kf);
         var cr = crTop + (crLow - crTop) * e, ci = ciTop + (ciLow - ciTop) * e;
-        setSpot(Math.max(0, cr), ci, 1, at.x, at.y, y);
-        soft.style.transform = y ? 'translate3d(0,' + (-y).toFixed(1) + 'px,0)' : '';
-        maskStrip(cr, ci, at.x, at.y);
+        var sy2 = doc ? at.y + y : at.y;
+        setSpot(Math.max(0, cr), ci, 1, at.x, sy2, doc ? 0 : y);
+        soft.style.transform = y && !doc ? 'translate3d(0,' + (-y).toFixed(1) + 'px,0)' : '';
+        maskStrip(cr, ci, at.x, sy2);
         var early = Math.min(1, kf / 0.4), l = early * early * (3 - 2 * early);
         soft.style.opacity = (0.85 * l).toFixed(3); sharpSky.style.opacity = l.toFixed(3);
         longsky.style.opacity = (1 - l).toFixed(3);
