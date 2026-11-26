@@ -140,6 +140,7 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
   left: calc(50% - var(--logo-w) * 0.465); top: calc(50% - var(--lift) - var(--logo-w) * 0.17453);
   width: calc(var(--logo-w) * 0.88); height: calc(var(--logo-w) * 0.34906); }
 .logo-link:focus-visible { outline: 2px solid var(--ink); outline-offset: -8px; }
+.logo-link.quiet:focus-visible { outline: none; }
 
 /* The long sky: as long as the scroll, with the horizon at its foot. Shown
    and moved by home.js only while the scroll is open. */

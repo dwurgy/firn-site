@@ -92,6 +92,13 @@
   var opened = false, melt = 0, openAt = null;
   /* When the scroll last moved: the snow holds still while it does */
   var scrolled = -1e9;
+  /* Whether Back home was pressed with the keyboard */
+  var byKey = false;
+  if (logoLink) {
+    var unquiet = function () { logoLink.classList.remove('quiet'); };
+    logoLink.addEventListener('blur', unquiet);
+    document.addEventListener('keydown', unquiet);
+  }
 
   function start() {
     var dark = darkMq.matches;
@@ -297,7 +304,13 @@
         f = 0; sx = at.x; sy = at.y;
         spot.style.removeProperty('--ci'); spot.style.width = spot.style.height = (CR * 2) + 'px';
         place();
-        if (up.contains(document.activeElement) || document.activeElement === document.body) logoLink.focus({ preventScroll: true });
+        /* Focus comes back to the logo. After a tap or click its ring stays
+           hidden (.quiet; Safari on iPhone drew it anyway) until a key is
+           pressed; after the keyboard it shows as usual. */
+        if (up.contains(document.activeElement) || document.activeElement === document.body) {
+          if (!byKey) logoLink.classList.add('quiet');
+          logoLink.focus({ preventScroll: true });
+        }
       }
       if (still) { finish(); return; }
       var far = Math.hypot(Math.max(at.x, W - at.x), Math.max(at.y, H - at.y));
@@ -353,7 +366,8 @@
       go();
     }
     function noMenu(e) { e.preventDefault(); }
-    function back(e) { e.preventDefault(); if (opened) leave(); }
+    /* e.detail is 0 when Back home was pressed with the keyboard */
+    function back(e) { e.preventDefault(); byKey = e.detail === 0; if (opened) leave(); }
     if (scroll) {
       main.addEventListener('pointerdown', press);
       main.addEventListener('pointerup', release);
