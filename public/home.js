@@ -207,6 +207,9 @@
       spot.style.setProperty('--ci', ci.toFixed(1) + '%');
       spot.style.transform = 'translate3d(' + (x - cr).toFixed(1) + 'px,' + (y - cr).toFixed(1) + 'px,0)';
       sharp.style.transform = 'translate3d(' + (cr - x).toFixed(1) + 'px,' + (cr - y - dy).toFixed(1) + 'px,0)';
+      /* only the logo rises with the scroll: the sky stays put, or its bottom
+         edge shows as a line across the screen while the scroll glides home */
+      sharpSky.style.transform = dy ? 'translate3d(0,' + dy.toFixed(1) + 'px,0)' : '';
       spot.style.opacity = fo.toFixed(3);
       shown.x = shown.f = NaN;
     }
@@ -270,7 +273,7 @@
       var y0 = up.scrollTop;
       function finish() {
         up.removeEventListener('scroll', onUpScroll);
-        longsky.style.transform = ''; soft.style.transform = '';
+        longsky.style.transform = ''; soft.style.transform = ''; sharpSky.style.transform = '';
         strip.style.webkitMaskImage = strip.style.maskImage = ''; strip.style.visibility = '';
         strip.removeAttribute('inert'); logoLink.removeAttribute('inert');
         soft.style.opacity = ''; sharpSky.style.opacity = ''; longsky.style.opacity = ''; up.style.opacity = '';
