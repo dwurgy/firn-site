@@ -160,6 +160,12 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
 .page.ready > .up { display: block; }
 .page.open > .up { visibility: visible; }
 .page.open .longsky { will-change: transform; }
+/* Scroll-linked (home.js adds .linked where supported): the long sky follows
+   the scroll's position by itself, so scrolling needs no script each frame */
+@keyframes longsky { to { transform: translate3d(0, calc(-1 * var(--travel, 0px)), 0); } }
+.page.linked { timeline-scope: --up; }
+.page.linked > .up { scroll-timeline: --up block; }
+.page.linked.open .longsky { animation: longsky linear both; animation-timeline: --up; }
 .page > .up .up-logo { display: flex; position: absolute; left: 0; top: 0; width: var(--pw, 100%); height: var(--ph, 100%);
   align-items: center; justify-content: center; overflow: hidden; visibility: hidden; pointer-events: none; }
 .page > .up .up-spacer { display: block; height: 72vh; }
