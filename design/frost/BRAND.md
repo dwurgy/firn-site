@@ -9,7 +9,8 @@ The values below are copied from the approved designs on the "Firn" design canva
 Three states, one window:
 
 - **Out of focus** (home page, the welcome's Hello, the 404, the link preview): the logo, huge and blurred, on the sky.
-- **The lens** (home, Hello, 404): one round piece of clear glass that shows whatever is under it sharp and slightly magnified.
+- **The soft spot** (website home and 404): where you point, the frost clears for a moment (see below).
+- **The lens** (the app's Hello): one round piece of clear glass that shows whatever is under it sharp and slightly magnified.
 - **In focus** (the welcome's "Welcome in."): the whole logo sharp, no lens. The fog has lifted.
 - **Everyday pages and steps** (inner web pages, the welcome's steps): the plain sky, nothing behind the content.
 
@@ -44,8 +45,15 @@ A faint band of warmth along the bottom edge, like low sun on the horizon. It is
 - **Lit edge, light mode (from the horizon, so along the bottom):** `inset 0 -3.5px 2px -1px rgba(255,238,220,.98)`, `inset 0 2.5px 2px -1px rgba(255,255,255,.4)`, at 70% opacity, with a warm halo beneath: `0 9px 18px -9px rgba(242,188,146,.4)`.
 - **Lit edge, dark mode (top left, no warmth):** `inset 3px 3px 2px -1px rgba(233,227,218,.6)`, `inset -2px -2px 2px -1px rgba(233,227,218,.18)`; shadow `rgba(0,0,0,.4)`.
 - **Clear, never bubbly:** no inner gloss, no haze. It is the one clear thing on a frosted page.
-- **On the website it follows the pointer, slowly:** it eases up to a top speed of 13% of the page width per second (never less than 120 px a second) × 0.8, and eases to a stop. It can go anywhere on the page. Left alone for 5 seconds it drifts along the name. On a phone, tap or drag moves it. The system pointer stays visible.
 - **In the app it sits still** on the name. Nothing moves while idle.
+- **Not on the website** since 26 Nov 2026: there the soft spot replaces it (below).
+
+## The soft spot (website, ClearScroll)
+
+- **What it is:** a round patch where the frost clears, soft all the way to its edge (clear to 22% of its radius, then fading out). No rim, no magnifying, no glass.
+- **Size:** radius 13% of the page width, between 130 and 220 px.
+- **How it moves:** about a second after arrival it clears once over the flake in the logo and frosts back. After that it clears where the pointer is, trails it, and frosts back 1.4 s after the pointer stops. With Reduce Motion it appears where you point and frosts back, with no motion.
+- **Up close:** clicking the logo (on a touch screen, a tap above the strip) opens a scroll over the page: the Mac and iPhone screenshots with short lines, then "Back home".
 
 ## Glass and buttons
 
@@ -78,7 +86,7 @@ No live blur on anything large: the blurred logo is a picture. When nothing move
 
 ## Website (firnbrowser.com)
 
-Redesigned 24 Nov 2026 around Frost. The home page is **one screen that says almost nothing**: the blurred logo, the lens, one line, and one button.
+Redesigned 24 Nov 2026 around Frost. The home page is **one screen that says almost nothing**: the blurred logo, the soft spot, one line, and one button. The logo opens the up-close scroll.
 
 - **Home:** no header. Bottom left: "A calm browser **for Mac, iPhone, and iPad.**" and a quiet row of links (Privacy, Release notes, Tip jar). Bottom right: one frosted pill, "Download", and the small print "Free. Needs macOS 14 or later."
 - **Download by device:** on a Mac (or any computer) the pill fetches the Mac app. On an iPhone or iPad it links to the App Store.
@@ -88,4 +96,4 @@ Redesigned 24 Nov 2026 around Frost. The home page is **one screen that says alm
 - **404:** the home page with "Nothing here. **Just snow.**" and a link home.
 - **Link preview** (1200 × 630): dark. The cream logo blurred on blue hour, no lens, with the tagline sharp at the bottom left. People see blue hour in the feed and arrive in the morning.
 - **Dark mode** follows the visitor's system.
-- **Privacy:** no third-party scripts, fonts, cookies, or forms; fonts load from fonts.firnbrowser.com. The page runs a few lines of its own script to tell a phone from a Mac and to move the lens. Pointer position is used on the page only, never stored or sent.
+- **Privacy:** no third-party scripts, fonts, cookies, or forms; fonts load from fonts.firnbrowser.com. The page runs a few lines of its own script to tell a phone from a Mac, to move the soft spot, and to open the scroll. Pointer position is used on the page only, never stored or sent.
