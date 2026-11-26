@@ -58,7 +58,7 @@ body { margin: 0; }
   height: 100vh; height: 100svh; min-height: 600px;
   padding: var(--pad-box);
   display: flex; flex-direction: column; justify-content: flex-end;
-  overflow: hidden; touch-action: none;
+  overflow: hidden;
   background: var(--sky); color: var(--ink);
   font-family: "Gooper Deck", Georgia, serif;
 }
@@ -67,7 +67,9 @@ body { margin: 0; }
     min-height: calc(600px + var(--tb) + var(--top) + var(--bot)); }
 }
 html.tuck .page { --top: 64px; --bot: 64px; }
-@media (max-height: 640px) { .page { touch-action: pan-y; } }
+/* With JavaScript (.live) a touch moves the soft spot, not the page */
+.page.live { touch-action: none; }
+@media (max-height: 640px) { .page.live { touch-action: pan-y; } }
 
 /* The logo, out of focus: a ready-made blurred picture (the design's blur,
    logo width x 0.0134, drawn once), so nothing blurs live. The picture has
@@ -87,7 +89,9 @@ html.tuck .page { --top: 64px; --bot: 64px; }
   pointer-events: none; opacity: 0; will-change: transform, opacity;
   -webkit-mask-image: radial-gradient(circle closest-side, #000 var(--ci, 22%), transparent 100%);
           mask-image: radial-gradient(circle closest-side, #000 var(--ci, 22%), transparent 100%); }
-.sharp { inset: auto; left: 0; top: 0; background: var(--sky); will-change: transform; }
+.sharp { inset: auto; left: 0; top: 0; will-change: transform; }
+.sharp-sky { position: absolute; inset: 0; background: var(--sky); }
+.sharp picture { position: relative; }
 
 .snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
@@ -104,13 +108,13 @@ nav { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 4px 0 -12px; font-fam
 nav a { display: inline-block; padding: 12px 0; opacity: .8;
   text-decoration-thickness: 1px; text-underline-offset: 4px; }
 
+.get-soon { text-align: right; }
 .get { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; text-align: right; }
 .small { margin: 0; font-family: var(--sans); font-size: 14px; line-height: 1.45; opacity: .8; }
-#get-soon { text-align: right; }
 @media (max-width: 600px) {
   .page { --lift: calc((var(--pad) + 181px + var(--tb)) / 2); }
   .get { align-items: flex-start; text-align: left; }
-  #get-soon { text-align: left; }
+  .get-soon { text-align: left; }
   nav { gap: 0 12px; }
 }
 
@@ -126,4 +130,75 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
   background: var(--frosty); border: 1px solid var(--rim-line);
   -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%);
   box-shadow: var(--pill-rim), 0 8px 28px var(--glass-shade);
+}
+
+/* ===== Up close: the scroll the logo opens (design/frost/pages/clear-scroll.dc.html) ===== */
+
+/* The logo link: over the logo, placed by the same numbers as the logo */
+.logo-link { position: absolute; z-index: 2; border-radius: 24px; -webkit-tap-highlight-color: transparent;
+  left: calc(50% - var(--logo-w) * 0.465); top: calc(50% - var(--lift) - var(--logo-w) * 0.17453);
+  width: calc(var(--logo-w) * 0.88); height: calc(var(--logo-w) * 0.34906); }
+.logo-link:focus-visible { outline: 2px solid var(--ink); outline-offset: -8px; }
+
+/* The long sky: as long as the scroll, with the horizon at its foot. Shown
+   and moved by home.js only while the scroll is open. */
+.longsky { position: absolute; left: 0; right: 0; top: 0; height: 100%; opacity: 0; pointer-events: none;
+  background: linear-gradient(0deg, var(--glow-1) 0px, var(--glow-2) 200px, var(--glow-0) 480px),
+              linear-gradient(180deg, var(--sky-top), var(--sky-low)); }
+
+/* Without JavaScript the scroll is a plain section below the first screen */
+.up { color: var(--ink); font-family: "Gooper Deck", Georgia, serif;
+  background: linear-gradient(0deg, var(--glow-1) 0px, var(--glow-2) 200px, var(--glow-0) 480px), var(--sky-low); }
+.up:focus { outline: none; }
+.up-logo, .up-spacer { display: none; }
+/* With JavaScript (home.js moves it into <main>): over the page, hidden
+   until the logo opens it. It is built (and its pictures load) only once
+   the visitor points, taps, or tabs (.ready). */
+.page > .up { position: absolute; inset: 0; z-index: 8; display: none; visibility: hidden; background: none;
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
+.page.ready > .up { display: block; }
+.page.open > .up { visibility: visible; }
+.page.open .longsky { will-change: transform; }
+.page > .up .up-logo { display: flex; position: absolute; left: 0; top: 0; width: var(--pw, 100%); height: var(--ph, 100%);
+  align-items: center; justify-content: center; overflow: hidden; visibility: hidden; pointer-events: none; }
+.page > .up .up-spacer { display: block; height: 72vh; }
+
+.up-in { position: relative; box-sizing: border-box;
+  padding: 40px max(72px, env(safe-area-inset-right)) calc(72px + var(--bot, 0px) + var(--tb, 0px) + env(safe-area-inset-bottom)) max(72px, env(safe-area-inset-left)); }
+.up-row { position: relative; display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: end; margin: 0 0 72px; }
+.up-row p { margin: 0 0 40px; font-size: 32px; line-height: 1.14; font-weight: 400; text-wrap: balance; }
+.up-row b { font-weight: 600; }
+.up-rest > .up-row:nth-child(odd) { grid-template-columns: 1fr 300px; }
+.up-rest > .up-row:nth-child(odd) > p { order: 2; }
+.up-rest > .up-row:nth-child(odd) > img { justify-self: end; }
+.up-row img { display: block; width: 100%; max-width: 1000px; height: auto; }
+.up-phones { display: flex; gap: 28px; }
+.up-phones div { width: 210px; padding: 4px; border-radius: 36px; background: #1B1C1F; box-shadow: 0 24px 60px var(--glass-shade); }
+.up-phones img { display: block; width: 100%; height: auto; border-radius: 32px; }
+.phone-only { display: none !important; }
+.up-get { margin: 24px 0 0 340px; }
+.up-get .get { align-items: flex-start; text-align: left; }
+.up-get .small { line-height: normal; }
+.up-get .get-soon { text-align: left; }
+.up-foot { margin: 160px 0 0; padding-bottom: 8px; font-family: var(--sans); font-size: 14px; }
+.up-foot nav { gap: 0 22px; margin: 0; }
+.up-foot nav a { opacity: 1; }
+.up-foot p { margin: 4px 0 0; opacity: .72; }
+.up-foot p a { text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+@media (max-width: 600px) {
+  .up-in { padding: 0 max(24px, env(safe-area-inset-right)) calc(32px + var(--bot, 0px) + var(--tb, 0px) + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+  .up { padding-top: 32px; }
+  .page > .up { padding-top: 0; }
+  .up-row, .up-rest > .up-row:nth-child(odd) { grid-template-columns: 1fr; gap: 16px; margin: 0 0 56px; }
+  .up-rest > .up-row:nth-child(odd) > p { order: 0; }
+  .up-rest > .up-row:nth-child(odd) > img { justify-self: start; }
+  .up-row p { margin: 0; font-size: 24px; }
+  .up-phones { gap: 10px; }
+  .up-phones div { width: auto; flex: 1 1 0; padding: 3px; border-radius: 22px; }
+  .up-phones img { border-radius: 19px; }
+  .wide-only { display: none !important; }
+  .phone-only { display: flex !important; }
+  .up-get { margin: 8px 0 0; }
+  .up-foot { margin-top: 96px; }
 }

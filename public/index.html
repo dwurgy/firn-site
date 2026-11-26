@@ -32,11 +32,14 @@
 
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://fonts.firnbrowser.com/GooperDeck-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="home.css?v=34">
-<script src="home.js?v=17" defer></script>
+<link rel="stylesheet" href="home.css?v=35">
+<script src="home.js?v=18" defer></script>
 </head>
 <body>
 <main class="page" id="page">
+
+<!-- The sky for the scroll: as long as the scroll, horizon at its foot (home.js) -->
+<div class="longsky" id="longsky" aria-hidden="true"></div>
 
 <!-- The logo, out of focus -->
 <div class="soft">
@@ -45,6 +48,9 @@
 <img class="logo" src="assets/firn-lockup-blur.webp" alt="Firn" width="960" height="511">
 </picture>
 </div>
+
+<!-- The logo opens the scroll ("up close"); without JavaScript it jumps to it -->
+<a class="logo-link" id="logo-link" href="#up-close" aria-label="Firn. See it up close"></a>
 
 <!-- The strip along the bottom: the line and links on the left, the download on the right -->
 <div class="strip" id="strip">
@@ -60,23 +66,24 @@
 </div>
 <div>
 <!-- On a Mac or any computer (and when JavaScript is off) -->
-<div class="get" id="get-mac">
+<div class="get get-mac">
 <a class="pill" href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg">Download</a>
 <p class="small">Free. Needs macOS 14 or later.</p>
 </div>
 <!-- On an iPhone or iPad, once APP_STORE_URL is filled in at the top of home.js -->
-<div class="get" id="get-ios" hidden>
-<a class="pill" id="app-store-link" href="/">Download</a>
-<p class="small" id="ios-needs">On the App Store. Needs iOS 26 or later.</p>
+<div class="get get-ios" hidden>
+<a class="pill app-store-link" href="/">Download</a>
+<p class="small ios-needs">On the App Store. Needs iOS 26 or later.</p>
 </div>
 <!-- On an iPhone or iPad, until then -->
-<p class="small" id="get-soon" hidden>Firn is on the Mac today.<br>iPhone and iPad are on the way.</p>
+<p class="small get-soon" hidden>Firn is on the Mac today.<br>iPhone and iPad are on the way.</p>
 </div>
 </div>
 
 <!-- The same sky and logo in focus; only the soft spot shows it -->
 <div class="spot" id="spot" aria-hidden="true">
 <div class="sharp" id="sharp">
+<div class="sharp-sky" id="sharp-sky"></div>
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="assets/firn-lockup-on-dark.svg">
 <img class="logo" src="assets/firn-lockup.svg" alt="" width="5353" height="2595">
@@ -87,5 +94,67 @@
 <canvas class="snow" id="snow" aria-hidden="true"></canvas>
 
 </main>
+
+<!-- Up close: one scroll of captioned screenshots. home.js moves it into
+     <main> and shows it when the logo is clicked; without JavaScript it is
+     a plain section below the first screen. -->
+<section class="up" id="up-close" aria-label="Firn, up close" tabindex="-1">
+<div class="up-in" id="up-in">
+<!-- the sharp logo, so it scrolls away like the top of the page -->
+<div class="up-logo" id="up-logo" aria-hidden="true">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="assets/firn-lockup-on-dark.svg">
+<img class="logo" src="assets/firn-lockup.svg" alt="" width="5353" height="2595" loading="lazy">
+</picture>
+</div>
+<div class="up-spacer" id="up-spacer"></div>
+<!-- The opener: the Mac on a wide screen, three iPhones on a phone -->
+<div class="up-row up-hero" id="up-hero">
+<p>A calm browser <b>for Mac, iPhone, and iPad.</b></p>
+<img class="wide-only" src="assets/up-close/mac-hero.webp" alt="Firn on a Mac: the sidebar with tabs and a group beside a web page" width="2000" height="1304" loading="lazy" decoding="async">
+<div class="up-phones phone-only">
+<div><img src="assets/up-close/iphone-page.webp" alt="Firn on an iPhone showing a web page, with the address bar at the bottom" width="404" height="878" loading="lazy" decoding="async"></div>
+<div><img src="assets/up-close/iphone-tabs.webp" alt="Firn on an iPhone: open tabs, with three kept together in a group" width="404" height="878" loading="lazy" decoding="async"></div>
+<div><img src="assets/up-close/iphone-small-bar.webp" alt="Firn on an iPhone showing a web page with one small bar at the bottom" width="404" height="878" loading="lazy" decoding="async"></div>
+</div>
+</div>
+<div class="up-rest" id="up-rest">
+<div class="up-row"><p>Your spaces,<br><b>synced with iCloud.</b></p><img src="assets/up-close/sync-devices.webp" alt="Firn on a MacBook and an iPhone, showing the same spaces" width="1756" height="1415" loading="lazy" decoding="async"></div>
+<div class="up-row"><p>Work and Personal,<br><b>kept apart.</b></p><img src="assets/up-close/mac-spaces.webp" alt="A Work space in Firn, with its own tabs and color" width="2000" height="1304" loading="lazy" decoding="async"></div>
+<div class="up-row"><p>A glance at a link<br><b>before you keep it.</b></p><img src="assets/up-close/mac-lookout.webp" alt="Lookout in Firn: a link previewed in a floating panel over the page" width="2000" height="1304" loading="lazy" decoding="async"></div>
+<div class="up-row"><p>Two pages,<br><b>side by side.</b></p><img src="assets/up-close/mac-split-view.webp" alt="Split view in Firn: two pages side by side" width="2000" height="1304" loading="lazy" decoding="async"></div>
+<div class="up-row"><p>Old tabs,<br><b>tidied away.</b></p><img src="assets/up-close/mac-tidied-away.webp" alt="Tidied away in Firn: a small panel listing tabs not looked at in a while" width="2000" height="1219" loading="lazy" decoding="async"></div>
+<div class="up-row wide-only"><p>Also on<br><b>iPhone and iPad.</b></p>
+<div class="up-phones">
+<div><img src="assets/up-close/iphone-page.webp" alt="Firn on an iPhone showing a web page, with the address bar at the bottom" width="404" height="878" loading="lazy" decoding="async"></div>
+<div><img src="assets/up-close/iphone-tabs.webp" alt="Firn on an iPhone: open tabs, with three kept together in a group" width="404" height="878" loading="lazy" decoding="async"></div>
+<div><img src="assets/up-close/iphone-small-bar.webp" alt="Firn on an iPhone showing a web page with one small bar at the bottom" width="404" height="878" loading="lazy" decoding="async"></div>
+</div>
+</div>
+<div class="up-get">
+<div class="get get-mac">
+<a class="pill" href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg">Download</a>
+<p class="small">Free. Needs macOS 14 or later.</p>
+</div>
+<div class="get get-ios" hidden>
+<a class="pill app-store-link" href="/">Download</a>
+<p class="small ios-needs">On the App Store. Needs iOS 26 or later.</p>
+</div>
+<p class="small get-soon" hidden>Firn is on the Mac today.<br>iPhone and iPad are on the way.</p>
+</div>
+<footer class="up-foot">
+<nav aria-label="Firn">
+<a href="/" id="back-home">Back home</a>
+<a href="/release-notes">Release notes</a>
+<a href="/support">Support</a>
+<a href="/privacy">Privacy</a>
+<a href="/tip-jar">Tip jar</a>
+<a href="/press">Press kit</a>
+</nav>
+<p>Firn · A <a href="https://davidwurgler.com">David Wurgler</a> app · © 2026</p>
+</footer>
+</div>
+</div>
+</section>
 </body>
 </html>

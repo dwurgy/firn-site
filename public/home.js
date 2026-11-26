@@ -23,6 +23,20 @@
   var spot = document.getElementById('spot');
   var sharp = document.getElementById('sharp');
   if (!main || !canvas || !strip || !spot || !sharp) return;
+  main.classList.add('live');   /* home.css: touches move the spot, not the page */
+  var soft = main.querySelector('.soft');
+  var sharpSky = document.getElementById('sharp-sky');
+  /* Up close (home only; the 404 has none of these) */
+  var up = document.getElementById('up-close');
+  var logoLink = document.getElementById('logo-link');
+  var longsky = document.getElementById('longsky');
+  var upLogo = document.getElementById('up-logo');
+  var spacer = document.getElementById('up-spacer');
+  var hero = document.getElementById('up-hero');
+  var rest = document.getElementById('up-rest');
+  var backHome = document.getElementById('back-home');
+  var scroll = !!(up && logoLink && longsky && upLogo && spacer && hero && rest && backHome);
+  function each(sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
 
   /* --- iPhone or iPad? (iPads say they are Macs, but have a touch screen) --- */
   var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
@@ -41,17 +55,29 @@
     window.addEventListener('pageshow', tuckScroll);
   }
 
-  if (ios && document.getElementById('get-mac')) {   /* the 404 page has no download */
+  /* Both pills (the strip's and the scroll's) swap; the 404 has none */
+  if (ios && document.querySelector('.get-mac')) {
     var store = APP_STORE_URL.trim();
-    document.getElementById('get-mac').hidden = true;
+    each('.get-mac', function (el) { el.hidden = true; });
     if (/^https:\/\//.test(store)) {
-      document.getElementById('app-store-link').href = store;
-      document.getElementById('get-ios').hidden = false;
+      each('.app-store-link', function (a) { a.href = store; });
+      each('.get-ios', function (el) { el.hidden = false; });
       if (!/iPhone|iPod/.test(navigator.userAgent))   /* an iPad */
-        document.getElementById('ios-needs').textContent = 'On the App Store. Needs iPadOS 26 or later.';
+        each('.ios-needs', function (el) { el.textContent = 'On the App Store. Needs iPadOS 26 or later.'; });
     } else {
-      document.getElementById('get-soon').hidden = false;
+      each('.get-soon', function (el) { el.hidden = false; });
     }
+  }
+
+  /* The scroll goes inside the page, over it (home.css .page > .up). Its
+     pictures start loading once the visitor points, taps, or tabs. */
+  if (scroll) {
+    main.appendChild(up);
+    var ready = function () {
+      main.classList.add('ready');
+      ['pointermove', 'pointerdown', 'focusin'].forEach(function (t) { main.removeEventListener(t, ready); });
+    };
+    ['pointermove', 'pointerdown', 'focusin'].forEach(function (t) { main.addEventListener(t, ready); });
   }
 
   var ctx = canvas.getContext('2d');
@@ -62,6 +88,8 @@
      and when the pointer last was (px, py, pt). Kept across restarts. */
   var sx = null, sy = null, f = 0, px = null, py = null, pt = -1e9;
   var born = performance.now();
+  /* Up close: open or not, the running clearing or closing, where it opened */
+  var opened = false, melt = 0, openAt = null;
 
   function start() {
     var dark = darkMq.matches;
@@ -122,6 +150,7 @@
       lift = (h - strip.offsetTop - tuckTop()) / 2;
       tuckScroll();
       main.style.setProperty('--lift', lift.toFixed(1) + 'px');
+      main.style.setProperty('--pw', w + 'px'); main.style.setProperty('--ph', h + 'px');
       if (w !== W || h !== H) {
         W = w; H = h;
         sharp.style.width = W + 'px'; sharp.style.height = H + 'px';
@@ -135,7 +164,8 @@
         flakes = []; for (var i = 0; i < n; i++) flakes.push(make(true));
       }
       if (sx === null) { var fl = flake(); sx = fl.x; sy = fl.y; }
-      place();
+      if (opened) { spacer.style.height = Math.round(H * 0.72) + 'px'; longsky.style.height = up.scrollHeight + 'px'; }
+      else place();
       if (still) draw(0);
     }
     /* Each frame: about a second after arrival the spot clears once over the
@@ -156,7 +186,7 @@
       place();
     }
     function move(e) {
-      if (e.target.closest && e.target.closest('.strip a')) return;
+      if (opened || (e.target.closest && e.target.closest('.strip a, .up'))) return;
       /* browsers send a still "move" when the page loads under a resting cursor */
       if (e.type === 'pointermove' && e.pointerType === 'mouse' && !e.movementX && !e.movementY) return;
       var r = main.getBoundingClientRect();
@@ -169,6 +199,134 @@
       }
     }
 
+    /* ----- Up close ----- */
+    /* The spot at any size: the window is 2 x cr square, soft from ci% out;
+       dy lifts the sharp logo inside it as the scroll moves. */
+    function setSpot(cr, ci, fo, x, y, dy) {
+      spot.style.width = spot.style.height = (cr * 2).toFixed(1) + 'px';
+      spot.style.setProperty('--ci', ci.toFixed(1) + '%');
+      spot.style.transform = 'translate3d(' + (x - cr).toFixed(1) + 'px,' + (y - cr).toFixed(1) + 'px,0)';
+      sharp.style.transform = 'translate3d(' + (cr - x).toFixed(1) + 'px,' + (cr - y - dy).toFixed(1) + 'px,0)';
+      spot.style.opacity = fo.toFixed(3);
+      shown.x = shown.f = NaN;
+    }
+    /* The same soft spot takes the strip's words with it */
+    function maskStrip(cr, ci, x, y) {
+      var m = 'radial-gradient(circle ' + Math.max(1, cr).toFixed(1) + 'px at ' + (x - strip.offsetLeft).toFixed(1) + 'px ' +
+        (y - strip.offsetTop).toFixed(1) + 'px, transparent ' + ci.toFixed(1) + '%, #000 100%)';
+      strip.style.webkitMaskImage = m; strip.style.maskImage = m;
+    }
+    function onUpScroll() {
+      if (up.scrollHeight !== longsky.offsetHeight) longsky.style.height = up.scrollHeight + 'px';
+      longsky.style.transform = 'translate3d(0,' + (-up.scrollTop) + 'px,0)';
+    }
+    /* Open: the spot grows from where it is until the frost is gone (1.2 s,
+       ease-out), the sky becomes the long one, and the opener rises */
+    function enter() {
+      opened = true;
+      main.classList.add('ready', 'open');
+      strip.setAttribute('inert', ''); logoLink.setAttribute('inert', '');
+      spacer.style.height = Math.round(H * 0.72) + 'px';
+      up.scrollTop = 0; up.style.opacity = '';
+      longsky.style.height = up.scrollHeight + 'px';
+      up.addEventListener('scroll', onUpScroll, { passive: true });
+      up.focus({ preventScroll: true });
+      /* the sharp logo now lives in the scroll, so it scrolls away natively */
+      function settle() {
+        soft.style.opacity = '0'; sharpSky.style.opacity = '0'; longsky.style.opacity = '1';
+        strip.style.visibility = 'hidden';
+        upLogo.style.visibility = 'visible'; spot.style.opacity = '0'; shown.f = NaN;
+      }
+      var ox = sx, oy = sy; openAt = { x: ox, y: oy };
+      if (still) { settle(); return; }
+      var far = Math.hypot(Math.max(ox, W - ox), Math.max(oy, H - oy));
+      var cr0 = CR, ci0 = 22, f0 = f, crEnd = far * 1.25, ciEnd = 78;
+      var t0 = performance.now(), dur = 1200;
+      function grow(now) {
+        var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        var cr = cr0 + (crEnd - cr0) * e, ci = ci0 + (ciEnd - ci0) * e;
+        f = f0 + (1 - f0) * Math.min(1, e * 1.6);
+        setSpot(cr, ci, f, ox, oy, 0);
+        maskStrip(cr, ci, ox, oy);
+        /* as the spot finishes, the sky settles to the new, longer page */
+        var late = Math.max(0, Math.min(1, (k - 0.55) / 0.45)), l = late * late * (3 - 2 * late);
+        soft.style.opacity = (0.85 * (1 - l)).toFixed(3); sharpSky.style.opacity = (1 - l).toFixed(3);
+        longsky.style.opacity = l.toFixed(3);
+        if (k < 1) melt = requestAnimationFrame(grow); else settle();
+      }
+      melt = requestAnimationFrame(grow);
+      /* the opener rises from below and stops half in view: there is more below */
+      var from = { opacity: 0, transform: 'translateY(' + Math.round(H * 0.35) + 'px)' }, to = { opacity: 1, transform: 'none' };
+      if (hero.animate) {
+        hero.animate([from, to], { duration: 1300, delay: 650, easing: 'cubic-bezier(.16,.8,.24,1)', fill: 'backwards' });
+        rest.animate([from, to], { duration: 1300, delay: 800, easing: 'cubic-bezier(.16,.8,.24,1)', fill: 'backwards' });
+      }
+    }
+    /* Back home: the scroll glides to the top as its rows fade, then the
+       frost closes back in toward where it opened, the mirror of opening */
+    function leave() {
+      cancelAnimationFrame(melt); pt = -1e9;
+      var at = openAt || { x: W / 2, y: H / 2 };
+      var y0 = up.scrollTop;
+      function finish() {
+        up.removeEventListener('scroll', onUpScroll);
+        longsky.style.transform = ''; soft.style.transform = '';
+        strip.style.webkitMaskImage = strip.style.maskImage = ''; strip.style.visibility = '';
+        strip.removeAttribute('inert'); logoLink.removeAttribute('inert');
+        soft.style.opacity = ''; sharpSky.style.opacity = ''; longsky.style.opacity = ''; up.style.opacity = '';
+        upLogo.style.visibility = '';
+        main.classList.remove('open'); opened = false; up.scrollTop = 0;
+        f = 0; sx = at.x; sy = at.y;
+        spot.style.removeProperty('--ci'); spot.style.width = spot.style.height = (CR * 2) + 'px';
+        place();
+        if (up.contains(document.activeElement) || document.activeElement === document.body) logoLink.focus({ preventScroll: true });
+      }
+      if (still) { finish(); return; }
+      var far = Math.hypot(Math.max(at.x, W - at.x), Math.max(at.y, H - at.y));
+      var crTop = far * 1.25, ciTop = 78, crLow = 0, ciLow = 22;
+      var upDur = y0 > 0 ? Math.min(1100, 500 + y0 * 0.12) : 0;
+      function inout(k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
+      var t0 = performance.now(), frost = 1500;
+      /* the spot takes the sharp logo back from the scroll, in the same place */
+      setSpot(crTop, ciTop, 1, at.x, at.y, y0);
+      upLogo.style.visibility = '';
+      strip.style.visibility = '';
+      function step(now) {
+        var t = now - t0;
+        var ku = upDur ? Math.min(1, t / upDur) : 1, y = y0 * (1 - inout(ku));
+        if (upDur) { up.scrollTop = y; onUpScroll(); }
+        up.style.opacity = (1 - Math.min(1, t / Math.max(400, upDur * 0.8))).toFixed(3);
+        var kf = Math.max(0, Math.min(1, (t - upDur * 0.6) / frost)), e = inout(kf);
+        var cr = crTop + (crLow - crTop) * e, ci = ciTop + (ciLow - ciTop) * e;
+        setSpot(Math.max(0, cr), ci, 1, at.x, at.y, y);
+        soft.style.transform = y ? 'translate3d(0,' + (-y).toFixed(1) + 'px,0)' : '';
+        maskStrip(cr, ci, at.x, at.y);
+        var early = Math.min(1, kf / 0.4), l = early * early * (3 - 2 * early);
+        soft.style.opacity = (0.85 * l).toFixed(3); sharpSky.style.opacity = l.toFixed(3);
+        longsky.style.opacity = (1 - l).toFixed(3);
+        if (kf < 1) melt = requestAnimationFrame(step); else finish();
+      }
+      melt = requestAnimationFrame(step);
+    }
+    /* The logo: on a phone the first tap clears the spot there, and a tap
+       while it is clear opens the scroll */
+    var touch = false;
+    function press(e) { touch = e.pointerType === 'touch'; }
+    function open(e) {
+      e.preventDefault();
+      if (opened) return;
+      if (touch && !still && f < 0.8) { touch = false; return; }
+      touch = false;
+      main.classList.add('ready');
+      requestAnimationFrame(enter);
+    }
+    function back(e) { e.preventDefault(); if (opened) leave(); }
+    if (scroll) {
+      logoLink.addEventListener('pointerdown', press);
+      logoLink.addEventListener('click', open);
+      backHome.addEventListener('click', back);
+    }
+
     size();
     if (window.ResizeObserver) { ro = new ResizeObserver(size); ro.observe(canvas); ro.observe(strip); }
     else window.addEventListener('resize', size);
@@ -176,12 +334,12 @@
     main.addEventListener('pointermove', move);
     main.addEventListener('pointerdown', move);
     /* Reduce Motion: the snow is drawn once, and nothing clears on arrival */
-    if (still) { f = 0; place(); }
+    if (still && !opened) { f = 0; place(); }
     else {
       var last = performance.now();
       var tick = function (now) {
         var dt = Math.min(0.05, (now - last) / 1000); last = now;
-        clearing(now, dt);
+        if (!opened) clearing(now, dt);
         for (var i = 0; i < flakes.length; i++) {
           var p = flakes[i]; p.y += p.v * dt; p.x += 3 * dt;
           if (p.y - p.r > H) flakes[i] = make(false);
@@ -197,6 +355,11 @@
       if (ro) ro.disconnect(); else window.removeEventListener('resize', size);
       main.removeEventListener('pointermove', move);
       main.removeEventListener('pointerdown', move);
+      if (scroll) {
+        logoLink.removeEventListener('pointerdown', press);
+        logoLink.removeEventListener('click', open);
+        backHome.removeEventListener('click', back);
+      }
     };
   }
 
