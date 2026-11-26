@@ -308,16 +308,20 @@
       }
       melt = requestAnimationFrame(step);
     }
-    /* The logo opens the scroll on a click. On a touch screen it opens the
-       moment the finger lifts (after a tap, a hold, or a drag), clearing
-       from where the finger was. */
+    /* The logo opens the scroll on a click. On a touch screen a press
+       anywhere above the strip (the logo and the sky, not the links or the
+       pill) opens it the moment the finger lifts, after a tap, a hold, or a
+       drag, clearing from where the finger was. */
     var touch = false, touched = -1e9, going = false;
     function go() {
       if (going || opened) return;
       going = true; main.classList.add('ready');
       requestAnimationFrame(function () { going = false; enter(); });
     }
-    function press(e) { touch = e.pointerType === 'touch'; }
+    function press(e) {
+      touch = e.pointerType === 'touch' && !opened && !(e.target.closest && e.target.closest('.strip, .up')) &&
+        e.clientY < strip.getBoundingClientRect().top;
+    }
     function release(e) {
       if (!touch || e.pointerType !== 'touch') return;
       touch = false; touched = performance.now();
@@ -333,8 +337,8 @@
     function noMenu(e) { e.preventDefault(); }
     function back(e) { e.preventDefault(); if (opened) leave(); }
     if (scroll) {
-      logoLink.addEventListener('pointerdown', press);
-      logoLink.addEventListener('pointerup', release);
+      main.addEventListener('pointerdown', press);
+      main.addEventListener('pointerup', release);
       logoLink.addEventListener('contextmenu', noMenu);
       logoLink.addEventListener('click', open);
       backHome.addEventListener('click', back);
@@ -369,8 +373,8 @@
       main.removeEventListener('pointermove', move);
       main.removeEventListener('pointerdown', move);
       if (scroll) {
-        logoLink.removeEventListener('pointerdown', press);
-        logoLink.removeEventListener('pointerup', release);
+        main.removeEventListener('pointerdown', press);
+        main.removeEventListener('pointerup', release);
         logoLink.removeEventListener('contextmenu', noMenu);
         logoLink.removeEventListener('click', open);
         backHome.removeEventListener('click', back);
