@@ -61,9 +61,9 @@ changes it.
 The Frost rebuild is finished. Now: **ClearScroll** (the prompt and
 design: `design/frost/pages/clear-scroll.dc.html` and `-phone`).
 
-- **Next: step 2**, the click into the scroll (content, footer, phone order).
-  Then step 3, Back home; then step 4, clean-up (the lens out of CLAUDE.md
-  and the design README and BRAND).
+- **Next: step 4**, clean-up: the lens out of CLAUDE.md (home page section,
+  "The idea", "Keep it smooth", privacy rules) and the design README and BRAND.
+- ~~Steps 2 and 3: the logo opens the scroll; Back home closes it~~ done 2026-11-26.
 - ~~Step 1: the soft spot replaces the lens on home and the 404; blurred logo
   is a ready-made picture; all nine screenshots in `assets/up-close/`~~ done 2026-11-26.
 
