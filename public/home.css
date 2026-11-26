@@ -161,6 +161,12 @@ nav a { display: inline-block; padding: 12px 0; opacity: .8;
 .page.ready > .up { display: block; }
 .page.open > .up { visibility: visible; }
 .page.open .longsky { will-change: transform; }
+/* Touch screens (.doc, home.js): the open scroll is the page's own scroll,
+   so the page grows to hold it and nothing inside scrolls on its own */
+.page.doc { overflow: visible; overflow-x: clip; touch-action: pan-y; }
+.page.doc > .up { bottom: auto; overflow: visible; overflow-x: clip; --bot: 0px; --tb: 0px; }
+.page.linked.open.doc .longsky { animation: none; }
+.page.doc .longsky { will-change: auto; }
 /* Scroll-linked (home.js adds .linked where supported): the long sky follows
    the scroll's position by itself, so scrolling needs no script each frame */
 @keyframes longsky { to { transform: translate3d(0, calc(-1 * var(--travel, 0px)), 0); } }
