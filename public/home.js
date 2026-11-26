@@ -1,7 +1,8 @@
-/* Firn home page ("Frost"): the lens, the snow, and telling an iPhone or
-   iPad from a Mac. The design's script (design/frost/pages/home.dc.html) as
-   plain JavaScript, with its numbers. Nothing here stores or sends anything:
-   the pointer position only moves the lens on this page. */
+/* Firn home page ("Frost", with "ClearScroll"): the soft spot where the
+   frost clears, the snow, and telling an iPhone or iPad from a Mac. The
+   design's script (design/frost/pages/clear-scroll.dc.html) as plain
+   JavaScript, with its numbers. Nothing here stores or sends anything: the
+   pointer position only moves the soft spot on this page. */
 (function () {
   'use strict';
 
@@ -12,21 +13,16 @@
      see "Firn is on the Mac today. iPhone and iPad are on the way." */
   var APP_STORE_URL = 'https://apps.apple.com/us/app/firn-browser/id6829053602';
 
-  /* Approved values (design/frost/README.md). Magnify (0.35) and edge light
-     (0.7) live in home.css as --z and --e. */
-  var LENS_SPEED = 0.8;
+  /* Approved values (design/frost/README.md) */
   var DENSITY = 0.3;
-  var IDLE_MS = 5000;
+  var LINGER_MS = 1400;   /* the spot frosts back this long after the pointer stops */
 
   var main = document.getElementById('page');
   var canvas = document.getElementById('snow');
   var strip = document.getElementById('strip');
-  var mirror = document.getElementById('mirror');
-  var lensEl = document.getElementById('lens');
+  var spot = document.getElementById('spot');
   var sharp = document.getElementById('sharp');
-  var ring = document.getElementById('ring');
-  main.classList.add('live');   /* home.css: the lens moves by transforms only */
-  if (!main || !canvas || !strip || !mirror) return;
+  if (!main || !canvas || !strip || !spot || !sharp) return;
 
   /* --- iPhone or iPad? (iPads say they are Macs, but have a touch screen) --- */
   var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
@@ -58,21 +54,14 @@
     }
   }
 
-  /* --- A copy of the strip inside the lens, so text under it is sharp and
-         magnified too. The copy can't be clicked, focused, or read aloud. --- */
-  var copy = strip.cloneNode(true);
-  copy.removeAttribute('id');
-  Array.prototype.forEach.call(copy.querySelectorAll('[id]'), function (el) { el.removeAttribute('id'); });
-  mirror.replaceChildren(copy);
-
   var ctx = canvas.getContext('2d');
   var darkMq = matchMedia('(prefers-color-scheme: dark)');
   var stillMq = matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* The lens's centre, speed, and where the pointer last was */
-  var cx = null, cy = null, vx = 0, vy = 0, tx = null, ty = null, moved = -1e9;
-  var t0 = performance.now() / 1000;
-  var ph = Math.asin(0.085 / 0.38);
+  /* The spot: its centre (sx, sy), how clear it is (f, 0 to 1), and where
+     and when the pointer last was (px, py, pt). Kept across restarts. */
+  var sx = null, sy = null, f = 0, px = null, py = null, pt = -1e9;
+  var born = performance.now();
 
   function start() {
     var dark = darkMq.matches;
@@ -89,7 +78,8 @@
       g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return s;
     }
     var sprites = [sprite(0.55), sprite(0.8), sprite(0.98)];
-    var W = 0, H = 0, lift = 0, R = 0, Z = 1, flakes = [], raf = 0, ro = null;
+    var W = 0, H = 0, lift = 0, CR = 0, flakes = [], raf = 0, ro = null, timer = 0;
+    var shown = { x: NaN, y: NaN, f: NaN };
 
     function make(anywhere) {
       var k = Math.random(); var layer = k < 0.6 ? 0 : k < 0.9 ? 1 : 2;
@@ -101,20 +91,20 @@
         ph: Math.random() * 6.28, f: 0.15 + Math.random() * 0.25, amp: 6 + Math.random() * 14 * (layer + 1)
       };
     }
-    function logo() {
-      var lw = Math.min(W * 1.04, 1560);
-      return { x: (W - lw) / 2 - lw * 0.025, w: lw, h: lw * 2595.2 / 5353 };
+    /* The centre of the flake in the logo: where the spot clears on arrival */
+    function flake() {
+      var lw = Math.min(W * 1.04, 1560), lh = lw * 2595.2 / 5353;
+      return { x: (W - lw) / 2 - lw * 0.025 + lw * 0.2417, y: H / 2 - lift + lh * 0.0068 };
     }
-    /* Where the lens rests: on the name */
-    function rest() { var L = logo(); return { x: L.x + L.w * 0.585, y: H / 2 - lift }; }
-    /* Move the lens: the window and the ring slide to it, and the sharp page
-       inside slides the other way, magnified about the lens's centre */
+    /* Show the spot: the window slides to it and the sharp page inside slides
+       the other way. Only writes when something changed. */
     function place() {
-      var at = 'translate3d(' + (cx - R).toFixed(2) + 'px,' + (cy - R).toFixed(2) + 'px,0)';
-      lensEl.style.transform = at;
-      ring.style.transform = at;
-      sharp.style.transform = 'translate3d(' + (R - Z * cx).toFixed(2) + 'px,' +
-        (R - Z * cy).toFixed(2) + 'px,0) scale(' + Z + ')';
+      if (!(Math.abs(sx - shown.x) <= 0.05 && Math.abs(sy - shown.y) <= 0.05)) {
+        shown.x = sx; shown.y = sy;
+        spot.style.transform = 'translate3d(' + (sx - CR).toFixed(2) + 'px,' + (sy - CR).toFixed(2) + 'px,0)';
+        sharp.style.transform = 'translate3d(' + (CR - sx).toFixed(2) + 'px,' + (CR - sy).toFixed(2) + 'px,0)';
+      }
+      if (!(Math.abs(f - shown.f) <= 0.002)) { shown.f = f; spot.style.opacity = f.toFixed(3); }
     }
     function draw(t) {
       ctx.clearRect(0, 0, W, H);
@@ -132,53 +122,66 @@
       lift = (h - strip.offsetTop - tuckTop()) / 2;
       tuckScroll();
       main.style.setProperty('--lift', lift.toFixed(1) + 'px');
-      R = ring.offsetWidth / 2;
-      Z = parseFloat(getComputedStyle(main).getPropertyValue('--z')) || 1;
       if (w !== W || h !== H) {
         W = w; H = h;
         sharp.style.width = W + 'px'; sharp.style.height = H + 'px';
+        CR = Math.min(220, Math.max(130, W * 0.13));
+        spot.style.width = spot.style.height = (CR * 2) + 'px';
+        shown.x = NaN;
         var dpr = W * H > 2000000 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         var n = Math.min(160, Math.round(W * H / 16000 * DENSITY));
         flakes = []; for (var i = 0; i < n; i++) flakes.push(make(true));
       }
-      if (still || cx === null) { var r0 = rest(); cx = r0.x; cy = r0.y; vx = vy = 0; }
+      if (sx === null) { var fl = flake(); sx = fl.x; sy = fl.y; }
       place();
       if (still) draw(0);
     }
-    function lens(now, dt) {
-      var t = now / 1000 - t0; var L = logo(); var gx = tx, gy = ty;
-      if (now - moved > IDLE_MS || gx === null) {
-        /* left alone: drift along the name */
-        gx = L.x + L.w * (0.5 + 0.38 * Math.sin(t * 0.11 + ph));
-        gy = H / 2 - lift + L.h * 0.1 * Math.sin(t * 0.17);
+    /* Each frame: about a second after arrival the spot clears once over the
+       flake, then settles back. After that it clears where the pointer is,
+       trails it slowly, and frosts back 1.4 s after the pointer stops. */
+    function clearing(now, dt) {
+      var t = now - born, gx, gy, goal = 0;
+      if (px === null) {
+        var fl = flake(); gx = fl.x; gy = fl.y;
+        if (t > 1000 && t < 3600) goal = 1;
+      } else {
+        gx = px; gy = py;
+        if (now - pt < LINGER_MS) goal = 1;
       }
-      var max = Math.max(W * 0.13, 120) * LENS_SPEED;
-      var wx = (gx - cx) * 2, wy = (gy - cy) * 2;
-      var wl = Math.hypot(wx, wy); if (wl > max) { wx *= max / wl; wy *= max / wl; }
-      var ease = 1 - Math.exp(-dt * 3);
-      vx += (wx - vx) * ease; vy += (wy - vy) * ease;
-      cx += vx * dt; cy += vy * dt;
+      var k = 1 - Math.exp(-dt * 2.2);
+      sx += (gx - sx) * k; sy += (gy - sy) * k;
+      f += (goal - f) * (1 - Math.exp(-dt * (goal > f ? 1.8 : 0.7)));
       place();
     }
     function move(e) {
+      if (e.target.closest && e.target.closest('.strip a')) return;
+      /* browsers send a still "move" when the page loads under a resting cursor */
+      if (e.type === 'pointermove' && e.pointerType === 'mouse' && !e.movementX && !e.movementY) return;
       var r = main.getBoundingClientRect();
-      tx = e.clientX - r.left; ty = e.clientY - r.top; moved = performance.now();
+      px = e.clientX - r.left; py = e.clientY - r.top; pt = performance.now();
+      if (still) {
+        /* Reduce Motion: the spot clears and frosts back at once, no motion */
+        sx = px; sy = py; f = 1; place();
+        clearTimeout(timer);
+        timer = setTimeout(function () { f = 0; place(); }, LINGER_MS);
+      }
     }
 
     size();
     if (window.ResizeObserver) { ro = new ResizeObserver(size); ro.observe(canvas); ro.observe(strip); }
     else window.addEventListener('resize', size);
 
-    /* Reduce Motion: the snow is drawn once and the lens stays on the name */
-    if (!still) {
-      main.addEventListener('pointermove', move);
-      main.addEventListener('pointerdown', move);
+    main.addEventListener('pointermove', move);
+    main.addEventListener('pointerdown', move);
+    /* Reduce Motion: the snow is drawn once, and nothing clears on arrival */
+    if (still) { f = 0; place(); }
+    else {
       var last = performance.now();
       var tick = function (now) {
         var dt = Math.min(0.05, (now - last) / 1000); last = now;
-        lens(now, dt);
+        clearing(now, dt);
         for (var i = 0; i < flakes.length; i++) {
           var p = flakes[i]; p.y += p.v * dt; p.x += 3 * dt;
           if (p.y - p.r > H) flakes[i] = make(false);
@@ -190,7 +193,7 @@
     }
 
     return function stop() {
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(raf); clearTimeout(timer);
       if (ro) ro.disconnect(); else window.removeEventListener('resize', size);
       main.removeEventListener('pointermove', move);
       main.removeEventListener('pointerdown', move);

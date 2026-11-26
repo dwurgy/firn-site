@@ -1,5 +1,6 @@
-/* Firn home page: "Frost". One screen: the blurred logo, the lens, one line,
-   one pill. Built from design/frost/pages/home.dc.html; the values are the
+/* Firn home page: "Frost", with "ClearScroll". One screen: the blurred logo,
+   one line, one pill, and a soft spot where the frost clears. Built from
+   design/frost/pages/clear-scroll.dc.html (and -phone); the values are the
    design's (see design/frost/BRAND.md). This file stands alone. The 404
    page uses it too. */
 
@@ -17,8 +18,6 @@
   --glass-shade: rgba(36,31,27,.17); --rim-warm: rgba(242,188,146,.4);
   /* the horizon: light mode only */
   --glow-1: rgba(242,196,160,.2); --glow-2: rgba(236,206,186,.11); --glow-0: rgba(236,206,186,0);
-  /* lit edge: from the horizon, so along the bottom */
-  --lens-rim: inset 0 -3.5px 2px -1px var(--rim-hi), inset 0 2.5px 2px -1px var(--rim-lo);
   --pill-rim: inset 0 -1.5px 1px -0.5px var(--rim-hi), inset 0 1px 1px -0.5px var(--rim-lo);
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --logo-w: min(104vw, 1560px);
@@ -31,8 +30,6 @@
     --rim-line: rgba(233,227,218,.16); --rim-out: rgba(0,0,0,.3);
     --glass-shade: rgba(0,0,0,.4); --rim-warm: rgba(0,0,0,0);
     --glow-1: rgba(0,0,0,0); --glow-2: rgba(0,0,0,0); --glow-0: rgba(0,0,0,0);
-    /* lit edge: top left, no warmth */
-    --lens-rim: inset 3px 3px 2px -1px var(--rim-hi), inset -2px -2px 2px -1px var(--rim-lo);
     --pill-rim: inset 1.5px 1.5px 1px -0.5px var(--rim-hi), inset -1px -1px 1px -0.5px var(--rim-lo);
   }
 }
@@ -42,11 +39,6 @@ body { margin: 0; }
 [hidden] { display: none !important; }
 
 .page {
-  /* The lens. --z: how much it magnifies (1 + 0.08 x 0.35). --e: edge light.
-     --lx/--ly: its centre; these rest it on the name until home.js moves it. */
-  --z: 1.028; --e: .7;
-  --r: clamp(104px, 13vw, 190px);
-  --lx: calc(50% + var(--logo-w) * 0.06); --ly: calc(50% - var(--lift));
   --pad: clamp(24px, 5vw, 72px);
   /* --tb: the band behind a phone browser's bottom toolbar (0 elsewhere). The
      sky runs down behind it and the strip sits just above it. */
@@ -77,43 +69,30 @@ body { margin: 0; }
 html.tuck .page { --top: 64px; --bot: 64px; }
 @media (max-height: 640px) { .page { touch-action: pan-y; } }
 
-/* The logo: out of focus underneath, sharp inside the lens */
+/* The logo, out of focus: a ready-made blurred picture (the design's blur,
+   logo width x 0.0134, drawn once), so nothing blurs live. The picture has
+   room for the blur around the logo: it is 1.1 x the logo's width. */
 .soft, .sharp { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.soft { filter: blur(calc(var(--logo-w) * 0.0134)); opacity: .85; }
+.soft { opacity: .85; }
 .logo { display: block; width: var(--logo-w); max-width: none; height: auto;
   transform: translate(-2.5%, calc(var(--lift) * -1)); }
-.sharp {
-  pointer-events: none; background: var(--sky);
-  transform-origin: var(--lx) var(--ly); transform: scale(var(--z));
-  -webkit-mask-image: radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly), #000 99%, transparent 100%);
-          mask-image: radial-gradient(circle calc(var(--r) / var(--z)) at var(--lx) var(--ly), #000 99%, transparent 100%);
-}
-.lens { position: absolute; inset: 0; pointer-events: none; }
-/* With JavaScript (.live), the lens is a round window that slides, and the
-   sharp page inside it slides the other way. Only transforms change while it
-   moves, so the browser just slides pictures it already drew: no repainting,
-   no layout, and no style checks on the rest of the page (home.js). */
-.page.live .lens { inset: auto; left: 0; top: 0; width: calc(var(--r) * 2); height: calc(var(--r) * 2);
-  border-radius: 50%; overflow: hidden; will-change: transform; }
-.page.live .sharp { inset: auto; left: 0; top: 0; transform-origin: 0 0; will-change: transform;
-  -webkit-mask-image: none; mask-image: none; }
-.page.live .ring { left: 0; top: 0; will-change: transform; }
-.mirror { position: absolute; inset: 0; box-sizing: border-box; padding: var(--pad-box);
-  display: flex; flex-direction: column; justify-content: flex-end; }
+.soft .logo { width: calc(var(--logo-w) * 1.1);
+  transform: translate(calc(var(--logo-w) * -0.025), calc(var(--lift) * -1)); }
+
+/* The soft spot: a round window, soft to its edge, that home.js slides to the
+   pointer while the sharp page inside slides the other way. Only transform
+   and opacity change as it moves, so nothing is repainted. Hidden without
+   JavaScript. --ci: where the soft edge starts (22%, the design's). */
+.spot { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: hidden;
+  pointer-events: none; opacity: 0; will-change: transform, opacity;
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 var(--ci, 22%), transparent 100%);
+          mask-image: radial-gradient(circle closest-side, #000 var(--ci, 22%), transparent 100%); }
+.sharp { inset: auto; left: 0; top: 0; background: var(--sky); will-change: transform; }
 
 .snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
-.ring {
-  position: absolute; left: calc(var(--lx) - var(--r)); top: calc(var(--ly) - var(--r));
-  width: calc(var(--r) * 2); height: calc(var(--r) * 2);
-  box-sizing: border-box; border-radius: 50%; pointer-events: none;
-  border: 1px solid var(--rim-line);
-  box-shadow: 0 9px 18px -9px var(--rim-warm), 0 0 0 1px var(--rim-out), 0 12px 40px var(--glass-shade);
-}
-.ring i { position: absolute; inset: 0; border-radius: 50%; opacity: var(--e); box-shadow: var(--lens-rim); }
-
-/* The strip along the bottom */
-.strip { position: relative; display: flex; flex-wrap: wrap; align-items: flex-end;
+/* The strip along the bottom, above the spot and the snow */
+.strip { position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: flex-end;
   justify-content: space-between; gap: 20px 48px; }
 h1 { margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.2; font-weight: 400; text-wrap: balance; }
 h1 .em { font-weight: 600; }

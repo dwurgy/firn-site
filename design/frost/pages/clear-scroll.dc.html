@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Firn: The frost clears into a scroll</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+@font-face{font-family:'Gooper Deck';font-weight:400;font-style:normal;src:url(/_blob/043c0cbc83ebc9e31b3ee95b6f6b81e5) format('woff2')}
+@font-face{font-family:'Gooper Deck';font-weight:600;font-style:normal;src:url(/_blob/38cd2d9b88c1d32ac6083c8c5af5b11b) format('woff2')}
+:root{--sky-top:#D3DBDF;--sky-low:#E9ECEA;--ink:#241F1B;--frosty:rgba(255,255,255,.5);--fog:rgba(233,236,234,.78);--rim-hi:rgba(255,238,220,.98);--rim-lo:rgba(255,255,255,.4);--rim-line:rgba(255,255,255,.35);--glass-shade:rgba(36,31,27,.17);--rim-out:rgba(36,31,27,.09);--glow-1:rgba(242,196,160,.2);--glow-2:rgba(236,206,186,.11);--glow-0:rgba(236,206,186,0);--rim-warm:rgba(242,188,146,.4);--halo:rgba(242,196,160,.55);--lens-rim:inset 0 -3.5px 2px -1px var(--rim-hi),inset 0 2.5px 2px -1px var(--rim-lo);--pill-rim:inset 0 -1.5px 1px -0.5px var(--rim-hi),inset 0 1px 1px -0.5px var(--rim-lo)}
+@media (prefers-color-scheme: dark){:root{--sky-top:#151A27;--sky-low:#232B3F;--ink:#E9E3DA;--frosty:rgba(44,53,76,.5);--fog:rgba(35,43,63,.8);--rim-hi:rgba(233,227,218,.6);--rim-lo:rgba(233,227,218,.18);--rim-line:rgba(233,227,218,.16);--glass-shade:rgba(0,0,0,.4);--rim-out:rgba(0,0,0,.3);--glow-1:rgba(0,0,0,0);--glow-2:rgba(0,0,0,0);--glow-0:rgba(0,0,0,0);--rim-warm:rgba(0,0,0,0);--halo:rgba(233,227,218,.18);--lens-rim:inset 3px 3px 2px -1px var(--rim-hi),inset -2px -2px 2px -1px var(--rim-lo);--pill-rim:inset 1.5px 1.5px 1px -0.5px var(--rim-hi),inset -1px -1px 1px -0.5px var(--rim-lo)}}
+.firn-sharp{opacity:var(--f,0);-webkit-mask-image:radial-gradient(circle var(--cr,200px) at var(--cx,50%) var(--cy,50%),#000 var(--ci,30%),transparent 100%);mask-image:radial-gradient(circle var(--cr,200px) at var(--cx,50%) var(--cy,50%),#000 var(--ci,30%),transparent 100%)}
+.flake-hit{position:absolute;left:calc(var(--fx,296px) - var(--fr,150px));top:calc(var(--fy,325px) - var(--fr,150px));width:calc(var(--fr,150px) * 2);height:calc(var(--fr,150px) * 2);border-radius:50%;z-index:2;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.flake-hit:focus-visible{outline:2px solid var(--ink);outline-offset:-10px}
+.mode-flake .logo-link,.mode-point .flake-hit{display:none}
+.firn-page{height:100vh;height:100svh;touch-action:none}
+.firn-nav{display:flex;flex-wrap:wrap;gap:0 22px;margin:4px 0 -12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px}
+.firn-nav a{display:inline-block;padding:12px 0;opacity:.8;text-decoration-thickness:1px;text-underline-offset:4px}
+.sf{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.pill{display:inline-block;padding:14px 24px;border-radius:999px;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:17px;background:var(--frosty);border:1px solid var(--rim-line);-webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);box-shadow:var(--pill-rim),0 8px 28px var(--glass-shade)}
+.obj,.door-hit{position:absolute}
+.obj-window{right:6%;top:9%;width:clamp(150px,13vw,200px);aspect-ratio:200/240}
+:root{--door-frame:#CDBBA8;--door-leaf:#8C7362;--door-snow:#FBFBFA}
+@media (prefers-color-scheme: dark){:root{--on-flake:#151A27;--door-frame:#3B4256;--door-leaf:#2A3042;--door-snow:#B9C0CE}}
+.obj-door{left:calc(var(--rx,800px) - clamp(84px,7.4vw,108px) / 2);bottom:clamp(24px,5vw,72px);width:clamp(84px,7.4vw,108px);aspect-ratio:100/140}
+.door-hint{position:absolute;left:calc(var(--rx,800px) - 80px);bottom:calc(clamp(24px,5vw,72px) - 20px);width:160px;height:90px;background:radial-gradient(closest-side,rgba(242,196,160,.3),rgba(242,196,160,0));pointer-events:none}
+.obj-cabin{right:8%;bottom:calc(var(--sh,140px) + 6px);width:clamp(210px,17vw,260px);aspect-ratio:240/170}
+.obj svg{display:block;width:100%;height:100%;overflow:visible}
+.obj .glow{opacity:.5;transition:opacity .7s ease}
+.obj.hot .glow{opacity:1}
+.obj .leaf{transform-box:fill-box;transform-origin:left center;transform:scaleX(.88);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.obj.hot .leaf{transform:scaleX(.68)}
+.obj .come{position:absolute;left:-40px;right:-40px;top:100%;margin-top:8px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;opacity:0;transition:opacity .5s ease}
+.obj-door .come,.obj-cabin .come{top:auto;bottom:100%;margin:0 0 10px}
+.obj.hot .come{opacity:.9}
+.logo-link{position:absolute;left:var(--lgx,0px);top:var(--lgy,0px);width:var(--lgw,100%);height:var(--lgh,50%);z-index:2;border-radius:24px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.logo-link:focus-visible{outline:2px solid var(--ink);outline-offset:-8px}
+
+.up,.up-sky{position:absolute;inset:0;z-index:8;visibility:hidden}
+.up{overflow-y:auto;color:var(--ink)}
+.up-sky{display:none;z-index:7;background:linear-gradient(180deg,var(--sky-top),var(--sky-low))}
+.up-on{visibility:visible}
+.up-in{box-sizing:border-box;padding:40px 72px 72px}
+.up-row{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:end;margin:0 0 72px}
+.up-row p{margin:0 0 40px;font-size:32px;line-height:1.14;font-weight:400;text-wrap:balance}
+.up-row b{font-weight:600}
+[data-up-rest] > .up-row:nth-child(odd){grid-template-columns:1fr 300px}
+[data-up-rest] > .up-row:nth-child(odd) > p{order:2}
+[data-up-rest] > .up-row:nth-child(odd) > img{justify-self:end}
+.up-row img{display:block;width:100%;max-width:1000px;height:auto}
+.up-phones{display:flex;gap:28px}
+.up-phones div{width:210px;padding:4px;border-radius:36px;background:#1B1C1F;box-shadow:0 24px 60px var(--glass-shade)}
+.up-phones img{display:block;width:100%;height:auto;border-radius:32px}
+@media (max-width: 600px){
+.firn-nav{gap:0 12px}
+.home-get{align-items:flex-start !important;text-align:left !important}
+.up-in{padding:0 24px 32px}
+.up-row,[data-up-rest] > .up-row:nth-child(odd){grid-template-columns:1fr;gap:16px;margin:0 0 56px}
+[data-up-rest] > .up-row:nth-child(odd) > p{order:0}
+[data-up-rest] > .up-row:nth-child(odd) > img{justify-self:start}
+.up-row p{margin:0;font-size:24px}
+.up-phones{gap:10px}
+.up-phones div{width:auto;flex:1 1 0;padding:3px;border-radius:22px}
+.up-phones img{border-radius:19px}
+.up-get{margin:8px 0 0 !important}
+.up-foot{margin-top:96px !important}
+}
+a{color:var(--ink)}a:hover{color:var(--ink)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+</style>
+</helmet>
+<main class="firn-page mode-{{ mode }}" onPointerMove="{{ track }}" onPointerDown="{{ track }}" ref="{{ setMain }}" style="--z: {{zoom}}; --lx: 800px; --ly: 410px; --r: calc(clamp(104px, 13vw, 190px) * var(--g, 1)); position: relative; min-height: 600px; box-sizing: border-box; padding: clamp(24px, 5vw, 72px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: linear-gradient(0deg, var(--glow-1) 0%, var(--glow-2) 24%, var(--glow-0) 58%), linear-gradient(180deg, var(--sky-top), var(--sky-low)); color: var(--ink); font-family: 'Gooper Deck', ui-serif, Georgia, serif">
+<div data-longsky aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 100%; opacity: 0; pointer-events: none; background: linear-gradient(0deg, var(--glow-1) 0px, var(--glow-2) 200px, var(--glow-0) 480px), linear-gradient(180deg, var(--sky-top), var(--sky-low))"></div>
+<div data-blur aria-hidden="true" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; filter: blur(calc(min(104vw, 1560px) * 0.0134)); opacity: 0.85">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="LOGO-firn-lockup-on-dark.svg">
+<img src="LOGO-firn-lockup.svg" alt="" style="display: block; width: min(104vw, 1560px); height: auto; transform: translate(-2.5%, calc(var(--lift, 0px) * -1))">
+</picture>
+</div>
+<div data-strip style="position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 48px">
+<div>
+<h1 style="margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.2; font-weight: 400; text-wrap: balance">A calm browser <span style="font-weight: 600">for Mac, iPhone, and iPad.</span></h1>
+<nav class="firn-nav" aria-label="More about Firn">
+<a href="https://firnbrowser.com/release-notes">Release notes</a>
+<a href="https://firnbrowser.com/support">Support</a>
+<a href="https://firnbrowser.com/privacy">Privacy</a>
+<a href="https://firnbrowser.com/tip-jar">Tip jar</a>
+<a href="https://firnbrowser.com/press">Press kit</a>
+</nav>
+</div>
+<div class="sf home-get" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 10px">
+<a class="pill" href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg">Download</a>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; opacity: 0.8">Free. Needs macOS 14 or later.</p>
+</div>
+</div>
+<div class="firn-sharp" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center">
+<div data-sharp-sky style="position: absolute; inset: 0; background: linear-gradient(0deg, var(--glow-1) 0%, var(--glow-2) 24%, var(--glow-0) 58%), linear-gradient(180deg, var(--sky-top), var(--sky-low))"></div>
+<picture style="position: relative">
+<source media="(prefers-color-scheme: dark)" srcset="LOGO-firn-lockup-on-dark.svg">
+<img src="LOGO-firn-lockup.svg" alt="" style="display: block; width: min(104vw, 1560px); height: auto; transform: translate(-2.5%, calc(var(--lift, 0px) * -1))">
+</picture>
+</div>
+<canvas data-snow ref="{{ setCanvas }}" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none"></canvas>
+<a class="flake-hit" href="#up-close" aria-label="Firn. See it up close" onClick="{{ open }}" onPointerDown="{{ press }}" onPointerEnter="{{ near }}" onPointerLeave="{{ far }}" onFocus="{{ near }}" onBlur="{{ far }}"></a>
+<a class="logo-link" href="#up-close" aria-label="Firn. See it up close" onClick="{{ open }}" onPointerDown="{{ press }}" onPointerEnter="{{ near }}" onPointerLeave="{{ far }}" onFocus="{{ near }}" onBlur="{{ far }}"></a>
+<div data-up-sky aria-hidden="true" class="up-sky {{ upCls }}"></div>
+<section data-up id="up-close" class="up {{ upCls }}" aria-label="Firn, up close">
+<div class="up-in">
+<div data-spacer aria-hidden="true" style="height: 74vh"></div>
+<div class="up-row" data-hero-row>
+<p>A calm browser <b>for Mac, iPhone, and iPad.</b></p>
+<img data-hero src="mac-hero.webp" alt="Firn on a Mac: the sidebar with tabs and a group beside a web page">
+</div>
+<div data-up-rest>
+<div class="up-row"><p>Your spaces,<br><b>synced with iCloud.</b></p><img src="sync-devices.png" alt="Firn on a MacBook and an iPhone, showing the same spaces"></div>
+<div class="up-row"><p>Work and Personal,<br><b>kept apart.</b></p><img src="mac-spaces.webp" alt="A Work space in Firn, with its own tabs and color"></div>
+<div class="up-row"><p>A glance at a link<br><b>before you keep it.</b></p><img src="mac-lookout.webp" alt="Lookout in Firn: a link previewed in a floating panel over the page"></div>
+<div class="up-row"><p>Two pages,<br><b>side by side.</b></p><img src="mac-split-view.webp" alt="Split view in Firn: two pages side by side"></div>
+<div class="up-row"><p>Old tabs,<br><b>tidied away.</b></p><img src="mac-tidied-away.webp" alt="Tidied away in Firn: a small panel listing tabs not looked at in a while"></div>
+<div class="up-row"><p>Also on<br><b>iPhone and iPad.</b></p>
+<div class="up-phones">
+<div><img src="iphone-page.jpg" alt="Firn on an iPhone showing a web page, with the address bar at the bottom"></div>
+<div><img src="iphone-tabs.jpg" alt="Firn on an iPhone: open tabs, with three kept together in a group"></div>
+<div><img src="iphone-small-bar.jpg" alt="Firn on an iPhone showing a web page with one small bar at the bottom"></div>
+</div>
+</div>
+<div class="sf up-get" style="margin: 24px 0 0 340px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px">
+<a class="pill" href="https://github.com/dwurgy/firn/releases/latest/download/Firn.dmg">Download</a>
+<p style="margin: 0; font-size: 14px; opacity: .8">Free. Needs macOS 14 or later.</p>
+</div>
+<footer class="sf up-foot" style="margin: 160px 0 0; padding-bottom: 8px; font-size: 14px">
+<nav aria-label="Firn" style="display: flex; flex-wrap: wrap; gap: 0 22px">
+<a href="#" onClick="{{ back }}" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Back home</a>
+<a href="https://firnbrowser.com/release-notes" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Release notes</a>
+<a href="https://firnbrowser.com/support" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Support</a>
+<a href="https://firnbrowser.com/privacy" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Privacy</a>
+<a href="https://firnbrowser.com/tip-jar" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Tip jar</a>
+<a href="https://firnbrowser.com/press" style="display: inline-block; padding: 12px 0; text-decoration-thickness: 1px; text-underline-offset: 4px">Press kit</a>
+</nav>
+<p style="margin: 4px 0 0; opacity: 0.72">Firn · A <a href="https://davidwurgler.com" style="text-decoration-thickness: 1px; text-underline-offset: 4px">David Wurgler</a> app · © 2026</p>
+</footer>
+</div>
+</div>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"clear":{"editor":"enum","options":["Where you point","Only the flake"],"default":"Where you point"},"density":{"editor":"range","default":0.3,"min":0,"max":2,"step":0.1},"$preview":{"width":1440,"height":820}}'>
+class Component extends DCLogic {
+componentDidMount() { this.start(); }
+componentWillUnmount() { cancelAnimationFrame(this.raf); if (this.ro) this.ro.disconnect(); if (this.mo) this.mo.disconnect(); }
+start() {
+const m = this.main || document.querySelector('main');
+const c = this.canvas || document.querySelector('canvas[data-snow]');
+if (!m || !c) return;
+const strip = m.querySelector('[data-strip]'); const mirror = m.querySelector('[data-mirror]');
+if (strip && mirror) {
+let queued = false;
+const sync = () => { queued = false; mirror.replaceChildren(strip.cloneNode(true)); };
+sync();
+if (window.MutationObserver) { this.mo = new MutationObserver(() => { if (!queued) { queued = true; requestAnimationFrame(sync); } }); this.mo.observe(strip, { subtree: true, childList: true, characterData: true, attributes: true }); }
+}
+const ctx = c.getContext('2d');
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+this.still = still;
+const rgb = dark ? '233,227,218' : '255,255,255';
+const sprite = (soft) => {
+const s = document.createElement('canvas'); s.width = s.height = 64;
+const g = s.getContext('2d'); const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+gr.addColorStop(0, 'rgba(' + rgb + ',1)'); gr.addColorStop(1 - soft, 'rgba(' + rgb + ',1)'); gr.addColorStop(1, 'rgba(' + rgb + ',0)');
+g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return s;
+};
+const sprites = [sprite(0.55), sprite(0.8), sprite(0.98)];
+let W = 0, H = 0, lift = 0, flakes = [];
+const make = (anywhere) => {
+const k = Math.random(); const layer = k < 0.6 ? 0 : k < 0.9 ? 1 : 2;
+const r = layer === 0 ? 1 + Math.random() * 1.4 : layer === 1 ? 2.5 + Math.random() * 3 : 9 + Math.random() * 16;
+return { layer, r, x: Math.random() * W, y: anywhere ? Math.random() * H : -r * 2,
+v: (layer === 0 ? 9 : layer === 1 ? 18 : 34) * (0.7 + Math.random() * 0.6),
+a: (layer === 0 ? 0.75 : layer === 1 ? 0.5 : 0.2) * (dark ? 0.55 : 1) * (0.6 + Math.random() * 0.4),
+ph: Math.random() * 6.28, f: 0.15 + Math.random() * 0.25, amp: 6 + Math.random() * 14 * (layer + 1) };
+};
+const size = () => {
+W = c.clientWidth; H = c.clientHeight;
+lift = strip ? (H - strip.offsetTop) / 2 : 0; m.style.setProperty('--lift', lift.toFixed(1) + 'px');
+if (strip) m.style.setProperty('--sh', (H - strip.offsetTop + 12).toFixed(0) + 'px');
+{ const lw = Math.min(W * 1.04, 1560); const lh = lw * 2595.2 / 5353; m.style.setProperty('--fx', ((W - lw) / 2 - lw * 0.025 + lw * 0.2417).toFixed(1) + 'px'); m.style.setProperty('--fy', (H / 2 - lift + lh * 0.0068).toFixed(1) + 'px'); m.style.setProperty('--fr', (lh * 0.4).toFixed(1) + 'px'); m.style.setProperty('--lgx', ((W - lw) / 2 - lw * 0.025 + lw * 0.06).toFixed(1) + 'px'); m.style.setProperty('--lgy', (H / 2 - lift - lh * 0.36).toFixed(1) + 'px'); m.style.setProperty('--lgw', (lw * 0.88).toFixed(1) + 'px'); m.style.setProperty('--lgh', (lh * 0.72).toFixed(1) + 'px'); }
+const dpr = W * H > 2000000 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+const n = Math.min(160, Math.round(W * H / 16000 * (this.props.density ?? 0.3)));
+flakes = []; for (let i = 0; i < n; i++) flakes.push(make(true));
+};
+const draw = (t) => {
+ctx.clearRect(0, 0, W, H);
+for (const p of flakes) {
+const x = p.x + Math.sin(t * p.f + p.ph) * p.amp;
+ctx.globalAlpha = p.a; ctx.drawImage(sprites[p.layer], x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+}
+};
+size();
+const logo = () => { const lw = Math.min(W * 1.04, 1560); return { x: (W - lw) / 2 - lw * 0.025, w: lw, h: lw * 2595.2 / 5353 }; };
+const rest = () => { const L = logo(); return { x: L.x + L.w * 0.585, y: H / 2 - lift }; };
+this.secret = () => { const el = m.querySelector('[data-secret]'); return el ? { x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2 } : null; };
+const t0 = performance.now() / 1000; const ph = Math.asin(0.085 / 0.38);
+const r0 = rest(); this.cx = r0.x; this.cy = r0.y; this.vx = 0; this.vy = 0; this.g = 1; this.moved = -1e9; this.born = performance.now(); this.f = 0; this.arrived = 0; this.introDone = false;
+const lens = (now, dt) => {
+const t = now / 1000 - t0; const L = logo(); const S = this.secret();
+let tx = this.tx, ty = this.ty, goal = 1, boost = 1, aim = false;
+if (this.focused && S) { tx = S.x; ty = S.y; goal = 1; boost = 3; aim = true; }
+else if (!still && !this.touched && !this.introDone && S && now - this.born > 1200 && (this.props.lensHome ?? 'Graze, then follow') !== 'Rest on the flake') {
+if (!this.arrived && Math.hypot(S.x - this.cx, S.y - this.cy) < 12) this.arrived = now;
+if (this.arrived && !this.hinted) { this.hinted = true; this.setState({ hot: true }); }
+if (this.arrived && now - this.arrived > 1800) { this.introDone = true; this.moved = -1e9; this.setState({ hot: false }); }
+else { tx = S.x; ty = S.y; goal = 1; boost = 3; aim = true; }
+}
+const homeFlake = (this.props.lensHome ?? 'Graze, then follow') === 'Rest on the flake';
+if (!aim && homeFlake && S && (still || now - this.moved > 5000 || tx == null)) { tx = S.x; ty = S.y; aim = true; }
+if (!aim && (still || now - this.moved > 5000 || tx == null)) {
+tx = still ? rest().x : L.x + L.w * (0.5 + 0.38 * Math.sin(t * 0.11 + ph));
+ty = still ? H / 2 - lift : H / 2 - lift + L.h * 0.1 * Math.sin(t * 0.17);
+}
+if (!aim && this.state && this.state.hot) goal = 1;
+if (still) { this.cx = tx; this.cy = ty; this.g = goal; }
+else {
+const max = Math.max(W * 0.13, 120) * (this.props.lensSpeed ?? 0.8) * boost;
+let wx = (tx - this.cx) * 2, wy = (ty - this.cy) * 2;
+const wl = Math.hypot(wx, wy); if (wl > max) { wx *= max / wl; wy *= max / wl; }
+const ease = 1 - Math.exp(-dt * 3);
+this.vx += (wx - this.vx) * ease; this.vy += (wy - this.vy) * ease;
+this.cx += this.vx * dt; this.cy += this.vy * dt;
+this.g += (goal - this.g) * (1 - Math.exp(-dt * 2.5));
+}
+m.style.setProperty('--lx', this.cx.toFixed(1) + 'px'); m.style.setProperty('--ly', this.cy.toFixed(1) + 'px'); m.style.setProperty('--g', this.g.toFixed(3));
+if (S) { const lk = this.link || (this.link = m.querySelector('.logo-link')); const rr = Math.min(190, Math.max(104, W * 0.13)) * this.g; const seen = this.focused || Math.hypot(S.x - this.cx, S.y - this.cy) < rr - 40; if (seen !== this.seen) { this.seen = seen; lk.style.pointerEvents = seen ? 'auto' : 'none'; } }
+};
+if (window.ResizeObserver) { this.ro = new ResizeObserver(() => { size(); if (still) draw(0); }); this.ro.observe(c); }
+if (still) draw(0);
+let last = performance.now();
+const tick = (now) => {
+const dt = Math.min(0.05, (now - last) / 1000); last = now;
+if (this.state && this.state.open) { if (this.zoomAt) { const k = Math.min(1, (now - this.zoomAt) / 1300); const e = k * k * (3 - 2 * k); m.style.setProperty('--g', (1 + 7 * e).toFixed(3)); } }
+else {
+{ const t = now - this.born; const flakeMode = (this.props.clear ?? 'Where you point') === 'Only the flake';
+const lw = Math.min(W * 1.04, 1560), lh = lw * 2595.2 / 5353;
+const fxp = (W - lw) / 2 - lw * 0.025 + lw * 0.2417, fyp = H / 2 - lift + lh * 0.0068;
+let goal = 0, gx = fxp, gy = fyp, cr, ci;
+const intro = !still && t > 1000 && t < 3600;
+if (flakeMode) { cr = lh * 0.5; ci = 62; if (intro || this.near) goal = 1; }
+else {
+cr = Math.min(220, Math.max(130, W * 0.13)); ci = 22;
+if (intro && this.px == null) goal = 1;
+if (this.px != null && now - this.pt < 1400) { gx = this.px; gy = this.py; goal = 1; }
+else if (this.px != null) { gx = this.px; gy = this.py; }
+}
+if (this.sx == null) { this.sx = gx; this.sy = gy; }
+const k = still ? 1 : 1 - Math.exp(-dt * 2.2);
+this.sx += (gx - this.sx) * k; this.sy += (gy - this.sy) * k;
+const rate = goal > this.f ? 1.8 : 0.7;
+this.f = still ? goal : this.f + (goal - this.f) * (1 - Math.exp(-dt * rate));
+m.style.setProperty('--f', this.f.toFixed(3)); m.style.setProperty('--cx', this.sx.toFixed(1) + 'px'); m.style.setProperty('--cy', this.sy.toFixed(1) + 'px'); if (this.crS == null) { this.crS = cr; this.ciS = ci; }
+const kc = still ? 1 : 1 - Math.exp(-dt * 1.2); this.crS += (cr - this.crS) * kc; this.ciS += (ci - this.ciS) * kc;
+m.style.setProperty('--cr', this.crS.toFixed(1) + 'px'); m.style.setProperty('--ci', this.ciS.toFixed(1) + '%'); }
+if (!still) {
+for (let i = 0; i < flakes.length; i++) { const p = flakes[i]; p.y += p.v * dt; p.x += 3 * dt; if (p.y - p.r > H) flakes[i] = make(false); }
+draw(now / 1000);
+}
+}
+this.raf = requestAnimationFrame(tick);
+};
+this.raf = requestAnimationFrame(tick);
+}
+enter() {
+const m = this.main; if (!m) return;
+const up = m.querySelector('[data-up]'); const strip = m.querySelector('[data-strip]');
+const hero = m.querySelector('[data-hero-row]'); const rest = m.querySelectorAll('[data-up-rest]');
+const sp = m.querySelector('[data-spacer]');
+const r = m.getBoundingClientRect(); const Wd = r.width, Ht = r.height;
+sp.style.height = Math.round(Ht * 0.72) + 'px';
+up.scrollTop = 0; up.style.opacity = '';
+const blur = m.querySelector('[data-blur]'), sharp = m.querySelector('.firn-sharp'), sharpSky = m.querySelector('[data-sharp-sky]'), longsky = m.querySelector('[data-longsky]');
+const layers = [blur, sharp, longsky];
+longsky.style.height = up.scrollHeight + 'px';
+this.onUpScroll = () => { const y = up.scrollTop; if (longsky.offsetHeight !== up.scrollHeight) longsky.style.height = up.scrollHeight + 'px'; layers.forEach((el) => { el.style.transform = 'translateY(' + (-y) + 'px)'; }); };
+up.addEventListener('scroll', this.onUpScroll, { passive: true });
+const settle = () => { blur.style.opacity = '0'; sharpSky.style.opacity = '0'; longsky.style.opacity = '1'; strip.style.visibility = 'hidden'; };
+if (this.still) { this.f = 1; this.crS = Wd * 2; this.ciS = 80; m.style.setProperty('--f', '1'); m.style.setProperty('--cr', this.crS + 'px'); m.style.setProperty('--ci', '80%'); settle(); return; }
+const ox = this.sx ?? Wd / 2, oy = this.sy ?? Ht / 2; this.openAt = { ox, oy };
+const far = Math.hypot(Math.max(ox, Wd - ox), Math.max(oy, Ht - oy));
+const cr0 = this.crS ?? 180, ci0 = this.ciS ?? 22, f0 = this.f ?? 0;
+const crEnd = far * 1.25, ciEnd = 78;
+const t0 = performance.now(), dur = 1200;
+const out = (k) => 1 - Math.pow(1 - k, 3);
+const sx0 = strip.offsetLeft, sy0 = strip.offsetTop;
+const grow = (now) => {
+const k = Math.min(1, (now - t0) / dur), e = out(k);
+this.crS = cr0 + (crEnd - cr0) * e; this.ciS = ci0 + (ciEnd - ci0) * e; this.f = f0 + (1 - f0) * Math.min(1, e * 1.6);
+m.style.setProperty('--cr', this.crS.toFixed(1) + 'px'); m.style.setProperty('--ci', this.ciS.toFixed(1) + '%'); m.style.setProperty('--f', this.f.toFixed(3));
+// the same soft spot takes the words with it
+const sm = 'radial-gradient(circle ' + this.crS.toFixed(1) + 'px at ' + (ox - sx0).toFixed(1) + 'px ' + (oy - sy0).toFixed(1) + 'px, transparent ' + this.ciS.toFixed(1) + '%, #000 100%)';
+strip.style.webkitMaskImage = sm; strip.style.maskImage = sm;
+// as the spot finishes, the sky settles to the new, longer page
+const late = Math.max(0, Math.min(1, (k - 0.55) / 0.45)), l = late * late * (3 - 2 * late);
+blur.style.opacity = (0.85 * (1 - l)).toFixed(3); sharpSky.style.opacity = (1 - l).toFixed(3); longsky.style.opacity = l.toFixed(3);
+if (k < 1) this.melt = requestAnimationFrame(grow); else settle();
+};
+this.melt = requestAnimationFrame(grow);
+// the hero rises from below and stops half in view: there is more below
+hero.animate([{ opacity: 0, transform: 'translateY(' + Math.round(Ht * 0.35) + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 1300, delay: 650, easing: 'cubic-bezier(.16,.8,.24,1)', fill: 'backwards' });
+rest.forEach((el) => el.animate([{ opacity: 0, transform: 'translateY(' + Math.round(Ht * 0.35) + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 1300, delay: 800, easing: 'cubic-bezier(.16,.8,.24,1)', fill: 'backwards' }));
+}
+leave() {
+const m = this.main; if (!m) return;
+cancelAnimationFrame(this.melt); this.pt = 0;
+const up = m.querySelector('[data-up]'); const strip = m.querySelector('[data-strip]');
+const blur = m.querySelector('[data-blur]'), sharp = m.querySelector('.firn-sharp'), sharpSky = m.querySelector('[data-sharp-sky]'), longsky = m.querySelector('[data-longsky]');
+const layers = [blur, sharp, longsky];
+const r = m.getBoundingClientRect(); const Wd = r.width, Ht = r.height;
+const finish = () => {
+up.removeEventListener('scroll', this.onUpScroll); layers.forEach((el) => { el.style.transform = ''; });
+strip.style.webkitMaskImage = strip.style.maskImage = ''; strip.style.visibility = '';
+blur.style.opacity = '0.85'; sharpSky.style.opacity = ''; longsky.style.opacity = '0'; up.style.opacity = '0';
+this.f = 0; this.crS = Math.min(220, Math.max(130, Wd * 0.13)); this.ciS = 22; this.sx = null; this.sy = null;
+m.style.setProperty('--f', '0'); this.setState({ open: false });
+};
+if (this.still) { finish(); return; }
+const { ox, oy } = this.openAt || { ox: Wd / 2, oy: Ht / 2 };
+const far = Math.hypot(Math.max(ox, Wd - ox), Math.max(oy, Ht - oy));
+const crTop = far * 1.25, ciTop = 78, crLow = 0, ciLow = 22;
+const sx0 = strip.offsetLeft, sy0 = strip.offsetTop;
+const y0 = up.scrollTop, upDur = y0 > 0 ? Math.min(1100, 500 + y0 * 0.12) : 0;
+const inout = (k) => k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const t0 = performance.now(), frost = 1500;
+strip.style.visibility = '';
+// 1. the page glides back to the top and its rows fade; 2. the frost closes back in, the mirror of the clearing
+const step = (now) => {
+const t = now - t0;
+const ku = upDur ? Math.min(1, t / upDur) : 1;
+if (upDur) { up.scrollTop = y0 * (1 - inout(ku)); this.onUpScroll(); }
+up.style.opacity = (1 - Math.min(1, t / Math.max(400, upDur * 0.8))).toFixed(3);
+const kf = Math.max(0, Math.min(1, (t - upDur * 0.6) / frost)), e = inout(kf);
+const cr = crTop + (crLow - crTop) * e, ci = ciTop + (ciLow - ciTop) * e;
+m.style.setProperty('--cr', cr.toFixed(1) + 'px'); m.style.setProperty('--ci', ci.toFixed(1) + '%'); m.style.setProperty('--cx', ox + 'px'); m.style.setProperty('--cy', oy + 'px');
+const sm = 'radial-gradient(circle ' + Math.max(1, cr).toFixed(1) + 'px at ' + (ox - sx0).toFixed(1) + 'px ' + (oy - sy0).toFixed(1) + 'px, transparent ' + ci.toFixed(1) + '%, #000 100%)';
+strip.style.webkitMaskImage = sm; strip.style.maskImage = sm;
+const early = Math.min(1, kf / 0.4), l = early * early * (3 - 2 * early);
+blur.style.opacity = (0.85 * l).toFixed(3); sharpSky.style.opacity = l.toFixed(3); longsky.style.opacity = (1 - l).toFixed(3);
+if (kf < 1) this.melt = requestAnimationFrame(step); else finish();
+};
+this.melt = requestAnimationFrame(step);
+}
+
+renderVals() {
+const serif = false; const markKey = 'plain'; const mode = (this.props.clear ?? 'Where you point') === 'Only the flake' ? 'flake' : 'point';
+const open = !!(this.state && this.state.open);
+const hot = !!(this.state && this.state.hot);
+return {
+mode, markKey, plain: !serif, serif, upCls: open ? 'up-on' : '',
+zoom: 1 + 0.08 * (this.props.magnify ?? 0.35),
+setCanvas: (el) => { if (el) this.canvas = el; },
+setMain: (el) => { if (el) this.main = el; },
+hotOn: () => { if (!hot) this.setState({ hot: true }); },
+hotOff: () => { this.focused = false; if (hot) this.setState({ hot: false }); },
+focusOn: () => { this.focused = true; if (!hot) this.setState({ hot: true }); },
+open: (e) => { e.preventDefault();
+if (this.touch && !this.still && (this.f ?? 0) < 0.8) { this.near = true; this.touch = false; return; }
+const m = this.main; const r = m.getBoundingClientRect();
+if (e.clientX || e.clientY) { this.ox = e.clientX - r.left; this.oy = e.clientY - r.top; } else { this.ox = null; this.oy = null; }
+this.touch = false; this.near = false; if (!this.still) m.querySelectorAll('[data-up], [data-up-sky]').forEach((el) => { el.style.opacity = '0'; }); this.setState({ open: true }); requestAnimationFrame(() => this.enter()); },
+track: (e) => { if (e.target && e.target.closest && e.target.closest('[data-strip] a, [data-up]')) return; const r = (this.main || e.currentTarget).getBoundingClientRect(); this.px = e.clientX - r.left; this.py = e.clientY - r.top; this.pt = performance.now(); },
+press: (e) => { this.touch = e.pointerType === 'touch'; },
+near: () => { this.near = true; },
+far: () => { this.near = false; },
+back: (e) => { e.preventDefault(); this.leave(); },
+move: (e) => {
+if (e.target && e.target.closest && e.target.closest('[data-strip] a, [data-up]')) return;
+const m = this.main || e.currentTarget; const r = m.getBoundingClientRect();
+this.tx = e.clientX - r.left; this.ty = e.clientY - r.top; this.moved = performance.now(); if (e.type === 'pointerdown') this.touched = true;
+}
+};
+}
+}
+</script>
+</body>
+</html>
