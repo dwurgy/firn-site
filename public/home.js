@@ -75,6 +75,7 @@
     main.appendChild(up);
     var ready = function () {
       main.classList.add('ready');
+      warm();
       ['pointermove', 'pointerdown', 'focusin'].forEach(function (t) { main.removeEventListener(t, ready); });
     };
     ['pointermove', 'pointerdown', 'focusin'].forEach(function (t) { main.addEventListener(t, ready); });
@@ -100,6 +101,26 @@
   var scrolled = -1e9;
   /* Whether Back home was pressed with the keyboard */
   var byKey = false;
+  /* Up close holds still while it opens, so nobody scrolls into rows that
+     haven't risen yet: wheel, swipe, and scroll keys wait until then */
+  var holdUntil = 0;
+  function hold(e) {
+    if (!opened || performance.now() > holdUntil) return;
+    if (e.type === 'keydown' && !/^(ArrowUp|ArrowDown|PageUp|PageDown|Home|End| )$/.test(e.key)) return;
+    e.preventDefault();
+  }
+  if (scroll) ['wheel', 'touchmove', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, hold, { passive: false });
+  });
+  /* The pictures load and decode before they're needed, not while scrolling
+     (only the ones this screen shows: phones skip the wide Mac picture) */
+  function warm() {
+    each('#up-close img', function (img) {
+      if (!img.getClientRects().length) return;
+      img.loading = 'eager';
+      if (img.decode) img.decode().catch(function () {});
+    });
+  }
   if (logoLink) {
     var unquiet = function () { logoLink.classList.remove('quiet'); };
     logoLink.addEventListener('blur', unquiet);
@@ -262,6 +283,8 @@
         main.classList.add('doc');
       }
       main.classList.add('ready', 'open');
+      warm();
+      if (!still) holdUntil = performance.now() + 1300;
       strip.setAttribute('inert', ''); logoLink.setAttribute('inert', '');
       spacer.style.height = Math.round(H * 0.72) + 'px';
       up.scrollTop = 0; up.style.opacity = '';
